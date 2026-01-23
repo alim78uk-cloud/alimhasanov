@@ -12,6 +12,9 @@ const labelOff = document.getElementById("labelOffHero");
 const navHero = document.getElementById("navHero");
 const navDetails = document.getElementById("navDetails");
 const profileImg = document.getElementById("profileImg");
+const allProfileImgs = document.querySelectorAll(
+  ".profile-container img, .sticky-profile img",
+);
 
 // ========================================
 // State
@@ -453,27 +456,6 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-// ========================================
-// Profile Image Toggle (Easter Egg)
-// ========================================
-const allProfileImgs = document.querySelectorAll(
-  ".profile-container img, .sticky-profile img",
-);
-const cartoonSrc = "images/darkblue_centered.png";
-const realSrc = "images/IMG_7899.jpg";
-let isCartoon = true;
-
-allProfileImgs.forEach((img) => {
-  img.addEventListener("click", (e) => {
-    e.stopPropagation();
-    isCartoon = !isCartoon;
-    const newSrc = isCartoon ? cartoonSrc : realSrc;
-    allProfileImgs.forEach((i) => {
-      i.src = newSrc;
-      i.style.mixBlendMode = isCartoon ? "multiply" : "normal";
-    });
-  });
-});
 
 // ========================================
 // Theme Toggle
