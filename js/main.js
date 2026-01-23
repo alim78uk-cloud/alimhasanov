@@ -24,6 +24,20 @@ let isOffHours = false;
 let isAnimating = false;
 
 // ========================================
+// Environment Check (Hide Admin in Prod)
+// ========================================
+const isLocal =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1";
+
+if (!isLocal) {
+  const adminContainer = document.getElementById("adminContainer");
+  const debugContainer = document.getElementById("debugContainer");
+  if (adminContainer) adminContainer.style.display = "none";
+  if (debugContainer) debugContainer.style.display = "none";
+}
+
+// ========================================
 // Panel Transition
 // ========================================
 const heroSummary = document.querySelector(".hero-summary");
