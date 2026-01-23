@@ -28,7 +28,8 @@ let isAnimating = false;
 // ========================================
 const isLocal =
   window.location.hostname === "localhost" ||
-  window.location.hostname === "127.0.0.1";
+  window.location.hostname === "127.0.0.1" ||
+  window.location.hostname === ""; // Support file:// protocol
 
 if (!isLocal) {
   const adminContainer = document.getElementById("adminContainer");
