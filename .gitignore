@@ -1,0 +1,19 @@
+# System Files
+.DS_Store
+.cv_content.tmp
+.claude/
+.playwright-mcp/
+
+# Python Scripts (Build/Maintenance tools)
+*.py
+cv_extracted.txt
+
+# Test/Backup HTML Files
+foo.html
+foo1.html
+index_5.html
+index_8.html
+
+# Documentation/Private
+project_handover.md
+CV_AlimHasanov.pdf
