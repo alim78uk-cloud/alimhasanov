@@ -31,11 +31,11 @@ const isLocal =
   window.location.hostname === "127.0.0.1" ||
   window.location.hostname === ""; // Support file:// protocol
 
-if (!isLocal) {
+if (isLocal) {
   const adminContainer = document.getElementById("adminContainer");
   const debugContainer = document.getElementById("debugContainer");
-  if (adminContainer) adminContainer.style.display = "none";
-  if (debugContainer) debugContainer.style.display = "none";
+  if (adminContainer) adminContainer.style.display = "flex";
+  if (debugContainer) debugContainer.style.display = "flex";
 }
 
 // ========================================
