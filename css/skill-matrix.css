@@ -1,0 +1,1025 @@
+.skill-matrix-view {
+  position: relative;
+  width: 100%;
+  overflow-x: visible;
+  padding-bottom: 0; /* Removed padding to prevent table lifting at bottom */
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+.skill-matrix-view::-webkit-scrollbar {
+  display: none;
+}
+
+/* Base Heatmap Structure */
+.hm-layout-container {
+  display: block;
+  box-sizing: border-box;
+  position: relative;
+
+  /* Center the entire table (label + matrix) */
+  width: 1000px;
+  max-width: 100%;
+  margin: -106px auto 0 auto; /* Pulls container up to dock flush with tabs */
+  padding-top: 0;
+  padding-bottom: 0; /* Removed 20px padding to stop scroll exactly at footer bottom */
+  overflow: visible; /* Allow footer to extend */
+  left: 190px; /* Shift right to compensate for 380px left-hanging labels (380/2 = 190) */
+}
+
+/* =========================================
+   PALETTES (10 Variations - Dark/Red Focus)
+   ========================================= */
+.skill-matrix-view {
+  --hm-p-main: #ff3b30; /* Default (Red) */
+}
+
+.skill-matrix-view[data-heatmap-palette="red"] {
+  --hm-p-main: #ff3b30;
+}
+.skill-matrix-view[data-heatmap-palette="crimson"] {
+  --hm-p-main: #dc143c;
+}
+.skill-matrix-view[data-heatmap-palette="burgundy"] {
+  --hm-p-main: #800020;
+}
+.skill-matrix-view[data-heatmap-palette="bordeaux"] {
+  --hm-p-main: #4c0013;
+}
+.skill-matrix-view[data-heatmap-palette="rust"] {
+  --hm-p-main: #b7410e;
+}
+.skill-matrix-view[data-heatmap-palette="obsidian"] {
+  --hm-p-main: #444444;
+}
+.skill-matrix-view[data-heatmap-palette="graphite"] {
+  --hm-p-main: #6c757d;
+}
+.skill-matrix-view[data-heatmap-palette="slate"] {
+  --hm-p-main: #607d8b;
+}
+.skill-matrix-view[data-heatmap-palette="midnight"] {
+  --hm-p-main: #191970;
+}
+.skill-matrix-view[data-heatmap-palette="silver"] {
+  --hm-p-main: #a9a9a9;
+}
+
+/* =========================================
+   THEME: MINIMAL (Locked)
+   Sharp but with gaps, no empty backgrounds
+   ========================================= */
+.skill-matrix-view[data-heatmap-theme="minimal"] {
+  /* Borders restored */
+  --hm-grid-color: var(--border-color);
+  --hm-text: var(--text-color);
+  --hm-text-secondary: var(--secondary-text);
+}
+.skill-matrix-view[data-heatmap-theme="minimal"] .hm-heat-cell {
+  border-right: none;
+  margin: 1px 1px;
+  border-radius: 2px;
+  height: calc(100% - 2px);
+  background-color: transparent; /* Empty */
+}
+
+/* =========================================
+   SHARED COLOR MAPPING
+   ========================================= */
+
+/* Use transparency for levels to allow blending */
+.skill-matrix-view .hm-heat-cell.bg-level-3,
+.skill-matrix-view .hm-heat-cell.bg-level-2,
+.skill-matrix-view .hm-heat-cell.bg-level-1 {
+  background-color: var(--hm-p-main);
+}
+.skill-matrix-view .hm-heat-cell.bg-level-3 {
+  opacity: 0.25; /* Lightest */
+}
+.skill-matrix-view .hm-heat-cell.bg-level-2 {
+  opacity: 0.6; /* Medium */
+}
+.skill-matrix-view .hm-heat-cell.bg-level-1 {
+  opacity: 0.95; /* Darkest */
+}
+
+/* Legend Boxes Matching */
+.hm-legend-box.bg-level-3 {
+  background-color: var(--hm-p-main);
+  opacity: 0.25;
+}
+.hm-legend-box.bg-level-2 {
+  background-color: var(--hm-p-main);
+  opacity: 0.6;
+}
+.hm-legend-box.bg-level-1 {
+  background-color: var(--hm-p-main);
+  opacity: 0.95;
+}
+
+/* Text & Lines */
+.skill-matrix-view .hm-angled-text,
+.skill-matrix-view .hm-skill-label,
+.skill-matrix-view .hm-legend-item {
+  color: var(--hm-text-secondary, var(--secondary-text));
+}
+
+/* Separator line style matching page header border */
+/* Separator line style matching page header border (Tab Active State weight, but grey) */
+.skill-matrix-view .hm-separator-line {
+  background: rgba(0, 0, 0, 0.06); /* Slightly darker than 0.03 for visibility */
+  width: 3px; /* Matched to tab underline weight */
+  border-radius: 2px;
+}
+
+.skill-matrix-view .hm-skill-row {
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Heatmap Cell Base */
+.hm-heat-cell {
+  height: 100%;
+  transition: all 0.3s ease;
+  border-right: 1px solid var(--bg-color);
+}
+
+.hm-diagonal-zone {
+  position: sticky;
+  display: flex;
+  align-items: stretch;
+  overflow: visible;
+  height: 128px; /* Base height for labels */
+  z-index: 400;
+  transition: background-color 0.3s ease;
+}
+
+.hm-header-zone {
+  top: 106px; /* Stick exactly below the tabs */
+  height: 164px; /* Reduced specific height to tighten space (was 186px) */
+  padding-top: 58px; /* Use padding to create the gap, covered by background */
+  margin-top: 0;
+  padding-bottom: 10px; /* Reduced from 32px to minimize lower gap */
+  background: var(--header-bg); /* Translucent glass effect */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-sizing: border-box; /* Ensure padding doesn't push years off-grid */
+}
+
+.hm-footer-zone {
+  bottom: 0; /* Reset to 0 to cover scrolling content */
+  height: 164px; /* Matched to header height */
+  margin-bottom: 0;
+  padding-top: 10px; /* Reduced from 20px to match header's tight spacing (10px bottom pad vs 10px top pad) */
+  padding-bottom: 58px; /* Mirroring header's structure */
+  background: var(--header-bg); /* Translucent glass effect */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-sizing: border-box;
+}
+
+/* Ensure background covers the hanging labels to the left */
+.hm-header-zone::before,
+.hm-footer-zone::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -380px;
+  width: 380px;
+  background: inherit;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: -1;
+}
+
+/* Footer diagonal zone - let it hang/extend for long firm names */
+.hm-diagonal-zone:last-of-type {
+  overflow: visible;
+}
+.hm-diagonal-zone:last-of-type .hm-diagonal-track {
+  overflow: visible;
+}
+.hm-diagonal-zone:last-of-type .hm-diagonal-item {
+  overflow: visible;
+}
+.hm-diagonal-zone:last-of-type .hm-angled-text {
+  white-space: nowrap;
+}
+.hm-label-placeholder {
+  width: 380px;
+  min-width: 380px;
+  flex-shrink: 0;
+  margin-left: -380px; /* Extend to the left, outside the centered container */
+  position: relative; /* Context for the legend */
+  background: transparent; /* Translucent as requested */
+  z-index: 10;
+}
+.hm-diagonal-track {
+  flex-grow: 1;
+  display: flex;
+  position: relative;
+  height: 100%;
+}
+.hm-diagonal-item {
+  position: relative;
+  height: 100%;
+  overflow: visible;
+}
+.hm-separator-line {
+  position: absolute;
+  width: 1px;
+  height: 26px; /* Scaled down to match compact layout */
+  z-index: 10;
+}
+.hm-text-wrapper {
+  position: absolute;
+  width: 100%;
+  z-index: 20;
+  pointer-events: none;
+}
+.hm-angled-text {
+  position: absolute;
+  white-space: nowrap;
+  font-size: 9px; /* Reduced by 30% (was 13px) */
+  font-weight: 900;
+  text-transform: uppercase;
+  transition:
+    color 0.25s ease,
+    opacity 0.25s ease,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: auto;
+  opacity: 0.35; /* Washed out - less attention */
+  color: var(--secondary-text);
+  cursor: pointer;
+}
+.hm-diagonal-item:hover .hm-angled-text {
+  color: var(--hm-p-main, var(--accent-color));
+  opacity: 0.85;
+  transform: scale(1.1);
+}
+
+/* Specific styling for Top Header (Years) and Bottom Footer (Firm Names) */
+.hm-header-zone .hm-angled-text,
+.hm-footer-zone .hm-angled-text {
+  font-size: 14px; /* Increased from 9px */
+  font-weight: 900;
+  opacity: 0.6; /* Slightly more visible */
+}
+.hm-skill-label {
+  width: 380px;
+  min-width: 380px;
+  padding: 0 16px;
+  font-size: 15px; /* Reduced by 30% (was 22px) */
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--text-color); /* Matches header Name color */
+  display: flex;
+  align-items: center;
+  border-right: 1px solid var(--hm-grid-color, var(--border-color));
+  border-bottom: 1px solid var(--hm-grid-color, var(--border-color));
+  flex-shrink: 0;
+  white-space: nowrap;
+  margin-left: -380px; /* Extend to the left, outside the centered container */
+  cursor: pointer;
+  transition:
+    color 0.25s ease,
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.hm-skill-row:hover .hm-skill-label {
+  color: var(--hm-p-main, var(--accent-color));
+}
+
+/* Row styles with hover border effect */
+.hm-skill-row {
+  display: flex;
+  align-items: stretch;
+  height: 22px; /* Reduced by 30% (was 32px) */
+  position: relative;
+}
+.hm-skill-row::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -380px;
+  right: 0;
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  pointer-events: none;
+  transition: border-color 0.2s ease;
+}
+.hm-skill-row:hover::before {
+  border-top-color: rgba(0, 0, 0, 0.6);
+  border-bottom-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Matrix cell hover */
+.hm-heat-cell {
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+  position: relative;
+}
+
+/* Crosshair Highlight Styles */
+
+/* Base highlight pseudo-element */
+.hm-heat-cell.highlight-target::after,
+.hm-heat-cell.highlight-col::after,
+.hm-heat-cell.highlight-row::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 60; /* Above cell content */
+  box-sizing: border-box; /* Borders included in width/height calculations */
+}
+
+/* 1. Target Cell: Full 4-sided Border, overlaps gaps */
+.hm-heat-cell.highlight-target::after {
+  width: calc(100% + 1px);
+  height: calc(100% + 1px);
+  border: 2px solid #000;
+}
+
+/* 2. Column Peer (Vertical Axis): Left & Right Borders only */
+.hm-heat-cell.highlight-col::after {
+  width: 100%; /* No need to extend width, just height */
+  height: calc(100% + 1px); /* Extend down to cover row border */
+  border-left: 2px solid #000;
+  border-right: 2px solid #000;
+  border-top: none;
+  border-bottom: none;
+}
+
+/* 3. Row Peer (Horizontal Axis): Top & Bottom Borders only */
+.hm-heat-cell.highlight-row::after {
+  width: calc(100% + 1px); /* Extend right to cover cell border */
+  height: 100%;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  border-left: none;
+  border-right: none;
+}
+
+/* Cleanup base highlight classes to remove old styles if they persist structurally, 
+   but effectively we just rely on ::after now. 
+   We ensure the container itself has no outline/shadow. */
+.hm-heat-cell.highlight-target,
+.hm-heat-cell.highlight-col,
+.hm-heat-cell.highlight-row {
+  box-shadow: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+  z-index: 50; /* Ensure the cell itself is high enough for the pseudo to show */
+  overflow: visible; /* Allow pseudo to extend */
+}
+
+/* Header/Footer Diagonal Items only get visual update, use simple style for them */
+.hm-diagonal-item.highlight-col .hm-angled-text {
+  opacity: 1;
+  color: var(--hm-p-main, var(--accent-color));
+  transform: scale(1.08);
+  transform-origin: bottom left;
+}
+
+.hm-skill-track {
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
+}
+.hm-legend {
+  position: absolute;
+  left: 16px; /* Align with skill label padding */
+  bottom: 4px; /* Resting just above the first row */
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  z-index: 500;
+  background: var(--bg-color); /* Solid background */
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: none;
+}
+.hm-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--secondary-text);
+}
+.hm-legend-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+.hm-pos-top {
+  top: 0;
+}
+.hm-pos-bottom {
+  bottom: 0;
+}
+
+/* Container centering */
+#skillMatrixContainer {
+  width: 100%;
+  max-width: var(--details-max-width);
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.skills-container-full {
+  overflow: visible;
+}
+
+/* =========================================
+   DOWNLOAD BUTTON
+   ========================================= */
+.matrix-download-btn {
+  /* Positioned inside hm-label-placeholder */
+  position: absolute;
+  left: 16px;
+  bottom: 42px; /* Increased margin from legend as requested */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: var(--bg-color); /* Block translucency */
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--secondary-text);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 500;
+}
+
+.matrix-download-btn:hover {
+  background: var(--hm-p-main, var(--accent-color));
+  color: white;
+  border-color: var(--hm-p-main, var(--accent-color));
+}
+
+.matrix-download-btn svg {
+  flex-shrink: 0;
+}
+
+/* =========================================
+   EXPORT MODAL
+   ========================================= */
+.matrix-export-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 10000;
+  overflow: auto;
+}
+
+.matrix-export-modal.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.matrix-export-modal-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-color);
+}
+
+.matrix-export-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--header-bg);
+  flex-shrink: 0;
+}
+
+.matrix-export-modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.matrix-export-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.matrix-export-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.matrix-export-toggle input {
+  display: none;
+}
+
+.toggle-slider {
+  width: 36px;
+  height: 20px;
+  background: var(--border-color);
+  border-radius: 10px;
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.toggle-slider::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.matrix-export-toggle input:checked + .toggle-slider {
+  background: var(--hm-p-main, var(--accent-color));
+}
+
+.matrix-export-toggle input:checked + .toggle-slider::after {
+  transform: translateX(16px);
+}
+
+.toggle-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--secondary-text);
+}
+
+.matrix-export-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--hm-p-main, var(--accent-color));
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.matrix-export-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.matrix-export-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.matrix-export-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--secondary-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.matrix-export-close:hover {
+  background: var(--border-color);
+  color: var(--text-color);
+}
+
+.matrix-export-modal-body {
+  flex: 1;
+  overflow: auto;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.matrix-export-preview {
+  background: white;
+  /* MANUALLY ADJUST EXPORT MARGINS HERE */
+  padding-right: 140px; /* Sets equal space on all sides */
+  padding-left: 50px;
+  padding-bottom: 50px;
+  padding-top: 50px;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  overflow: visible;
+}
+
+/* =========================================
+   EXPORT-READY MATRIX STYLES
+   ========================================= */
+.matrix-export-preview .export-matrix {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: white;
+  color: #333;
+  min-width: 780px;
+  max-width: 780px;
+}
+
+/* Diagonal Header Zone */
+.matrix-export-preview .export-diagonal-zone {
+  display: flex;
+  align-items: flex-end;
+  height: 150px;
+  margin-bottom: 0;
+  overflow: visible;
+}
+
+.matrix-export-preview .export-label-placeholder {
+  width: 160px;
+  min-width: 160px;
+  flex-shrink: 0;
+}
+
+.matrix-export-preview .export-diagonal-track {
+  flex: 1;
+  display: flex;
+  position: relative;
+  height: 100%;
+  border-bottom: 1px solid #ccc;
+}
+
+.matrix-export-preview .export-diagonal-item {
+  position: relative;
+  height: 100%;
+  overflow: visible;
+}
+
+.matrix-export-preview .export-separator-line {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  height: 80px; /* Half length */
+  background: #ccc;
+  transform: rotate(45deg);
+  transform-origin: bottom right;
+  opacity: 0.5; /* Subtle */
+}
+
+.matrix-export-preview .export-separator-line.export-first-sep {
+  display: none; /* Hide top/left border of first cell */
+}
+
+.matrix-export-preview .export-angled-text {
+  position: absolute;
+  bottom: 2px;
+  left: calc(50% + 8px);
+  white-space: nowrap;
+  font-size: 8px; /* Base size */
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #555;
+  transform: rotate(-45deg);
+  transform-origin: bottom left;
+}
+
+.matrix-export-preview .export-years {
+  font-size: 11px; /* 2x base size */
+  font-weight: 500;
+  color: #333;
+  margin-right: 4px;
+}
+
+.matrix-export-preview .export-firm {
+  font-size: 8px; /* Base size */
+  font-weight: 600;
+  color: #666;
+}
+
+/* Skill Rows - no internal cell borders */
+.matrix-export-preview .export-skill-row {
+  display: flex;
+  align-items: stretch;
+  height: 16px;
+}
+
+.matrix-export-preview .export-skill-label {
+  width: 160px;
+  min-width: 160px;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  padding-right: 8px;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  border-right: 1px solid #ddd;
+}
+
+.matrix-export-preview .export-skill-track {
+  display: flex;
+  flex: 1;
+}
+
+.matrix-export-preview .export-heat-cell {
+  height: 100%;
+  box-sizing: border-box;
+  /* Subtle stylish borders */
+  border-right: 1px solid rgba(0, 0, 0, 0.08); /* faint vertical line */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08); /* faint horizontal line */
+}
+
+/* Color mode */
+.matrix-export-preview .export-heat-cell.level-3 {
+  background-color: #ff3b30;
+  opacity: 0.95;
+}
+.matrix-export-preview .export-heat-cell.level-2 {
+  background-color: #ff3b30;
+  opacity: 0.6;
+}
+.matrix-export-preview .export-heat-cell.level-1 {
+  background-color: #ff3b30;
+  opacity: 0.25;
+}
+.matrix-export-preview .export-heat-cell.level-0 {
+  background-color: white;
+}
+
+/* B&W mode */
+.matrix-export-preview.bw-mode .export-heat-cell.level-3 {
+  background-color: #333;
+  opacity: 1;
+}
+.matrix-export-preview.bw-mode .export-heat-cell.level-2 {
+  background-color: #666;
+  opacity: 1;
+}
+.matrix-export-preview.bw-mode .export-heat-cell.level-1 {
+  background-color: #aaa;
+  opacity: 1;
+}
+.matrix-export-preview.bw-mode .export-heat-cell.level-0 {
+  background-color: white;
+}
+
+.matrix-export-preview .export-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Align top to match Name */
+  margin-bottom: 20px;
+  padding-left: 160px; /* Align with matrix start (label width) */
+}
+
+/* ... */
+
+.matrix-export-preview .export-legend.top-right {
+  padding: 0;
+  margin-top: 2px; /* Optical alignment with Title text */
+  margin-bottom: 0;
+}
+
+.matrix-export-preview .export-header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.matrix-export-preview .export-legend {
+  display: flex;
+  gap: 16px;
+  /* Removed padding/margin as it's now flexed */
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #666;
+}
+
+
+
+.matrix-export-preview .export-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.matrix-export-preview .export-legend-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.matrix-export-preview .export-legend-box.level-3 {
+  background: #ff3b30;
+  opacity: 0.95;
+}
+.matrix-export-preview .export-legend-box.level-2 {
+  background: #ff3b30;
+  opacity: 0.6;
+}
+.matrix-export-preview .export-legend-box.level-1 {
+  background: #ff3b30;
+  opacity: 0.25;
+}
+
+.matrix-export-preview.bw-mode .export-legend-box.level-3 {
+  background: #333;
+  opacity: 1;
+}
+.matrix-export-preview.bw-mode .export-legend-box.level-2 {
+  background: #666;
+  opacity: 1;
+}
+.matrix-export-preview.bw-mode .export-legend-box.level-1 {
+  background: #aaa;
+  opacity: 1;
+}
+
+.matrix-export-preview .export-title-name {
+  font-family: "Inter", sans-serif;
+  font-size: 24px; /* Large like header */
+  font-weight: 900;
+  color: #333;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+.matrix-export-preview .export-title-desc {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.matrix-export-preview .export-subtitle {
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  color: #666;
+  margin-bottom: 0;
+}
+
+/* Spinner animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.matrix-export-btn svg.spin {
+  animation: spin 1s linear infinite;
+}
+
+/* =========================================
+   ADMIN MODE STYLES
+   ========================================= */
+
+/* Admin Mode Active State */
+.skill-matrix-view.admin-mode-active .hm-heat-cell {
+  cursor: copy; /* Indicate clickable/changing nature */
+}
+
+/* Hover effect for cells in admin mode to show they are interactive */
+.skill-matrix-view.admin-mode-active .hm-heat-cell:hover {
+  opacity: 0.8;
+  transform: scale(0.95);
+  z-index: 100;
+}
+
+/* Delete Skill Button */
+.admin-delete-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background-color: #ff3b30;
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  margin-right: 8px; /* Space before text */
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.admin-delete-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Ensure label container handles the button nicely */
+.skill-matrix-view.admin-mode-active .hm-skill-label {
+  padding-left: 8px; /* Adjust padding if needed */
+}
+
+/* ADMIN V2 FEATURES */
+
+/* Reorder / Drag Styles */
+.skill-matrix-view.admin-mode-active .hm-skill-row {
+  cursor: grab;
+}
+.skill-matrix-view.admin-mode-active .hm-skill-row.dragging {
+  opacity: 0.5;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px dashed rgba(255, 255, 255, 0.5);
+}
+.skill-matrix-view.admin-mode-active .hm-skill-row.drag-over {
+  border-top: 2px solid var(--hm-p-main);
+}
+
+/* Drag Handle Icon */
+.admin-drag-handle {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+  cursor: grab;
+  /* Simple grip dots icon via CSS or SVG if needed, using text for now */
+  font-size: 14px;
+  line-height: 12px;
+  color: rgba(255,255,255,0.4);
+}
+.admin-drag-handle::after {
+  content: "⋮⋮"; /* Grip symbol */
+}
+.admin-drag-handle:hover {
+  color: rgba(255,255,255,0.9);
+}
+
+/* Reorder Buttons - Removed in V3 for Drag Drop */
+.admin-reorder-btn {
+  display: none; 
+}
+
+/* Editable Text Indication */
+.skill-matrix-view.admin-mode-active .hm-editable-text {
+  cursor: text;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
+  transition: background 0.2s;
+}
+.skill-matrix-view.admin-mode-active .hm-editable-text:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Rating Dropdown (Absolute) */
+.admin-rating-dropdown {
+  position: fixed; /* Fixed to viewport to avoid overflow issues */
+  z-index: 9999;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  min-width: 100px;
+}
+.admin-rating-option {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 4px;
+  color: var(--text-color);
+}
+.admin-rating-option:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.admin-rating-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+

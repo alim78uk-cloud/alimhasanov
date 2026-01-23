@@ -1,0 +1,76 @@
+/* ========================================
+   THEME TOGGLE
+   ======================================== */
+.theme-toggle-container {
+    position: fixed;
+    bottom: 20px;
+    right: 70px; /* Position to the left of settings icon */
+    z-index: 1001;
+    background: var(--header-bg);
+    backdrop-filter: blur(10px);
+    padding: 0.4rem;
+    border-radius: 50px;
+    display: flex;
+    gap: 0.4rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.theme-btn {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.theme-btn:hover {
+    transform: scale(1.2);
+}
+
+.theme-btn.active {
+    transform: scale(1.2);
+    border-color: var(--text-color);
+}
+
+.t-btn-original { background-color: #f4f4f0; border: 1px solid #ddd; }
+.t-btn-dark { background-color: #0a0a0f; border: 1px solid #333; }
+.t-btn-ocean { background-color: #0f172a; border: 1px solid #1e293b; }
+.t-btn-neon { background: linear-gradient(135deg, #000, #f0f); }
+.t-btn-minimal { background-color: #fff; border: 1px solid #000; }
+
+/* ========================================
+   SIDEBAR NAVIGATION
+   ======================================== */
+.sidebar-nav {
+    position: fixed;
+    left: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 200;
+}
+
+.nav-dot {
+    width: 4px;
+    height: 28px;
+    background: var(--secondary-text);
+    opacity: 0.25;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.4s var(--transition-ease);
+}
+
+.nav-dot:hover {
+    opacity: 0.5;
+}
+
+.nav-dot.active {
+    height: 44px;
+    background: var(--accent-color);
+    opacity: 1;
+}

@@ -1,0 +1,19 @@
+/* ========================================
+   BASE / RESET
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.4;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}

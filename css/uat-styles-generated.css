@@ -1,0 +1,306 @@
+
+/* ========================================
+   MINIMALIST SWISS 2025 STYLES
+   Focus: Typography, Whitespace, Lists, No Shadows
+   Excluded: #section-weekend (by virtue of scoping classes to siblings)
+   ======================================== */
+
+/* --- COMMON RESET FOR LIST STYLES --- */
+.uat-section-content[class*="swiss-"] .bento-grid,
+.uat-section-content[class*="swiss-"] .split-grid,
+.uat-section-content[class*="swiss-"] .bucket-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.uat-section-content[class*="swiss-"] .bento-card,
+.uat-section-content[class*="swiss-"] .bucket-card,
+.uat-section-content[class*="swiss-"] .list-item {
+    width: 100%;
+    min-height: auto;
+    height: auto !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 1rem 0;
+    transform: none !important; /* disabled hover float */
+}
+
+/* Force flex row layout for cards turned into list items */
+.uat-section-content[class*="swiss-"] .bento-card,
+.uat-section-content[class*="swiss-"] .bucket-card {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: baseline;
+    justify-content: flex-start;
+}
+
+/* Hide or adjust icons/visuals */
+.uat-section-content[class*="swiss-"] .emoji-xl, 
+.uat-section-content[class*="swiss-"] .icon-box,
+.uat-section-content[class*="swiss-"] .square-check {
+    display: none; /* Default hide for super minimal, can override */
+}
+
+.uat-section-content[class*="swiss-"] .card-content {
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    width: 100%;
+}
+
+.uat-section-content[class*="swiss-"] h3,
+.uat-section-content[class*="swiss-"] .list-text,
+.uat-section-content[class*="swiss-"] .bucket-text {
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+
+/* --- STYLE 1: SWISS GRID (Strict lines, bold type) --- */
+.uat-section-content.swiss-grid .bento-card,
+.uat-section-content.swiss-grid .list-item,
+.uat-section-content.swiss-grid .bucket-card {
+    border-bottom: 2px solid var(--text-color);
+    padding: 1.25rem 0;
+}
+
+.uat-section-content.swiss-grid h3,
+.uat-section-content.swiss-grid .list-text,
+.uat-section-content.swiss-grid .bucket-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800; /* Super bold */
+    font-size: 1.2rem;
+    letter-spacing: -0.03em;
+    width: 40%; /* Fixed width for labels */
+}
+
+.uat-section-content.swiss-grid p,
+.uat-section-content.swiss-grid .list-date {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--secondary-text);
+}
+
+.uat-section-content.swiss-grid .card-content {
+    justify-content: space-between;
+}
+
+/* Restore bucket check for this style but minimal */
+.uat-section-content.swiss-grid .square-check {
+    display: block;
+    border: 2px solid var(--text-color);
+    width: 14px;
+    height: 14px;
+    margin-right: 1rem;
+    border-radius: 0;
+}
+
+
+/* --- STYLE 2: CLEAN TYPE (Whitespace, numbering) --- */
+.uat-section-content.swiss-type .bento-card,
+.uat-section-content.swiss-type .list-item,
+.uat-section-content.swiss-type .bucket-card {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 0.8rem 0;
+}
+
+.uat-section-content.swiss-type h3::before,
+.uat-section-content.swiss-type .list-text::before,
+.uat-section-content.swiss-type .bucket-text::before {
+    content: "0" counter(item-counter) " ";
+    font-family: monospace;
+    color: var(--secondary-text);
+    font-size: 0.7rem;
+    margin-right: 1rem;
+    opacity: 0.5;
+}
+
+.uat-section-content.swiss-type {
+    counter-reset: item-counter;
+}
+
+.uat-section-content.swiss-type .bento-card,
+.uat-section-content.swiss-type .list-item,
+.uat-section-content.swiss-type .bucket-card {
+    counter-increment: item-counter;
+}
+
+.uat-section-content.swiss-type h3,
+.uat-section-content.swiss-type .list-text,
+.uat-section-content.swiss-type .bucket-text {
+    font-weight: 300;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+}
+
+
+/* --- STYLE 3: ACCENT LINE (Left border, technical) --- */
+.uat-section-content.swiss-accent .bento-card,
+.uat-section-content.swiss-accent .list-item,
+.uat-section-content.swiss-accent .bucket-card {
+    padding: 0.8rem 0 0.8rem 1.5rem;
+    border-left: 1px solid var(--secondary-text);
+    margin-bottom: 0.5rem;
+}
+
+.uat-section-content.swiss-accent .bento-card:hover,
+.uat-section-content.swiss-accent .list-item:hover,
+.uat-section-content.swiss-accent .bucket-card:hover {
+    border-left: 3px solid var(--text-color); /* Thicker line on hover */
+    padding-left: 1.4rem; /* Adjust padding to keep text stable */
+    background: rgba(255,255,255,0.02) !important;
+}
+
+.uat-section-content.swiss-accent h3,
+.uat-section-content.swiss-accent .list-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+}
+
+.uat-section-content.swiss-accent .pill {
+    margin-left: auto;
+    border: 1px solid var(--secondary-text);
+    padding: 2px 8px;
+}
+
+
+/* --- STYLE 4: DATA TABLE (Mono, rows) --- */
+.uat-section-content.swiss-table .bento-card,
+.uat-section-content.swiss-table .list-item,
+.uat-section-content.swiss-table .bucket-card {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr 1fr;
+    border-bottom: 1px solid var(--border-color);
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.uat-section-content.swiss-table .culture-col {
+    display: contents; /* Flattens the column structure effectively */
+}
+/* Re-fix culture column for this specific grid view if possible, or just treat internal items */
+.uat-section-content.swiss-table .culture-col .list-item {
+    grid-template-columns: 2fr 1fr; /* Top 5 only has name + date */
+}
+
+.uat-section-content.swiss-table h3,
+.uat-section-content.swiss-table .list-text,
+.uat-section-content.swiss-table .bucket-text {
+    font-size: 0.9rem;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 400;
+}
+
+.uat-section-content.swiss-table .card-content p {
+    font-size: 0.8rem;
+    color: var(--secondary-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* --- STYLE 5: INTERACTIVE TEXT (Word Cloud) --- */
+.uat-section-content.swiss-big .bento-grid,
+.uat-section-content.swiss-big .list-group,
+.uat-section-content.swiss-big .bucket-row,
+.uat-section-content.swiss-big .split-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 1.5rem 3rem !important; /* Random gap */
+    padding: 2rem 0;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Force split grid columns to behave like part of the cloud */
+.uat-section-content.swiss-big .culture-col {
+    display: contents; /* Flattens the column so items participate in the main flex container */
+}
+
+/* Items as cloud particles */
+.uat-section-content.swiss-big .bento-card,
+.uat-section-content.swiss-big .list-item,
+.uat-section-content.swiss-big .bucket-card {
+    width: auto !important;
+    padding: 0;
+    border: none;
+    margin: 0;
+    flex: 0 0 auto;
+    position: relative;
+}
+
+/* Typography - Unify sizes */
+.uat-section-content.swiss-big h3,
+.uat-section-content.swiss-big .list-text,
+.uat-section-content.swiss-big .bucket-text {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--secondary-text);
+    opacity: 0.4;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    letter-spacing: -0.04em;
+    line-height: 1;
+}
+
+/* Hover: Pop the text */
+.uat-section-content.swiss-big .bento-card:hover h3,
+.uat-section-content.swiss-big .list-item:hover .list-text,
+.uat-section-content.swiss-big .bucket-card:hover .bucket-text,
+.uat-section-content.swiss-big .bento-card:hover .bucket-text { /* fallback */
+    color: var(--text-color);
+    opacity: 1;
+    transform: scale(1.2);
+    z-index: 10;
+}
+
+/* Fake Randomness via nth-child */
+.uat-section-content.swiss-big .bento-card:nth-child(2n),
+.uat-section-content.swiss-big .list-item:nth-child(2n),
+.uat-section-content.swiss-big .bucket-card:nth-child(2n) {
+    margin-top: 2rem;
+}
+
+.uat-section-content.swiss-big .bento-card:nth-child(3n),
+.uat-section-content.swiss-big .list-item:nth-child(3n),
+.uat-section-content.swiss-big .bucket-card:nth-child(3n) {
+    margin-bottom: 2.5rem;
+    transform: rotate(-2deg);
+}
+
+.uat-section-content.swiss-big .bento-card:nth-child(5n),
+.uat-section-content.swiss-big .list-item:nth-child(5n),
+.uat-section-content.swiss-big .bucket-card:nth-child(5n) {
+    margin-left: 2rem;
+    transform: rotate(3deg);
+}
+
+.uat-section-content.swiss-big .bento-card:nth-child(7n),
+.uat-section-content.swiss-big .list-item:nth-child(7n),
+.uat-section-content.swiss-big .bucket-card:nth-child(7n) {
+    margin-right: 1.5rem;
+    font-size: 0.9em; /* Slight visual variance */
+}
+
+/* Hide metadata */
+.uat-section-content.swiss-big p,
+.uat-section-content.swiss-big .list-date,
+.uat-section-content.swiss-big .pill,
+.uat-section-content.swiss-big .check-icon {
+    display: none !important;
+}
+
+/* Specific fix for bucket list check square in this mode - hide it */
+.uat-section-content.swiss-big .square-check {
+    display: none !important; 
+}

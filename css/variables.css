@@ -1,0 +1,80 @@
+/* ========================================
+   VARIABLES & THEMES
+   ======================================== */
+
+/* Layout Variables */
+:root {
+    --bg-color: #f4f4f0;
+    --text-color: #1a1a1a;
+    --secondary-text: #666;
+    --accent-color: #FF3B30; /* Swiss Red */
+    --border-color: rgba(0,0,0,0.1);
+    --card-bg: #fff;
+    --header-bg: rgba(244, 244, 240, 0.75); /* Semi-transparent for glass effect */
+
+    --sticky-height: 40px; /* User selected */
+    --details-top-padding: 4.8rem; /* User selected */
+    --details-max-width: 1780px; /* User selected */
+
+    --transition-duration: 0.8s;
+    --transition-ease: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --bg-color: #0a0a0f;
+    --text-color: #e0e0e0;
+    --accent-color: #00d4ff;
+    --secondary-text: #a0a0a0;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --header-bg: rgba(10, 10, 15, 0.75);
+    --border-color: rgba(255,255,255,0.1);
+}
+
+/* Ocean Theme */
+[data-theme="ocean"] {
+    --bg-color: #0f172a;
+    --text-color: #f8fafc;
+    --accent-color: #38bdf8;
+    --secondary-text: #94a3b8;
+    --card-bg: rgba(30, 41, 59, 0.5);
+    --header-bg: rgba(15, 23, 42, 0.75);
+    --border-color: rgba(255,255,255,0.1);
+}
+
+/* Neon Theme */
+[data-theme="neon"] {
+    --bg-color: #000000;
+    --text-color: #fff;
+    --accent-color: #f0f;
+    --secondary-text: #aaa;
+    --card-bg: rgba(20, 20, 20, 0.8);
+    --header-bg: rgba(0, 0, 0, 0.75);
+    --border-color: #333;
+}
+
+/* Minimal Theme */
+[data-theme="minimal"] {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --accent-color: #000000;
+    --secondary-text: #555;
+    --card-bg: #fff;
+    --header-bg: rgba(255, 255, 255, 0.75);
+    --border-color: #000;
+}
+
+[data-theme="minimal"] .profile-container img,
+[data-theme="minimal"] .sticky-profile img {
+    filter: grayscale(100%);
+}
+
+/* Fix photo visibility on dark themes - disable multiply blend */
+[data-theme="dark"] .profile-container img,
+[data-theme="dark"] .sticky-profile img,
+[data-theme="ocean"] .profile-container img,
+[data-theme="ocean"] .sticky-profile img,
+[data-theme="neon"] .profile-container img,
+[data-theme="neon"] .sticky-profile img {
+    mix-blend-mode: normal;
+}

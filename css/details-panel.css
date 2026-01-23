@@ -1,0 +1,186 @@
+/* ========================================
+   DETAILS PANEL
+   ======================================== */
+
+.details-panel {
+    position: fixed;
+    top: 100vh;
+    left: 0;
+    right: 0;
+    height: 100vh; /* Full height */
+    background-color: var(--bg-color);
+    overflow: hidden;
+    transition: top var(--transition-duration) var(--transition-ease),
+                background-color 0.4s ease,
+                transform 0.2s ease-out;
+    z-index: 50;
+}
+
+body.show-details .details-panel {
+    top: 0; /* Cover entire screen */
+}
+
+/* Pull-to-close progress indicator */
+.pull-indicator {
+    position: fixed;
+    top: calc(var(--sticky-height) + 24px);
+    left: 50%;
+    transform: translateX(-50%) scale(0.8) translateY(-10px);
+    width: 48px;
+    height: 48px;
+    z-index: 200;
+    opacity: 0;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+    pointer-events: none;
+    background: var(--card-bg);
+    border-radius: 50%;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pull-indicator.visible {
+    transform: translateX(-50%) scale(1) translateY(0);
+    opacity: 1;
+}
+
+.pull-indicator svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.pull-indicator .bg-circle {
+    fill: none;
+    stroke: var(--border-color);
+    stroke-width: 2;
+    opacity: 0.5;
+}
+
+.pull-indicator .progress-circle {
+    fill: none;
+    stroke: var(--accent-color);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-dasharray: 113; /* 2 * PI * 18 */
+    stroke-dashoffset: 113;
+    transition: stroke-dashoffset 0.1s linear;
+}
+
+.pull-indicator .arrow {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    line-height: 1;
+    transition: transform 0.2s ease;
+    font-weight: 300;
+}
+
+/* Rotate the arrow to point UP */
+.pull-indicator.full .arrow {
+    transform: scale(1.2);
+    color: var(--accent-color);
+}
+
+/* Wrapper becomes scroll container for glass effect */
+.details-wrapper {
+    max-width: var(--details-max-width);
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    height: 100vh;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.details-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* Tabs Navigation - Sticky below header */
+.details-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding-top: calc(var(--sticky-height) + 50px); /* Extra breathing room below header */
+    padding-bottom: 0;
+    position: sticky;
+    top: 0;
+    z-index: 500; /* Ensure it stays on top of heatmap legend and labels */
+    background-color: var(--header-bg); /* Semi-transparent for glass effect */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+/* Partial width border-bottom */
+.details-tabs::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    right: 20%;
+    height: 3px;
+    background-color: rgba(0, 0, 0, 0.03); /* Subtle, washed out */
+    border-radius: 2px;
+}
+
+/* Tab Container */
+.tab-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 0; /* Removed 5rem padding to stop scroll at footer */
+}
+
+/* Tabs Navigation Buttons (Restored) */
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 0.75rem 1.5rem 0.5rem; /* Bottom padding for space above underline */
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--secondary-text);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.tab-btn:hover {
+    color: var(--text-color);
+}
+
+.tab-btn.active {
+    color: var(--text-color); /* Keep text color, not red */
+    font-weight: 600;
+}
+
+.tab-btn.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: var(--accent-color);
+}
+
+/* Tab Panes (Restored) */
+.tab-pane {
+    display: none;
+    height: 100%;
+    width: 100%;
+    padding-bottom: 0;
+}
+
+.tab-pane.active {
+    display: block;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

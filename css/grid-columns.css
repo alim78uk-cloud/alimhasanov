@@ -1,0 +1,93 @@
+/* ========================================
+   FULL WIDTH TAB LAYOUTS
+   ======================================== */
+
+/* Consistent top spacing for all panes */
+:root {
+    --pane-top-margin: 6.2rem; /* Unified distance from tabs border to start of content text */
+}
+
+/* Experience Column - Reset for full width */
+.experience-column.active-full {
+    width: 100%;
+    max-width: 990px; /* 10% wider than 900px */
+    margin: 0 auto;
+    padding-top: var(--pane-top-margin);
+    padding-bottom: 2rem;
+}
+
+/* Tech Skills Container - Full Width */
+.skills-container-full {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: var(--pane-top-margin) 0 2rem 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.skills-container-full .skill-matrix-view {
+    flex: 1;
+    min-height: 500px;
+}
+
+/* Soft Skills Grid - Premium Full Width */
+.soft-skills-container-full {
+    width: 100%;
+    max-width: 990px; /* Match CV pane width */
+    margin: 0 auto;
+    padding: var(--pane-top-margin) 0 2rem 0;
+}
+
+.soft-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding-top: 0; /* Remove extra gap to satisfy the alignment rule */
+}
+
+
+
+.soft-skill-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.soft-skill-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.soft-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.soft-skill-card h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.soft-skill-card p {
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+    line-height: 1.5;
+}
+
+.bucket-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--secondary-text);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}

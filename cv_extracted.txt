@@ -1,0 +1,138 @@
+S K I L L S 
+Application Support
+Incident Management
+Troubleshooting
+Monitoring
+SQL
+Python
+WebSockets
+REST A PIs
+Bash
+Testing & Debugging
+Data Automation
+Master Data Management
+Jira
+Web Development
+HTML & CSS
+English (Fluent)
+German (limited working proficiency,  
+        planned C1 Exam)
+Bulgarian (Native)
+Turkish (Native)
+C O N T A C T 
++41 76 70 47 318
+alim78uk@gmail.com
+8135 Langnau am Albis
+https://www.linkedin.com/in/alimhasanovbg/
+Single
+November 1978
+B Permit
+M A Y  2 0 2 2  -  J U N  2 0 2 3 ,  L O N D O N ,  U K  C r y p t o  T r a d i n g  S u p p o r t
+E l w o o d  T e c h n o l o g y
+2 4 / 7  S u p p o r t  o f  C r y p t o  T r a d i n g  A p p l i c a t i o n  f o r  S p o t ,  F u t u r e s ,  O p t i o n s  a n d  P e r p e t u a l s
+D i r e c t  c l i e n t  s u p p o r t  f o r  i n c i d e n t  m a n a g e m e n t ,  r o o t  c a u s e  a n a l y s i s ,  a n d  t i c k e t  r e s o l u t i o n
+O n b o a r d e d  a n d  t r a i n e d  n e w  &  p o t e n t i a l  c l i e n t s :
+O r g a n i z e d  a n d  m a n a g e d  t r a i n i n g  s e s s i o n s  f o r  c l i e n t s
+C o n d u c t e d  c o n n e c t i v i t y  t e s t s  w i t h  c l i e n t s
+P e r f o r m e d  f i n a l  t r a d i n g  f l o w  t e s t s  b e f o r e  g o - l i v e
+B a c k e n d ,  F r o n t e n d ,  A P I ,  a n d  A l g o r i t h m  s u p p o r t
+T e s t e d ,  d e b u g g e d  a n d  r e l e a s e d  n e w  s o f t w a r e  v e r s i o n s
+T o o l s  u s e d :  S Q L ,  P y t h o n ,  U n i x ,  B a s h ,  B i g Q u e r y ,  Z e n d e s k  
+A L I M   H A S A N O V
+A P P L I C A T I O N  S U P P O R T  |  D A T A  M A N A G E M E N T  &  A U T O M A T I O N
+P R O F E S S I O N A L  E X P E R I E N C E
+I  k e e p  b u s i n e s s e s  r u n n i n g  s e a m l e s s l y  a n d  c l i e n t s  c o n f i d e n t  b y  m a n a g i n g  a p p l i c a t i o n s  a n d
+m o n i t o r i n g  l o g s ,  d a t a b a s e s ,  A P I s ,  a n d  n e t w o r k  c o n n e c t i v i t y  a c r o s s  t h e  s o f t w a r e  s t a c k .
+E x p e r i e n c e d  w i t h  d a t a  m a n a g e m e n t ,  d a t a  a c c u r a c y ,  a n d  p r o c e s s  a u t o m a t i o n .  A l s o  w i t h
+s t r e a m l i n i n g  a n d  p r o c e s s i n g  o f  d a t a  f r o m  m u l t i p l e  s o u r c e s  r a n g i n g  f r o m  A P I s  t o  t e x t  f i l e s
+a n d  a u t o m a t i n g  t h e  p r o c e s s  u s i n g  t o o l s  l i k e  P y t h o n ,  S Q L ,  o r  o t h e r  a s  r e q u i r e d .  
+I n  a d d i t i o n ,  a s  a  s e l f - t a u g h t  u s e r  o f  S Q L ,  P y t h o n  a n d  v a r i o u s  I T  t o o l s ,  I  n a t u r a l l y  b r i d g e  t h e
+g a p  b e t w e e n  b u s i n e s s  l o g i c  a n d  I T  t e a m s .  I n  s h o r t ,  I  c o n v e r t  h u m a n - r e a d a b l e  d a t a  i n t o
+m a c h i n e - r e a d a b l e  —  a n d  v i c e  v e r s a .
+M o d u s  O p e r a n d i :  d i a g n o s e ,  f i x ,  a u t o m a t e ,  r e p e a t .
+P R O F I L E
+OCT 2023 - MAY 2025, ZÜRICH, CH  P r o d u c t  D a t a  S p e c i a l i s t
+F E  f u n d i n f o
+D e v e l o p e d  i n t e r n a l  t o o l s  f o r  d a t a  p r o f i l i n g  a n d  q u a l i t y  a s s e s s m e n t  u s i n g  P y t h o n  a n d  S Q L
+A u t o m a t e d  i n t e r n a l  r e f e r e n c e  d a t a  d i s c o v e r y  a n d  g a t h e r i n g  p r o c e s s e s ,  r e s u l t i n g  i n :
+S i m p l i f i e d  d a t a  a c c e s s  a n d  d i s c o v e r y  f r o m  m u l t i p l e  s o u r c e s  f o r  i n t e r n a l  t e a m s
+F a s t e r  c l i e n t  t i c k e t  t u r n a r o u n d  t i m e s
+E l i m i n a t i o n  o f   d u p l i c a t e  d a t a  s u b m i s s i o n  &  p r o c e s s i n g  
+C o n v e r t e d  a n  E x c e l - V B A  b a s e d  t o o l  i n t o  a  m o d e r n  w e b  b a s e d  U I  ( l i n k ) ,  r e s u l t i n g  i n :
+R e d u c e d  c l i e n t  f u n d  d a t a  s u b m i s s i o n  e r r o r s  a n d  f e w e r  s u p p o r t  t i c k e t s
+M i n i m i z e d  t i m e  o f  e x p e n s i v e  m a n u a l  i n t e r v e n t i o n s
+I m p r o v e d  f u n d  d a t a  i n t a k e / p r o c e s s i n g  t u r n a r o u n d  t i m e
+G u i d e d  a s s e t  m a n a g e r s  o n  t h e i r  f u n d  d a t a  s u b m i s s i o n  r e q u i r e m e n t s
+P e r f o r m e d  S Q L - b a s e d  d a t a  m a n i p u l a t i o n ,  c l e a n s i n g ,  a n d  r e c o n c i l i a t i o n
+T o o l s  u s e d :  S Q L ,  P y t h o n ,  J a v a S c r i p t ,  H T M L ,  J i r a ,  D u c k D B
+M A Y  2 0 1 8  -  M A Y  2 0 2 2 ,  L O N D O N ,  U K  S e n i o r  C o n s u l t a n t
+B r o a d r i d g e  F i n a n c i a l
+C o n s u l t e d  a n d  s u p p o r t e d   T i e r  1  b a n k s  a n d  o t h e r  i n s t i t u t i o n a l  c l i e n t s  w i t h  t h e i r  c l e a r i n g
+r e p o r t s  p r o c e s s i n g
+B A U  s u p p o r t  &  J i r a  t i c k e t s  m a n a g e m e n t
+C o n d u c t e d  c o n n e c t i v i t y  a n d  d a t a  f l o w  t e s t s  w i t h / f o r  c l i e n t s
+O n b o a r d e d  n e w  c l i e n t s  ( i n c l u d i n g  a  T i e r  1  b a n k )  a n d  m a p p e d  n e w  C C P  r e p o r t s  a c c o r d i n g
+t o  t h e i r  r e q u i r e m e n t s  a n d  i n t e r n a l  e n g i n e
+I n t r o d u c e d  p r e v i o u s l y  u n d o c u m e n t e d  b u s i n e s s  a n d  p r o c e d u r e s  s p e c i f i c a t i o n s
+T o o l s  u s e d :  S Q L ,  O r a c l e  D B ,  T o m c a t ,  B a s h ,  P y t h o n
+L A N G U A G E S 
+
+E D U C A T I O N
+PERDUE SCHOOL OF BUSINESS, SALISBURY UNIVERSITY
+Master of Business Administration, MBA
+2 0 1 0 - 2 0 1 3 ,  S a l i s b u r y ,  M D ,  U S A
+WILMINGTON UNIVERSITY
+Bachelor of Science / Finance
+2 0 0 4 - 2 0 0 8 ,  N e w  C a s t l e ,  D E ,  U S A
+O C T   2 0 1 4  -  J U N  2 0 1 5 ,  L O N D O N ,  U KG l o b a l  D a t a  E q u i t y  A n a l y s t  ( c o n t r a c t )
+B l o o m b e r g  L . P
+S c r e e n e d ,  s e l e c t e d  a n d  v a l i d a t e d  f u n d a m e n t a l  d a t a  u s e d  f o r  i n f o r m e d  f i n a n c i a l  d e c i s i o n s
+D e v e l o p e d  w o r k f l o w  s o l u t i o n s ,  i m p r o v e d  p r o c e s s e s  a p p l y i n g  I T  &  p r o b l e m - s o l v i n g  s k i l l s
+P r o c e s s e d  &  p a r s e d  v a r i o u s  f i n a n c i a l  d a t a  s o u r c e s  i n t o  B l o o m b e r g  d a t a b a s e s
+S E P T  2 0 0 4  -  J U N  2 0 1 4 ,  O C E A N  V I E W ,  D E ,  U S AS e r v e r  |  M a n a g e r
+K o o l  B e a n  R e s t a u r a n t
+B u i l t  a n  i n - h o u s e  w e b  i n t e r f a c e  f o r  r e s e r v a t i o n s  u s i n g  P H P  &  S Q L
+W a s  i n  c h a r g e  o f  d a i l y  o p e r a t i o n s ,  s t a f f i n g ,  i n v e n t o r y  a n d  m a r k e t i n g  o f  e x p a n d i n g
+f r a n c h i s e
+R e s p o n s i b l e  f o r  b u s i n e s s  d e v e l o p m e n t ,  s a l e s  &  f o r e c a s t s ,  K P I s ,  a n d  p r o f i t a b i l i t y  a n a l y s i s
+M a n a g e d  o n - l i n e  a n d  s o c i a l  m e d i a  p r e s e n c e
+M A R  2 0 0 6  -  A U G  2 0 0 6 ,  R E H O B O T H  B E A C H ,  D E ,  U S AI n t e r n
+M e r r i l l  L y n c h
+Q u a n t i t a t i v e  s c r e e n i n g  f o r  m u t u a l  f u n d s  a n d  e q u i t i e s  o n  b e h a l f  o f  c l i e n t s
+I T  S u p p o r t  a n d  a d v i s o r y  p r o v i d e d  t o  b r o k e r s ;  c o n t a c t  w i t h  d i v e r s e  f i n a n c i a l  p r o d u c t s
+M A Y  2 0 0 0  -  S E P T  2 0 0 2 ,  V A R N A ,  B GF o r e i g n  E x c h a n g e  C a s h i e r
+I n t e r e x c h a n g e  
+I n f o r m e d  c u s t o m e r s  a b o u t  f o r e i g n  c u r r e n c y  r e g u l a t i o n s
+Q u o t e d  u n i t  e x c h a n g e  r a t e s  f o l l o w i n g  i n t e r n a t i o n a l  r a t e  s h e e t s  
+S O F T  S K I L L S
+Analytical, out-of-the-box mindset
+Team-oriented and objective collaborator
+Experienced and clear communicator with
+clients
+Bridge between Business and IT
+High attention to data accuracy and detail in
+reconciliations and report generation
+Self-motivated and goal-driven
+Open-minded with a “get-it-done” attitude
+Always curious to   learn new technologies
+Table Tennis
+Golf
+Hiking
+H O B B I E S
+A U G   2 0 1 5  -  F E B  2 0 1 7 ,  L O N D O N ,  U KP r o d u c t  I m p l e m e n t a t i o n  A n a l y s t
+T e t h y s  T e c h n o l o g y
+S u p p o r t e d  e q u i t y / o p t i o n s  e l e c t r o n i c  t r a d i n g  p l a t f o r m
+L i a i s e d  w i t h  a p p l i c a t i o n  d e v e l o p e r s  &  c l i e n t s  t o  s e e k  o p t i m a l  s o l u t i o n s  f o r  c l i e n t  i s s u e s
+S o u r c e d  a n d  a n a l y s e d  d a t a  s e r i e s  w i t h  s c r i p t i n g  a n d  S Q L  q u e r i e s
+D e v e l o p e d  a n d  t e s t e d  p r o t o t y p e  s o l u t i o n s  b a s e d  o n  d a t a  a n d  w o r k f l o w  a n a l y s i s
+B u i l t  a n  a u t o m a t e d  E x c e l - V B A  b a s e d  m o n i t o r i n g  t o o l  f o r  F I X  s e s s i o n  s t a t u s  t r a c k i n g  a n d
+a l e r t s
+F E B  2 0 1 7  -  A P R  2 0 1 8 ,  L O N D O N ,  U KA l g o r i t h m i c  E x e c u t i o n  D e s k  A n a l y s t
+Q u a n t i t a t i v e  B r o k e r s
+B u i l t  a  P y t h o n - b a s e d  a u t o m a t i o n  t o  r e g u l a r l y  r e t r i e v e  C M E  f u t u r e s  e x p i r y  d a t a
+R e p l a c i n g  a  p r e v i o u s l y   e r r o n e o u s  r e p e t i t i v e  m a n u a l  p r o c e s s
+R e d u c e d  t r a d i n g  i n c i d e n t s  f o r  c l i e n t s  r e l a t e d  t o  c o n t r a c t  a v a i l a b i l i t y
+S u p p o r t e d  L i n u x  b a s e d  f u t u r e s / f i x e d  i n c o m e  e l e c t r o n i c  t r a d i n g  e n v i r o n m e n t
+C o n d u c t e d  i n b o u n d / o u t b o u n d  F I X  c e r t i f i c a t i o n s
+A u t o m a t e d  d a i l y  p r o c e s s e s  v i a  P y t h o n  s c r i p t s
+T o o l s  u s e d :  S Q L ,  k d b ,  P y t h o n ,  B a s h

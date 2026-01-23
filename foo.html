@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Alim Hasanov - Experience Intensity Heatmap</title>
+    <style>
+        :root {
+            --daily: #4CAF50;    /* Green */
+            --regularly: #FF9800; /* Orange */
+            --ondemand: #2196F3;  /* Blue */
+            --none: #f8f9fa;      /* Very Light Gray for empty */
+            --border: #dee2e6;
+            --text-dark: #343a40;
+            --label-bg: #e9ecef;
+            --header-bg: #d1ecf1; /* Light Blue */
+            --footer-bg: #343a40; /* Dark */
+        }
+
+        body { font-family: 'Inter', Arial, sans-serif; padding: 40px; background-color: #fff; color: var(--text-dark); }
+        
+        .heatmap-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1400px; /* Allow it to be wide but checked */
+            border: 1px solid var(--border);
+            background: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            margin: 0 auto;
+        }
+
+        /* ROW STRUCTURE: Fixed Label + Flexible Data Track */
+        .row { display: flex; align-items: stretch; border-bottom: 1px solid var(--border); }
+        .row:last-child { border-bottom: none; }
+
+        .label-col {
+            width: 220px; /* Fixed width */
+            flex-shrink: 0;
+            padding: 0 15px;
+            background: var(--label-bg);
+            font-weight: 600;
+            font-size: 0.85em;
+            border-right: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            color: #495057;
+        }
+
+        .data-track {
+            flex: 1; /* Takes remaining space */
+            display: flex; /* Holds the cells in a row */
+            min-width: 0; /* Prevents overflow */
+        }
+
+        /* CELLS */
+        .cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: white;
+            border-right: 1px solid rgba(255,255,255,0.2); /* Subtle divider */
+            position: relative;
+        }
+        .cell:last-child { border-right: none; }
+
+        /* COLORS */
+        .daily { background-color: var(--daily); }
+        .regularly { background-color: var(--regularly); }
+        .ondemand { background-color: var(--ondemand); }
+        .none { background-color: var(--none); color: #ccc; }
+
+        /* --- ANGLED HEADERS (YEARS) --- */
+        .header-row { height: 80px; background: var(--header-bg); border-bottom: 2px solid #b1dfeb; }
+        .header-row .label-col { background: transparent; border-right: 1px solid #b1dfeb; font-weight: 800; color: #0c5460; }
+        .header-row .cell { 
+            color: #0c5460; 
+            overflow: visible; 
+            border-right: 1px solid rgba(0,0,0,0.05);
+            align-items: flex-end; /* Align to bottom */
+            padding-bottom: 5px;
+        }
+        
+        /* --- ANGLED FOOTERS (EMPLOYERS) --- */
+        .footer-row { height: 120px; background: var(--footer-bg); color: white; border-top: 2px solid #212529; }
+        .footer-row .label-col { background: #212529; color: white; border-right: 1px solid #495057; }
+        .footer-row .cell { 
+            border-right: 1px solid #495057; 
+            overflow: visible;
+            align-items: flex-start; /* Align to top */
+            padding-top: 10px;
+        }
+
+        /* ANGLED TEXT UTILITIES */
+        .angled-inner {
+            transform: rotate(-45deg);
+            white-space: nowrap;
+            text-align: left;
+            position: absolute;
+            /* Debugging help: border: 1px solid red; */
+        }
+
+        /* Specific tweaks for Header to align text nicely at bottom */
+        .header-row .angled-inner {
+            transform-origin: bottom center;
+            bottom: 15px; 
+            font-size: 1.1em;
+            font-weight: 800;
+        }
+
+        /* Specific tweaks for Footer to align text nicely at top */
+        .footer-row .angled-inner {
+            transform-origin: top center;
+            top: 20px;
+            font-size: 1.1em; /* Larger firm names */
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .skill-row { height: 42px; }
+        .skill-row:hover .label-col { background: #dee2e6; color: #000; }
+        .skill-row:hover .cell { opacity: 0.95; }
+
+
+        .legend { margin-top: 30px; display: flex; gap: 25px; justify-content: center; }
+        .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.9em; font-weight: 600; color: #555; }
+        .box { width: 18px; height: 18px; border-radius: 4px; }
+        
+        h2 { text-align: center; margin-bottom: 30px; color: #333; font-weight: 800; letter-spacing: -0.5px; }
+    </style>
+</head>
+<body>
+
+    <h2>Technical Proficiency Timeline</h2>
+
+    <div class="heatmap-container" id="matrixContainer">
+        <!-- Generated Content -->
+    </div>
+
+    <div class="legend">
+        <div class="legend-item"><div class="box daily"></div> Daily Usage</div>
+        <div class="legend-item"><div class="box regularly"></div> Regularly Used</div>
+        <div class="legend-item"><div class="box ondemand"></div> On Demand / Ad-hoc</div>
+    </div>
+
+    <script>
+    const careerData = {
+        employers: [
+            { id: "fefund", name: "FE fundinfo", start: "2023-10", end: "2025-05", 
+                skills: { "Application Support": 3, "Incident Management": 2, "Troubleshooting": 3, "Monitoring": 2, "SQL": 3, "Python": 3, "REST APIs": 3, "Data Automation": 3, "Master Data Management": 3, "Jira": 3, "Web Development": 2, "HTML & CSS": 3 } 
+            },
+            { id: "elwood", name: "Elwood Technology", start: "2022-05", end: "2023-06", 
+                skills: { "Application Support": 3, "Incident Management": 3, "Troubleshooting": 3, "Monitoring": 3, "SQL": 3, "Python": 2, "WebSockets": 3, "REST APIs": 3, "Bash": 3, "Testing & Debugging": 3, "Jira": 3, "Data Automation": 1 } 
+            },
+            { id: "broadridge", name: "Broadridge Financial", start: "2018-05", end: "2022-05", 
+                skills: { "Application Support": 3, "Incident Management": 3, "Troubleshooting": 3, "Monitoring": 3, "SQL": 3, "Python": 1, "REST APIs": 2, "Bash": 2, "Testing & Debugging": 2, "Jira": 3, "Data Automation": 1 } 
+            },
+            { id: "qb", name: "Quant Brokers", start: "2017-02", end: "2018-04", 
+                skills: { "Application Support": 3, "Incident Management": 3, "Troubleshooting": 3, "Monitoring": 3, "SQL": 1, "Python": 3, "Bash": 3, "Testing & Debugging": 2, "Data Automation": 3, "Jira": 1 } 
+            },
+            { id: "tethys", name: "Tethys Tech", start: "2015-08", end: "2017-02", 
+                skills: { "Application Support": 3, "Incident Management": 2, "Troubleshooting": 3, "Monitoring": 3, "SQL": 2, "Python": 1, "Testing & Debugging": 3, "Data Automation": 2 } 
+            },
+            { id: "bloomberg", name: "Bloomberg", start: "2014-10", end: "2015-06", 
+                skills: { "Application Support": 2, "Incident Management": 1, "Troubleshooting": 2, "Monitoring": 3, "SQL": 2, "Python": 1, "Master Data Management": 3, "HTML & CSS": 2, "Data Automation": 1, "Web Development": 1 } 
+            }
+        ],
+        skillList: [
+            "Application Support", "Incident Management", "Troubleshooting", "Monitoring", 
+            "SQL", "Python", "WebSockets", "REST APIs", "Bash", "Testing & Debugging", 
+            "Data Automation", "Master Data Management", "Jira", "Web Development", "HTML & CSS"
+        ]
+    };
+
+    function calculateMonths(start, end) {
+        const s = new Date(start);
+        const e = new Date(end);
+        return (e.getFullYear() - s.getFullYear()) * 12 + (e.getMonth() - s.getMonth());
+    }
+
+    const container = document.getElementById('matrixContainer');
+
+    // Calculate total duration for relative widths 
+    careerData.employers.forEach(emp => emp.duration = calculateMonths(emp.start, emp.end));
+    const totalMonths = careerData.employers.reduce((acc, emp) => acc + emp.duration, 0);
+
+    // 1. Generate Header (Years) - Angled
+    let html = `
+    <div class="row header-row">
+        <div class="label-col">Timeline</div>
+        <div class="data-track">`;
+            
+    careerData.employers.forEach(emp => {
+        const w = (emp.duration / totalMonths) * 100;
+        const years = `${emp.start.split('-')[0].slice(-2)}-${emp.end.split('-')[0].slice(-2)}`;
+        // Use angled-inner wrapper
+        html += `<div class="cell" style="width:${w}%"><span class="angled-inner">${years}</span></div>`;
+    });
+    html += `</div></div>`; // Close track and row
+
+    // 2. Generate Skill Rows
+    careerData.skillList.forEach(skill => {
+        html += `<div class="row skill-row">
+                    <div class="label-col">${skill}</div>
+                    <div class="data-track">`;
+        
+        careerData.employers.forEach(emp => {
+            const w = (emp.duration / totalMonths) * 100;
+            const level = emp.skills[skill] || 0;
+            const cls = level === 3 ? 'daily' : level === 2 ? 'regularly' : level === 1 ? 'ondemand' : 'none';
+            const txt = level === 3 ? 'Daily' : level === 2 ? 'Reg.' : level === 1 ? 'Ad-hoc' : '';
+            html += `<div class="cell ${cls}" style="width:${w}%">${txt}</div>`;
+        });
+        html += `   </div>
+                 </div>`;
+    });
+
+    // 3. Generate Footer (Employer) - Angled
+    html += `<div class="row footer-row">
+                <div class="label-col">Employer</div>
+                <div class="data-track">`;
+    careerData.employers.forEach(emp => {
+        const w = (emp.duration / totalMonths) * 100;
+         // Use angled-inner wrapper
+        html += `<div style="width:${w}%" class="cell"><span class="angled-inner">${emp.name}</span></div>`;
+    });
+    html += `   </div>
+             </div>`;
+
+    container.innerHTML = html;
+    </script>
+
+</body>
+</html>

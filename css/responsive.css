@@ -1,0 +1,70 @@
+/* ========================================
+   RESPONSIVE - Tablet
+   ======================================== */
+@media (max-width: 1000px) {
+    .skills-column, .soft-skills-column { display: none; }
+    .grid-layout { grid-template-columns: 1fr; }
+    .exp-item {
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "title toggle"
+            "date date"
+            "firm firm"
+            "location location"
+            "details details";
+        row-gap: 0.5rem;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - Mobile
+   ======================================== */
+@media (max-width: 768px) {
+    .header {
+        padding: 2rem;
+    }
+
+    .name {
+        font-size: 3.2rem;
+    }
+
+    .hero-summary {
+        position: relative;
+        top: auto;
+        max-width: 100%;
+        margin-bottom: 1.5rem;
+    }
+
+    .profile-container {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 45vw;
+        margin: 0 auto 1.5rem;
+    }
+
+    .header-content {
+        justify-content: center;
+    }
+
+    .journey-trace {
+        font-size: 1.2rem;
+        flex-wrap: wrap;
+    }
+
+    .sidebar-nav {
+        display: none;
+    }
+
+    .header.collapsed {
+        padding: 0 1rem;
+    }
+
+    .header.collapsed .name {
+        font-size: 1rem;
+    }
+
+    h1 { font-size: 4rem; }
+    .grid-layout { display: block; }
+    .profile-container { width: 38vw; }
+}

@@ -1,0 +1,1915 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alim Hasanov | Strategy & Code</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- CSS Modules -->
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/details-panel.css" />
+    <link rel="stylesheet" href="css/grid-columns.css" />
+    <link rel="stylesheet" href="css/experience.css" />
+    <link rel="stylesheet" href="css/uat-section.css" />
+    <link rel="stylesheet" href="css/uat-styles-generated.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/skill-matrix.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </head>
+  <body>
+    <!-- Pull-to-close Progress Indicator -->
+    <div class="pull-indicator" id="pullIndicator">
+      <svg viewBox="0 0 40 40">
+        <circle class="bg-circle" cx="20" cy="20" r="18"></circle>
+        <circle class="progress-circle" cx="20" cy="20" r="18"></circle>
+      </svg>
+      <span class="arrow">↑</span>
+    </div>
+
+    <!-- Sidebar Navigation - Moved closer to content -->
+    <nav
+      class="sidebar-nav"
+      style="left: max(2rem, calc(50% - (var(--details-max-width) / 2)))"
+    >
+      <div class="nav-dot active" data-panel="hero" id="navHero"></div>
+      <div class="nav-dot" data-panel="details" id="navDetails"></div>
+    </nav>
+
+    <!-- Admin Controls (Bottom Right) -->
+    <div
+      id="adminContainer"
+      style="
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        font-family: -apple-system, sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      "
+    >
+      <!-- Heatmap Style Palette -->
+      <select
+        id="hm-palette-select"
+        onchange="switchPalette(this.value)"
+        style="
+          background: rgba(0, 0, 0, 0.85);
+          color: white;
+          border: none;
+          padding: 6px 10px;
+          border-radius: 6px;
+          font-size: 11px;
+          font-weight: 500;
+          cursor: pointer;
+        "
+      >
+        <option value="red">Swiss Red</option>
+        <option value="crimson">Crimson</option>
+        <option value="burgundy">Burgundy</option>
+        <option value="bordeaux">Bordeaux</option>
+        <option value="rust">Rust</option>
+        <option value="obsidian">Obsidian</option>
+        <option value="graphite">Graphite</option>
+        <option value="slate">Slate</option>
+        <option value="midnight">Midnight</option>
+        <option value="silver">Silver</option>
+      </select>
+
+      <!-- Theme Toggle (Page Colors) -->
+      <div
+        class="theme-toggle-container"
+        style="position: static; display: flex; gap: 4px"
+      >
+        <button
+          class="theme-btn t-btn-original active"
+          data-theme="original"
+          title="Original"
+        ></button>
+        <button
+          class="theme-btn t-btn-dark"
+          data-theme="dark"
+          title="Dark"
+        ></button>
+        <button
+          class="theme-btn t-btn-ocean"
+          data-theme="ocean"
+          title="Ocean"
+        ></button>
+        <button
+          class="theme-btn t-btn-neon"
+          data-theme="neon"
+          title="Neon"
+        ></button>
+        <button
+          class="theme-btn t-btn-minimal"
+          data-theme="minimal"
+          title="Minimal"
+        ></button>
+      </div>
+    </div>
+
+    <!-- Debug Layout Tool (Collapsible) -->
+    <div
+      id="debugContainer"
+      style="
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      "
+    >
+      <!-- Toggle Button -->
+      <button
+        id="debugToggle"
+        onclick="toggleDebug()"
+        style="
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: rgba(0, 0, 0, 0.85);
+          border: none;
+          color: white;
+          font-size: 20px;
+          cursor: pointer;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: transform 0.2s;
+        "
+      >
+        ⚙️
+      </button>
+
+      <!-- Controls Panel (Hidden by default or toggled) -->
+      <div
+        id="debugPanel"
+        style="
+          display: none;
+          position: absolute;
+          bottom: 50px;
+          right: 0;
+          background: rgba(0, 0, 0, 0.9);
+          padding: 15px;
+          border-radius: 12px;
+          color: white;
+          font-size: 12px;
+          backdrop-filter: blur(10px);
+          width: 220px;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        "
+      >
+        <div
+          style="
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+          "
+        >
+          Layout Debugger
+          <span
+            style="font-size: 10px; opacity: 0.6; cursor: pointer"
+            onclick="toggleDebug()"
+            >▼</span
+          >
+        </div>
+        <div style="margin-bottom: 12px">
+          <label style="display: block; margin-bottom: 4px; opacity: 0.8"
+            >Header Height:
+            <span id="valHeight" style="color: #ff3b30; font-weight: bold"
+              >80px</span
+            ></label
+          >
+          <input
+            type="range"
+            id="rngHeight"
+            min="60"
+            max="160"
+            value="80"
+            style="width: 100%; cursor: grab"
+          />
+        </div>
+        <div style="margin-bottom: 12px">
+          <label style="display: block; margin-bottom: 4px; opacity: 0.8"
+            >Details Width:
+            <span id="valWidth" style="color: #ff3b30; font-weight: bold"
+              >1860px</span
+            ></label
+          >
+          <input
+            type="range"
+            id="rngWidth"
+            min="1000"
+            max="2400"
+            step="20"
+            value="1860"
+            style="width: 100%; cursor: grab"
+          />
+        </div>
+        <div style="margin-bottom: 12px">
+          <label style="display: block; margin-bottom: 4px; opacity: 0.8"
+            >Details Pad Top:
+            <span id="valPad" style="color: #ff3b30; font-weight: bold"
+              >5.5rem</span
+            ></label
+          >
+          <input
+            type="range"
+            id="rngPad"
+            min="1"
+            max="8"
+            step="0.1"
+            value="5.5"
+            style="width: 100%; cursor: grab"
+          />
+        </div>
+
+        <!-- Heatmap Firm Names Section -->
+        <div
+          style="
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+          "
+        >
+          <div
+            style="
+              margin-bottom: 8px;
+              font-weight: 700;
+              text-transform: uppercase;
+            "
+          >
+            Heatmap Firms
+          </div>
+          <div style="margin-bottom: 8px">
+            <label style="display: block; margin-bottom: 4px; opacity: 0.8"
+              >Top Position:
+              <span id="valFirmTop" style="color: #ff3b30; font-weight: bold"
+                >25px</span
+              ></label
+            >
+            <input
+              type="range"
+              id="rngFirmTop"
+              min="0"
+              max="100"
+              step="1"
+              value="25"
+              style="width: 100%; cursor: grab"
+              oninput="updateFirmPosition()"
+            />
+          </div>
+          <div style="margin-bottom: 8px">
+            <label style="display: block; margin-bottom: 4px; opacity: 0.8"
+              >Center Nudge:
+              <span id="valFirmNudge" style="color: #ff3b30; font-weight: bold"
+                >0px</span
+              ></label
+            >
+            <input
+              type="range"
+              id="rngFirmNudge"
+              min="-100"
+              max="100"
+              step="1"
+              value="0"
+              style="width: 100%; cursor: grab"
+              oninput="updateFirmPosition()"
+            />
+          </div>
+          <div style="margin-bottom: 8px">
+            <label style="display: block; margin-bottom: 4px; opacity: 0.8"
+              >Angle:
+              <span id="valFirmAngle" style="color: #ff3b30; font-weight: bold"
+                >-55deg</span
+              ></label
+            >
+            <input
+              type="range"
+              id="rngFirmAngle"
+              min="-90"
+              max="0"
+              step="5"
+              value="-55"
+              style="width: 100%; cursor: grab"
+              oninput="updateFirmPosition()"
+            />
+          </div>
+          <button
+            onclick="copyFirmCSS()"
+            style="
+              width: 100%;
+              padding: 6px;
+              background: #007aff;
+              border: none;
+              color: white;
+              border-radius: 4px;
+              cursor: pointer;
+              font-weight: 600;
+              margin-top: 4px;
+            "
+          >
+            Copy CSS Values
+          </button>
+        </div>
+
+        <!-- Visual Effects Section -->
+        <div
+          style="
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+          "
+        >
+          <div
+            style="
+              margin-bottom: 8px;
+              font-weight: 700;
+              text-transform: uppercase;
+            "
+          >
+            Visual Effects
+          </div>
+          <select
+            id="effectSelect"
+            style="
+              width: 100%;
+              padding: 4px;
+              margin-bottom: 8px;
+              background: rgba(255, 255, 255, 0.1);
+              border: none;
+              color: white;
+              border-radius: 4px;
+            "
+          >
+            <option value="fireworks">Fireworks</option>
+            <option value="hobbies">Hobby Burst (Emojis)</option>
+            <option value="paper">Paper Toss (Confetti)</option>
+          </select>
+          <button
+            id="btnTriggerEffect"
+            style="
+              width: 100%;
+              padding: 6px;
+              background: var(--accent-color);
+              border: none;
+              color: white;
+              border-radius: 4px;
+              cursor: pointer;
+              font-weight: 600;
+            "
+          >
+            Trigger Effect
+          </button>
+        </div>
+
+        <!-- Admin Mode Section -->
+        <div
+          style="
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+          "
+        >
+          <div
+            style="
+              margin-bottom: 8px;
+              font-weight: 700;
+              text-transform: uppercase;
+            "
+          >
+            Admin Controls
+          </div>
+          <button
+            id="adminModeToggle"
+            onclick="toggleAdminMode()"
+            style="
+              width: 100%;
+              padding: 8px;
+              background: rgba(255, 255, 255, 0.15);
+              border: none;
+              color: white;
+              border-radius: 4px;
+              cursor: pointer;
+              font-weight: 600;
+            "
+          >
+            Enable Admin Mode
+          </button>
+          
+          <div id="adminControls" style="display: none; margin-top: 8px; gap: 8px; flex-direction: column;">
+             <button
+              onclick="addSkill()"
+              style="
+                width: 100%;
+                padding: 8px;
+                background: rgba(76, 175, 80, 0.3);
+                border: 1px solid rgba(76, 175, 80, 0.5);
+                color: white;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: 600;
+              "
+            >
+              + Add Skill
+            </button>
+             <button
+              onclick="saveCareerData()"
+              style="
+                width: 100%;
+                padding: 8px;
+                background: rgba(33, 150, 243, 0.3);
+                border: 1px solid rgba(33, 150, 243, 0.5);
+                color: white;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: 600;
+              "
+            >
+              Save JSON
+            </button>
+          </div>
+        </div>
+
+        <!-- Glass Effect & Photo Section -->
+        <div
+          style="
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+          "
+        >
+          <div
+            style="
+              margin-bottom: 8px;
+              font-weight: 700;
+              text-transform: uppercase;
+            "
+          >
+            Glass & Photo
+          </div>
+          <div style="margin-bottom: 12px">
+            <label style="display: block; margin-bottom: 4px; opacity: 0.8"
+              >Blur Intensity:
+              <span id="valBlur" style="color: #ff3b30; font-weight: bold"
+                >5px</span
+              ></label
+            >
+            <input
+              type="range"
+              id="rngBlur"
+              min="0"
+              max="120"
+              step="1"
+              value="5"
+              style="width: 100%; cursor: grab"
+            />
+          </div>
+          <div style="margin-bottom: 12px">
+            <label style="display: block; margin-bottom: 4px; opacity: 0.8"
+              >Photo Top Offset:
+              <span id="valPhotoTop" style="color: #ff3b30; font-weight: bold"
+                >0px</span
+              ></label
+            >
+            <input
+              type="range"
+              id="rngPhotoTop"
+              min="-20"
+              max="60"
+              step="2"
+              value="0"
+              style="width: 100%; cursor: grab"
+            />
+          </div>
+          <div style="margin-bottom: 12px">
+            <label style="display: block; margin-bottom: 4px; opacity: 0.8"
+              >Photo Size:
+              <span id="valPhotoSize" style="color: #ff3b30; font-weight: bold"
+                >100px</span
+              ></label
+            >
+            <input
+              type="range"
+              id="rngPhotoSize"
+              min="60"
+              max="160"
+              step="5"
+              value="100"
+              style="width: 100%; cursor: grab"
+            />
+          </div>
+          <button
+            onclick="copyGlassPhotoCSS()"
+            style="
+              width: 100%;
+              padding: 6px;
+              background: #007aff;
+              border: none;
+              color: white;
+              border-radius: 4px;
+              cursor: pointer;
+              font-weight: 600;
+              margin-top: 4px;
+            "
+          >
+            Copy CSS Values
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- HEADER (Hero that collapses to sticky) -->
+    <header class="header" id="header">
+      <div class="header-content">
+        <!-- Hero Summary (visible in hero state) -->
+        <div class="hero-summary">
+          <div
+            class="hero-tagline"
+            id="heroTagline"
+            data-en="Application Support | Data Management"
+            data-de="Anwendungsunterstützung | Datenmanagement"
+          >
+            Application Support | Data Management
+          </div>
+          <p
+            class="hero-description"
+            id="heroDescription"
+            data-en="I keep businesses running seamlessly and clients confident by managing applications and monitoring logs, databases, APIs, and network connectivity across the software stack."
+            data-de="Ich sorge für reibungslose Geschäftsabläufe und zufriedene Kunden durch die Verwaltung von Anwendungen und die Überwachung von Logs, Datenbanken, APIs und Netzwerkkonnektivität im gesamten Software-Stack."
+          >
+            I keep businesses running seamlessly and clients confident by
+            managing applications and monitoring logs, databases, APIs, and
+            network connectivity across the software stack.
+          </p>
+        </div>
+
+        <!-- Profile Image -->
+        <div class="profile-container">
+          <img
+            src="images/darkblue_centered.png"
+            alt="Alim Hasanov"
+            id="profileImg"
+          />
+        </div>
+
+        <!-- Name Area -->
+        <div class="name-area">
+          <h1 class="name" id="nameTitle">Alim<br />Hasanov</h1>
+        </div>
+
+        <!-- Journey Trace -->
+        <div class="journey-trace">
+          <span class="j-code" data-title="Bulgaria">BG</span>
+          <span class="j-arrow">→</span>
+          <span class="j-code" data-title="Turkey">TR</span>
+          <span class="j-arrow">→</span>
+          <span class="j-code" data-title="Germany">DE</span>
+          <span class="j-arrow">→</span>
+          <span class="j-code" data-title="USA">US</span>
+          <span class="j-arrow">→</span>
+          <span class="j-code" data-title="United Kingdom">UK</span>
+          <span class="j-arrow">→</span>
+          <span class="j-code" data-title="Switzerland">CH</span>
+        </div>
+
+        <!-- Header Center - Subtitle (visible when collapsed) -->
+        <div class="header-center">
+          <span
+            class="header-subtitle"
+            id="headerSubtitle"
+            data-en="Application Support | Data Management"
+            data-de="Anwendungsunterstützung | Datenmanagement"
+            >Application Support | Data Management</span
+          >
+        </div>
+
+        <!-- Header Controls - Right side (visible when collapsed) -->
+        <div class="header-controls" id="headerControls">
+          <!-- LinkedIn -->
+          <a
+            href="https://www.linkedin.com/in/alimhasanov/"
+            target="_blank"
+            class="header-linkedin"
+            aria-label="LinkedIn Profile"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+              />
+            </svg>
+          </a>
+
+          <!-- Language Switcher -->
+          <div class="language-switcher">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <div
+              style="
+                width: 1px;
+                height: 12px;
+                background: var(--secondary-text);
+                opacity: 0.3;
+              "
+            ></div>
+            <button class="lang-btn" data-lang="de">DE</button>
+          </div>
+
+          <!-- Profile Photo -->
+          <div class="sticky-profile">
+            <img src="images/darkblue_centered.png" alt="Alim Hasanov" />
+          </div>
+        </div>
+
+        <!-- Fixed Mode Toggle (Moved out of name-area) -->
+        <div class="fixed-mode-toggle">
+          <div class="mode-toggle" id="modeToggleHero">
+            <span class="mode-label active" id="labelOnHero">PROD</span>
+            <div class="toggle-switch"></div>
+            <span class="mode-label" id="labelOffHero">UAT</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- DETAILS PANEL -->
+    <section class="details-panel" id="detailsPanel">
+      <div class="details-wrapper">
+        <!-- New Tabs Navigation -->
+        <div class="details-tabs" id="prod-tabs">
+          <button class="tab-btn active" data-tab="cv" id="tabBtnCV">CV</button>
+          <button class="tab-btn" data-tab="tech" id="tabBtnTech">
+            Tech Skills
+          </button>
+          <button class="tab-btn" data-tab="soft" id="tabBtnSoft">
+            Soft Skills
+          </button>
+        </div>
+
+        <!-- UAT Tabs (Visible only in Off-Hours) -->
+        <div class="details-tabs" id="uat-tabs" style="display: none">
+          <button class="tab-btn active" data-target="section-weekend">
+            Perfect Weekend
+          </button>
+          <button class="tab-btn" data-target="section-hobbies">
+            Latest Books
+          </button>
+          <button class="tab-btn" data-target="section-culture">Top 5</button>
+          <button class="tab-btn" data-target="section-bucket">
+            TO DO (GO)
+          </button>
+        </div>
+
+        <div class="tab-container">
+          <!-- 1. CV TAB -->
+          <div class="tab-pane active" id="tab-cv">
+            <!-- Experience History (Previously Middle Column) -->
+            <div class="experience-column active-full" id="experience-section">
+              <div
+                class="exp-item"
+                data-skills="python,sql,javascript,html,jira,duckdb"
+                onclick="toggleExp(this)"
+              >
+                <div class="exp-role">
+                  <button class="exp-toggle-btn" aria-label="Toggle Details">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                  <h2>Product Data Specialist</h2>
+                </div>
+                <div
+                  class="exp-date"
+                  data-en="Oct 2023 - May 2025"
+                  data-de="Okt. 2023 - Mai 2025"
+                >
+                  Oct 2023 - May 2025
+                </div>
+                <div class="exp-company">
+                  FE fundinfo
+                  <a
+                    href="https://www.fefundinfo.com"
+                    target="_blank"
+                    class="website-icon"
+                    onclick="event.stopPropagation()"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="2" y1="12" x2="22" y2="12"></line>
+                      <path
+                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                      ></path></svg
+                  ></a>
+                  <a
+                    href="https://www.linkedin.com/company/fefundinfo/"
+                    target="_blank"
+                    class="linkedin-icon"
+                    onclick="event.stopPropagation()"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                      /></svg
+                  ></a>
+                </div>
+                <div class="exp-location">Zürich, CH</div>
+
+
+
+                <div class="exp-details-wrapper">
+                  <div class="exp-details-content">
+                    <div
+                      class="job-summary"
+                      data-en="Developed internal tools for data profiling and quality assessment using Python and SQL. Automated internal reference data discovery and gathering processes, creating modern web-based UIs to replace legacy systems."
+                      data-de="Entwicklung interner Tools für Datenprofiling und Qualitätsbewertung mit Python und SQL. Automatisierung interner Referenzdaten-Erkennung und -Erfassung, Erstellung moderner webbasierter Oberflächen als Ersatz für Legacy-Systeme."
+                    >
+                      Developed internal tools for data profiling and quality
+                      assessment using Python and SQL. Automated internal
+                      reference data discovery and gathering processes, creating
+                      modern web-based UIs to replace legacy systems.
+                    </div>
+                    <div class="job-highlights">
+                      <ul>
+                        <li
+                          data-en="Simplified data access and discovery from multiple sources for internal teams."
+                          data-de="Vereinfachter Datenzugriff und -erkennung aus mehreren Quellen für interne Teams."
+                        >
+                          Simplified data access and discovery from multiple
+                          sources for internal teams.
+                        </li>
+                        <li
+                          data-en="Eliminated duplicate data submission and processing, speeding up client ticket turnaround."
+                          data-de="Beseitigung doppelter Datenübermittlung und -verarbeitung, Beschleunigung der Kundenticket-Bearbeitung."
+                        >
+                          Eliminated duplicate data submission and processing,
+                          speeding up client ticket turnaround.
+                        </li>
+                        <li
+                          data-en="Converted an Excel-VBA based tool into a modern web-based UI, reducing client fund data submission errors."
+                          data-de="Umwandlung eines Excel-VBA-basierten Tools in eine moderne webbasierte Oberfläche, Reduzierung von Fehlern bei der Fondsdatenübermittlung."
+                        >
+                          Converted an Excel-VBA based tool into a modern
+                          web-based UI, reducing client fund data submission
+                          errors.
+                        </li>
+                        <li
+                          data-en="Minimized expensive manual interventions and improved fund data intake processing time."
+                          data-de="Minimierung teurer manueller Eingriffe und Verbesserung der Verarbeitungszeit für Fondsdatenaufnahme."
+                        >
+                          Minimized expensive manual interventions and improved
+                          fund data intake processing time.
+                        </li>
+                        <li
+                          data-en="Guided asset managers on their fund data submission requirements."
+                          data-de="Beratung von Asset Managern zu ihren Anforderungen bei der Fondsdatenübermittlung."
+                        >
+                          Guided asset managers on their fund data submission
+                          requirements.
+                        </li>
+                        <li
+                          data-en="Performed SQL-based data manipulation, cleansing, and reconciliation."
+                          data-de="Durchführung von SQL-basierter Datenmanipulation, -bereinigung und -abstimmung."
+                        >
+                          Performed SQL-based data manipulation, cleansing, and
+                          reconciliation.
+                        </li>
+                        <li>
+                          <strong>Tools:</strong> SQL, Python, JavaScript, HTML,
+                          Jira, DuckDB.
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="exp-item"
+                data-skills="sql,python,unix,bash,bigquery"
+                onclick="toggleExp(this)"
+              >
+                <div class="exp-role">
+                  <button class="exp-toggle-btn" aria-label="Toggle Details">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                  <h2>Crypto Trading Support</h2>
+                </div>
+                <div
+                  class="exp-date"
+                  data-en="May 2022 - Jun 2023"
+                  data-de="Mai 2022 - Juni 2023"
+                >
+                  May 2022 - Jun 2023
+                </div>
+                <div class="exp-company">
+                  Elwood Technology
+                  <a
+                    href="https://elwood.io"
+                    target="_blank"
+                    class="website-icon"
+                    onclick="event.stopPropagation()"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="2" y1="12" x2="22" y2="12"></line>
+                      <path
+                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                      ></path></svg
+                  ></a>
+                  <a
+                    href="https://www.linkedin.com/company/elwoodtechnologies"
+                    target="_blank"
+                    class="linkedin-icon"
+                    onclick="event.stopPropagation()"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                      /></svg
+                  ></a>
+                </div>
+                <div class="exp-location">London, UK</div>
+
+
+
+                <div class="exp-details-wrapper">
+                  <div class="exp-details-content">
+                    <div
+                      class="job-summary"
+                      data-en="Provided 24/7 support for a crypto trading application covering Spot, Futures, Options, and Perpetuals. Managed incident resolution, root cause analysis, and directly supported clients through technical challenges."
+                      data-de="24/7-Support für eine Krypto-Handelsanwendung mit Spot, Futures, Optionen und Perpetuals. Verwaltung von Störungsbehebung, Ursachenanalyse und direkte Kundenunterstützung bei technischen Herausforderungen."
+                    >
+                      Provided 24/7 support for a crypto trading application
+                      covering Spot, Futures, Options, and Perpetuals. Managed
+                      incident resolution, root cause analysis, and directly
+                      supported clients through technical challenges.
+                    </div>
+                    <div class="job-highlights">
+                      <ul>
+                        <li
+                          data-en="Organized and managed training sessions to onboard new and potential clients."
+                          data-de="Organisation und Durchführung von Schulungen zur Einarbeitung neuer und potenzieller Kunden."
+                        >
+                          Organized and managed training sessions to onboard new
+                          and potential clients.
+                        </li>
+                        <li
+                          data-en="Conducted connectivity tests and performed final trading flow tests before go-live."
+                          data-de="Durchführung von Konnektivitätstests und finalen Handelsablauftests vor der Inbetriebnahme."
+                        >
+                          Conducted connectivity tests and performed final
+                          trading flow tests before go-live.
+                        </li>
+                        <li
+                          data-en="Supported Backend, Frontend, API, and Algorithm components of the trading platform."
+                          data-de="Unterstützung der Backend-, Frontend-, API- und Algorithmus-Komponenten der Handelsplattform."
+                        >
+                          Supported Backend, Frontend, API, and Algorithm
+                          components of the trading platform.
+                        </li>
+                        <li
+                          data-en="Tested, debugged, and released new software versions."
+                          data-de="Testen, Debuggen und Veröffentlichung neuer Softwareversionen."
+                        >
+                          Tested, debugged, and released new software versions.
+                        </li>
+                        <li>
+                          <strong>Tools:</strong> SQL, Python, Unix, Bash,
+                          BigQuery, Zendesk.
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="exp-item"
+                data-skills="sql,oracle,bash,python"
+                onclick="toggleExp(this)"
+              >
+                <div class="exp-role">
+                  <button class="exp-toggle-btn" aria-label="Toggle Details">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                  <h2>Support Analyst</h2>
+                </div>
+                <div
+                  class="exp-date"
+                  data-en="May 2018 - May 2022"
+                  data-de="Mai 2018 - Mai 2022"
+                >
+                  May 2018 - May 2022
+                </div>
+                <div class="exp-company">
+                  Broadridge Financial
+                  <a
+                    href="https://www.broadridge.com"
+                    target="_blank"
+                    class="website-icon"
+                    onclick="event.stopPropagation()"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="2" y1="12" x2="22" y2="12"></line>
+                      <path
+                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                      ></path></svg
+                  ></a>
+                  <a
+                    href="https://www.linkedin.com/company/broadridge"
+                    target="_blank"
+                    class="linkedin-icon"
+                    onclick="event.stopPropagation()"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                      /></svg
+                  ></a>
+                </div>
+                <div class="exp-location">London, UK</div>
+
+
+
+                <div class="exp-details-wrapper">
+                  <div class="exp-details-content">
+                    <div
+                      class="job-summary"
+                      data-en="Consulted and supported Tier 1 banks and institutional clients with their clearing reports processing. Managed BAU support and led the onboarding of new clients to internal engines."
+                      data-de="Beratung und Unterstützung von Tier-1-Banken und institutionellen Kunden bei der Verarbeitung ihrer Clearing-Berichte. Verwaltung des BAU-Supports und Leitung des Onboardings neuer Kunden auf interne Systeme."
+                    >
+                      Consulted and supported Tier 1 banks and institutional
+                      clients with their clearing reports processing. Managed
+                      BAU support and led the onboarding of new clients to
+                      internal engines.
+                    </div>
+                    <div class="job-highlights">
+                      <ul>
+                        <li
+                          data-en="Conducted connectivity and data flow tests with/for clients."
+                          data-de="Durchführung von Konnektivitäts- und Datenflusstests mit/für Kunden."
+                        >
+                          Conducted connectivity and data flow tests with/for
+                          clients.
+                        </li>
+                        <li
+                          data-en="Onboarded new clients (including a Tier 1 bank) and mapped new CCP reports to requirements."
+                          data-de="Onboarding neuer Kunden (inkl. einer Tier-1-Bank) und Zuordnung neuer CCP-Berichte zu Anforderungen."
+                        >
+                          Onboarded new clients (including a Tier 1 bank) and
+                          mapped new CCP reports to requirements.
+                        </li>
+                        <li
+                          data-en="Introduced previously undocumented business and procedure specifications."
+                          data-de="Einführung zuvor undokumentierter Geschäfts- und Verfahrensspezifikationen."
+                        >
+                          Introduced previously undocumented business and
+                          procedure specifications.
+                        </li>
+                        <li>
+                          <strong>Tools:</strong> SQL, Oracle DB, Tomcat, Bash,
+                          Python.
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="exp-item"
+                data-skills="linux,sql,kdb,python,bash"
+                onclick="toggleExp(this)"
+              >
+                <div class="exp-role">
+                  <button class="exp-toggle-btn" aria-label="Toggle Details">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                  <h2>Electronic Trading Support</h2>
+                </div>
+                <div
+                  class="exp-date"
+                  data-en="Feb 2017 - Apr 2018"
+                  data-de="Feb. 2017 - Apr. 2018"
+                >
+                  Feb 2017 - Apr 2018
+                </div>
+                <div class="exp-company">
+                  Quantitative Brokers
+                  <a
+                    href="https://quantitativebrokers.com"
+                    target="_blank"
+                    class="website-icon"
+                    onclick="event.stopPropagation()"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="2" y1="12" x2="22" y2="12"></line>
+                      <path
+                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                      ></path></svg
+                  ></a>
+                  <a
+                    href="https://www.linkedin.com/company/quantitative-brokers"
+                    target="_blank"
+                    class="linkedin-icon"
+                    onclick="event.stopPropagation()"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                      /></svg
+                  ></a>
+                </div>
+                <div class="exp-location">London, UK</div>
+
+
+
+                <div class="exp-details-wrapper">
+                  <div class="exp-details-content">
+                    <div
+                      class="job-summary"
+                      data-en="Built Python-based automation to retrieve CME futures expiry data, replacing erroneous manual processes. Supported a Linux-based futures/fixed income electronic trading environment."
+                      data-de="Entwicklung einer Python-basierten Automatisierung zum Abruf von CME-Futures-Verfallsdaten als Ersatz für fehlerhafte manuelle Prozesse. Unterstützung einer Linux-basierten Futures/Anleihen-Handelsumgebung."
+                    >
+                      Built Python-based automation to retrieve CME futures
+                      expiry data, replacing erroneous manual processes.
+                      Supported a Linux-based futures/fixed income electronic
+                      trading environment.
+                    </div>
+                    <div class="job-highlights">
+                      <ul>
+                        <li
+                          data-en="Reduced trading incidents for clients related to contract availability."
+                          data-de="Reduzierung von Handelsvorfällen für Kunden im Zusammenhang mit Kontraktverfügbarkeit."
+                        >
+                          Reduced trading incidents for clients related to
+                          contract availability.
+                        </li>
+                        <li
+                          data-en="Conducted inbound/outbound FIX certifications."
+                          data-de="Durchführung von eingehenden/ausgehenden FIX-Zertifizierungen."
+                        >
+                          Conducted inbound/outbound FIX certifications.
+                        </li>
+                        <li
+                          data-en="Automated daily processes via Python scripts."
+                          data-de="Automatisierung täglicher Prozesse mittels Python-Skripten."
+                        >
+                          Automated daily processes via Python scripts.
+                        </li>
+                        <li><strong>Tools:</strong> SQL, kdb, Python, Bash.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="exp-item"
+                data-skills="fix,excel,sql"
+                onclick="toggleExp(this)"
+              >
+                <div class="exp-role">
+                  <button class="exp-toggle-btn" aria-label="Toggle Details">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                  <h2>Implementation Analyst</h2>
+                </div>
+                <div
+                  class="exp-date"
+                  data-en="Aug 2015 - Feb 2017"
+                  data-de="Aug. 2015 - Feb. 2017"
+                >
+                  Aug 2015 - Feb 2017
+                </div>
+                <div class="exp-company">
+                  Tethys Technology
+                  <a
+                    href="https://tethystech.com"
+                    target="_blank"
+                    class="website-icon"
+                    onclick="event.stopPropagation()"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="2" y1="12" x2="22" y2="12"></line>
+                      <path
+                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                      ></path></svg
+                  ></a>
+                  <a
+                    href="https://www.linkedin.com/company/tethys-technology"
+                    target="_blank"
+                    class="linkedin-icon"
+                    onclick="event.stopPropagation()"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                      /></svg
+                  ></a>
+                </div>
+                <div class="exp-location">London, UK</div>
+
+
+
+                <div class="exp-details-wrapper">
+                  <div class="exp-details-content">
+                    <div
+                      class="job-summary"
+                      data-en="Supported equity/options electronic trading platforms and liaised with developers to seek optimal solutions for client issues."
+                      data-de="Unterstützung von Aktien-/Optionen-Handelsplattformen und Zusammenarbeit mit Entwicklern zur Findung optimaler Lösungen für Kundenprobleme."
+                    >
+                      Supported equity/options electronic trading platforms and
+                      liaised with developers to seek optimal solutions for
+                      client issues.
+                    </div>
+                    <div class="job-highlights">
+                      <ul>
+                        <li
+                          data-en="Sourced and analyzed data series with scripting and SQL queries."
+                          data-de="Beschaffung und Analyse von Datenreihen mittels Scripting und SQL-Abfragen."
+                        >
+                          Sourced and analyzed data series with scripting and
+                          SQL queries.
+                        </li>
+                        <li
+                          data-en="Developed and tested prototype solutions based on data and workflow analysis."
+                          data-de="Entwicklung und Test von Prototyp-Lösungen basierend auf Daten- und Workflow-Analyse."
+                        >
+                          Developed and tested prototype solutions based on data
+                          and workflow analysis.
+                        </li>
+                        <li
+                          data-en="Built an automated Excel-VBA based monitoring tool for FIX session status tracking and alerts."
+                          data-de="Erstellung eines automatisierten Excel-VBA-basierten Überwachungstools für FIX-Sitzungsstatus und Warnmeldungen."
+                        >
+                          Built an automated Excel-VBA based monitoring tool for
+                          FIX session status tracking and alerts.
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="exp-item"
+                data-skills="sql,excel"
+                onclick="toggleExp(this)"
+              >
+                <div class="exp-role">
+                  <button class="exp-toggle-btn" aria-label="Toggle Details">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                  <h2>Global Data Analyst</h2>
+                </div>
+                <div
+                  class="exp-date"
+                  data-en="Oct 2014 - Jun 2015"
+                  data-de="Okt. 2014 - Juni 2015"
+                >
+                  Oct 2014 - Jun 2015
+                </div>
+                <div class="exp-company">
+                  Bloomberg L.P
+                  <a
+                    href="https://www.bloomberg.com"
+                    target="_blank"
+                    class="website-icon"
+                    onclick="event.stopPropagation()"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="2" y1="12" x2="22" y2="12"></line>
+                      <path
+                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                      ></path></svg
+                  ></a>
+                  <a
+                    href="https://www.linkedin.com/company/bloomberg-lp"
+                    target="_blank"
+                    class="linkedin-icon"
+                    onclick="event.stopPropagation()"
+                    ><svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                      /></svg
+                  ></a>
+                </div>
+                <div class="exp-location">London, UK</div>
+
+
+
+                <div class="exp-details-wrapper">
+                  <div class="exp-details-content">
+                    <div
+                      class="job-summary"
+                      data-en="Screened, selected, and validated fundamental data used for informed financial decisions."
+                      data-de="Prüfung, Auswahl und Validierung von Fundamentaldaten für fundierte Finanzentscheidungen."
+                    >
+                      Screened, selected, and validated fundamental data used
+                      for informed financial decisions.
+                    </div>
+                    <div class="job-highlights">
+                      <ul>
+                        <li
+                          data-en="Developed workflow solutions and improved processes applying IT & problem-solving skills."
+                          data-de="Entwicklung von Workflow-Lösungen und Prozessverbesserungen durch Anwendung von IT- und Problemlösungsfähigkeiten."
+                        >
+                          Developed workflow solutions and improved processes
+                          applying IT & problem-solving skills.
+                        </li>
+                        <li
+                          data-en="Processed & parsed various financial data sources into Bloomberg databases."
+                          data-de="Verarbeitung und Parsing verschiedener Finanzdatenquellen in Bloomberg-Datenbanken."
+                        >
+                          Processed & parsed various financial data sources into
+                          Bloomberg databases.
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Early Career Items (Collapsible) -->
+              <div class="student-jobs-section">
+                <button
+                  class="student-jobs-toggle"
+                  onclick="toggleStudentJobs(this)"
+                >
+                  <svg
+                    class="toggle-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                  <span
+                    class="toggle-label"
+                    data-en="Student Jobs"
+                    data-de="Studentenjobs"
+                    >Student Jobs</span
+                  >
+                </button>
+                <div class="student-jobs-content">
+                  <div class="student-jobs-inner">
+                    <!-- 1. Kool Bean Restaurant -->
+                    <div
+                      class="exp-item"
+                      data-skills="php,sql"
+                      onclick="toggleExp(this)"
+                    >
+                      <div class="exp-role">
+                        <button
+                          class="exp-toggle-btn"
+                          aria-label="Toggle Details"
+                        >
+                          <svg
+                            viewBox="0 0 24 24"
+                            width="24"
+                            height="24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                          </svg>
+                        </button>
+                        <h2>Server &rarr; Manager</h2>
+                      </div>
+                      <div
+                        class="exp-date"
+                        data-en="2004 - 2014"
+                        data-de="2004 - 2014"
+                      >
+                        2004 - 2014
+                      </div>
+                      <div class="exp-company">Kool Bean Restaurant</div>
+                      <div class="exp-location">Ocean View, DE, US</div>
+
+
+
+                      <div class="exp-details-wrapper">
+                        <div class="exp-details-content">
+                          <div
+                            class="job-summary"
+                            data-en="Managed operations and business development for an expanding franchise. Built a custom technical solution for reservations."
+                            data-de="Leitung von Betrieb und Geschäftsentwicklung für ein expandierendes Franchise. Entwicklung einer maßgeschneiderten technischen Lösung für Reservierungen."
+                          >
+                            Managed operations and business development for an
+                            expanding franchise. Built a custom technical
+                            solution for reservations.
+                          </div>
+                          <div class="job-highlights">
+                            <ul>
+                              <li
+                                data-en="Built an in-house web interface for reservations using PHP & SQL."
+                                data-de="Entwicklung einer internen Web-Oberfläche für Reservierungen mit PHP & SQL."
+                              >
+                                Built an in-house web interface for reservations
+                                using PHP & SQL.
+                              </li>
+                              <li
+                                data-en="Responsible for business development, sales & forecasts, KPIs, and profitability analysis."
+                                data-de="Verantwortlich für Geschäftsentwicklung, Vertrieb & Prognosen, KPIs und Rentabilitätsanalyse."
+                              >
+                                Responsible for business development, sales &
+                                forecasts, KPIs, and profitability analysis.
+                              </li>
+                              <li
+                                data-en="Managed daily operations, staffing, inventory and marketing."
+                                data-de="Leitung des Tagesgeschäfts, Personalplanung, Lagerverwaltung und Marketing."
+                              >
+                                Managed daily operations, staffing, inventory
+                                and marketing.
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 2. Merrill Lynch -->
+                    <div
+                      class="exp-item"
+                      data-skills="sql,excel"
+                      onclick="toggleExp(this)"
+                    >
+                      <div class="exp-role">
+                        <button
+                          class="exp-toggle-btn"
+                          aria-label="Toggle Details"
+                        >
+                          <svg
+                            viewBox="0 0 24 24"
+                            width="24"
+                            height="24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                          </svg>
+                        </button>
+                        <h2>Intern</h2>
+                      </div>
+                      <div class="exp-date" data-en="2006" data-de="2006">
+                        2006
+                      </div>
+                      <div class="exp-company">Merrill Lynch</div>
+                      <div class="exp-location">Rehoboth Beach, DE, US</div>
+
+
+
+                      <div class="exp-details-wrapper">
+                        <div class="exp-details-content">
+                          <div
+                            class="job-summary"
+                            data-en="Gained early exposure to financial markets and provided technical support to brokers."
+                            data-de="Frühe Erfahrung mit Finanzmärkten und technische Unterstützung für Makler."
+                          >
+                            Gained early exposure to financial markets and
+                            provided technical support to brokers.
+                          </div>
+                          <div class="job-highlights">
+                            <ul>
+                              <li
+                                data-en="Quantitative screening for mutual funds and equities on behalf of clients."
+                                data-de="Quantitative Analyse von Investmentfonds und Aktien im Auftrag von Kunden."
+                              >
+                                Quantitative screening for mutual funds and
+                                equities on behalf of clients.
+                              </li>
+                              <li
+                                data-en="IT Support and advisory provided to brokers."
+                                data-de="IT-Support und Beratung für Makler."
+                              >
+                                IT Support and advisory provided to brokers.
+                              </li>
+                              <li
+                                data-en="Contact with diverse financial products."
+                                data-de="Kontakt mit verschiedenen Finanzprodukten."
+                              >
+                                Contact with diverse financial products.
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 3. Interexchange -->
+                    <div
+                      class="exp-item"
+                      data-skills="excel"
+                      onclick="toggleExp(this)"
+                    >
+                      <div class="exp-role">
+                        <button
+                          class="exp-toggle-btn"
+                          aria-label="Toggle Details"
+                        >
+                          <svg
+                            viewBox="0 0 24 24"
+                            width="24"
+                            height="24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                          </svg>
+                        </button>
+                        <h2>Forex Cashier</h2>
+                      </div>
+                      <div
+                        class="exp-date"
+                        data-en="2000 - 2002"
+                        data-de="2000 - 2002"
+                      >
+                        2000 - 2002
+                      </div>
+                      <div class="exp-company">Interexchange</div>
+                      <div class="exp-location">Varna, BG</div>
+
+
+
+                      <div class="exp-details-wrapper">
+                        <div class="exp-details-content">
+                          <div
+                            class="job-summary"
+                            data-en="Handled currency exchange operations and customer compliance."
+                            data-de="Abwicklung von Devisengeschäften und Kundenberatung zu Vorschriften."
+                          >
+                            Handled currency exchange operations and customer
+                            compliance.
+                          </div>
+                          <div class="job-highlights">
+                            <ul>
+                              <li
+                                data-en="Informed customers about foreign currency regulations."
+                                data-de="Kundeninformation über Devisenvorschriften."
+                              >
+                                Informed customers about foreign currency
+                                regulations.
+                              </li>
+                              <li
+                                data-en="Quoted unit exchange rates following international rate sheets."
+                                data-de="Angabe von Wechselkursen gemäß internationaler Kurstabellen."
+                              >
+                                Quoted unit exchange rates following
+                                international rate sheets.
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. TECH SKILLS TAB -->
+          <div class="tab-pane" id="tab-tech">
+            <div class="skills-container-full">
+              <div id="skillMatrixContainer" class="skill-matrix-view">
+                <!-- JS Injected -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. SOFT SKILLS TAB -->
+          <div class="tab-pane" id="tab-soft">
+            <div class="soft-skills-container-full">
+              <h2 class="bucket-label">Soft Skills & Competencies</h2>
+              <div class="soft-skills-grid">
+                <div class="soft-skill-card">
+                  <span class="soft-icon">🧠</span>
+                  <h3>Analytical Thinking</h3>
+                  <p>Deep dive into data to find patterns and insights.</p>
+                </div>
+                <div class="soft-skill-card">
+                  <span class="soft-icon">🗣️</span>
+                  <h3>Communication</h3>
+                  <p>
+                    Bridging the gap between technical and non-technical teams.
+                  </p>
+                </div>
+                <div class="soft-skill-card">
+                  <span class="soft-icon">⚖️</span>
+                  <h3>Strategic Planning</h3>
+                  <p>Aligning data processes with long-term business goals.</p>
+                </div>
+                <div class="soft-skill-card">
+                  <span class="soft-icon">🚀</span>
+                  <h3>Problem Solving</h3>
+                  <p>Quick incident response and root cause analysis.</p>
+                </div>
+                <div class="soft-skill-card">
+                  <span class="soft-icon">🤝</span>
+                  <h3>Collaboration</h3>
+                  <p>Effective teamwork across cross-functional departments.</p>
+                </div>
+                <div class="soft-skill-card">
+                  <span class="soft-icon">⏱️</span>
+                  <h3>Efficiency</h3>
+                  <p>Optimizing workflows and automating repetitive tasks.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Personal Section (Off Hours / UAT) -->
+        <div id="personal-section">
+          <!-- Right Pane: Content Display -->
+          <div class="uat-display">
+            <!-- 1. Perfect Weekend (Default Style) -->
+            <div class="uat-section-content active" id="section-weekend">
+              <div class="bento-grid weekend-grid">
+                <div class="bento-card simple-card span-2x2">
+                  <div class="card-img-container">
+                    <img src="images/strava.jpg" alt="Mountain Biking" />
+                  </div>
+                  <div class="card-caption">
+                    <h3>Mountain Biking: Best way to explore Switzerland</h3>
+                  </div>
+                </div>
+                <div class="bento-card simple-card span-2x2">
+                  <div class="card-img-container">
+                    <img src="images/table%20tennis.jpg" alt="Table Tennis" />
+                  </div>
+                  <div class="card-caption">
+                    <h3>Table Tennis: Playing since 5 years old</h3>
+                  </div>
+                </div>
+                <div class="bento-card simple-card centered-card">
+                  <div class="card-img-container">
+                    <img src="images/golfing.jpg" alt="Angling" />
+                  </div>
+                  <div class="card-caption">
+                    <h3>Golf: No need to be a pro to enjoy it!</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Latest Books (Swiss Big) -->
+            <div class="uat-section-content swiss-big" id="section-hobbies">
+              <div class="bento-grid">
+                <div class="bento-card span-1x2 active-hover">
+                  <div class="card-content">
+                    <div class="icon-box"></div>
+                    <h3>The Pragmatic Programmer</h3>
+                    <p>A classic. Re-reading for the 3rd time.</p>
+                    <div class="tag-row">
+                      <span class="pill">Tech</span>
+                      <span class="pill">Philosophy</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="bento-card span-2x1 bg-tech">
+                  <div class="card-content">
+                    <h3>Clean Code</h3>
+                    <p>Robert C. Martin</p>
+                  </div>
+                </div>
+                <div class="bento-card span-1x1">
+                  <div class="card-content centered">
+                    <div class="emoji-xl">🧠</div>
+                    <h3>Thinking, Fast & Slow</h3>
+                  </div>
+                </div>
+                <div class="bento-card span-2x1 bg-cooking">
+                  <div class="card-content">
+                    <h3>Project Hail Mary</h3>
+                    <p>Andy Weir</p>
+                  </div>
+                </div>
+                <div class="bento-card span-1x1">
+                  <div class="card-content centered">
+                    <div class="emoji-xl"></div>
+                    <h3>Elon Musk</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Culture (Swiss Big) -->
+            <div class="uat-section-content swiss-big" id="section-culture">
+              <div class="split-grid">
+                <!-- Movies Column -->
+                <div class="culture-col">
+                  <div class="list-group">
+                    <div class="list-item">
+                      <span class="list-text">Inception</span>
+                      <span class="list-date">2010</span>
+                    </div>
+                    <div class="list-item">
+                      <span class="list-text">The Dark Knight</span>
+                      <span class="list-date">2008</span>
+                    </div>
+                    <div class="list-item">
+                      <span class="list-text">Interstellar</span>
+                      <span class="list-date">2014</span>
+                    </div>
+                    <div class="list-item">
+                      <span class="list-text">The Matrix</span>
+                      <span class="list-date">1999</span>
+                    </div>
+                    <div class="list-item">
+                      <span class="list-text">Pulp Fiction</span>
+                      <span class="list-date">1994</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- TV Shows Column -->
+                <div class="culture-col">
+                  <div class="list-group">
+                    <div class="list-item">
+                      <span class="list-text">Breaking Bad</span>
+                      <span class="list-date">2008 - 2013</span>
+                    </div>
+                    <div class="list-item">
+                      <span class="list-text">Succession</span>
+                      <span class="list-date">2018 - 2023</span>
+                    </div>
+                    <div class="list-item">
+                      <span class="list-text">Severance</span>
+                      <span class="list-date">2022 - Present</span>
+                    </div>
+                    <div class="list-item">
+                      <span class="list-text">The Wire</span>
+                      <span class="list-date">2002 - 2008</span>
+                    </div>
+                    <div class="list-item">
+                      <span class="list-text">Silicon Valley</span>
+                      <span class="list-date">2014 - 2019</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. TO DO (GO) List (Swiss Big) -->
+            <div class="uat-section-content swiss-big" id="section-bucket">
+              <div class="bucket-row">
+                <div class="bento-card bucket-card">
+                  <span class="square-check"></span>
+                  <div class="bucket-text">Australia</div>
+                </div>
+                <div class="bento-card bucket-card">
+                  <span class="square-check"></span>
+                  <div class="bucket-text">Japan</div>
+                </div>
+                <div class="bento-card bucket-card">
+                  <span class="square-check"></span>
+                  <div class="bucket-text">China</div>
+                </div>
+                <div class="bento-card bucket-card">
+                  <span class="square-check"></span>
+                  <div class="bucket-text">New Zealand</div>
+                </div>
+                <div class="bento-card bucket-card">
+                  <span class="square-check"></span>
+                  <div class="bucket-text">Learn to Snowboard</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Matrix Export Modal -->
+    <div id="matrixExportModal" class="matrix-export-modal">
+      <div class="matrix-export-modal-content">
+        <div class="matrix-export-modal-header">
+          <h2>Skills & Activities Progression</h2>
+          <div class="matrix-export-controls">
+            <label class="matrix-export-toggle">
+              <input type="checkbox" id="exportColorToggle" checked onchange="toggleExportColor()">
+              <span class="toggle-slider"></span>
+              <span class="toggle-label">Color</span>
+            </label>
+            <button class="matrix-export-btn" onclick="downloadMatrixAsPDF()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+            </button>
+            <button class="matrix-export-close" onclick="closeMatrixExportModal()">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="matrix-export-modal-body">
+          <div id="matrixExportPreview" class="matrix-export-preview">
+            <!-- Export-ready matrix rendered here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/debug-effects.js"></script>
+    <script src="js/main.js"></script>
+
+    <script src="js/skill-matrix.js"></script>
+  </body>
+</html>
