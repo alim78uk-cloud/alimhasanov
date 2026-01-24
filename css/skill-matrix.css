@@ -95,19 +95,19 @@
   background-color: var(--hm-p-main);
 }
 .skill-matrix-view .hm-heat-cell.bg-level-3 {
-  opacity: 0.25; /* Lightest */
+  opacity: 0.95; /* Darkest */
 }
 .skill-matrix-view .hm-heat-cell.bg-level-2 {
   opacity: 0.6; /* Medium */
 }
 .skill-matrix-view .hm-heat-cell.bg-level-1 {
-  opacity: 0.95; /* Darkest */
+  opacity: 0.25; /* Lightest */
 }
 
 /* Legend Boxes Matching */
 .hm-legend-box.bg-level-3 {
   background-color: var(--hm-p-main);
-  opacity: 0.25;
+  opacity: 0.95;
 }
 .hm-legend-box.bg-level-2 {
   background-color: var(--hm-p-main);
@@ -115,7 +115,7 @@
 }
 .hm-legend-box.bg-level-1 {
   background-color: var(--hm-p-main);
-  opacity: 0.95;
+  opacity: 0.25;
 }
 
 /* Text & Lines */
@@ -128,7 +128,12 @@
 /* Separator line style matching page header border */
 /* Separator line style matching page header border (Tab Active State weight, but grey) */
 .skill-matrix-view .hm-separator-line {
-  background: rgba(0, 0, 0, 0.06); /* Slightly darker than 0.03 for visibility */
+  background: rgba(
+    0,
+    0,
+    0,
+    0.06
+  ); /* Slightly darker than 0.03 for visibility */
   width: 3px; /* Matched to tab underline weight */
   border-radius: 2px;
 }
@@ -407,8 +412,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 9px; /* Reduced from 11px */
+  font-weight: 700;
   text-transform: uppercase;
   color: var(--secondary-text);
 }
@@ -419,6 +424,30 @@
 }
 .hm-pos-top {
   top: 0;
+}
+.hm-separator-top {
+  margin-top: 0; /* Removed visual split gap */
+  border-top: 1px solid var(--border-color);
+}
+.hm-separator-top::after {
+  /* Optional: Small label or line to distinguish */
+}
+
+.hm-skill-label.font-monospace,
+.font-monospace {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 16.5px; /* Optically adjusted to match 15px Sans-Serif */
+  letter-spacing: -0.5px;
+  font-weight: 700;
+}
+.hm-legend-note {
+  margin-left: auto; /* Push to right */
+  font-size: 9px; /* Reduced */
+  font-weight: 500;
+  font-style: italic;
+  color: var(--secondary-text);
+  opacity: 0.7;
+  margin-top: 2px;
 }
 .hm-pos-bottom {
   bottom: 0;
@@ -639,7 +668,8 @@
    EXPORT-READY MATRIX STYLES
    ========================================= */
 .matrix-export-preview .export-matrix {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: white;
   color: #333;
   min-width: 780px;
@@ -728,7 +758,7 @@
   width: 160px;
   min-width: 160px;
   font-size: 9px;
-  font-weight: 600;
+  font-weight: 900; /* Increased to match web view */
   text-transform: uppercase;
   display: flex;
   align-items: center;
@@ -736,6 +766,13 @@
   color: #333;
   border-bottom: 1px solid #eee;
   border-right: 1px solid #ddd;
+}
+
+.matrix-export-preview .export-skill-label.font-monospace {
+    font-family: "Courier New", Courier, monospace;
+    font-weight: 700;
+    font-size: 10px; /* Optically adjusted up from 9px */
+    letter-spacing: -0.3px;
 }
 
 .matrix-export-preview .export-skill-track {
@@ -815,8 +852,6 @@
   text-transform: uppercase;
   color: #666;
 }
-
-
 
 .matrix-export-preview .export-legend-item {
   display: flex;
@@ -966,18 +1001,18 @@
   /* Simple grip dots icon via CSS or SVG if needed, using text for now */
   font-size: 14px;
   line-height: 12px;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
 .admin-drag-handle::after {
   content: "⋮⋮"; /* Grip symbol */
 }
 .admin-drag-handle:hover {
-  color: rgba(255,255,255,0.9);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 /* Reorder Buttons - Removed in V3 for Drag Drop */
 .admin-reorder-btn {
-  display: none; 
+  display: none;
 }
 
 /* Editable Text Indication */
@@ -996,7 +1031,7 @@
   z-index: 9999;
   background: var(--bg-color);
   border: 1px solid var(--border-color);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   border-radius: 6px;
   display: flex;
   flex-direction: column;
@@ -1022,4 +1057,3 @@
   height: 12px;
   border-radius: 2px;
 }
-

@@ -109,8 +109,18 @@
 
 .hero-description {
   font-size: 1.1rem;
-  line-height: 1.6;
+  line-height: 1.7; /* Increased for better readability */
   color: var(--secondary-text);
+  font-weight: 300; /* Lighter weight for professional look */
+  letter-spacing: 0.015em; /* Subtle spacing */
+}
+
+.hero-description p {
+  margin-bottom: 1.2rem; /* Increased spacing between paragraphs */
+}
+
+.hero-description p:last-child {
+  margin-bottom: 0;
 }
 
 /* Profile Image - Big in Hero, Hidden when collapsed */

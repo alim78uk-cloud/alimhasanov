@@ -2,7 +2,6 @@
 // DATA: Chronological Heatmap
 // ==========================================
 const careerData = {
-  
   "employers": [
     {
       "id": "fefund",
@@ -12,27 +11,28 @@ const careerData = {
       "headerOffset": 15,
       "footerOffset": 15,
       "skills": {
-        "Application Support": 1,
-        "Incident Management": 3,
-        "Troubleshooting": 1,
-        "Monitoring": 3,
-        "SQL": 1,
-        "Python": 1,
-        "REST APIs": 1,
+        "Application Support": 3,
+        "Incident Management": 1,
+        "Troubleshooting": 3,
+        "Monitoring": 1,
+        "SQL": 3,
+        "Python": 3,
+        "REST APIs": 3,
         "Data Automation": 3,
         "Master Data Management": 3,
         "Jira": 3,
         "Web Development": 2,
-        "HTML & CSS": 3,
-        "Data Profiling": 3,
-        "Quality Assessment": 3,
+        "HTML & CSS": 2,
         "Process Automation": 3,
         "DuckDB": 3,
         "Excel VBA": 2,
-        "ETL Pipelines": 2,
-        "Agile/Scrum": 3,
-        "WebSockets": 3,
-        "Bash": 1
+        "Agile/Scrum": 1,
+        "WebSockets": 1,
+        "Bash": 3,
+        "Testing & Debugging": 2,
+        "Log Analysis": 1,
+        "Linux/Unix": 1,
+        "Customer Interactions": 3
       },
       "dur": 19
     },
@@ -44,25 +44,34 @@ const careerData = {
       "headerOffset": 15,
       "footerOffset": 15,
       "skills": {
-        "Application Support": 1,
-        "Incident Management": 1,
-        "Troubleshooting": 1,
-        "Monitoring": 1,
-        "SQL": 1,
-        "Python": 1,
-        "WebSockets": 1,
-        "REST APIs": 1,
+        "Application Support": 3,
+        "Incident Management": 3,
+        "Troubleshooting": 3,
+        "Monitoring": 3,
+        "SQL": 3,
+        "Python": 3,
+        "WebSockets": 3,
+        "REST APIs": 3,
         "Bash": 3,
         "Testing & Debugging": 3,
         "Jira": 3,
-        "Data Automation": 1,
-        "Crypto Assets": 3,
+        "Data Automation": 2,
         "Fix Protocol": 2,
-        "Linux Systems": 3,
         "Log Analysis": 3,
-        "Network Debugging": 2,
-        "Market Data": 3,
-        "On-call Support": 3
+        "Network Debugging": 3,
+        "Market Data": 2,
+        "On-call Support": 3,
+        "Master Data Management": 3,
+        "Web Development": 1,
+        "HTML & CSS": 1,
+        "Process Automation": 3,
+        "DuckDB": 3,
+        "Excel VBA": 1,
+        "Shell Scripting": 3,
+        "Algorithmic Trading": 3,
+        "Linux/Unix": 3,
+        "Bloomberg Terminal": 2,
+        "Customer Interactions": 3
       },
       "dur": 13
     },
@@ -74,24 +83,30 @@ const careerData = {
       "headerOffset": 15,
       "footerOffset": 15,
       "skills": {
-        "Application Support": 1,
-        "Incident Management": 1,
-        "Troubleshooting": 1,
-        "Monitoring": 1,
-        "SQL": 1,
-        "Python": 1,
-        "REST APIs": 1,
+        "Application Support": 3,
+        "Incident Management": 3,
+        "Troubleshooting": 3,
+        "Monitoring": 3,
+        "SQL": 3,
+        "Python": 3,
+        "REST APIs": 3,
         "Bash": 2,
-        "Testing & Debugging": 2,
-        "Jira": 3,
-        "Data Automation": 1,
-        "Financial Systems": 3,
-        "Batch Processing": 3,
-        "Shell Scripting": 3,
-        "ITIL": 2,
-        "SLA Management": 3,
+        "Testing & Debugging": 3,
+        "Jira": 1,
+        "Data Automation": 3,
         "Client Relations": 2,
-        "WebSockets": 2
+        "WebSockets": 2,
+        "Master Data Management": 3,
+        "Web Development": 2,
+        "HTML & CSS": 2,
+        "Process Automation": 2,
+        "Excel VBA": 1,
+        "Log Analysis": 3,
+        "Network Debugging": 1,
+        "On-call Support": 3,
+        "Shell Scripting": 1,
+        "Linux/Unix": 2,
+        "Customer Interactions": 3
       },
       "dur": 48
     },
@@ -103,22 +118,32 @@ const careerData = {
       "headerOffset": 15,
       "footerOffset": 15,
       "skills": {
-        "Application Support": 1,
-        "Incident Management": 1,
-        "Troubleshooting": 1,
-        "Monitoring": 1,
-        "SQL": 1,
-        "Python": 1,
+        "Application Support": 3,
+        "Incident Management": 3,
+        "Troubleshooting": 3,
+        "Monitoring": 3,
+        "SQL": 3,
+        "Python": 3,
         "Bash": 3,
-        "Testing & Debugging": 2,
-        "Data Automation": 3,
-        "Jira": 1,
+        "Testing & Debugging": 3,
+        "Data Automation": 2,
+        "Jira": 3,
         "Algorithmic Trading": 3,
-        "System Latency": 2,
-        "Performance Tuning": 2,
-        "Data Integrity": 3,
-        "WebSockets": 1,
-        "REST APIs": 1
+        "WebSockets": 3,
+        "REST APIs": 3,
+        "Master Data Management": 2,
+        "Web Development": 1,
+        "Process Automation": 3,
+        "Excel VBA": 1,
+        "Fix Protocol": 3,
+        "Log Analysis": 3,
+        "Network Debugging": 2,
+        "Market Data": 2,
+        "On-call Support": 3,
+        "Shell Scripting": 2,
+        "Linux/Unix": 3,
+        "Bloomberg Terminal": 3,
+        "Customer Interactions": 3
       },
       "dur": 14
     },
@@ -130,19 +155,31 @@ const careerData = {
       "headerOffset": 15,
       "footerOffset": 15,
       "skills": {
-        "Application Support": 1,
-        "Incident Management": 1,
-        "Troubleshooting": 1,
-        "Monitoring": 1,
-        "SQL": 1,
-        "Python": 1,
+        "Application Support": 3,
+        "Incident Management": 3,
+        "Troubleshooting": 3,
+        "Monitoring": 3,
+        "SQL": 3,
+        "Python": 3,
         "Testing & Debugging": 3,
         "Data Automation": 2,
-        "Technical Support": 3,
         "Linux/Unix": 3,
-        "Connectivity": 3,
         "WebSockets": 2,
-        "REST APIs": 1
+        "REST APIs": 3,
+        "Bash": 3,
+        "Master Data Management": 2,
+        "HTML & CSS": 2,
+        "Process Automation": 3,
+        "Excel VBA": 2,
+        "Fix Protocol": 3,
+        "Log Analysis": 3,
+        "Network Debugging": 2,
+        "Market Data": 2,
+        "On-call Support": 3,
+        "Shell Scripting": 1,
+        "Algorithmic Trading": 3,
+        "Bloomberg Terminal": 2,
+        "Customer Interactions": 3
       },
       "dur": 18
     },
@@ -154,68 +191,72 @@ const careerData = {
       "headerOffset": 15,
       "footerOffset": 15,
       "skills": {
-        "Troubleshooting": 3,
-        "Monitoring": 3,
+        "Troubleshooting": 1,
+        "Monitoring": 1,
         "SQL": 2,
-        "Python": 1,
-        "Master Data Management": 3,
-        "HTML & CSS": 2,
-        "Data Automation": 1,
-        "Web Development": 1,
+        "Python": 3,
+        "Master Data Management": 1,
+        "Data Automation": 3,
         "Bloomberg Terminal": 3,
-        "Customer Service": 3,
-        "Data Mining": 2
+        "Excel VBA": 1,
+        "Customer Interactions": 3
       },
       "dur": 8
     }
   ],
-  "skillList": [
+  "taskSkills": [
     "Application Support",
     "Incident Management",
     "Troubleshooting",
     "Monitoring",
-    "SQL",
-    "Python",
-    "WebSockets",
-    "REST APIs",
-    "Bash",
-    "Testing & Debugging",
     "Data Automation",
     "Master Data Management",
-    "Jira",
     "Web Development",
-    "HTML & CSS",
-    "Data Profiling",
-    "Quality Assessment",
     "Process Automation",
-    "DuckDB",
-    "Excel VBA",
-    "ETL Pipelines",
     "Agile/Scrum",
-    "Crypto Assets",
-    "Fix Protocol",
-    "Linux Systems",
+    "Testing & Debugging",
     "Log Analysis",
     "Network Debugging",
     "Market Data",
     "On-call Support",
-    "Financial Systems",
-    "Batch Processing",
-    "Shell Scripting",
-    "ITIL",
-    "SLA Management",
-    "Algorithmic Trading",
-    "System Latency",
-    "Performance Tuning",
-    "Data Integrity",
-    "Technical Support",
-    "Linux/Unix",
-    "Connectivity",
-    "Bloomberg Terminal",
-    "Customer Service",
-    "Data Mining"
+    "Customer Interactions",
+    "Client Relations",
+    "Algorithmic Trading"
   ],
+  "toolSkills": [
+    "SQL",
+    "Python",
+    "REST APIs",
+    "WebSockets",
+    "Bash",
+    "Jira",
+    "HTML & CSS",
+    "DuckDB",
+    "Excel VBA",
+    "Linux/Unix",
+    "Fix Protocol",
+    "Shell Scripting",
+    "Bloomberg Terminal"
+  ],
+  /* Merged list for rendering logic */
+  get skillList() {
+      return [...this.taskSkills, ...this.toolSkills];
+  },
+  /* Set setter to allow reordering/manipulation if needed, though split implies fixed groups */
+  set skillList(val) {
+      // no-op or handle if needed for drag-drop reordering entire list
+      // For now, if we drag drop, we might lose the split distinction if we just stomp this.
+      // But let's keep it simple. The rendering will use this flattened list.
+      // If drag/drop happens, we might need to update task/tool lists or just treat it as a flat list thenceforth.
+      this._customSkillList = val;
+  }
 };
+
+// Handle potential overwrite of getter by simple assignment in drag/drop or admin
+Object.defineProperty(careerData, "skillList", {
+    get: function() { return this._customSkillList || [...this.taskSkills, ...this.toolSkills]; },
+    set: function(val) { this._customSkillList = val; }
+});
 
 const container = document.getElementById("skillMatrixContainer");
 
@@ -263,9 +304,9 @@ window.openRatingDropdown = function (rowIdx, colIdx, event) {
   
   const levels = [
     { val: 0, label: "Clear", color: "#333" }, 
-    { val: 1, label: "Daily Focus (1)", color: "var(--hm-p-main)", opacity: 0.95 },   // Darkest
-    { val: 2, label: "Regularly (2)", color: "var(--hm-p-main)", opacity: 0.6 },    // Medium
-    { val: 3, label: "On Demand (3)", color: "var(--hm-p-main)", opacity: 0.25 }    // Lightest
+    { val: 3, label: "Daily Activity (3)", color: "var(--hm-p-main)", opacity: 0.95 },   // Darkest
+    { val: 2, label: "Periodic Activity (2)", color: "var(--hm-p-main)", opacity: 0.6 },    // Medium
+    { val: 1, label: "On Demand (1)", color: "var(--hm-p-main)", opacity: 0.25 }    // Lightest
   ];
 
   levels.forEach(lvl => {
@@ -523,8 +564,16 @@ function renderHeatmapView() {
           ondragend="handleDragEnd(event)"`
        : "";
 
-    html += `<div class="hm-skill-row" data-row="${idx}" ${rowAttrs}>
-            <div class="hm-skill-label">${preBtns} ${labelContent}</div>
+    // Check for "Tool" (technical) skill
+    const isTool = careerData.toolSkills && careerData.toolSkills.includes(skill);
+    const isFirstTool = careerData.toolSkills && careerData.toolSkills[0] === skill;
+    
+    // Style classes
+    const labelClass = isTool ? "hm-skill-label font-monospace" : "hm-skill-label";
+    const rowClass = isFirstTool ? "hm-skill-row hm-separator-top" : "hm-skill-row";
+
+    html += `<div class="${rowClass}" data-row="${idx}" ${rowAttrs}>
+            <div class="${labelClass}">${preBtns} ${labelContent}</div>
             <div class="hm-skill-track">
                 ${careerData.employers
                   .map((e, colIdx) => {
@@ -574,9 +623,10 @@ function renderDiagonalHeader(isFooter, totalDur) {
         </button>
 
         <div class="hm-legend">
-            <div class="hm-legend-item"><div class="hm-legend-box bg-level-3"></div> Daily Focus</div>
-            <div class="hm-legend-item"><div class="hm-legend-box bg-level-2"></div> Regularly</div>
-            <div class="hm-legend-item"><div class="hm-legend-box bg-level-1"></div> Support Mode</div>
+            <div class="hm-legend-item"><div class="hm-legend-box bg-level-3"></div> Core</div>
+            <div class="hm-legend-item"><div class="hm-legend-box bg-level-2"></div> Regular</div>
+            <div class="hm-legend-item"><div class="hm-legend-box bg-level-1"></div> On Demand</div>
+            <div class="hm-legend-note">Cadence across roles</div>
         </div>
     `
     : "";
@@ -799,15 +849,16 @@ function renderExportMatrix(container) {
   // Left side: Title + Subtitle/Source
   html += '<div class="export-header-left">';
   html += '<div class="export-title-name">Alim Hasanov</div>';
-  html += '<div class="export-title-desc">Skills & Activities Progression</div>';
+  html += '<div class="export-title-desc">Tasks & Tools Progression</div>';
   html += '<div class="export-subtitle">alimhasanov.com | 2014-2025</div>';
   html += '</div>';
 
   // Right side: Legend
   html += `<div class="export-legend top-right">
-    <div class="export-legend-item"><div class="export-legend-box level-3"></div> Daily Focus</div>
-    <div class="export-legend-item"><div class="export-legend-box level-2"></div> Regularly</div>
-    <div class="export-legend-item"><div class="export-legend-box level-1"></div> Support Mode</div>
+    <div class="export-legend-item"><div class="export-legend-box level-3"></div> Core</div>
+    <div class="export-legend-item"><div class="export-legend-box level-2"></div> Regular</div>
+    <div class="export-legend-item"><div class="export-legend-box level-1"></div> On Demand</div>
+    <div class="export-legend-note">Cadence across roles</div>
   </div>`;
   
   html += '</div>'; // End header container
@@ -835,8 +886,16 @@ function renderExportMatrix(container) {
 
   // Skill rows with borders
   careerData.skillList.forEach((skill) => {
-    html += `<div class="export-skill-row">
-      <div class="export-skill-label">${skill}</div>
+    // Check for "Tool" (technical) skill
+    const isTool = careerData.toolSkills && careerData.toolSkills.includes(skill);
+    const isFirstTool = careerData.toolSkills && careerData.toolSkills[0] === skill;
+    
+    // Style classes
+    const labelClass = isTool ? "export-skill-label font-monospace" : "export-skill-label";
+    const rowClass = isFirstTool ? "export-skill-row hm-separator-top" : "export-skill-row"; // Re-using hm-separator-top if compat, or check CSS
+
+    html += `<div class="${rowClass}">
+      <div class="${labelClass}">${skill}</div>
       <div class="export-skill-track">
         ${careerData.employers
           .map((e) => {

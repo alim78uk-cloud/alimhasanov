@@ -415,9 +415,17 @@
           >
             Enable Admin Mode
           </button>
-          
-          <div id="adminControls" style="display: none; margin-top: 8px; gap: 8px; flex-direction: column;">
-             <button
+
+          <div
+            id="adminControls"
+            style="
+              display: none;
+              margin-top: 8px;
+              gap: 8px;
+              flex-direction: column;
+            "
+          >
+            <button
               onclick="addSkill()"
               style="
                 width: 100%;
@@ -432,7 +440,7 @@
             >
               + Add Skill
             </button>
-             <button
+            <button
               onclick="saveCareerData()"
               style="
                 width: 100%;
@@ -546,21 +554,37 @@
           <div
             class="hero-tagline"
             id="heroTagline"
-            data-en="Application Support | Data Management"
+            data-en="APPLICATION & DATA MANAGEMENT | AUTOMATION"
             data-de="Anwendungsunterstützung | Datenmanagement"
           >
-            Application Support | Data Management
+            APPLICATION & DATA MANAGEMENT | AUTOMATION
           </div>
-          <p
-            class="hero-description"
-            id="heroDescription"
-            data-en="I keep businesses running seamlessly and clients confident by managing applications and monitoring logs, databases, APIs, and network connectivity across the software stack."
-            data-de="Ich sorge für reibungslose Geschäftsabläufe und zufriedene Kunden durch die Verwaltung von Anwendungen und die Überwachung von Logs, Datenbanken, APIs und Netzwerkkonnektivität im gesamten Software-Stack."
-          >
-            I keep businesses running seamlessly and clients confident by
-            managing applications and monitoring logs, databases, APIs, and
-            network connectivity across the software stack.
-          </p>
+          <div class="hero-description" id="heroDescription">
+            <p
+              data-en="Hands-on with application management, automating data flows, and vendor integrations. Mostly you will find me troubleshooting APIs, querying databases, reading logs or debugging a client issue - or tinkering on automating a task."
+              data-de=""
+            >
+              Core experience: managing applications, automating data flows, and
+              handling vendor integrations — monitoring services, APIs,
+              databases, logs, and configurations.
+            </p>
+            <p
+              data-en="With a get-it-done attitude, I enjoy being the SME and the interface between clients and internal development teams, syncing business needs with IT."
+              data-de=""
+            >
+              With a get-it-done attitude, I enjoy being the SME and the
+              interface between clients and internal development teams, syncing
+              business needs with IT.
+            </p>
+            <p
+              data-en="I’m in my element tracing bugs, testing new features, automating repetitive tasks with tools like Python all the while facing clients and keeping them in the loop."
+              data-de=""
+            >
+              I’m in my element tracing bugs, testing new features, automating
+              repetitive tasks with tools like Python or SQL all the while
+              facing clients and keep them in the loop.
+            </p>
+          </div>
         </div>
 
         <!-- Profile Image -->
@@ -597,9 +621,9 @@
           <span
             class="header-subtitle"
             id="headerSubtitle"
-            data-en="Application Support | Data Management"
+            data-en="APPLICATION & DATA MANAGEMENT | AUTOMATION"
             data-de="Anwendungsunterstützung | Datenmanagement"
-            >Application Support | Data Management</span
+            >APPLICATION & DATA MANAGEMENT | AUTOMATION</span
           >
         </div>
 
@@ -625,7 +649,8 @@
             </svg>
           </a>
 
-          <!-- Language Switcher -->
+          <!-- Language Switcher (Hidden for now) -->
+          <!--
           <div class="language-switcher">
             <button class="lang-btn active" data-lang="en">EN</button>
             <div
@@ -638,6 +663,7 @@
             ></div>
             <button class="lang-btn" data-lang="de">DE</button>
           </div>
+          -->
 
           <!-- Profile Photo -->
           <div class="sticky-profile">
@@ -663,7 +689,7 @@
         <div class="details-tabs" id="prod-tabs">
           <button class="tab-btn active" data-tab="cv" id="tabBtnCV">CV</button>
           <button class="tab-btn" data-tab="tech" id="tabBtnTech">
-            Tech Skills
+            <span style="font-weight: 900">TASKS</span> & <span class="font-monospace" style="font-weight: 700">TOOLS</span>
           </button>
           <button class="tab-btn" data-tab="soft" id="tabBtnSoft">
             Soft Skills
@@ -760,8 +786,6 @@
                   ></a>
                 </div>
                 <div class="exp-location">Zürich, CH</div>
-
-
 
                 <div class="exp-details-wrapper">
                   <div class="exp-details-content">
@@ -902,8 +926,6 @@
                 </div>
                 <div class="exp-location">London, UK</div>
 
-
-
                 <div class="exp-details-wrapper">
                   <div class="exp-details-content">
                     <div
@@ -1027,8 +1049,6 @@
                 </div>
                 <div class="exp-location">London, UK</div>
 
-
-
                 <div class="exp-details-wrapper">
                   <div class="exp-details-content">
                     <div
@@ -1146,8 +1166,6 @@
                 </div>
                 <div class="exp-location">London, UK</div>
 
-
-
                 <div class="exp-details-wrapper">
                   <div class="exp-details-content">
                     <div
@@ -1259,8 +1277,6 @@
                   ></a>
                 </div>
                 <div class="exp-location">London, UK</div>
-
-
 
                 <div class="exp-details-wrapper">
                   <div class="exp-details-content">
@@ -1374,8 +1390,6 @@
                 </div>
                 <div class="exp-location">London, UK</div>
 
-
-
                 <div class="exp-details-wrapper">
                   <div class="exp-details-content">
                     <div
@@ -1470,8 +1484,6 @@
                       <div class="exp-company">Kool Bean Restaurant</div>
                       <div class="exp-location">Ocean View, DE, US</div>
 
-
-
                       <div class="exp-details-wrapper">
                         <div class="exp-details-content">
                           <div
@@ -1543,8 +1555,6 @@
                       </div>
                       <div class="exp-company">Merrill Lynch</div>
                       <div class="exp-location">Rehoboth Beach, DE, US</div>
-
-
 
                       <div class="exp-details-wrapper">
                         <div class="exp-details-content">
@@ -1618,8 +1628,6 @@
                       </div>
                       <div class="exp-company">Interexchange</div>
                       <div class="exp-location">Varna, BG</div>
-
-
 
                       <div class="exp-details-wrapper">
                         <div class="exp-details-content">
@@ -1878,21 +1886,43 @@
           <h2>Skills & Activities Progression</h2>
           <div class="matrix-export-controls">
             <label class="matrix-export-toggle">
-              <input type="checkbox" id="exportColorToggle" checked onchange="toggleExportColor()">
+              <input
+                type="checkbox"
+                id="exportColorToggle"
+                checked
+                onchange="toggleExportColor()"
+              />
               <span class="toggle-slider"></span>
               <span class="toggle-label">Color</span>
             </label>
             <button class="matrix-export-btn" onclick="downloadMatrixAsPDF()">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7 10 12 15 17 10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
             </button>
-            <button class="matrix-export-close" onclick="closeMatrixExportModal()">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="18" y1="6" x2="6" y2="18"/>
-                <line x1="6" y1="6" x2="18" y2="18"/>
+            <button
+              class="matrix-export-close"
+              onclick="closeMatrixExportModal()"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             </button>
           </div>
