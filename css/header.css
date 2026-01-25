@@ -59,6 +59,7 @@
   text-transform: uppercase;
   transition: all var(--transition-duration) var(--transition-ease);
   transform-origin: bottom left;
+  cursor: pointer; /* Clickable to go home/prod */
 }
 
 .header.collapsed .name {

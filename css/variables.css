@@ -11,7 +11,6 @@
     --border-color: rgba(0,0,0,0.1);
     --card-bg: #fff;
     --header-bg: rgba(244, 244, 240, 0.75); /* Semi-transparent for glass effect */
-
     --sticky-height: 40px; /* User selected */
     --details-top-padding: 4.8rem; /* User selected */
     --details-max-width: 1780px; /* User selected */

@@ -107,6 +107,11 @@
     opacity: 0.9;
 }
 
+.highlight-label {
+    font-weight: 600;
+}
+
+
 /* Modern Highlights Styling */
 .job-highlights ul {
     display: flex;
@@ -119,6 +124,24 @@
     font-size: 0.9rem;
     color: var(--text-color);
     opacity: 0.9;
+}
+
+.job-highlights .highlight-link {
+    color: #1f6feb;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.job-highlights .highlight-link:hover {
+    text-decoration: underline;
+}
+
+.job-highlights li > ul {
+    margin-top: 0.5rem;
+}
+
+.job-highlights ul ul li {
+    margin-bottom: 0.4rem;
 }
 
 /* --- LAYOUT LEGO V1: THE SWISS BLOCK --- */

@@ -15,6 +15,12 @@ const profileImg = document.getElementById("profileImg");
 const allProfileImgs = document.querySelectorAll(
   ".profile-container img, .sticky-profile img",
 );
+const defaultHeroTagline =
+  heroTagline?.dataset?.en || heroTagline?.textContent?.trim() || "";
+const defaultHeaderSubtitle =
+  headerSubtitle?.dataset?.en || headerSubtitle?.textContent?.trim() || "";
+const heroDescription = document.getElementById("heroDescription");
+const defaultHeroDescription = heroDescription?.innerHTML || "";
 
 // ========================================
 // State
@@ -274,10 +280,15 @@ document.addEventListener(
 );
 
 // ========================================
-// Nav Dot Clicks
+// Nav Dot Clicks & Name Click
 // ========================================
 navHero.addEventListener("click", () => goToPanel("hero"));
 navDetails.addEventListener("click", () => goToPanel("details"));
+
+// Name Click: Go to Hero + Force PROD (Reload Page)
+nameTitle.addEventListener("click", () => {
+  window.location.reload();
+});
 
 // ========================================
 // Mode Toggle (Office Hours ON/OFF)
@@ -292,9 +303,27 @@ modeToggle.addEventListener("click", () => {
   // Update tagline and header subtitle
   const taglineText = isOffHours
     ? "Explorer | Reader | Human"
-    : "Application Support | Data Management";
+    : defaultHeroTagline || defaultHeaderSubtitle;
+  const subtitleText = isOffHours
+    ? "Explorer | Reader | Human"
+    : defaultHeaderSubtitle || defaultHeroTagline;
   heroTagline.textContent = taglineText;
-  headerSubtitle.textContent = taglineText;
+  headerSubtitle.textContent = subtitleText;
+
+  // Update Hero Description for UAT
+  if (heroDescription) {
+    if (isOffHours) {
+      heroDescription.innerHTML = `
+        <p style="margin-bottom: 0.5rem">Always curious</p>
+        <p style="margin-bottom: 0.5rem">A nerd by nature</p>
+        <p style="margin-bottom: 0.5rem">Endless travelling</p>
+        <p style="margin-bottom: 0.5rem">Allergic to honey</p>
+        <p style="margin-bottom: 0.5rem">News junkie</p>
+      `;
+    } else {
+      heroDescription.innerHTML = defaultHeroDescription;
+    }
+  }
 
   // Image Transition
   const prodSrc = "images/darkblue_centered.png";
@@ -575,3 +604,96 @@ document.querySelectorAll(".bucket-item").forEach((item) => {
     }
   });
 });
+
+// ========================================
+// Contact Modal Logic (Google Forms Backend)
+// ========================================
+const contactModal = document.getElementById("contactModal");
+const contactForm = document.getElementById("contactForm");
+const contactEmailBtn = document.getElementById("contactEmailBtn");
+const contactSuccess = document.getElementById("contactSuccess");
+const contactFormContainer = document.getElementById("contactFormContainer");
+
+// Modal State Management
+function openContactModal() {
+  if (contactModal) contactModal.classList.add("active");
+  document.body.style.overflow = "hidden"; // Prevent scrolling
+}
+
+function closeContactModal() {
+  if (contactModal) contactModal.classList.remove("active");
+  document.body.style.overflow = ""; // Restore scrolling
+  
+  // Reset form after a delay (animation time)
+  setTimeout(() => {
+    if (contactForm) contactForm.reset();
+    if (contactSuccess) contactSuccess.classList.remove("active");
+    if (contactFormContainer) contactFormContainer.style.opacity = "1";
+    if (contactFormContainer) contactFormContainer.style.pointerEvents = "auto";
+  }, 400);
+}
+
+// Intercept Email Icon Click
+if (contactEmailBtn) {
+  contactEmailBtn.addEventListener("click", (e) => {
+    e.preventDefault(); // Stop default mailto: behavior
+    openContactModal();
+  });
+}
+
+// Google Form Submission Logic
+if (contactForm) {
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    
+    const submitBtn = contactForm.querySelector(".contact-submit");
+    const originalBtnText = submitBtn.innerHTML;
+    
+    // UI Loading State
+    submitBtn.classList.add("loading");
+    submitBtn.innerHTML = '<span>Sending...</span>';
+    
+    // --- USER CONFIGURATION REQUIRED ---
+    // Update these IDs after creating your Google Form
+    const FORM_ID = "YOUR_FORM_ID_HERE";
+    const ENTRY_IDS = {
+      name: "entry.NAME_ID_HERE",
+      email: "entry.EMAIL_ID_HERE",
+      message: "entry.MESSAGE_ID_HERE"
+    };
+    // ------------------------------------
+
+    const formData = new FormData(contactForm);
+    const googleFormUrl = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
+    
+    // We use URLSearchParams for the POST body
+    const params = new URLSearchParams();
+    params.append(ENTRY_IDS.name, formData.get("name"));
+    params.append(ENTRY_IDS.email, formData.get("email"));
+    params.append(ENTRY_IDS.message, formData.get("message"));
+
+    try {
+      // mode: 'no-cors' allows submission even if Google doesn't send CORS headers back
+      await fetch(googleFormUrl, {
+        method: "POST",
+        mode: "no-cors",
+        body: params,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      });
+
+      // Submission Success UI
+      contactFormContainer.style.opacity = "0";
+      contactFormContainer.style.pointerEvents = "none";
+      contactSuccess.classList.add("active");
+
+    } catch (error) {
+      console.error("Form submission error:", error);
+      alert("Something went wrong. Please try again or use alim78uk@gmail.com directly.");
+    } finally {
+      submitBtn.classList.remove("loading");
+      submitBtn.innerHTML = originalBtnText;
+    }
+  });
+}

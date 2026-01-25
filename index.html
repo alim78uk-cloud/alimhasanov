@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="css/uat-styles-generated.css" />
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/contact-modal.css" />
     <link rel="stylesheet" href="css/skill-matrix.css" />
     <link rel="stylesheet" href="css/skill-matrix-options.css" />
 
@@ -47,78 +48,7 @@
       <div class="nav-dot" data-panel="details" id="navDetails"></div>
     </nav>
 
-    <!-- Admin Controls (Bottom Right) -->
-    <div
-      id="adminContainer"
-      style="
-        position: fixed;
-        right: 20px;
-        z-index: 1000;
-        font-family: var(--font-main);
-        display: none;
-        align-items: center;
-        gap: 10px;
-      "
-    >
-      <!-- Heatmap Style Palette -->
-      <select
-        id="hm-palette-select"
-        onchange="switchPalette(this.value)"
-        style="
-          background: rgba(0, 0, 0, 0.85);
-          color: white;
-          border: none;
-          padding: 6px 10px;
-          border-radius: 6px;
-          font-size: 11px;
-          font-weight: 500;
-          cursor: pointer;
-        "
-      >
-        <option value="red">Swiss Red</option>
-        <option value="crimson">Crimson</option>
-        <option value="burgundy">Burgundy</option>
-        <option value="bordeaux">Bordeaux</option>
-        <option value="rust">Rust</option>
-        <option value="obsidian">Obsidian</option>
-        <option value="graphite">Graphite</option>
-        <option value="slate">Slate</option>
-        <option value="midnight">Midnight</option>
-        <option value="silver">Silver</option>
-      </select>
 
-      <!-- Theme Toggle (Page Colors) -->
-      <div
-        class="theme-toggle-container"
-        style="position: static; display: flex; gap: 4px"
-      >
-        <button
-          class="theme-btn t-btn-original active"
-          data-theme="original"
-          title="Original"
-        ></button>
-        <button
-          class="theme-btn t-btn-dark"
-          data-theme="dark"
-          title="Dark"
-        ></button>
-        <button
-          class="theme-btn t-btn-ocean"
-          data-theme="ocean"
-          title="Ocean"
-        ></button>
-        <button
-          class="theme-btn t-btn-neon"
-          data-theme="neon"
-          title="Neon"
-        ></button>
-        <button
-          class="theme-btn t-btn-minimal"
-          data-theme="minimal"
-          title="Minimal"
-        ></button>
-      </div>
-    </div>
 
     <!-- Debug Layout Tool (Collapsible) -->
     <div
@@ -401,6 +331,7 @@
             Admin Controls
           </div>
           <button
+            type="button"
             id="adminModeToggle"
             onclick="toggleAdminMode()"
             style="
@@ -427,7 +358,8 @@
             "
           >
             <button
-              onclick="addSkill()"
+              type="button"
+              onclick="openAddSkillModal()"
               style="
                 width: 100%;
                 padding: 8px;
@@ -442,6 +374,7 @@
               + Add Skill
             </button>
             <button
+              type="button"
               onclick="saveCareerData()"
               style="
                 width: 100%;
@@ -630,6 +563,31 @@
 
         <!-- Header Controls - Right side (visible when collapsed) -->
         <div class="header-controls" id="headerControls">
+          <!-- Email -->
+          <a
+            href="mailto:alim78uk@gmail.com"
+            id="contactEmailBtn"
+            class="header-linkedin"
+            aria-label="Email Me"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </a>
+
           <!-- LinkedIn -->
           <a
             href="https://www.linkedin.com/in/alimhasanovbg/"
@@ -694,6 +652,9 @@
           </button>
           <button class="tab-btn" data-tab="soft" id="tabBtnSoft">
             Soft Skills
+          </button>
+          <button class="tab-btn" data-tab="lang" id="tabBtnLang">
+            Languages & Education
           </button>
         </div>
 
@@ -790,64 +751,127 @@
 
                 <div class="exp-details-wrapper">
                   <div class="exp-details-content">
-                    <div
-                      class="job-summary"
-                      data-en="Developed internal tools for data profiling and quality assessment using Python and SQL. Automated internal reference data discovery and gathering processes, creating modern web-based UIs to replace legacy systems."
-                      data-de="Entwicklung interner Tools für Datenprofiling und Qualitätsbewertung mit Python und SQL. Automatisierung interner Referenzdaten-Erkennung und -Erfassung, Erstellung moderner webbasierter Oberflächen als Ersatz für Legacy-Systeme."
-                    >
-                      Developed internal tools for data profiling and quality
-                      assessment using Python and SQL. Automated internal
-                      reference data discovery and gathering processes, creating
-                      modern web-based UIs to replace legacy systems.
+                    <div class="job-summary">
+                      <span
+                        class="highlight-label"
+                        data-en="Highlight:"
+                        data-de="Highlight:"
+                      >
+                        Highlight:
+                      </span>
+                      <span
+                        class="highlight-text"
+                        data-en="I made data discovery faster for my team through automation and upgraded an outdated VBA tool to a modern web app to improve client experience"
+                        data-de="I made data discovery faster for my team through automation and upgraded an outdated VBA tool to a modern web app to improve client experience"
+                      >
+                        I made data discovery faster for my team through
+                        automation and upgraded an old VBA tool to a modern web
+                        app to improve the client experience
+                      </span>
                     </div>
                     <div class="job-highlights">
                       <ul>
                         <li
-                          data-en="Simplified data access and discovery from multiple sources for internal teams."
-                          data-de="Vereinfachter Datenzugriff und -erkennung aus mehreren Quellen für interne Teams."
+                          data-en="Developed internal tools for data profiling and quality assessment using Python and SQL"
+                          data-de="Developed internal tools for data profiling and quality assessment using Python and SQL"
                         >
-                          Simplified data access and discovery from multiple
-                          sources for internal teams.
-                        </li>
-                        <li
-                          data-en="Eliminated duplicate data submission and processing, speeding up client ticket turnaround."
-                          data-de="Beseitigung doppelter Datenübermittlung und -verarbeitung, Beschleunigung der Kundenticket-Bearbeitung."
-                        >
-                          Eliminated duplicate data submission and processing,
-                          speeding up client ticket turnaround.
-                        </li>
-                        <li
-                          data-en="Converted an Excel-VBA based tool into a modern web-based UI, reducing client fund data submission errors."
-                          data-de="Umwandlung eines Excel-VBA-basierten Tools in eine moderne webbasierte Oberfläche, Reduzierung von Fehlern bei der Fondsdatenübermittlung."
-                        >
-                          Converted an Excel-VBA based tool into a modern
-                          web-based UI, reducing client fund data submission
-                          errors.
-                        </li>
-                        <li
-                          data-en="Minimized expensive manual interventions and improved fund data intake processing time."
-                          data-de="Minimierung teurer manueller Eingriffe und Verbesserung der Verarbeitungszeit für Fondsdatenaufnahme."
-                        >
-                          Minimized expensive manual interventions and improved
-                          fund data intake processing time.
-                        </li>
-                        <li
-                          data-en="Guided asset managers on their fund data submission requirements."
-                          data-de="Beratung von Asset Managern zu ihren Anforderungen bei der Fondsdatenübermittlung."
-                        >
-                          Guided asset managers on their fund data submission
-                          requirements.
-                        </li>
-                        <li
-                          data-en="Performed SQL-based data manipulation, cleansing, and reconciliation."
-                          data-de="Durchführung von SQL-basierter Datenmanipulation, -bereinigung und -abstimmung."
-                        >
-                          Performed SQL-based data manipulation, cleansing, and
-                          reconciliation.
+                          Developed internal tools for data profiling and
+                          quality assessment using Python and SQL
                         </li>
                         <li>
-                          <strong>Tools:</strong> SQL, Python, JavaScript, HTML,
-                          Jira, DuckDB.
+                          <span
+                            data-en="Automated internal reference data discovery and gathering processes, resulting in:"
+                            data-de="Automated internal reference data discovery and gathering processes, resulting in:"
+                          >
+                            Automated internal reference data discovery and
+                            gathering processes, resulting in:
+                          </span>
+                          <ul>
+                            <li
+                              data-en="Simplified data access and discovery from multiple sources for internal teams"
+                              data-de="Simplified data access and discovery from multiple sources for internal teams"
+                            >
+                              Simplified data access and discovery from multiple
+                              sources for internal teams
+                            </li>
+                            <li
+                              data-en="Faster client ticket turnaround times"
+                              data-de="Faster client ticket turnaround times"
+                            >
+                              Faster client ticket turnaround times
+                            </li>
+                            <li
+                              data-en="Elimination of duplicate data submission &amp; processing"
+                              data-de="Elimination of duplicate data submission &amp; processing"
+                            >
+                              Elimination of duplicate data submission &amp;
+                              processing
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          <span
+                            data-en="Converted an Excel-VBA based tool into a modern web based UI ("
+                            data-de="Converted an Excel-VBA based tool into a modern web based UI ("
+                          >
+                            Converted an Excel-VBA based tool into a modern web
+                            based UI (
+                          </span>
+                          <a
+                            class="highlight-link"
+                            href="https://template.fefundinfo.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onclick="event.stopPropagation()"
+                          >
+                            link
+                          </a>
+                          <span
+                            data-en="), resulting in:"
+                            data-de="), resulting in:"
+                          >
+                            ), resulting in:
+                          </span>
+                          <ul>
+                            <li
+                              data-en="Reduced client fund data submission errors and fewer support tickets"
+                              data-de="Reduced client fund data submission errors and fewer support tickets"
+                            >
+                              Reduced client fund data submission errors and
+                              fewer support tickets
+                            </li>
+                            <li
+                              data-en="Minimized time of expensive manual interventions"
+                              data-de="Minimized time of expensive manual interventions"
+                            >
+                              Minimized time of expensive manual interventions
+                            </li>
+                            <li
+                              data-en="Improved fund data intake/processing turnaround time"
+                              data-de="Improved fund data intake/processing turnaround time"
+                            >
+                              Improved fund data intake/processing turnaround
+                              time
+                            </li>
+                          </ul>
+                        </li>
+                        <li
+                          data-en="Guided asset managers on their fund data submission requirements"
+                          data-de="Guided asset managers on their fund data submission requirements"
+                        >
+                          Guided asset managers on their fund data submission
+                          requirements
+                        </li>
+                        <li
+                          data-en="Performed SQL-based data manipulation, cleansing, and reconciliation"
+                          data-de="Performed SQL-based data manipulation, cleansing, and reconciliation"
+                        >
+                          Performed SQL-based data manipulation, cleansing, and
+                          reconciliation
+                        </li>
+                        <li>
+                          <strong>Tools used:</strong> SQL, Python, JavaScript,
+                          HTML, Jira, DuckDB
                         </li>
                       </ul>
                     </div>
@@ -929,48 +953,86 @@
 
                 <div class="exp-details-wrapper">
                   <div class="exp-details-content">
-                    <div
-                      class="job-summary"
-                      data-en="Provided 24/7 support for a crypto trading application covering Spot, Futures, Options, and Perpetuals. Managed incident resolution, root cause analysis, and directly supported clients through technical challenges."
-                      data-de="24/7-Support für eine Krypto-Handelsanwendung mit Spot, Futures, Optionen und Perpetuals. Verwaltung von Störungsbehebung, Ursachenanalyse und direkte Kundenunterstützung bei technischen Herausforderungen."
-                    >
-                      Provided 24/7 support for a crypto trading application
-                      covering Spot, Futures, Options, and Perpetuals. Managed
-                      incident resolution, root cause analysis, and directly
-                      supported clients through technical challenges.
+                    <div class="job-summary">
+                      <span
+                        class="highlight-label"
+                        data-en="Highlight:"
+                        data-de="Highlight:"
+                      >
+                        Highlight:
+                      </span>
+                      <span
+                        class="highlight-text"
+                        data-en="Was part of a close-knit team providing 24/7 global support for a crypto trading platform, resolving high-pressure incidents for institutional clients"
+                        data-de="Was part of a close-knit team providing 24/7 global support for a crypto trading platform, resolving high-pressure incidents for institutional clients"
+                      >
+                        Was part of a close-knit team providing 24/7 global
+                        support for a crypto trading platform, resolving
+                        high-pressure incidents for institutional clients
+                      </span>
                     </div>
                     <div class="job-highlights">
                       <ul>
                         <li
-                          data-en="Organized and managed training sessions to onboard new and potential clients."
-                          data-de="Organisation und Durchführung von Schulungen zur Einarbeitung neuer und potenzieller Kunden."
+                          data-en="24/7 Support of Crypto Trading Application for Spot, Futures, Options and Perpetuals"
+                          data-de="24/7 Support of Crypto Trading Application for Spot, Futures, Options and Perpetuals"
                         >
-                          Organized and managed training sessions to onboard new
-                          and potential clients.
-                        </li>
-                        <li
-                          data-en="Conducted connectivity tests and performed final trading flow tests before go-live."
-                          data-de="Durchführung von Konnektivitätstests und finalen Handelsablauftests vor der Inbetriebnahme."
-                        >
-                          Conducted connectivity tests and performed final
-                          trading flow tests before go-live.
-                        </li>
-                        <li
-                          data-en="Supported Backend, Frontend, API, and Algorithm components of the trading platform."
-                          data-de="Unterstützung der Backend-, Frontend-, API- und Algorithmus-Komponenten der Handelsplattform."
-                        >
-                          Supported Backend, Frontend, API, and Algorithm
-                          components of the trading platform.
-                        </li>
-                        <li
-                          data-en="Tested, debugged, and released new software versions."
-                          data-de="Testen, Debuggen und Veröffentlichung neuer Softwareversionen."
-                        >
-                          Tested, debugged, and released new software versions.
+                          24/7 Support of Crypto Trading Application for Spot,
+                          Futures, Options and Perpetuals
                         </li>
                         <li>
-                          <strong>Tools:</strong> SQL, Python, Unix, Bash,
-                          BigQuery, Zendesk.
+                          <span
+                            data-en="Direct client support for incident management, root cause analysis, and ticket resolution"
+                            data-de="Direct client support for incident management, root cause analysis, and ticket resolution"
+                          >
+                            Direct client support for incident management, root
+                            cause analysis, and ticket resolution
+                          </span>
+                          <ul>
+                            <li
+                              data-en="Onboarded and trained new &amp; potential clients:"
+                              data-de="Onboarded and trained new &amp; potential clients:"
+                            >
+                              Onboarded and trained new &amp; potential
+                              clients:
+                            </li>
+                            <li
+                              data-en="Organized and managed training sessions for clients"
+                              data-de="Organized and managed training sessions for clients"
+                            >
+                              Organized and managed training sessions for
+                              clients
+                            </li>
+                          </ul>
+                        </li>
+                        <li
+                          data-en="Conducted connectivity tests with clients"
+                          data-de="Conducted connectivity tests with clients"
+                        >
+                          Conducted connectivity tests with clients
+                        </li>
+                        <li
+                          data-en="Backend, Frontend, API, and Algorithm support"
+                          data-de="Backend, Frontend, API, and Algorithm support"
+                        >
+                          Backend, Frontend, API, and Algorithm support
+                        </li>
+                        <li
+                          data-en="Supported REST APIs and WebSocket connectivity"
+                          data-de="Supported REST APIs and WebSocket connectivity"
+                        >
+                          Supported REST APIs and WebSocket connectivity
+                        </li>
+                        <li
+                          data-en="Monitored client connectivity and implemented and tested new connections"
+                          data-de="Monitored client connectivity and implemented and tested new connections"
+                        >
+                          Monitored client connectivity and implemented and
+                          tested new connections
+                        </li>
+                        <li>
+                          <strong>Tools used:</strong> SQL, Python, Unix, Bash,
+                          BigQuery, Zendesk
                         </li>
                       </ul>
                     </div>
@@ -998,7 +1060,7 @@
                       <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                   </button>
-                  <h2>Support Analyst</h2>
+                  <h2>Senior Consultant</h2>
                 </div>
                 <div
                   class="exp-date"
@@ -1052,42 +1114,67 @@
 
                 <div class="exp-details-wrapper">
                   <div class="exp-details-content">
-                    <div
-                      class="job-summary"
-                      data-en="Consulted and supported Tier 1 banks and institutional clients with their clearing reports processing. Managed BAU support and led the onboarding of new clients to internal engines."
-                      data-de="Beratung und Unterstützung von Tier-1-Banken und institutionellen Kunden bei der Verarbeitung ihrer Clearing-Berichte. Verwaltung des BAU-Supports und Leitung des Onboardings neuer Kunden auf interne Systeme."
-                    >
-                      Consulted and supported Tier 1 banks and institutional
-                      clients with their clearing reports processing. Managed
-                      BAU support and led the onboarding of new clients to
-                      internal engines.
+                    <div class="job-summary">
+                      <span
+                        class="highlight-label"
+                        data-en="Highlight:"
+                        data-de="Highlight:"
+                      >
+                        Highlight:
+                      </span>
+                      <span
+                        class="highlight-text"
+                        data-en="Advised Tier-1 banks and institutional clients on clearing report processing, led business-as-usual support, and managed onboarding of new clients to internal reporting engines, ensuring compliance with CCP requirements."
+                        data-de="Advised Tier-1 banks and institutional clients on clearing report processing, led business-as-usual support, and managed onboarding of new clients to internal reporting engines, ensuring compliance with CCP requirements."
+                      >
+                        Advised Tier-1 banks and institutional clients on
+                        clearing report processing, led business-as-usual
+                        support, and managed onboarding of new clients to
+                        internal reporting engines, ensuring compliance with
+                        CCP requirements.
+                      </span>
                     </div>
                     <div class="job-highlights">
                       <ul>
                         <li
-                          data-en="Conducted connectivity and data flow tests with/for clients."
-                          data-de="Durchführung von Konnektivitäts- und Datenflusstests mit/für Kunden."
+                          data-en="Consulted and supported Tier 1 banks and other institutional clients with their clearing reports processing"
+                          data-de="Consulted and supported Tier 1 banks and other institutional clients with their clearing reports processing"
+                        >
+                          Consulted and supported Tier 1 banks and other
+                          institutional clients with their clearing reports
+                          processing
+                        </li>
+                        <li
+                          data-en="BAU support &amp; Jira tickets management"
+                          data-de="BAU support &amp; Jira tickets management"
+                        >
+                          BAU support &amp; Jira tickets management
+                        </li>
+                        <li
+                          data-en="Conducted connectivity and data flow tests with/for clients"
+                          data-de="Conducted connectivity and data flow tests with/for clients"
                         >
                           Conducted connectivity and data flow tests with/for
-                          clients.
+                          clients
                         </li>
                         <li
-                          data-en="Onboarded new clients (including a Tier 1 bank) and mapped new CCP reports to requirements."
-                          data-de="Onboarding neuer Kunden (inkl. einer Tier-1-Bank) und Zuordnung neuer CCP-Berichte zu Anforderungen."
+                          data-en="Onboarded new clients (including a Tier 1 bank) and mapped new CCP reports according to their requirements and internal engine"
+                          data-de="Onboarded new clients (including a Tier 1 bank) and mapped new CCP reports according to their requirements and internal engine"
                         >
                           Onboarded new clients (including a Tier 1 bank) and
-                          mapped new CCP reports to requirements.
+                          mapped new CCP reports according to their
+                          requirements and internal engine
                         </li>
                         <li
-                          data-en="Introduced previously undocumented business and procedure specifications."
-                          data-de="Einführung zuvor undokumentierter Geschäfts- und Verfahrensspezifikationen."
+                          data-en="Introduced previously undocumented business and procedures specifications"
+                          data-de="Introduced previously undocumented business and procedures specifications"
                         >
                           Introduced previously undocumented business and
-                          procedure specifications.
+                          procedures specifications
                         </li>
                         <li>
-                          <strong>Tools:</strong> SQL, Oracle DB, Tomcat, Bash,
-                          Python.
+                          <strong>Tools used:</strong> SQL, Oracle DB, Tomcat,
+                          Bash, Python
                         </li>
                       </ul>
                     </div>
@@ -1115,7 +1202,7 @@
                       <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                   </button>
-                  <h2>Electronic Trading Support</h2>
+                  <h2>Algorithmic Execution Desk Analyst</h2>
                 </div>
                 <div
                   class="exp-date"
@@ -1169,38 +1256,58 @@
 
                 <div class="exp-details-wrapper">
                   <div class="exp-details-content">
-                    <div
-                      class="job-summary"
-                      data-en="Built Python-based automation to retrieve CME futures expiry data, replacing erroneous manual processes. Supported a Linux-based futures/fixed income electronic trading environment."
-                      data-de="Entwicklung einer Python-basierten Automatisierung zum Abruf von CME-Futures-Verfallsdaten als Ersatz für fehlerhafte manuelle Prozesse. Unterstützung einer Linux-basierten Futures/Anleihen-Handelsumgebung."
-                    >
-                      Built Python-based automation to retrieve CME futures
-                      expiry data, replacing erroneous manual processes.
-                      Supported a Linux-based futures/fixed income electronic
-                      trading environment.
+                    <div class="job-summary">
+                      <span
+                        class="highlight-label"
+                        data-en="Highlight:"
+                        data-de="Highlight:"
+                      >
+                        Highlight:
+                      </span>
+                      <span
+                        class="highlight-text"
+                        data-en="Maintained a Linux-based futures and fixed income trading environment, automated data expiry retrieval, reduced incident rates, and handled FIX certification processes for clients"
+                        data-de="Maintained a Linux-based futures and fixed income trading environment, automated data expiry retrieval, reduced incident rates, and handled FIX certification processes for clients"
+                      >
+                        Maintained a Linux-based futures and fixed income
+                        trading environment, automated data expiry retrieval,
+                        reduced incident rates, and handled FIX certification
+                        processes for clients
+                      </span>
                     </div>
                     <div class="job-highlights">
                       <ul>
                         <li
-                          data-en="Reduced trading incidents for clients related to contract availability."
-                          data-de="Reduzierung von Handelsvorfällen für Kunden im Zusammenhang mit Kontraktverfügbarkeit."
+                          data-en="Automated retrieval of CME futures expiry data via Python, replacing error-prone manual processes"
+                          data-de="Automated retrieval of CME futures expiry data via Python, replacing error-prone manual processes"
                         >
-                          Reduced trading incidents for clients related to
-                          contract availability.
+                          Automated retrieval of CME futures expiry data via
+                          Python, replacing error-prone manual processes
                         </li>
                         <li
-                          data-en="Conducted inbound/outbound FIX certifications."
-                          data-de="Durchführung von eingehenden/ausgehenden FIX-Zertifizierungen."
+                          data-en="Supported a Linux-based electronic trading environment for futures and fixed income"
+                          data-de="Supported a Linux-based electronic trading environment for futures and fixed income"
                         >
-                          Conducted inbound/outbound FIX certifications.
+                          Supported a Linux-based electronic trading
+                          environment for futures and fixed income
                         </li>
                         <li
-                          data-en="Automated daily processes via Python scripts."
-                          data-de="Automatisierung täglicher Prozesse mittels Python-Skripten."
+                          data-en="Reduced client trading incidents related to contract availability"
+                          data-de="Reduced client trading incidents related to contract availability"
                         >
-                          Automated daily processes via Python scripts.
+                          Reduced client trading incidents related to contract
+                          availability
                         </li>
-                        <li><strong>Tools:</strong> SQL, kdb, Python, Bash.</li>
+                        <li
+                          data-en="Conducted inbound/outbound FIX certifications and scripted daily process automation"
+                          data-de="Conducted inbound/outbound FIX certifications and scripted daily process automation"
+                        >
+                          Conducted inbound/outbound FIX certifications and
+                          scripted daily process automation
+                        </li>
+                        <li>
+                          <strong>Tools used:</strong> SQL, kdb, Python, Bash
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -1281,37 +1388,54 @@
 
                 <div class="exp-details-wrapper">
                   <div class="exp-details-content">
-                    <div
-                      class="job-summary"
-                      data-en="Supported equity/options electronic trading platforms and liaised with developers to seek optimal solutions for client issues."
-                      data-de="Unterstützung von Aktien-/Optionen-Handelsplattformen und Zusammenarbeit mit Entwicklern zur Findung optimaler Lösungen für Kundenprobleme."
-                    >
-                      Supported equity/options electronic trading platforms and
-                      liaised with developers to seek optimal solutions for
-                      client issues.
+                    <div class="job-summary">
+                      <span
+                        class="highlight-label"
+                        data-en="Highlight:"
+                        data-de="Highlight:"
+                      >
+                        Highlight:
+                      </span>
+                      <span
+                        class="highlight-text"
+                        data-en="Managed equity and options platforms for institutional clients and built automated monitoring tools for FIX connections."
+                        data-de="Managed equity and options platforms for institutional clients and built automated monitoring tools for FIX connections."
+                      >
+                        Managed equity and options platforms for institutional
+                        clients and built automated monitoring tools for FIX
+                        connections.
+                      </span>
                     </div>
                     <div class="job-highlights">
                       <ul>
                         <li
-                          data-en="Sourced and analyzed data series with scripting and SQL queries."
-                          data-de="Beschaffung und Analyse von Datenreihen mittels Scripting und SQL-Abfragen."
+                          data-en="Provided support for equity/options electronic trading platforms and collaborated with developers on client issues"
+                          data-de="Provided support for equity/options electronic trading platforms and collaborated with developers on client issues"
                         >
-                          Sourced and analyzed data series with scripting and
-                          SQL queries.
+                          Provided support for equity/options electronic
+                          trading platforms and collaborated with developers on
+                          client issues
                         </li>
                         <li
-                          data-en="Developed and tested prototype solutions based on data and workflow analysis."
-                          data-de="Entwicklung und Test von Prototyp-Lösungen basierend auf Daten- und Workflow-Analyse."
+                          data-en="Sourced and analysed data series using scripting and SQL queries"
+                          data-de="Sourced and analysed data series using scripting and SQL queries"
                         >
-                          Developed and tested prototype solutions based on data
-                          and workflow analysis.
+                          Sourced and analysed data series using scripting and
+                          SQL queries
                         </li>
                         <li
-                          data-en="Built an automated Excel-VBA based monitoring tool for FIX session status tracking and alerts."
-                          data-de="Erstellung eines automatisierten Excel-VBA-basierten Überwachungstools für FIX-Sitzungsstatus und Warnmeldungen."
+                          data-en="Developed and tested prototype solutions based on workflow analyses"
+                          data-de="Developed and tested prototype solutions based on workflow analyses"
                         >
-                          Built an automated Excel-VBA based monitoring tool for
-                          FIX session status tracking and alerts.
+                          Developed and tested prototype solutions based on
+                          workflow analyses
+                        </li>
+                        <li
+                          data-en="Built an automated Excel-VBA monitoring tool for tracking FIX session status and generating alerts"
+                          data-de="Built an automated Excel-VBA monitoring tool for tracking FIX session status and generating alerts"
+                        >
+                          Built an automated Excel-VBA monitoring tool for
+                          tracking FIX session status and generating alerts
                         </li>
                       </ul>
                     </div>
@@ -1393,29 +1517,39 @@
 
                 <div class="exp-details-wrapper">
                   <div class="exp-details-content">
-                    <div
-                      class="job-summary"
-                      data-en="Screened, selected, and validated fundamental data used for informed financial decisions."
-                      data-de="Prüfung, Auswahl und Validierung von Fundamentaldaten für fundierte Finanzentscheidungen."
-                    >
-                      Screened, selected, and validated fundamental data used
-                      for informed financial decisions.
+                    <div class="job-summary">
+                      <span
+                        class="highlight-label"
+                        data-en="Highlight:"
+                        data-de="Highlight:"
+                      >
+                        Highlight:
+                      </span>
+                      <span
+                        class="highlight-text"
+                        data-en="Maintained the quality and reliability of fundamental data for a global platform used by institutional clients"
+                        data-de="Maintained the quality and reliability of fundamental data for a global platform used by institutional clients"
+                      >
+                        Maintained the quality and reliability of fundamental
+                        data for a global platform used by institutional
+                        clients
+                      </span>
                     </div>
                     <div class="job-highlights">
                       <ul>
                         <li
-                          data-en="Developed workflow solutions and improved processes applying IT & problem-solving skills."
-                          data-de="Entwicklung von Workflow-Lösungen und Prozessverbesserungen durch Anwendung von IT- und Problemlösungsfähigkeiten."
+                          data-en="Screened, selected and validated fundamental datasets to support accurate financial analysis"
+                          data-de="Screened, selected and validated fundamental datasets to support accurate financial analysis"
                         >
-                          Developed workflow solutions and improved processes
-                          applying IT & problem-solving skills.
+                          Screened, selected and validated fundamental datasets
+                          to support accurate financial analysis
                         </li>
                         <li
-                          data-en="Processed & parsed various financial data sources into Bloomberg databases."
-                          data-de="Verarbeitung und Parsing verschiedener Finanzdatenquellen in Bloomberg-Datenbanken."
+                          data-en="Developed workflow solutions and improved processes by applying IT and problem-solving skills"
+                          data-de="Developed workflow solutions and improved processes by applying IT and problem-solving skills"
                         >
-                          Processed & parsed various financial data sources into
-                          Bloomberg databases.
+                          Developed workflow solutions and improved processes
+                          by applying IT and problem-solving skills
                         </li>
                       </ul>
                     </div>
@@ -1442,9 +1576,9 @@
                   </svg>
                   <span
                     class="toggle-label"
-                    data-en="Student Jobs"
-                    data-de="Studentenjobs"
-                    >Student Jobs</span
+                    data-en="Student Years"
+                    data-de="Studentenjahre"
+                    >Student Years</span
                   >
                 </button>
                 <div class="student-jobs-content">
@@ -1679,39 +1813,161 @@
           <!-- 3. SOFT SKILLS TAB -->
           <div class="tab-pane" id="tab-soft">
             <div class="soft-skills-container-full">
-              <h2 class="bucket-label">Soft Skills & Competencies</h2>
-              <div class="soft-skills-grid">
-                <div class="soft-skill-card">
-                  <span class="soft-icon">🧠</span>
-                  <h3>Analytical Thinking</h3>
-                  <p>Deep dive into data to find patterns and insights.</p>
+              <div class="soft-skills-paragraphs">
+                <p>
+                  As someone who has lived and worked in several countries and cultures, I’ve learned to stay open-minded, adaptable, and flexible — whether I’m dealing with clients or collaborating with colleagues.
+                </p>
+                <p>
+                  Curious by nature, I’m always open to trying new tools or refining processes. In the fast-evolving age of AI, this has become quasi a job requirement.
+                </p>
+                <p>
+                  Solving issues — or making a process less error-prone by automating it — whether for an external client or an internal request, by digging into logs or trying to replicate a bug, feels like solving a puzzle. That’s the best part of the job.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. LANGUAGES TAB -->
+          <div class="tab-pane" id="tab-lang">
+            <div class="languages-container-full">
+              <div class="languages-block">
+                <div class="languages-list">
+                  <div class="language-row">
+                    <span class="language-name">English</span>
+                    <span class="language-level">Fluent</span>
+                  </div>
+                  <div class="language-row">
+                    <span class="language-name">Bulgarian</span>
+                    <span class="language-level">Native</span>
+                  </div>
+                  <div class="language-row">
+                    <span class="language-name">Turkish</span>
+                    <span class="language-level">Native</span>
+                  </div>
+                  <div class="language-row language-row-german">
+                    <span class="language-name">German</span>
+                    <span class="calendar-level calendar-level-inline">C1</span>
+                    <span class="calendar-level calendar-level-inline">C2</span>
+                  </div>
                 </div>
-                <div class="soft-skill-card">
-                  <span class="soft-icon">🗣️</span>
-                  <h3>Communication</h3>
-                  <p>
-                    Bridging the gap between technical and non-technical teams.
-                  </p>
+
+                <div class="language-calendar">
+                  <div class="language-calendar-grid">
+                    <div class="calendar-cell calendar-label">Reading</div>
+                    <div class="calendar-cell">✓</div>
+                    <div class="calendar-cell">Q4 2026</div>
+
+                    <div class="calendar-cell calendar-label">Listening</div>
+                    <div class="calendar-cell">✓</div>
+                    <div class="calendar-cell">Q4 2026</div>
+
+                    <div class="calendar-cell calendar-label">Speaking</div>
+                    <div class="calendar-cell">Q2 2026</div>
+                    <div class="calendar-cell">Q1 2027</div>
+
+                    <div class="calendar-cell calendar-label">Writing</div>
+                    <div class="calendar-cell">Q2 2026</div>
+                    <div class="calendar-cell">Q1 2027</div>
+                  </div>
                 </div>
-                <div class="soft-skill-card">
-                  <span class="soft-icon">⚖️</span>
-                  <h3>Strategic Planning</h3>
-                  <p>Aligning data processes with long-term business goals.</p>
+              </div>
+
+              <div class="education-section">
+                <div class="exp-item edu-item">
+                  <div class="exp-role">
+                    <h2>Master of Business Administration, MBA</h2>
+                  </div>
+                  <div class="exp-date">2010-2013</div>
+                  <div class="exp-company">
+                    Perdue School of Business, Salisbury University
+                    <a
+                      href="https://www.salisbury.edu/"
+                      target="_blank"
+                      class="website-icon"
+                      onclick="event.stopPropagation()"
+                      ><svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path
+                          d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                        ></path></svg
+                    ></a>
+                    <a
+                      href="https://www.linkedin.com/school/salisbury-university/"
+                      target="_blank"
+                      class="linkedin-icon"
+                      onclick="event.stopPropagation()"
+                      ><svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path
+                          d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                        /></svg
+                    ></a>
+                  </div>
+                  <div class="exp-location">Salisbury, MD, USA</div>
                 </div>
-                <div class="soft-skill-card">
-                  <span class="soft-icon">🚀</span>
-                  <h3>Problem Solving</h3>
-                  <p>Quick incident response and root cause analysis.</p>
-                </div>
-                <div class="soft-skill-card">
-                  <span class="soft-icon">🤝</span>
-                  <h3>Collaboration</h3>
-                  <p>Effective teamwork across cross-functional departments.</p>
-                </div>
-                <div class="soft-skill-card">
-                  <span class="soft-icon">⏱️</span>
-                  <h3>Efficiency</h3>
-                  <p>Optimizing workflows and automating repetitive tasks.</p>
+                <div class="exp-item edu-item">
+                  <div class="exp-role">
+                    <h2>Bachelor of Science / Finance</h2>
+                  </div>
+                  <div class="exp-date">2004-2008</div>
+                  <div class="exp-company">
+                    Wilmington University
+                    <a
+                      href="https://www.wilmu.edu/"
+                      target="_blank"
+                      class="website-icon"
+                      onclick="event.stopPropagation()"
+                      ><svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path
+                          d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                        ></path></svg
+                    ></a>
+                    <a
+                      href="https://www.linkedin.com/school/wilmington-university/"
+                      target="_blank"
+                      class="linkedin-icon"
+                      onclick="event.stopPropagation()"
+                      ><svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path
+                          d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                        /></svg
+                    ></a>
+                  </div>
+                  <div class="exp-location">New Castle, DE, USA</div>
                 </div>
               </div>
             </div>
@@ -1730,7 +1986,10 @@
                     <img src="images/strava.jpg" alt="Mountain Biking" />
                   </div>
                   <div class="card-caption">
-                    <h3>Mountain Biking: Best way to explore Switzerland</h3>
+                    <h3>
+                      <span class="subtitle-label">Mountain Biking</span>: The
+                      best way to explore Switzerland
+                    </h3>
                   </div>
                 </div>
                 <div class="bento-card simple-card span-2x2">
@@ -1738,7 +1997,10 @@
                     <img src="images/table%20tennis.jpg" alt="Table Tennis" />
                   </div>
                   <div class="card-caption">
-                    <h3>Table Tennis: Playing since 5 years old</h3>
+                    <h3>
+                      <span class="subtitle-label">Table Tennis</span>: Playing
+                      since I was 5 years old.
+                    </h3>
                   </div>
                 </div>
                 <div class="bento-card simple-card centered-card">
@@ -1746,7 +2008,10 @@
                     <img src="images/golfing.jpg" alt="Angling" />
                   </div>
                   <div class="card-caption">
-                    <h3>Golf: No need to be a pro to enjoy it!</h3>
+                    <h3>
+                      <span class="subtitle-label">Golf</span>: You don’t need
+                      to be a pro to enjoy it!
+                    </h3>
                   </div>
                 </div>
               </div>
@@ -1757,37 +2022,67 @@
               <div class="bento-grid">
                 <div class="bento-card span-1x2 active-hover">
                   <div class="card-content">
-                    <div class="icon-box"></div>
-                    <h3>The Pragmatic Programmer</h3>
-                    <p>A classic. Re-reading for the 3rd time.</p>
-                    <div class="tag-row">
-                      <span class="pill">Tech</span>
-                      <span class="pill">Philosophy</span>
-                    </div>
+                    <h3>
+                      <a
+                        href="https://en.wikipedia.org/wiki/Homo_Deus:_A_Brief_History_of_Tomorrow"
+                        target="_blank"
+                        rel="noopener"
+                        >Homo Deus: A Brief History of Tomorrow</a
+                      >
+                    </h3>
+                    <p>Yuval Noah Harari</p>
                   </div>
                 </div>
                 <div class="bento-card span-2x1 bg-tech">
                   <div class="card-content">
-                    <h3>Clean Code</h3>
-                    <p>Robert C. Martin</p>
+                    <h3>
+                      <a
+                        href="https://en.wikipedia.org/wiki/Sapiens:_A_Brief_History_of_Humankind"
+                        target="_blank"
+                        rel="noopener"
+                        >Sapiens: A Brief History of Humankind</a
+                      >
+                    </h3>
+                    <p>Yuval Noah Harari</p>
                   </div>
                 </div>
                 <div class="bento-card span-1x1">
-                  <div class="card-content centered">
-                    <div class="emoji-xl">🧠</div>
-                    <h3>Thinking, Fast & Slow</h3>
+                  <div class="card-content">
+                    <h3>
+                      <a
+                        href="https://en.wikipedia.org/wiki/Steve_Jobs_(book)"
+                        target="_blank"
+                        rel="noopener"
+                        >Steve Jobs</a
+                      >
+                    </h3>
+                    <p>Walter Isaacson</p>
                   </div>
                 </div>
                 <div class="bento-card span-2x1 bg-cooking">
                   <div class="card-content">
-                    <h3>Project Hail Mary</h3>
-                    <p>Andy Weir</p>
+                    <h3>
+                      <a
+                        href="https://en.wikipedia.org/wiki/Walkaway_(Doctorow_novel)"
+                        target="_blank"
+                        rel="noopener"
+                        >Walkaway</a
+                      >
+                    </h3>
+                    <p>Cory Doctorow</p>
                   </div>
                 </div>
                 <div class="bento-card span-1x1">
-                  <div class="card-content centered">
-                    <div class="emoji-xl"></div>
-                    <h3>Elon Musk</h3>
+                  <div class="card-content">
+                    <h3>
+                      <a
+                        href="https://en.wikipedia.org/wiki/Fall_of_Giants"
+                        target="_blank"
+                        rel="noopener"
+                        >Century Trilogy</a
+                      >
+                    </h3>
+                    <p>Ken Follett</p>
                   </div>
                 </div>
               </div>
@@ -1800,23 +2095,58 @@
                 <div class="culture-col">
                   <div class="list-group">
                     <div class="list-item">
-                      <span class="list-text">Inception</span>
-                      <span class="list-date">2010</span>
+                      <span class="list-text"
+                        ><a
+                          href="https://www.imdb.com/title/tt0469494/"
+                          target="_blank"
+                          rel="noopener"
+                          >There Will Be Blood</a
+                        ></span
+                      >
+                      <span class="list-date">2007</span>
                     </div>
                     <div class="list-item">
-                      <span class="list-text">The Dark Knight</span>
-                      <span class="list-date">2008</span>
+                      <span class="list-text"
+                        ><a
+                          href="https://www.imdb.com/title/tt0217505/"
+                          target="_blank"
+                          rel="noopener"
+                          >Gangs of New York</a
+                        ></span
+                      >
+                      <span class="list-date">2002</span>
                     </div>
                     <div class="list-item">
-                      <span class="list-text">Interstellar</span>
-                      <span class="list-date">2014</span>
+                      <span class="list-text"
+                        ><a
+                          href="https://www.imdb.com/title/tt0088763/"
+                          target="_blank"
+                          rel="noopener"
+                          >Back to the Future Trilogy</a
+                        ></span
+                      >
+                      <span class="list-date">1985</span>
                     </div>
                     <div class="list-item">
-                      <span class="list-text">The Matrix</span>
-                      <span class="list-date">1999</span>
+                      <span class="list-text"
+                        ><a
+                          href="https://www.imdb.com/title/tt0480249/"
+                          target="_blank"
+                          rel="noopener"
+                          >I Am Legend</a
+                        ></span
+                      >
+                      <span class="list-date">2007</span>
                     </div>
                     <div class="list-item">
-                      <span class="list-text">Pulp Fiction</span>
+                      <span class="list-text"
+                        ><a
+                          href="https://www.imdb.com/title/tt0110413/"
+                          target="_blank"
+                          rel="noopener"
+                          >Léon: The Professional</a
+                        ></span
+                      >
                       <span class="list-date">1994</span>
                     </div>
                   </div>
@@ -1826,24 +2156,59 @@
                 <div class="culture-col">
                   <div class="list-group">
                     <div class="list-item">
-                      <span class="list-text">Breaking Bad</span>
+                      <span class="list-text"
+                        ><a
+                          href="https://www.imdb.com/title/tt0903747/?ref_=ls_t_1"
+                          target="_blank"
+                          rel="noopener"
+                          >Breaking Bad</a
+                        ></span
+                      >
                       <span class="list-date">2008 - 2013</span>
                     </div>
                     <div class="list-item">
-                      <span class="list-text">Succession</span>
-                      <span class="list-date">2018 - 2023</span>
+                      <span class="list-text"
+                        ><a
+                          href="https://www.imdb.com/title/tt2356777/?ref_=ls_t_93"
+                          target="_blank"
+                          rel="noopener"
+                          >True Detective (S1)</a
+                        ></span
+                      >
+                      <span class="list-date">2014</span>
                     </div>
                     <div class="list-item">
-                      <span class="list-text">Severance</span>
-                      <span class="list-date">2022 - Present</span>
+                      <span class="list-text"
+                        ><a
+                          href="https://www.imdb.com/title/tt1856010/?ref_=ls_t_39"
+                          target="_blank"
+                          rel="noopener"
+                          >House of Cards</a
+                        ></span
+                      >
+                      <span class="list-date">2013 - 2018</span>
                     </div>
                     <div class="list-item">
-                      <span class="list-text">The Wire</span>
-                      <span class="list-date">2002 - 2008</span>
+                      <span class="list-text"
+                        ><a
+                          href="https://www.imdb.com/title/tt0804503/?ref_=ls_t_9"
+                          target="_blank"
+                          rel="noopener"
+                          >Mad Men</a
+                        ></span
+                      >
+                      <span class="list-date">2007 - 2015</span>
                     </div>
                     <div class="list-item">
-                      <span class="list-text">Silicon Valley</span>
-                      <span class="list-date">2014 - 2019</span>
+                      <span class="list-text"
+                        ><a
+                          href="https://www.imdb.com/title/tt0108778/"
+                          target="_blank"
+                          rel="noopener"
+                          >Friends</a
+                        ></span
+                      >
+                      <span class="list-date">1994 - 2004</span>
                     </div>
                   </div>
                 </div>
@@ -1871,7 +2236,7 @@
                 </div>
                 <div class="bento-card bucket-card">
                   <span class="square-check"></span>
-                  <div class="bucket-text">Learn to Snowboard</div>
+                  <div class="bucket-text">Learn to snowboard</div>
                 </div>
               </div>
             </div>
@@ -1886,16 +2251,7 @@
         <div class="matrix-export-modal-header">
           <h2>Skills & Activities Progression</h2>
           <div class="matrix-export-controls">
-            <label class="matrix-export-toggle">
-              <input
-                type="checkbox"
-                id="exportColorToggle"
-                checked
-                onchange="toggleExportColor()"
-              />
-              <span class="toggle-slider"></span>
-              <span class="toggle-label">Color</span>
-            </label>
+
             <button class="matrix-export-btn" onclick="downloadMatrixAsPDF()">
               <svg
                 width="16"
@@ -1932,6 +2288,251 @@
           <div id="matrixExportPreview" class="matrix-export-preview">
             <!-- Export-ready matrix rendered here -->
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Skill Modal -->
+    <div
+      id="addSkillModal"
+      class="matrix-export-modal"
+      style="display: none; z-index: 10001; justify-content: center; align-items: center;"
+    >
+      <div
+        class="matrix-export-modal-content"
+        style="
+          width: 400px;
+          height: auto;
+          background: var(--bg-color, #fff);
+          border-radius: 8px;
+          box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          box-sizing: border-box;
+        "
+      >
+        <div class="matrix-export-modal-header">
+          <h2>Add New Skill</h2>
+          <button
+            type="button"
+            class="matrix-export-close"
+            onclick="closeAddSkillModal()"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div
+          class="matrix-export-modal-body add-skill-modal-body"
+          style="padding: 20px; width: 100%; box-sizing: border-box;"
+        >
+          <label style="display: block; margin-bottom: 8px; font-weight: 600"
+            >Skill Name:</label
+          >
+          <input
+            type="text"
+            id="newSkillInput"
+            style="
+              width: 100%;
+              padding: 8px;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              margin-bottom: 16px;
+              box-sizing: border-box;
+            "
+          />
+
+          <label style="display: block; margin-bottom: 8px; font-weight: 600"
+            >Skill Type:</label
+          >
+          <div class="add-skill-type-row" style="display: flex; gap: 16px; margin-bottom: 20px">
+            <label style="display: flex; align-items: center; cursor: pointer">
+              <input
+                type="radio"
+                name="skillType"
+                value="task"
+                checked
+                style="margin-right: 6px"
+              />
+              Task (Regular)
+            </label>
+            <label style="display: flex; align-items: center; cursor: pointer">
+              <input
+                type="radio"
+                name="skillType"
+                value="tool"
+                style="margin-right: 6px"
+              />
+              Tool (Monospace)
+            </label>
+          </div>
+
+          <div class="add-skill-actions" style="display: flex; justify-content: flex-end; gap: 8px">
+            <button
+              type="button"
+              onclick="closeAddSkillModal()"
+              style="
+                padding: 8px 16px;
+                background: #eee;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+              "
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onclick="confirmAddSkill()"
+              style="
+                padding: 8px 16px;
+                background: #007aff;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: 600;
+              "
+            >
+              Add Skill
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Contact Modal -->
+    <div id="contactModal" class="contact-modal-overlay">
+      <div class="contact-modal-surface">
+        <button class="contact-modal-close" onclick="closeContactModal()">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <div id="contactFormContainer">
+          <h2 class="contact-title" data-en="Contact Me" data-de="Kontakt">
+            Contact Me
+          </h2>
+          <p
+            class="contact-subtitle"
+            data-en="Send me a message and I'll get back to you as soon as possible."
+            data-de="Senden Sie mir eine Nachricht und ich melde mich so schnell wie möglich bei Ihnen."
+          >
+            Send me a message and I'll get back to you as soon as possible.
+          </p>
+
+          <form id="contactForm" class="contact-form">
+            <!-- Hidden Google Form Fields (Entry IDs will be mapped here) -->
+            <div class="contact-group">
+              <input
+                type="text"
+                name="name"
+                class="contact-input"
+                placeholder="Your Name"
+                aria-label="Your Name"
+                required
+              />
+            </div>
+
+            <div class="contact-group">
+              <input
+                type="email"
+                name="email"
+                class="contact-input"
+                placeholder="Email"
+                aria-label="Email"
+                required
+              />
+            </div>
+
+            <div class="contact-group">
+              <textarea
+                name="message"
+                class="contact-textarea"
+                placeholder="Message"
+                aria-label="Message"
+                required
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="contact-submit"
+              data-en="Send Message"
+              data-de="Nachricht senden"
+            >
+              <span>Send Message</span>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <div id="contactSuccess" class="contact-success-overlay">
+          <div class="success-icon">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <h2 class="contact-title" data-en="Sent!" data-de="Gesendet!">
+            Sent!
+          </h2>
+          <p
+            class="contact-subtitle"
+            data-en="Thank you for your message. I'll be in touch soon."
+            data-de="Vielen Dank für Ihre Nachricht. Ich melde mich bald bei Ihnen."
+          >
+            Thank you for your message. I'll be in touch soon.
+          </p>
+          <button
+            onclick="closeContactModal()"
+            class="contact-submit"
+            style="width: 100%"
+            data-en="Close"
+            data-de="Schließen"
+          >
+            Close
+          </button>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@
   width: 100%;
   overflow-x: visible;
   padding-bottom: 0; /* Removed padding to prevent table lifting at bottom */
+  --hm-row-border-color: rgba(0, 0, 0, 0.06);
   transition:
     background-color 0.3s,
     color 0.3s;
@@ -32,7 +33,7 @@
    PALETTES (10 Variations - Dark/Red Focus)
    ========================================= */
 .skill-matrix-view {
-  --hm-p-main: #ff3b30; /* Default (Red) */
+  --hm-p-main: #607d8b; /* Main Theme (Slate) */
 }
 
 .skill-matrix-view[data-heatmap-palette="red"] {
@@ -77,31 +78,46 @@
   --hm-text-secondary: var(--secondary-text);
 }
 .skill-matrix-view[data-heatmap-theme="minimal"] .hm-heat-cell {
-  border-right: none;
-  margin: 1px 1px;
-  border-radius: 2px;
-  height: calc(100% - 2px);
-  background-color: transparent; /* Empty */
+  /* Minimal theme - borders removed per user request */
+  border: none;
 }
 
 /* =========================================
    SHARED COLOR MAPPING
    ========================================= */
 
-/* Use transparency for levels to allow blending */
+/* Cell backgrounds using pseudo-element for opacity (preserves cell structure) */
 .skill-matrix-view .hm-heat-cell.bg-level-3,
 .skill-matrix-view .hm-heat-cell.bg-level-2,
 .skill-matrix-view .hm-heat-cell.bg-level-1 {
-  background-color: var(--hm-p-main);
+  position: relative;
 }
-.skill-matrix-view .hm-heat-cell.bg-level-3 {
+.skill-matrix-view .hm-heat-cell.bg-level-3::before,
+.skill-matrix-view .hm-heat-cell.bg-level-2::before,
+.skill-matrix-view .hm-heat-cell.bg-level-1::before {
+  content: "";
+  position: absolute;
+  /* Use tiny horizontal bleed to prevent subpixel gaps between flex cells */
+  top: 0;
+  bottom: 0;
+  left: -0.5px;
+  right: -0.5px;
+  background-color: var(--hm-p-main);
+  pointer-events: none;
+  z-index: 0;
+  box-sizing: border-box; 
+}
+.skill-matrix-view .hm-heat-cell.bg-level-3::before {
   opacity: 0.95; /* Darkest */
 }
-.skill-matrix-view .hm-heat-cell.bg-level-2 {
+.skill-matrix-view .hm-heat-cell.bg-level-2::before {
   opacity: 0.6; /* Medium */
 }
-.skill-matrix-view .hm-heat-cell.bg-level-1 {
+.skill-matrix-view .hm-heat-cell.bg-level-1::before {
   opacity: 0.25; /* Lightest */
+}
+.skill-matrix-view .hm-heat-cell.bg-level-0 {
+  background-color: transparent;
 }
 
 /* Legend Boxes Matching */
@@ -139,14 +155,29 @@
 }
 
 .skill-matrix-view .hm-skill-row {
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: none; /* Removed border to eliminate lines between cadence cells */
 }
 
-/* Heatmap Cell Base */
+/* Heatmap Cell Base - Consistent dimensions for all cells */
 .hm-heat-cell {
-  height: 100%;
-  transition: all 0.3s ease;
-  border-right: 1px solid var(--bg-color);
+  height: 22px; /* Explicit height for consistency across all columns */
+  min-height: 22px; /* Match row height */
+  box-sizing: border-box;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease;
+  border: none; /* No borders on cadence cells */
+  border-bottom: none; /* Row handles bottom border */
+  position: relative;
+  background-color: transparent;
+  overflow: hidden; /* Ensure content doesn't affect layout */
+  
+  /* Stabilize rendering during translations/transitions */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
 .hm-diagonal-zone {
@@ -173,7 +204,7 @@
 
 .hm-footer-zone {
   bottom: 0; /* Reset to 0 to cover scrolling content */
-  height: 164px; /* Matched to header height */
+  height: 240px; /* Increased to 240px to fit long names like "Elwood Technology" */
   margin-bottom: 0;
   padding-top: 10px; /* Reduced from 20px to match header's tight spacing (10px bottom pad vs 10px top pad) */
   padding-bottom: 58px; /* Mirroring header's structure */
@@ -281,8 +312,8 @@
   color: var(--text-color); /* Matches header Name color */
   display: flex;
   align-items: center;
-  border-right: 1px solid var(--hm-grid-color, var(--border-color));
-  border-bottom: 1px solid var(--hm-grid-color, var(--border-color));
+  border-right: none; /* Removed vertical border between labels and cadence cells */
+  border-bottom: none; /* Using pseudo-element for centered border */
   flex-shrink: 0;
   white-space: nowrap;
   margin-left: -380px; /* Extend to the left, outside the centered container */
@@ -290,7 +321,9 @@
   transition:
     color 0.25s ease,
     transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
 }
+
 .hm-skill-row:hover .hm-skill-label {
   color: var(--hm-p-main, var(--accent-color));
 }
@@ -299,101 +332,157 @@
 .hm-skill-row {
   display: flex;
   align-items: stretch;
-  height: 22px; /* Reduced by 30% (was 32px) */
+  height: 22px; /* Fixed row height */
+  min-height: 22px;
+  max-height: 22px;
   position: relative;
+  box-sizing: border-box;
 }
+/* Unified centered horizontal border - spans entire row width */
+/* Cadence cells border - whitish */
+.hm-skill-row::after {
+  content: "";
+  position: absolute;
+  left: 0; /* Start at cadence cells only */
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--hm-row-border-color); 
+  /* No transform: translateY(50%) here - it causes subpixel flickering on 1px lines */
+  pointer-events: none;
+  z-index: 1;
+}
+/* Skill labels border - original dark color */
 .hm-skill-row::before {
   content: "";
   position: absolute;
-  top: 0;
+  left: -364px; /* Start at labels */
+  right: calc(100%); /* End where cadence starts */
   bottom: 0;
-  left: -380px;
-  right: 0;
-  border-top: 2px solid transparent;
-  border-bottom: 2px solid transparent;
+  height: 1px;
+  background: var(--hm-row-border-color);
+  /* Matching the cadence side positioning */
   pointer-events: none;
-  transition: border-color 0.2s ease;
+  z-index: 1;
 }
+/* Row hover effect - DISABLED per user request
 .hm-skill-row:hover::before {
   border-top-color: rgba(0, 0, 0, 0.6);
   border-bottom-color: rgba(0, 0, 0, 0.6);
+}
+*/
+
+/* Hide border on first row - no top border needed */
+.hm-skill-row:first-of-type::after,
+.hm-skill-row:first-of-type::before {
+  display: none;
+}
+
+/* Hide border on last row - no bottom border needed */
+/* Target the skill row that comes right before the footer zone */
+.hm-skill-row:has(+ .hm-footer-zone)::after,
+.hm-skill-row:has(+ .hm-footer-zone)::before,
+.hm-skill-row:last-of-type::after,
+.hm-skill-row:last-of-type::before {
+  display: none;
 }
 
 /* Matrix cell hover */
 .hm-heat-cell {
   cursor: pointer;
-  transition: box-shadow 0.2s ease;
-  position: relative;
 }
 
 /* Crosshair Highlight Styles */
+/* Crosshair Highlight Styles */
+/* Crosshair Highlight Styles */
+/* Grid Cells */
+.hm-heat-cell {
+  transition: box-shadow 0.25s cubic-bezier(0.25, 1, 0.5, 1), outline 0.2s ease, background-color 0.2s ease !important;
+}
 
-/* Base highlight pseudo-element */
-.hm-heat-cell.highlight-target::after,
-.hm-heat-cell.highlight-col::after,
-.hm-heat-cell.highlight-row::after {
+.skill-matrix-view .hm-heat-cell.highlight-col,
+.skill-matrix-view .hm-heat-cell.highlight-row {
+  /* Ultra-pronounced, angled shadow for depth - directed down and right */
+  box-shadow: 12px 12px 24px rgba(0, 0, 0, 0.2) !important;
+  z-index: 10;
+  background-color: transparent !important; /* Preserves original cadence color */
+}
+
+/* Intersecting Target Cell - Unified with other highlight cells */
+.skill-matrix-view .hm-heat-cell.highlight-target {
+  box-shadow: 18px 18px 36px rgba(0, 0, 0, 0.3) !important;
+  z-index: 25;
+  background-color: transparent !important; 
+  outline: none !important; /* Revert outline for uniform look */
+}
+
+/* Slanted Header/Footer Highlight - Angled shadow box */
+.hm-diagonal-item::after {
   content: "";
   position: absolute;
   top: 0;
+  bottom: 0;
   left: 0;
+  right: 0;
+  background-color: var(--hm-p-main);
+  opacity: 0;
   pointer-events: none;
-  z-index: 60; /* Above cell content */
-  box-sizing: border-box; /* Borders included in width/height calculations */
+  z-index: 5;
+  transition: opacity 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* 1. Target Cell: Full 4-sided Border, overlaps gaps */
-.hm-heat-cell.highlight-target::after {
-  width: calc(100% + 1px);
-  height: calc(100% + 1px);
-  border: 2px solid #000;
+.hm-diagonal-item.highlight-col::after {
+  opacity: 0.18;
+  /* Angled shadow matching the crosshair direction */
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* 2. Column Peer (Vertical Axis): Left & Right Borders only */
-.hm-heat-cell.highlight-col::after {
-  width: 100%; /* No need to extend width, just height */
-  height: calc(100% + 1px); /* Extend down to cover row border */
-  border-left: 2px solid #000;
-  border-right: 2px solid #000;
-  border-top: none;
-  border-bottom: none;
+/* Header Slant */
+.hm-header-zone .hm-diagonal-item::after {
+  transform: skewX(-45deg);
+  transform-origin: bottom right;
 }
 
-/* 3. Row Peer (Horizontal Axis): Top & Bottom Borders only */
-.hm-heat-cell.highlight-row::after {
-  width: calc(100% + 1px); /* Extend right to cover cell border */
-  height: 100%;
-  border-top: 2px solid #000;
-  border-bottom: 2px solid #000;
-  border-left: none;
-  border-right: none;
+/* Footer Slant - Fixed direction to match cells (reverted to match header) */
+/* Footer Slant - Fixed direction to match cells (reverted to match header) */
+.hm-footer-zone .hm-diagonal-item::after {
+  transform: skewX(-45deg); 
+  transform-origin: top left;
 }
 
-/* Cleanup base highlight classes to remove old styles if they persist structurally, 
-   but effectively we just rely on ::after now. 
-   We ensure the container itself has no outline/shadow. */
-.hm-heat-cell.highlight-target,
-.hm-heat-cell.highlight-col,
-.hm-heat-cell.highlight-row {
-  box-shadow: none !important;
-  outline: none !important;
-  border-radius: 0 !important;
-  z-index: 50; /* Ensure the cell itself is high enough for the pseudo to show */
-  overflow: visible; /* Allow pseudo to extend */
+/* Footer Highlight Shadow - Cast upwards into the grid */
+.hm-footer-zone .hm-diagonal-item.highlight-col::after {
+  box-shadow: 15px -15px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Header/Footer Diagonal Items only get visual update, use simple style for them */
+/* Label Highlights - Pronounced background only */
+/* Label Highlights - Pronounced background only */
+.hm-skill-row.highlight-row::before {
+  background-color: var(--hm-p-main) !important;
+  opacity: 0.18 !important; /* Match header/footer opacity */
+  height: 100% !important; /* Cover full height of the row/label */
+  top: 0 !important;
+  box-shadow: 15px 0 30px rgba(0, 0, 0, 0.2); /* Shadow projecting right into grid, matching intensity */
+  z-index: 2;
+}
+
+/* Text emphasis */
+.skill-matrix-view .highlight-row .hm-skill-label,
 .hm-diagonal-item.highlight-col .hm-angled-text {
-  opacity: 1;
-  color: var(--hm-p-main, var(--accent-color));
-  transform: scale(1.08);
-  transform-origin: bottom left;
+  color: var(--hm-p-main, var(--accent-color)) !important;
+  opacity: 1 !important;
+  font-weight: 900 !important;
 }
 
 .hm-skill-track {
   display: flex;
   flex-grow: 1;
   height: 100%;
+  align-items: stretch; /* Ensure all cells stretch to same height */
+  position: relative;
 }
+
+/* Removed - using unified .hm-skill-row::after instead */
 .hm-legend {
   position: absolute;
   left: 16px; /* Align with skill label padding */
@@ -427,10 +516,7 @@
 }
 .hm-separator-top {
   margin-top: 0; /* Removed visual split gap */
-  border-top: 1px solid var(--border-color);
-}
-.hm-separator-top::after {
-  /* Optional: Small label or line to distinguish */
+  border-top: none; /* Removed border between Tools and Tasks */
 }
 
 .hm-skill-label.font-monospace,
@@ -651,6 +737,25 @@
   align-items: flex-start;
 }
 
+.add-skill-modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.add-skill-modal-body .add-skill-type-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.add-skill-modal-body .add-skill-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 .matrix-export-preview {
   background: white;
   /* MANUALLY ADJUST EXPORT MARGINS HERE */
@@ -730,8 +835,8 @@
 }
 
 .matrix-export-preview .export-label-placeholder {
-  width: 160px; /* Revert to original width */
-  min-width: 160px;
+  width: 220px; /* Increased to fit long text */
+  min-width: 220px;
   flex-shrink: 0;
   display: flex;
   align-items: flex-end; /* Align legend to bottom */
@@ -743,7 +848,18 @@
   display: flex;
   position: relative;
   height: 100%;
-  border-bottom: 1px solid #ccc;
+}
+.matrix-export-preview .export-diagonal-track::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.4);
+  transform: translateY(50%);
+  z-index: 10;
+  pointer-events: none;
 }
 
 .matrix-export-preview .export-diagonal-item {
@@ -794,25 +910,63 @@
   color: #666;
 }
 
-/* Skill Rows - no internal cell borders */
+/* Skill Rows - updated to match main view */
 .matrix-export-preview .export-skill-row {
   display: flex;
   align-items: stretch;
   height: 16px;
+  position: relative;
 }
 
+/* Centered borders for export rows - matching main view */
+.matrix-export-preview .export-skill-row::after {
+  content: "";
+  position: absolute;
+  left: 220px; /* Start at cadence cells */
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.4); /* Whitish - visible on colored cells */
+  transform: translateY(50%);
+  pointer-events: none;
+  z-index: 10;
+}
+.matrix-export-preview .export-skill-row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: calc(100% - 220px); /* Cover label area only */
+  bottom: 0;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.06); /* Dark for labels */
+  transform: translateY(50%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Hide border on first row - no top border needed */
+.matrix-export-preview .export-skill-row:first-of-type::after,
+.matrix-export-preview .export-skill-row:first-of-type::before {
+  display: none;
+}
+
+/* Hide border on last row - no bottom border needed */
+.matrix-export-preview .export-skill-row:last-of-type::after,
+.matrix-export-preview .export-skill-row:last-of-type::before {
+  display: none;
+}
 .matrix-export-preview .export-skill-label {
-  width: 160px; /* Revert to original width */
-  min-width: 160px;
-  font-size: 9px;
+  width: 220px; /* Increased to fit long text */
+  min-width: 220px;
+  font-size: 8px; /* Reduced to fit long text */
   font-weight: 900;
   text-transform: uppercase;
   display: flex;
   align-items: center;
   padding-right: 8px;
   color: #333;
-  border-bottom: 1px solid #eee;
-  border-right: 1px solid #ddd;
+  border-bottom: none; /* Using pseudo-element for centered border */
+  border-right: none; /* Removed vertical border */
 }
 
 .matrix-export-preview .export-skill-label.font-monospace {
@@ -830,23 +984,24 @@
 .matrix-export-preview .export-heat-cell {
   height: 100%;
   box-sizing: border-box;
-  /* Subtle stylish borders */
-  border-right: 1px solid rgba(0, 0, 0, 0.08); /* faint vertical line */
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08); /* faint horizontal line */
+  /* Removed layout-breaking margin-right: -1px to align with header */
+  border: none;
+  border-radius: 0 !important; /* Force square corners */
+  position: relative; /* Ensure stacking context */
+  background-clip: padding-box; /* Prevent fractional leakage */
 }
 
-/* Color mode */
+/* Pseudo-elements removed - using margin overlap strategy */
+
+/* Color mode using RGBA to preserve border opacity */
 .matrix-export-preview .export-heat-cell.level-3 {
-  background-color: #ff3b30;
-  opacity: 0.95;
+  background-color: #607d8b; /* Slate (Solid) */
 }
 .matrix-export-preview .export-heat-cell.level-2 {
-  background-color: #ff3b30;
-  opacity: 0.6;
+  background-color: #a0b1b9; /* Slate 60% approx */
 }
 .matrix-export-preview .export-heat-cell.level-1 {
-  background-color: #ff3b30;
-  opacity: 0.25;
+  background-color: #d7dee2; /* Slate 25% approx */
 }
 .matrix-export-preview .export-heat-cell.level-0 {
   background-color: white;
@@ -925,19 +1080,19 @@
 .matrix-export-preview .export-legend-box {
   width: 8px; /* Reduced from 12px */
   height: 8px; /* Reduced from 12px */
-  border-radius: 2px;
+  border-radius: 0;
 }
 
 .matrix-export-preview .export-legend-box.level-3 {
-  background: #ff3b30;
+  background: #607d8b;
   opacity: 0.95;
 }
 .matrix-export-preview .export-legend-box.level-2 {
-  background: #ff3b30;
+  background: #607d8b;
   opacity: 0.6;
 }
 .matrix-export-preview .export-legend-box.level-1 {
-  background: #ff3b30;
+  background: #607d8b;
   opacity: 0.25;
 }
 
@@ -1111,4 +1266,97 @@
   width: 12px;
   height: 12px;
   border-radius: 2px;
+}
+
+/* Drag & Drop Visual Feedback */
+.hm-skill-row.dragging {
+  opacity: 0.5;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.hm-skill-row.drag-over {
+  border-top: 2px solid var(--hm-p-main, #b7410e);
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+}
+
+/* =========================================
+   Stacked Legend Styles (Added for opacity fix)
+   ========================================= */
+.hm-legend.hm-legend-style-stacked {
+  background: var(--bg-color) !important; /* Force solid background to remove glassmorphism */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 12px;
+  pointer-events: auto; /* Ensure clickable */
+  bottom: 8px; /* Lift slightly */
+  border-radius: 8px;
+  box-shadow: none !important;
+}
+
+.hm-stacked-button-col {
+  display: flex;
+  align-items: center;
+}
+
+.matrix-download-btn-combined {
+  background: transparent; /* Transparent background */
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-color); /* Solid text color */
+  opacity: 1 !important; /* Force opaque */
+  box-shadow: none; /* Removed shadow */
+  transition: all 0.2s ease;
+}
+
+.matrix-download-btn-combined:hover {
+  background: var(--hm-p-main, var(--accent-color));
+  color: white;
+  /* Border color change removed as requested */
+}
+
+.btn-divider {
+  width: 1px;
+  height: 16px;
+  background: currentColor;
+  opacity: 0.2;
+}
+
+.hm-stacked-content-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hm-stacked-title {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-color); /* Solid dark color */
+  opacity: 1 !important;
+  letter-spacing: 0.05em;
+  /* text-shadow removed */
+}
+
+.hm-stacked-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Force legend items to be opaque */
+.hm-legend.hm-legend-style-stacked .hm-legend-item {
+  color: var(--text-color); /* Darker than secondary */
+  opacity: 1 !important;
+  font-weight: 700;
+  font-size: 10px;
+  /* text-shadow removed */
 }

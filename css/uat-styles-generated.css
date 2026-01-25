@@ -207,100 +207,114 @@
 }
 
 
-/* --- STYLE 5: INTERACTIVE TEXT (Word Cloud) --- */
+/* --- STYLE 5: LANGUAGE-LIKE LIST (Match prod list rows) --- */
 .uat-section-content.swiss-big .bento-grid,
 .uat-section-content.swiss-big .list-group,
-.uat-section-content.swiss-big .bucket-row,
+.uat-section-content.swiss-big .bucket-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 700px;
+    margin: 0 auto 0.8rem;
+    padding: 0;
+}
+
 .uat-section-content.swiss-big .split-grid {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 1.5rem 3rem !important; /* Random gap */
-    padding: 2rem 0;
-    max-width: 900px;
-    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 700px;
+    margin: 0 auto 0.8rem;
 }
 
-/* Force split grid columns to behave like part of the cloud */
-.uat-section-content.swiss-big .culture-col {
-    display: contents; /* Flattens the column so items participate in the main flex container */
-}
-
-/* Items as cloud particles */
 .uat-section-content.swiss-big .bento-card,
 .uat-section-content.swiss-big .list-item,
 .uat-section-content.swiss-big .bucket-card {
-    width: auto !important;
-    padding: 0;
-    border: none;
-    margin: 0;
-    flex: 0 0 auto;
-    position: relative;
+    width: 100%;
+    padding: 0.5rem 0.25rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    background: transparent;
+    align-items: center;
 }
 
-/* Typography - Unify sizes */
+.uat-section-content.swiss-big .bento-card:last-child,
+.uat-section-content.swiss-big .list-item:last-child,
+.uat-section-content.swiss-big .bucket-card:last-child {
+    border-bottom: none;
+}
+
+.uat-section-content.swiss-big .bento-card,
+.uat-section-content.swiss-big .list-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 1rem;
+    align-items: baseline;
+}
+
+.uat-section-content.swiss-big .bucket-card {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.uat-section-content.swiss-big .card-content {
+    padding: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 1rem;
+    align-items: baseline;
+}
+
 .uat-section-content.swiss-big h3,
 .uat-section-content.swiss-big .list-text,
 .uat-section-content.swiss-big .bucket-text {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--secondary-text);
-    opacity: 0.4;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: pointer;
-    letter-spacing: -0.04em;
-    line-height: 1;
-}
-
-/* Hover: Pop the text */
-.uat-section-content.swiss-big .bento-card:hover h3,
-.uat-section-content.swiss-big .list-item:hover .list-text,
-.uat-section-content.swiss-big .bucket-card:hover .bucket-text,
-.uat-section-content.swiss-big .bento-card:hover .bucket-text { /* fallback */
+    font-size: 1rem;
+    font-weight: 600;
     color: var(--text-color);
-    opacity: 1;
-    transform: scale(1.2);
-    z-index: 10;
+    margin: 0;
+    min-width: 0;
 }
 
-/* Fake Randomness via nth-child */
-.uat-section-content.swiss-big .bento-card:nth-child(2n),
-.uat-section-content.swiss-big .list-item:nth-child(2n),
-.uat-section-content.swiss-big .bucket-card:nth-child(2n) {
-    margin-top: 2rem;
+.uat-section-content.swiss-big .list-text a {
+    color: inherit;
+    text-decoration: none;
 }
 
-.uat-section-content.swiss-big .bento-card:nth-child(3n),
-.uat-section-content.swiss-big .list-item:nth-child(3n),
-.uat-section-content.swiss-big .bucket-card:nth-child(3n) {
-    margin-bottom: 2.5rem;
-    transform: rotate(-2deg);
+.uat-section-content.swiss-big h3 a {
+    color: inherit;
+    text-decoration: none;
 }
 
-.uat-section-content.swiss-big .bento-card:nth-child(5n),
-.uat-section-content.swiss-big .list-item:nth-child(5n),
-.uat-section-content.swiss-big .bucket-card:nth-child(5n) {
-    margin-left: 2rem;
-    transform: rotate(3deg);
+.uat-section-content.swiss-big .list-text a:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
-.uat-section-content.swiss-big .bento-card:nth-child(7n),
-.uat-section-content.swiss-big .list-item:nth-child(7n),
-.uat-section-content.swiss-big .bucket-card:nth-child(7n) {
-    margin-right: 1.5rem;
-    font-size: 0.9em; /* Slight visual variance */
+.uat-section-content.swiss-big h3 a:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
-/* Hide metadata */
 .uat-section-content.swiss-big p,
-.uat-section-content.swiss-big .list-date,
-.uat-section-content.swiss-big .pill,
-.uat-section-content.swiss-big .check-icon {
-    display: none !important;
+.uat-section-content.swiss-big .list-date {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--secondary-text);
+    margin: 0;
+    font-family: var(--font-main);
+    text-align: right;
+    white-space: nowrap;
 }
 
-/* Specific fix for bucket list check square in this mode - hide it */
-.uat-section-content.swiss-big .square-check {
-    display: none !important; 
+.uat-section-content.swiss-big .tag-row,
+.uat-section-content.swiss-big .pill {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .uat-section-content.swiss-big .split-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
 }

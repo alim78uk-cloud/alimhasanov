@@ -2,258 +2,352 @@
 // DATA: Chronological Heatmap
 // ==========================================
 const careerData = {
-  employers: [
+  "employers": [
     {
-      id: "fefund",
-      name: "FE fundinfo",
-      start: "2023-10",
-      end: "2025-05",
-      headerOffset: 15,
-      footerOffset: 15,
-      skills: {
-        "Application Support": 3,
-        "Incident Management": 1,
-        Troubleshooting: 3,
-        Monitoring: 1,
-        SQL: 3,
-        Python: 3,
-        "REST APIs": 3,
-        "Data Automation": 3,
-        "Master Data Management": 3,
-        Jira: 3,
-        "Web Development": 2,
-        "HTML & CSS": 2,
-        "Process Automation": 3,
-        DuckDB: 3,
-        "Excel VBA": 2,
-        "Agile/Scrum": 1,
-        WebSockets: 1,
-        Bash: 3,
-        "Testing & Debugging": 2,
-        "Log Analysis": 1,
-        "Linux/Unix": 1,
-        "Customer Interactions": 3,
+      "id": "fefund",
+      "name": "FE fundinfo",
+      "start": "2023-10",
+      "end": "2025-05",
+      "headerOffset": 15,
+      "footerOffset": 15,
+      "levels": {
+        "1": [
+          "incident_management",
+          "log_analysis",
+          "linux_unix",
+          "monitoring_alerting",
+          "git_version_control"
+        ],
+        "2": [
+          "web_development",
+          "html_css",
+          "uat_testing",
+          "vendor_coordination",
+          "root_cause_analysis",
+          "shell_scripting",
+          "client_interactions",
+          "excel_vba"
+        ],
+        "3": [
+          "application_support",
+          "sql",
+          "python",
+          "master_data_management",
+          "duckdb",
+          "troubleshooting_debugging",
+          "built_internal_tools",
+          "documentation_maintenance",
+          "data_validation_reconciliation",
+          "automation_of_manual_processes",
+          "client_training_onboarding",
+          "rest_api",
+          "bash_scripting",
+          "jira_confluence"
+        ]
       },
-      dur: 19,
+      "dur": 19
     },
     {
-      id: "elwood",
-      name: "Elwood Technology",
-      start: "2022-05",
-      end: "2023-06",
-      headerOffset: 15,
-      footerOffset: 15,
-      skills: {
-        "Application Support": 3,
-        "Incident Management": 3,
-        Troubleshooting: 3,
-        Monitoring: 3,
-        SQL: 3,
-        Python: 3,
-        WebSockets: 3,
-        "REST APIs": 3,
-        Bash: 3,
-        "Testing & Debugging": 3,
-        Jira: 3,
-        "Data Automation": 2,
-        "Fix Protocol": 2,
-        "Log Analysis": 3,
-        "Network Debugging": 3,
-        "Market Data": 2,
-        "On-call Support": 3,
-        "Master Data Management": 3,
-        "Web Development": 1,
-        "HTML & CSS": 1,
-        "Process Automation": 3,
-        DuckDB: 3,
-        "Excel VBA": 1,
-        "Shell Scripting": 3,
-        "Algorithmic Trading": 3,
-        "Linux/Unix": 3,
-        "Bloomberg Terminal": 2,
-        "Customer Interactions": 3,
+      "id": "elwood",
+      "name": "Elwood Technology",
+      "start": "2022-05",
+      "end": "2023-06",
+      "headerOffset": 15,
+      "footerOffset": 15,
+      "levels": {
+        "1": [
+          "web_development",
+          "html_css"
+        ],
+        "2": [
+          "fix_protocol",
+          "market_data",
+          "bloomberg_terminal",
+          "excel_vba",
+          "git_version_control"
+        ],
+        "3": [
+          "application_support",
+          "incident_management",
+          "sql",
+          "python",
+          "websockets",
+          "log_analysis",
+          "on_call_support",
+          "master_data_management",
+          "duckdb",
+          "shell_scripting",
+          "linux_unix",
+          "uat_testing",
+          "troubleshooting_debugging",
+          "vendor_coordination",
+          "monitoring_alerting",
+          "root_cause_analysis",
+          "built_internal_tools",
+          "documentation_maintenance",
+          "trade_support",
+          "data_validation_reconciliation",
+          "automation_of_manual_processes",
+          "client_interactions",
+          "client_training_onboarding",
+          "rest_api",
+          "bash_scripting",
+          "jira_confluence"
+        ]
       },
-      dur: 13,
+      "dur": 13
     },
     {
-      id: "broadridge",
-      name: "Broadridge",
-      start: "2018-05",
-      end: "2022-05",
-      headerOffset: 15,
-      footerOffset: 15,
-      skills: {
-        "Application Support": 3,
-        "Incident Management": 3,
-        Troubleshooting: 3,
-        Monitoring: 3,
-        SQL: 3,
-        Python: 3,
-        "REST APIs": 3,
-        Bash: 2,
-        "Testing & Debugging": 3,
-        Jira: 1,
-        "Data Automation": 3,
-        "Client Relations": 2,
-        WebSockets: 2,
-        "Master Data Management": 3,
-        "Web Development": 2,
-        "HTML & CSS": 2,
-        "Process Automation": 2,
-        "Excel VBA": 1,
-        "Log Analysis": 3,
-        "Network Debugging": 1,
-        "On-call Support": 3,
-        "Shell Scripting": 1,
-        "Linux/Unix": 2,
-        "Customer Interactions": 3,
+      "id": "broadridge",
+      "name": "Broadridge",
+      "start": "2018-05",
+      "end": "2022-05",
+      "headerOffset": 15,
+      "footerOffset": 15,
+      "levels": {
+        "1": [
+          "shell_scripting",
+          "jira_confluence"
+        ],
+        "2": [
+          "websockets",
+          "web_development",
+          "html_css",
+          "automation_of_manual_processes",
+          "bash_scripting",
+          "git_version_control"
+        ],
+        "3": [
+          "application_support",
+          "incident_management",
+          "sql",
+          "python",
+          "master_data_management",
+          "log_analysis",
+          "on_call_support",
+          "linux_unix",
+          "uat_testing",
+          "troubleshooting_debugging",
+          "vendor_coordination",
+          "monitoring_alerting",
+          "root_cause_analysis",
+          "built_internal_tools",
+          "documentation_maintenance",
+          "data_validation_reconciliation",
+          "client_interactions",
+          "client_training_onboarding",
+          "rest_api",
+          "excel_vba"
+        ]
       },
-      dur: 48,
+      "dur": 48
     },
     {
-      id: "qb",
-      name: "Quantitative Brokers",
-      start: "2017-02",
-      end: "2018-04",
-      headerOffset: 15,
-      footerOffset: 15,
-      skills: {
-        "Application Support": 3,
-        "Incident Management": 3,
-        Troubleshooting: 3,
-        Monitoring: 3,
-        SQL: 3,
-        Python: 3,
-        Bash: 3,
-        "Testing & Debugging": 3,
-        "Data Automation": 2,
-        Jira: 3,
-        "Algorithmic Trading": 3,
-        WebSockets: 3,
-        "REST APIs": 3,
-        "Master Data Management": 2,
-        "Web Development": 1,
-        "Process Automation": 3,
-        "Excel VBA": 1,
-        "Fix Protocol": 3,
-        "Log Analysis": 3,
-        "Network Debugging": 2,
-        "Market Data": 2,
-        "On-call Support": 3,
-        "Shell Scripting": 2,
-        "Linux/Unix": 3,
-        "Bloomberg Terminal": 3,
-        "Customer Interactions": 3,
+      "id": "qb",
+      "name": "Quantitative Brokers",
+      "start": "2017-02",
+      "end": "2018-04",
+      "headerOffset": 15,
+      "footerOffset": 15,
+      "levels": {
+        "1": [
+          "web_development",
+          "html_css"
+        ],
+        "2": [
+          "master_data_management",
+          "market_data",
+          "shell_scripting",
+          "vendor_coordination",
+          "documentation_maintenance",
+          "data_validation_reconciliation",
+          "built_internal_tools",
+          "client_training_onboarding",
+          "git_version_control"
+        ],
+        "3": [
+          "application_support",
+          "incident_management",
+          "sql",
+          "python",
+          "websockets",
+          "fix_protocol",
+          "log_analysis",
+          "on_call_support",
+          "linux_unix",
+          "bloomberg_terminal",
+          "uat_testing",
+          "troubleshooting_debugging",
+          "monitoring_alerting",
+          "root_cause_analysis",
+          "trade_support",
+          "automation_of_manual_processes",
+          "client_interactions",
+          "rest_api",
+          "bash_scripting",
+          "jira_confluence",
+          "excel_vba"
+        ]
       },
-      dur: 14,
+      "dur": 14
     },
     {
-      id: "tethys",
-      name: "Tethys Technology",
-      start: "2015-08",
-      end: "2017-02",
-      headerOffset: 15,
-      footerOffset: 15,
-      skills: {
-        "Application Support": 3,
-        "Incident Management": 3,
-        Troubleshooting: 3,
-        Monitoring: 3,
-        SQL: 3,
-        Python: 3,
-        "Testing & Debugging": 3,
-        "Data Automation": 2,
-        "Linux/Unix": 3,
-        WebSockets: 2,
-        "REST APIs": 3,
-        Bash: 3,
-        "Master Data Management": 2,
-        "HTML & CSS": 2,
-        "Process Automation": 3,
-        "Excel VBA": 2,
-        "Fix Protocol": 3,
-        "Log Analysis": 3,
-        "Network Debugging": 2,
-        "Market Data": 2,
-        "On-call Support": 3,
-        "Shell Scripting": 1,
-        "Algorithmic Trading": 3,
-        "Bloomberg Terminal": 2,
-        "Customer Interactions": 3,
+      "id": "tethys",
+      "name": "Tethys Technology",
+      "start": "2015-08",
+      "end": "2017-02",
+      "headerOffset": 15,
+      "footerOffset": 15,
+      "levels": {
+        "1": [
+          "shell_scripting"
+        ],
+        "2": [
+          "websockets",
+          "master_data_management",
+          "market_data",
+          "documentation_maintenance",
+          "data_validation_reconciliation",
+          "client_training_onboarding"
+        ],
+        "3": [
+          "application_support",
+          "incident_management",
+          "sql",
+          "python",
+          "linux_unix",
+          "fix_protocol",
+          "log_analysis",
+          "on_call_support",
+          "bloomberg_terminal",
+          "uat_testing",
+          "troubleshooting_debugging",
+          "monitoring_alerting",
+          "root_cause_analysis",
+          "built_internal_tools",
+          "trade_support",
+          "automation_of_manual_processes",
+          "client_interactions",
+          "rest_api",
+          "bash_scripting",
+          "excel_vba"
+        ]
       },
-      dur: 18,
+      "dur": 18
     },
     {
-      id: "bloomberg",
-      name: "Bloomberg",
-      start: "2014-10",
-      end: "2015-06",
-      headerOffset: 15,
-      footerOffset: 15,
-      skills: {
-        Troubleshooting: 1,
-        Monitoring: 1,
-        SQL: 2,
-        Python: 3,
-        "Master Data Management": 1,
-        "Data Automation": 3,
-        "Bloomberg Terminal": 3,
-        "Excel VBA": 1,
-        "Customer Interactions": 3,
+      "id": "bloomberg",
+      "name": "Bloomberg",
+      "start": "2014-10",
+      "end": "2015-06",
+      "headerOffset": 15,
+      "footerOffset": 15,
+      "levels": {
+        "1": [
+          "master_data_management",
+          "monitoring_alerting",
+          "incident_management",
+          "uat_testing",
+          "client_interactions"
+        ],
+        "2": [
+          "sql",
+          "vendor_coordination",
+          "log_analysis",
+          "market_data",
+          "rest_api"
+        ],
+        "3": [
+          "python",
+          "bloomberg_terminal",
+          "troubleshooting_debugging",
+          "application_support",
+          "data_validation_reconciliation",
+          "automation_of_manual_processes",
+          "excel_vba"
+        ]
       },
-      dur: 8,
-    },
+      "dur": 8
+    }
   ],
-  taskSkills: [
-    "Application Support",
-    "Incident Management",
-    "Troubleshooting",
-    "Monitoring",
-    "Data Automation",
-    "Master Data Management",
-    "Web Development",
-    "Process Automation",
-    "Agile/Scrum",
-    "Testing & Debugging",
-    "Log Analysis",
-    "Network Debugging",
-    "Market Data",
-    "On-call Support",
-    "Customer Interactions",
-    "Client Relations",
-    "Algorithmic Trading",
-  ],
-  toolSkills: [
-    "SQL",
-    "Python",
-    "REST APIs",
-    "WebSockets",
-    "Bash",
-    "Jira",
-    "HTML & CSS",
-    "DuckDB",
-    "Excel VBA",
-    "Linux/Unix",
-    "Fix Protocol",
-    "Shell Scripting",
-    "Bloomberg Terminal",
-  ],
-  /* Merged list for rendering logic */
-  get skillList() {
-    return [...this.taskSkills, ...this.toolSkills];
+  // skills map: id -> display label
+  "skills": {
+    "application_support": "Application Support",
+    "troubleshooting_debugging": "Troubleshooting & Debugging",
+    "automation_of_manual_processes": "Automation of Manual Processes",
+    "master_data_management": "Master Data Management",
+    "data_validation_reconciliation": "Data Validation & Reconciliation",
+    "built_internal_tools": "Built Internal Tools",
+    "documentation_maintenance": "Documentation Maintenance",
+    "client_training_onboarding": "Client Training & Onboarding",
+    "client_interactions": "Client Interactions",
+    "vendor_coordination": "Vendor Coordination",
+    "uat_testing": "UAT Testing",
+    "root_cause_analysis": "Root Cause Analysis",
+    "web_development": "Web Development",
+    "log_analysis": "Log Analysis",
+    "incident_management": "Incident Management",
+    "monitoring_alerting": "Monitoring & Alerting",
+    "on_call_support": "On-call Support",
+    "market_data": "Market Data",
+    "trade_support": "Trade Support",
+    "sql": "SQL",
+    "python": "Python",
+    "rest_api": "REST API",
+    "bash_scripting": "Bash scripting",
+    "jira_confluence": "Jira & Confluence",
+    "duckdb": "DuckDB",
+    "excel_vba": "Excel & VBA",
+    "html_css": "HTML & CSS",
+    "shell_scripting": "Shell Scripting",
+    "linux_unix": "Linux/Unix",
+    "git_version_control": "Git/Version Control",
+    "websockets": "WebSockets",
+    "fix_protocol": "Fix Protocol",
+    "bloomberg_terminal": "Bloomberg Terminal"
   },
-  /* Set setter to allow reordering/manipulation if needed, though split implies fixed groups */
-  set skillList(val) {
-    // no-op or handle if needed for drag-drop reordering entire list
-    // For now, if we drag drop, we might lose the split distinction if we just stomp this.
-    // But let's keep it simple. The rendering will use this flattened list.
-    // If drag/drop happens, we might need to update task/tool lists or just treat it as a flat list thenceforth.
-    this._customSkillList = val;
-  },
+  "taskSkills": [
+    "application_support",
+    "troubleshooting_debugging",
+    "automation_of_manual_processes",
+    "master_data_management",
+    "data_validation_reconciliation",
+    "built_internal_tools",
+    "documentation_maintenance",
+    "client_training_onboarding",
+    "client_interactions",
+    "vendor_coordination",
+    "uat_testing",
+    "root_cause_analysis",
+    "web_development",
+    "log_analysis",
+    "incident_management",
+    "monitoring_alerting",
+    "on_call_support",
+    "market_data",
+    "trade_support"
+  ],
+  "toolSkills": [
+    "sql",
+    "python",
+    "rest_api",
+    "bash_scripting",
+    "jira_confluence",
+    "duckdb",
+    "excel_vba",
+    "html_css",
+    "shell_scripting",
+    "linux_unix",
+    "git_version_control",
+    "websockets",
+    "fix_protocol",
+    "bloomberg_terminal"
+  ],
+  "_customSkillList": null
 };
 
 // Handle potential overwrite of getter by simple assignment in drag/drop or admin
-Object.defineProperty(careerData, "skillList", {
+Object.defineProperty(careerData, "skillIds", {
   get: function () {
     return this._customSkillList || [...this.taskSkills, ...this.toolSkills];
   },
@@ -261,6 +355,44 @@ Object.defineProperty(careerData, "skillList", {
     this._customSkillList = val;
   },
 });
+
+function getSkillName(skillId) {
+  return careerData.skills[skillId] || skillId;
+}
+
+function ensureLevelBuckets(employer) {
+  if (!employer.levels) {
+    employer.levels = { 1: [], 2: [], 3: [] };
+  }
+  if (!employer.levels[1]) employer.levels[1] = [];
+  if (!employer.levels[2]) employer.levels[2] = [];
+  if (!employer.levels[3]) employer.levels[3] = [];
+}
+
+function removeSkillFromLevels(employer, skillId) {
+  if (!employer.levels) return;
+  [1, 2, 3].forEach((lvl) => {
+    const list = employer.levels[lvl];
+    if (!list) return;
+    let idx = list.indexOf(skillId);
+    while (idx > -1) {
+      list.splice(idx, 1);
+      idx = list.indexOf(skillId);
+    }
+  });
+}
+
+function buildEmployerLevelMap(employer) {
+  const map = {};
+  if (!employer.levels) return map;
+  [1, 2, 3].forEach((lvl) => {
+    const list = employer.levels[lvl] || [];
+    list.forEach((skillId) => {
+      map[skillId] = lvl;
+    });
+  });
+  return map;
+}
 
 const container = document.getElementById("skillMatrixContainer");
 
@@ -299,9 +431,6 @@ window.openRatingDropdown = function (rowIdx, colIdx, event) {
   event.stopPropagation(); // Prevent document click
 
   closeRatingDropdown();
-
-  const skillName = careerData.skillList[rowIdx];
-  const employer = careerData.employers[colIdx];
 
   // Create Dropdown UI
   const dd = document.createElement("div");
@@ -366,13 +495,13 @@ window.closeRatingDropdown = function () {
 };
 
 window.setRating = function (rowIdx, colIdx, level) {
-  const skillName = careerData.skillList[rowIdx];
+  const skillId = careerData.skillIds[rowIdx];
   const employer = careerData.employers[colIdx];
 
-  if (level === 0) {
-    delete employer.skills[skillName];
-  } else {
-    employer.skills[skillName] = level;
+  ensureLevelBuckets(employer);
+  removeSkillFromLevels(employer, skillId);
+  if (level > 0) {
+    employer.levels[level].push(skillId);
   }
   renderHeatmapView();
 };
@@ -383,9 +512,11 @@ document.addEventListener("click", () => {
 
 // Reorder Logic (Drag & Drop)
 let dragSrcIndex = null;
+let dragSrcSkill = null;
 
 window.handleDragStart = function (e, index) {
   dragSrcIndex = index;
+  dragSrcSkill = careerData.skillIds[index];
   e.dataTransfer.effectAllowed = "move";
   e.dataTransfer.setData("text/plain", index);
   e.target.classList.add("dragging");
@@ -408,10 +539,35 @@ window.handleDrop = function (e, targetIndex) {
   if (e.stopPropagation) e.stopPropagation();
 
   // Reorder Data
-  if (dragSrcIndex !== null && dragSrcIndex !== targetIndex) {
-    // Move item
-    const item = careerData.skillList.splice(dragSrcIndex, 1)[0];
-    careerData.skillList.splice(targetIndex, 0, item);
+  if (dragSrcIndex !== null && dragSrcIndex !== targetIndex && dragSrcSkill) {
+    const taskCount = careerData.taskSkills.length;
+    
+    // Determine source and target sections
+    const srcIsTask = dragSrcIndex < taskCount;
+    const tgtIsTask = targetIndex < taskCount;
+    
+    // Remove from source array
+    if (srcIsTask) {
+      const srcArrIdx = careerData.taskSkills.indexOf(dragSrcSkill);
+      if (srcArrIdx > -1) careerData.taskSkills.splice(srcArrIdx, 1);
+    } else {
+      const srcArrIdx = careerData.toolSkills.indexOf(dragSrcSkill);
+      if (srcArrIdx > -1) careerData.toolSkills.splice(srcArrIdx, 1);
+    }
+    
+    // Calculate target position in the appropriate array
+    if (tgtIsTask) {
+      // Insert into taskSkills at the correct position
+      careerData.taskSkills.splice(targetIndex, 0, dragSrcSkill);
+    } else {
+      // Insert into toolSkills at the correct position (offset by taskSkills length)
+      const toolIndex = targetIndex - careerData.taskSkills.length;
+      careerData.toolSkills.splice(toolIndex, 0, dragSrcSkill);
+    }
+    
+    // Clear custom skill list to force recalculation from source arrays
+    careerData._customSkillList = null;
+    
     renderHeatmapView();
   }
   return false;
@@ -422,22 +578,25 @@ window.handleDragEnd = function (e) {
   document.querySelectorAll(".hm-skill-row").forEach((row) => {
     row.classList.remove("drag-over");
   });
+  dragSrcSkill = null;
 };
 
 // Edit Data (Inline)
+// Edit Data (Inline)
 window.editSkillName = function (idx) {
   if (!isAdminMode) return;
-  const current = careerData.skillList[idx];
+  const skillId = careerData.skillIds[idx];
+  const current = getSkillName(skillId);
   const newName = prompt("Edit Skill Name:", current);
-  if (newName && newName !== current) {
-    // Migrate data
-    careerData.employers.forEach((e) => {
-      if (e.skills[current] !== undefined) {
-        e.skills[newName] = e.skills[current];
-        delete e.skills[current];
-      }
-    });
-    careerData.skillList[idx] = newName;
+  
+  if (newName && newName.trim() !== current) {
+    const trimmed = newName.trim();
+    // Check collision
+    if (skillNameExists(trimmed, skillId)) {
+      alert("Skill name already exists!");
+      return;
+    }
+    careerData.skills[skillId] = trimmed;
     renderHeatmapView();
   }
 };
@@ -466,27 +625,107 @@ window.editEmployerYears = function (idx) {
 };
 
 // Add New Skill
-window.addSkill = function () {
-  const name = prompt("Enter new skill name:");
-  if (name && !careerData.skillList.includes(name)) {
-    careerData.skillList.push(name);
-    renderHeatmapView();
-  } else if (careerData.skillList.includes(name)) {
-    alert("Skill already exists!");
+// Add New Skill
+// Add New Skill (Modal)
+window.openAddSkillModal = function () {
+  const modal = document.getElementById("addSkillModal");
+  if (modal) {
+    modal.style.display = "flex";
+    const input = document.getElementById("newSkillInput");
+    if (input) {
+      input.value = "";
+      setTimeout(() => input.focus(), 100);
+    }
   }
 };
 
-// Remove Skill
-window.removeSkill = function (skillName) {
-  if (!confirm(`Delete skill "${skillName}"?`)) return;
-  const idx = careerData.skillList.indexOf(skillName);
-  if (idx > -1) {
-    careerData.skillList.splice(idx, 1);
-    careerData.employers.forEach((e) => {
-      delete e.skills[skillName];
-    });
-    renderHeatmapView();
+window.closeAddSkillModal = function () {
+  const modal = document.getElementById("addSkillModal");
+  if (modal) modal.style.display = "none";
+};
+
+function skillNameExists(name, excludeId = null) {
+  const target = name.trim();
+  return Object.entries(careerData.skills).some(([id, value]) => {
+    if (excludeId && id === excludeId) return false;
+    return value === target;
+  });
+}
+
+function makeSkillId(name) {
+  const base = name
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+  const normalizedBase = base || "skill";
+  let id = normalizedBase;
+  let suffix = 2;
+  while (careerData.skills[id]) {
+    id = `${normalizedBase}_${suffix++}`;
   }
+  return id;
+}
+
+window.confirmAddSkill = function () {
+  const input = document.getElementById("newSkillInput");
+  const name = input ? input.value.trim() : "";
+  
+  if (!name) {
+    alert("Please enter a skill name.");
+    return;
+  }
+
+  if (skillNameExists(name)) {
+    alert("Skill name already exists!");
+    return;
+  }
+
+  const typeRadio = document.querySelector('input[name="skillType"]:checked');
+  const type = typeRadio ? typeRadio.value : "task";
+  
+  const skillId = makeSkillId(name);
+  careerData.skills[skillId] = name;
+
+  if (type === "tool") {
+    careerData.toolSkills.push(skillId);
+  } else {
+    careerData.taskSkills.push(skillId);
+  }
+  
+  careerData._customSkillList = null; 
+  renderHeatmapView();
+  closeAddSkillModal();
+};
+
+// Remove Skill
+window.removeSkill = function (skillId) {
+  const skillName = getSkillName(skillId);
+  if (!confirm(`Delete skill "${skillName}"?`)) return;
+  
+  const taskIdx = careerData.taskSkills.indexOf(skillId);
+  if (taskIdx > -1) {
+    careerData.taskSkills.splice(taskIdx, 1);
+  } else {
+    const toolIdx = careerData.toolSkills.indexOf(skillId);
+    if (toolIdx > -1) {
+      careerData.toolSkills.splice(toolIdx, 1);
+    }
+  }
+
+  careerData.employers.forEach((e) => {
+    ensureLevelBuckets(e);
+    removeSkillFromLevels(e, skillId);
+  });
+  
+  delete careerData.skills[skillId];
+  if (careerData._customSkillList) {
+    careerData._customSkillList = careerData._customSkillList.filter(
+      (id) => id !== skillId,
+    );
+  }
+  careerData._customSkillList = null;
+  renderHeatmapView();
 };
 
 // Save Career Data (Export JSON)
@@ -519,11 +758,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (view) view.setAttribute("data-heatmap-theme", "minimal");
 });
 
-// Palette Switcher Logic
-window.switchPalette = function (palette) {
-  const view = document.querySelector(".skill-matrix-view");
-  if (view) view.setAttribute("data-heatmap-palette", palette);
-};
+
 
 // Utilities
 function calculateMonths(start, end) {
@@ -553,6 +788,8 @@ function renderHeatmapView() {
     (emp) => (emp.dur = calculateMonths(emp.start, emp.end)),
   );
   const totalDur = careerData.employers.reduce((acc, e) => acc + e.dur, 0);
+  const skillIds = careerData.skillIds;
+  const levelMaps = careerData.employers.map(buildEmployerLevelMap);
 
   let html = '<div class="hm-layout-container">';
 
@@ -560,8 +797,9 @@ function renderHeatmapView() {
   html += renderDiagonalHeader(false, totalDur);
 
   // 3. Skill Rows
-  careerData.skillList.forEach((skill, idx) => {
-    let labelContent = skill;
+  skillIds.forEach((skillId, idx) => {
+    const skillName = getSkillName(skillId);
+    let labelContent = skillName;
     let preBtns = "";
 
     if (isAdminMode) {
@@ -569,10 +807,10 @@ function renderHeatmapView() {
       preBtns += `<span class="admin-drag-handle"></span>`;
 
       // Delete
-      preBtns += `<span class="admin-delete-btn" onclick="removeSkill('${skill}')">-</span>`;
+      preBtns += `<span class="admin-delete-btn" onclick="removeSkill('${skillId}')">-</span>`;
 
       // Editable Name
-      labelContent = `<span class="hm-editable-text" onclick="editSkillName(${idx})">${skill}</span>`;
+      labelContent = `<span class="hm-editable-text" onclick="editSkillName(${idx})">${skillName}</span>`;
     }
 
     const rowAttrs = isAdminMode
@@ -587,9 +825,9 @@ function renderHeatmapView() {
 
     // Check for "Tool" (technical) skill
     const isTool =
-      careerData.toolSkills && careerData.toolSkills.includes(skill);
+      careerData.toolSkills && careerData.toolSkills.includes(skillId);
     const isFirstTool =
-      careerData.toolSkills && careerData.toolSkills[0] === skill;
+      careerData.toolSkills && careerData.toolSkills[0] === skillId;
 
     // Style classes
     const labelClass = isTool
@@ -600,11 +838,11 @@ function renderHeatmapView() {
       : "hm-skill-row";
 
     html += `<div class="${rowClass}" data-row="${idx}" ${rowAttrs}>
-            <div class="${labelClass}">${preBtns} ${labelContent}</div>
-            <div class="hm-skill-track">
+            <div class="${labelClass}" data-row="${idx}">${preBtns} ${labelContent}</div>
+            <div class="hm-skill-track" data-row="${idx}">
                 ${careerData.employers
                   .map((e, colIdx) => {
-                    const level = e.skills[skill] || 0;
+                    const level = levelMaps[colIdx][skillId] || 0;
                     // Admin Mode: Click handler calls dropdown
                     const clickAttr = isAdminMode
                       ? `onclick="openRatingDropdown(${idx}, ${colIdx}, event)"`
@@ -699,27 +937,42 @@ function renderDiagonalHeader(isFooter, totalDur) {
       : `left: 0; bottom:0; transform: rotate(45deg); transform-origin: bottom left;`;
 
     // Text Positioning
+    /*
+      Footer Text Adjustment for Clipping:
+      - We wrap the text in a skewed clipper (hm-text-clipper) to match the cell shape.
+      - The text element must be UN-skewed (skewX(45deg)) to look normal.
+      - We keep the rotation (-45deg).
+      - Origin is top-left for the clipper (matching CSS), but text rotation origin is its own.
+    */
     const textPosStyle = isFooter
-      ? `top: 6px; right: calc(50% + ${offset}px); transform: rotate(-45deg); transform-origin: top right;`
+      ? `top: 6px; right: calc(50% + ${offset}px); transform: skewX(45deg) rotate(-45deg); transform-origin: top right;`
       : `bottom: 6px; left: calc(50% + ${offset}px); transform: rotate(-45deg); transform-origin: bottom left;`;
 
     // Wrapper Position
     const wrapperClass = isFooter ? "hm-pos-top" : "hm-pos-bottom";
 
+    // Clipper Style (Only for footer to prevent hanging text)
+    // Matches the CSS ::after highlight shape: skewX(-45deg), origin top left.
+    const footerClipperStart = isFooter 
+      ? `<div class="hm-text-clipper" style="position: absolute; top:0; left:0; width:100%; height:100%; transform: skewX(-45deg); transform-origin: top left; overflow: hidden; pointer-events: none;">` 
+      : ``;
+    const footerClipperEnd = isFooter ? `</div>` : ``;
+
     html += `
             <div class="hm-diagonal-item" data-col="${idx}" style="width: ${width}%">
                 <!-- Slanted Cell Boundaries -->
-                <div class="hm-separator-line" style="${sepStyle}"></div>
-                <div class="hm-separator-line" style="${sepStyle}"></div>
+                ${idx === careerData.employers.length - 1 ? "" : `<div class="hm-separator-line" style="${sepStyle}"></div><div class="hm-separator-line" style="${sepStyle}"></div>`}
                 <!-- First cell top border removed as requested -->
                 ${idx === 0 ? `` : ""}
 
                 <!-- Text Wrapper -->
+                ${footerClipperStart}
                 <div class="hm-text-wrapper ${wrapperClass}">
                     <div class="hm-angled-text" style="${textPosStyle}">
                         ${text}
                     </div>
                 </div>
+                ${footerClipperEnd}
             </div>`;
   });
 
@@ -791,15 +1044,18 @@ function initColumnHighlight() {
   container.addEventListener("mouseover", (e) => {
     const cell = e.target.closest(".hm-heat-cell");
     const diagonalItem = e.target.closest(".hm-diagonal-item");
+    const skillLabel = e.target.closest(".hm-skill-label");
 
     if (cell) {
       const col = cell.dataset.col;
-      const row = cell.dataset.row; // Needs to be added in render
+      const row = cell.dataset.row;
       highlightCrosshair(row, col);
     } else if (diagonalItem) {
       const col = diagonalItem.dataset.col;
-      // Header hover -> Only column highlight, no row
       highlightCrosshair(null, col);
+    } else if (skillLabel) {
+      const row = skillLabel.dataset.row;
+      highlightCrosshair(row, null);
     } else {
       clearHighlights();
     }
@@ -861,19 +1117,7 @@ window.closeMatrixExportModal = function () {
   }
 };
 
-// Toggle color/B&W mode
-window.toggleExportColor = function () {
-  const preview = document.getElementById("matrixExportPreview");
-  const toggle = document.getElementById("exportColorToggle");
 
-  if (preview && toggle) {
-    if (toggle.checked) {
-      preview.classList.remove("bw-mode");
-    } else {
-      preview.classList.add("bw-mode");
-    }
-  }
-};
 
 // Render export-ready matrix (simplified, no sticky, fits on page)
 function renderExportMatrix(container) {
@@ -882,6 +1126,8 @@ function renderExportMatrix(container) {
     (emp) => (emp.dur = calculateMonths(emp.start, emp.end)),
   );
   const totalDur = careerData.employers.reduce((acc, e) => acc + e.dur, 0);
+  const skillIds = careerData.skillIds;
+  const levelMaps = careerData.employers.map(buildEmployerLevelMap);
 
   let html = '<div class="export-matrix">';
 
@@ -923,7 +1169,7 @@ function renderExportMatrix(container) {
     const text = `<span class="export-years">${startYear}-${endYear}</span> <span class="export-firm">${e.name}</span>`;
 
     html += `<div class="export-diagonal-item" style="width: ${width}%">
-      <div class="export-separator-line"></div>
+      ${idx === careerData.employers.length - 1 ? "" : '<div class="export-separator-line"></div>'}
       ${idx === 0 ? '<div class="export-separator-line export-first-sep"></div>' : ""}
       <div class="export-angled-text">${text}</div>
     </div>`;
@@ -932,12 +1178,13 @@ function renderExportMatrix(container) {
   html += "</div></div>";
 
   // Skill rows with borders
-  careerData.skillList.forEach((skill) => {
+  skillIds.forEach((skillId) => {
+    const skillName = getSkillName(skillId);
     // Check for "Tool" (technical) skill
     const isTool =
-      careerData.toolSkills && careerData.toolSkills.includes(skill);
+      careerData.toolSkills && careerData.toolSkills.includes(skillId);
     const isFirstTool =
-      careerData.toolSkills && careerData.toolSkills[0] === skill;
+      careerData.toolSkills && careerData.toolSkills[0] === skillId;
 
     // Style classes
     const labelClass = isTool
@@ -948,11 +1195,11 @@ function renderExportMatrix(container) {
       : "export-skill-row"; // Re-using hm-separator-top if compat, or check CSS
 
     html += `<div class="${rowClass}">
-      <div class="${labelClass}">${skill}</div>
+      <div class="${labelClass}">${skillName}</div>
       <div class="export-skill-track">
         ${careerData.employers
-          .map((e) => {
-            const level = e.skills[skill] || 0;
+          .map((e, colIdx) => {
+            const level = levelMaps[colIdx][skillId] || 0;
             const width = (e.dur / totalDur) * 100;
             return `<div class="export-heat-cell level-${level}" style="width: ${width}%"></div>`;
           })
@@ -1029,7 +1276,7 @@ window.downloadMatrixAsPDF = async function () {
     });
 
     pdf.addImage(imgData, "PNG", xOffset, yOffset, finalWidth, finalHeight);
-    pdf.save("ali-hariri-tech-skills-matrix.pdf");
+    pdf.save("AlimHasanov_Skills.pdf");
   } catch (error) {
     console.error("PDF generation failed:", error);
     alert("Failed to generate PDF. Please try again.");
@@ -1041,7 +1288,7 @@ window.downloadMatrixAsPDF = async function () {
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
         <polyline points="7 10 12 15 17 10"/>
         <line x1="12" y1="15" x2="12" y2="3"/>
-      </svg> Download PDF`;
+      </svg>`;
     }
   }
 };
