@@ -655,11 +655,12 @@ if (contactForm) {
     
     // --- USER CONFIGURATION REQUIRED ---
     // Update these IDs after creating your Google Form
-    const FORM_ID = "YOUR_FORM_ID_HERE";
+    const FORM_ID = "1FAIpQLSc722ZnUmi2V0zEEWpnmITQVCe8d8laS1dsY7dry3gcFRAi1A";
     const ENTRY_IDS = {
-      name: "entry.NAME_ID_HERE",
-      email: "entry.EMAIL_ID_HERE",
-      message: "entry.MESSAGE_ID_HERE"
+      name: "entry.778663532",
+      email: "entry.1304901056",
+      subject: "entry.245579432",
+      message: "entry.502832612"
     };
     // ------------------------------------
 
@@ -670,6 +671,10 @@ if (contactForm) {
     const params = new URLSearchParams();
     params.append(ENTRY_IDS.name, formData.get("name"));
     params.append(ENTRY_IDS.email, formData.get("email"));
+    const subjectValue = formData.get("subject");
+    if (subjectValue) {
+      params.append(ENTRY_IDS.subject, subjectValue);
+    }
     params.append(ENTRY_IDS.message, formData.get("message"));
 
     try {
