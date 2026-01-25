@@ -781,8 +781,12 @@ const COLOR_MAP = {
  * renderHeatmapView
  * Ported directly from foo1.html logic to match "THAT TABLE" request.
  * Uses exact same structure but with vanilla CSS classes defined in skill-matrix.css.
+ * Now with mobile responsive support - shows single firm at a time on mobile.
  */
 function renderHeatmapView() {
+  // Check mobile state
+  isMobileView = checkMobileView();
+
   // 1. Calculate Durations
   careerData.employers.forEach(
     (emp) => (emp.dur = calculateMonths(emp.start, emp.end)),
@@ -791,6 +795,23 @@ function renderHeatmapView() {
   const skillIds = careerData.skillIds;
   const levelMaps = careerData.employers.map(buildEmployerLevelMap);
 
+  // Update mobile mode class on view
+  const view = document.querySelector(".skill-matrix-view");
+  if (view) {
+    if (isMobileView) {
+      view.classList.add("mobile-mode");
+    } else {
+      view.classList.remove("mobile-mode");
+    }
+  }
+
+  // Mobile view - single firm carousel
+  if (isMobileView) {
+    renderMobileView(skillIds, levelMaps);
+    return;
+  }
+
+  // Desktop/Tablet view - full matrix
   let html = '<div class="hm-layout-container">';
 
   // 2. Header (Timelines)
@@ -814,12 +835,12 @@ function renderHeatmapView() {
     }
 
     const rowAttrs = isAdminMode
-      ? `draggable="true" 
-          ondragstart="handleDragStart(event, ${idx})" 
-          ondragover="handleDragOver(event)" 
-          ondrop="handleDrop(event, ${idx})" 
-          ondragenter="handleDragEnter(event)" 
-          ondragleave="handleDragLeave(event)" 
+      ? `draggable="true"
+          ondragstart="handleDragStart(event, ${idx})"
+          ondragover="handleDragOver(event)"
+          ondrop="handleDrop(event, ${idx})"
+          ondragenter="handleDragEnter(event)"
+          ondragleave="handleDragLeave(event)"
           ondragend="handleDragEnd(event)"`
       : "";
 
@@ -848,9 +869,9 @@ function renderHeatmapView() {
                       ? `onclick="openRatingDropdown(${idx}, ${colIdx}, event)"`
                       : "";
 
-                    return `<div class="hm-heat-cell ${COLOR_MAP[level]}" 
-                                 data-col="${colIdx}" 
-                                 data-row="${idx}" 
+                    return `<div class="hm-heat-cell ${COLOR_MAP[level]}"
+                                 data-col="${colIdx}"
+                                 data-row="${idx}"
                                  style="width: ${(e.dur / totalDur) * 100}%"
                                  ${clickAttr}></div>`;
                   })
@@ -860,7 +881,6 @@ function renderHeatmapView() {
   });
 
   // Admin Mode: Add Class to container for CSS styling
-  const view = document.querySelector(".skill-matrix-view");
   if (view) {
     if (isAdminMode) view.classList.add("admin-mode-active");
     else view.classList.remove("admin-mode-active");
@@ -870,6 +890,103 @@ function renderHeatmapView() {
   html += renderDiagonalHeader(true, totalDur);
 
   html += "</div>";
+  container.innerHTML = html;
+}
+
+/**
+ * renderMobileView
+ * Renders a mobile-optimized view showing one firm at a time with navigation
+ */
+function renderMobileView(skillIds, levelMaps) {
+  const employer = careerData.employers[currentFirmIndex];
+  const startYear = employer.start.split("-")[0];
+  const endYear = employer.end.split("-")[0];
+  const levelMap = levelMaps[currentFirmIndex];
+
+  let html = '';
+
+  // Mobile navigation header
+  html += `<div class="mobile-firm-nav">
+    <button class="mobile-firm-nav-btn" onclick="navigateFirm(-1)" ${currentFirmIndex === 0 ? 'disabled' : ''}>
+      <span>←</span>
+    </button>
+    <div class="mobile-firm-info">
+      <div class="mobile-firm-name">${employer.name}</div>
+      <div class="mobile-firm-years">${startYear} - ${endYear}</div>
+      <div class="mobile-firm-dots">
+        ${careerData.employers.map((_, idx) =>
+          `<div class="mobile-firm-dot ${idx === currentFirmIndex ? 'active' : ''}" onclick="goToFirm(${idx})"></div>`
+        ).join('')}
+      </div>
+    </div>
+    <button class="mobile-firm-nav-btn" onclick="navigateFirm(1)" ${currentFirmIndex === careerData.employers.length - 1 ? 'disabled' : ''}>
+      <span>→</span>
+    </button>
+  </div>`;
+
+  // Legend (mobile positioned)
+  html += `<div class="hm-legend hm-legend-style-stacked">
+    <div class="hm-stacked-content-col">
+      <span class="hm-stacked-title">Cadence at ${employer.name}:</span>
+      <div class="hm-stacked-row">
+        <div class="hm-legend-item"><div class="hm-legend-box bg-level-3"></div> Core</div>
+        <div class="hm-legend-item"><div class="hm-legend-box bg-level-2"></div> Regular</div>
+        <div class="hm-legend-item"><div class="hm-legend-box bg-level-1"></div> On Demand</div>
+      </div>
+    </div>
+    <div class="hm-stacked-button-col">
+      <button class="matrix-download-btn-combined" onclick="openMatrixExportModal()" title="Export PDF">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+      </button>
+    </div>
+  </div>`;
+
+  // Skill rows - single column for current firm
+  html += '<div class="hm-layout-container">';
+
+  skillIds.forEach((skillId, idx) => {
+    const skillName = getSkillName(skillId);
+    const level = levelMap[skillId] || 0;
+
+    // Check for "Tool" (technical) skill
+    const isTool = careerData.toolSkills && careerData.toolSkills.includes(skillId);
+    const isFirstTool = careerData.toolSkills && careerData.toolSkills[0] === skillId;
+
+    // Style classes
+    const labelClass = isTool ? "hm-skill-label font-monospace" : "hm-skill-label";
+    const rowClass = isFirstTool ? "hm-skill-row hm-separator-top" : "hm-skill-row";
+
+    html += `<div class="${rowClass}" data-row="${idx}">
+      <div class="${labelClass}" data-row="${idx}">${skillName}</div>
+      <div class="hm-skill-track" data-row="${idx}">
+        <div class="hm-heat-cell ${COLOR_MAP[level]}"
+             data-col="${currentFirmIndex}"
+             data-row="${idx}"
+             style="width: 100%"></div>
+      </div>
+    </div>`;
+  });
+
+  html += '</div>';
+
+  // Swipe hint (only show first time)
+  if (!sessionStorage.getItem('swipeHintShown')) {
+    html += `<div class="mobile-swipe-hint" style="
+      text-align: center;
+      padding: 1rem;
+      font-size: 11px;
+      color: var(--secondary-text);
+      opacity: 0.7;
+    ">
+      <span>← Swipe to navigate between firms →</span>
+    </div>`;
+    sessionStorage.setItem('swipeHintShown', 'true');
+  }
+
   container.innerHTML = html;
 }
 
@@ -1066,11 +1183,101 @@ function initColumnHighlight() {
   });
 }
 
+// ==========================================
+// MOBILE RESPONSIVE STATE
+// ==========================================
+let isMobileView = false;
+let currentFirmIndex = 0;
+
+function checkMobileView() {
+  return window.matchMedia("(max-width: 1024px)").matches;
+}
+
+function updateMobileState() {
+  const wasMobile = isMobileView;
+  isMobileView = checkMobileView();
+
+  const view = document.querySelector('.skill-matrix-view');
+  if (view) {
+    if (isMobileView) {
+      view.classList.add('mobile-mode');
+    } else {
+      view.classList.remove('mobile-mode');
+    }
+  }
+
+  // Re-render if state changed
+  if (wasMobile !== isMobileView) {
+    currentFirmIndex = 0;
+    renderHeatmapView();
+  }
+}
+
+// Navigation functions for mobile
+window.navigateFirm = function(direction) {
+  const maxIndex = careerData.employers.length - 1;
+  currentFirmIndex = Math.max(0, Math.min(maxIndex, currentFirmIndex + direction));
+  renderHeatmapView();
+};
+
+window.goToFirm = function(index) {
+  currentFirmIndex = index;
+  renderHeatmapView();
+};
+
 // Initialize
 document.addEventListener("DOMContentLoaded", () => {
+  updateMobileState();
   renderHeatmapView();
   initColumnHighlight();
+  initMobileSwipe();
 });
+
+// Handle resize
+window.addEventListener('resize', debounce(updateMobileState, 150));
+
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Mobile swipe support
+function initMobileSwipe() {
+  const container = document.getElementById('skillMatrixContainer');
+  if (!container) return;
+
+  let touchStartX = 0;
+  let touchEndX = 0;
+  const minSwipeDistance = 50;
+
+  container.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  container.addEventListener('touchend', (e) => {
+    if (!isMobileView) return;
+
+    touchEndX = e.changedTouches[0].screenX;
+    const swipeDistance = touchEndX - touchStartX;
+
+    if (Math.abs(swipeDistance) > minSwipeDistance) {
+      if (swipeDistance > 0) {
+        // Swipe right - go to previous firm
+        navigateFirm(-1);
+      } else {
+        // Swipe left - go to next firm
+        navigateFirm(1);
+      }
+    }
+  }, { passive: true });
+}
 
 // Global function to switch heatmap themes
 window.switchHeatmapTheme = function (element, themeName) {

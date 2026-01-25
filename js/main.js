@@ -51,6 +51,8 @@ const heroSummary = document.querySelector(".hero-summary");
 const journeyTrace = document.querySelector(".journey-trace");
 const headerCenter = document.querySelector(".header-center");
 const headerRight = document.querySelector(".header-controls");
+const tabsToggleBtn = document.getElementById("tabsToggleBtn");
+const tabsToggleLabel = document.getElementById("tabsToggleLabel");
 
 function goToPanel(panel) {
   if (isAnimating || panel === currentPanel) return;
@@ -359,6 +361,9 @@ modeToggle.addEventListener("click", () => {
   // Reset scroll when switching modes
   const detailsWrapper = document.querySelector(".details-wrapper");
   if (detailsWrapper) detailsWrapper.scrollTop = 0;
+
+  updateTabsToggleLabel();
+  closeTabsMenu();
 });
 
 // ========================================
@@ -371,6 +376,41 @@ function toggleStudentJobs(button) {
 }
 
 // ========================================
+// Tabs Toggle (Mobile)
+// ========================================
+function getActiveTabLabel() {
+  const selector = document.body.classList.contains("off-hours")
+    ? "#uat-tabs .tab-btn.active"
+    : "#prod-tabs .tab-btn.active";
+  const activeBtn = document.querySelector(selector);
+  return activeBtn?.textContent?.trim() || "Menu";
+}
+
+function updateTabsToggleLabel() {
+  if (!tabsToggleLabel) return;
+  tabsToggleLabel.textContent = getActiveTabLabel();
+}
+
+function closeTabsMenu() {
+  if (!tabsToggleBtn) return;
+  document.body.classList.remove("tabs-open");
+  tabsToggleBtn.setAttribute("aria-expanded", "false");
+}
+
+function toggleTabsMenu() {
+  if (!tabsToggleBtn) return;
+  const willOpen = !document.body.classList.contains("tabs-open");
+  document.body.classList.toggle("tabs-open", willOpen);
+  tabsToggleBtn.setAttribute("aria-expanded", String(willOpen));
+  if (willOpen) updateTabsToggleLabel();
+}
+
+if (tabsToggleBtn) {
+  tabsToggleBtn.addEventListener("click", () => {
+    toggleTabsMenu();
+  });
+}
+
 // ========================================
 // Details Panel Tab Switching (PROD)
 // ========================================
@@ -403,6 +443,9 @@ prodTabBtns.forEach((btn) => {
         switchView(activeMatrixBtn.dataset.view);
       }
     }
+
+    updateTabsToggleLabel();
+    closeTabsMenu();
   });
 });
 
@@ -427,8 +470,13 @@ uatTabBtns.forEach((btn) => {
     if (targetContent) {
       targetContent.classList.add("active");
     }
+
+    updateTabsToggleLabel();
+    closeTabsMenu();
   });
 });
+
+updateTabsToggleLabel();
 
 // ========================================
 // Experience Item Expand/Collapse
@@ -610,7 +658,7 @@ document.querySelectorAll(".bucket-item").forEach((item) => {
 // ========================================
 const contactModal = document.getElementById("contactModal");
 const contactForm = document.getElementById("contactForm");
-const contactEmailBtn = document.getElementById("contactEmailBtn");
+const contactEmailBtns = document.querySelectorAll(".contact-email-btn");
 const contactSuccess = document.getElementById("contactSuccess");
 const contactFormContainer = document.getElementById("contactFormContainer");
 
@@ -634,10 +682,12 @@ function closeContactModal() {
 }
 
 // Intercept Email Icon Click
-if (contactEmailBtn) {
-  contactEmailBtn.addEventListener("click", (e) => {
-    e.preventDefault(); // Stop default mailto: behavior
-    openContactModal();
+if (contactEmailBtns.length) {
+  contactEmailBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault(); // Stop default mailto: behavior
+      openContactModal();
+    });
   });
 }
 

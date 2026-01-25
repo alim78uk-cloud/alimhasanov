@@ -417,3 +417,128 @@ body.show-details .exp-item:nth-child(7) { transition-delay: 0.4s; }
     width: 98%; /* Wider but centered */
     max-width: 98%;
 }
+
+/* ========================================
+   EXPERIENCE ITEMS - RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .exp-item {
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "title toggle"
+            "date date"
+            "firm firm"
+            "location location"
+            "links links"
+            "details details";
+        row-gap: 0.35rem;
+        margin-bottom: 2rem;
+    }
+
+    .exp-role h2 {
+        font-size: 1.5rem;
+    }
+
+    .exp-company,
+    .exp-date,
+    .exp-location {
+        font-size: 0.75rem;
+        height: auto;
+        min-height: 1.4rem;
+        padding: 0.15rem 0.5rem;
+    }
+
+    .exp-links {
+        justify-content: flex-start;
+        height: auto;
+        min-height: 1.4rem;
+    }
+
+    .exp-links:empty {
+        display: none;
+    }
+
+    .exp-details-content {
+        width: 100%;
+        max-width: 100%;
+        padding: 0.75rem;
+    }
+
+    .exp-details-content li {
+        font-size: 0.8rem;
+        padding-left: 1rem;
+    }
+
+    .job-summary {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+    }
+
+    .job-highlights li {
+        font-size: 0.8rem;
+        padding-left: 1.2rem;
+    }
+
+    /* Student jobs */
+    .student-jobs-toggle .toggle-label {
+        font-size: 0.75rem;
+    }
+
+    .sub-job-header {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+
+    .sub-job-role {
+        font-size: 1rem;
+    }
+
+    .sub-job-company,
+    .sub-job-date,
+    .sub-job-location {
+        font-size: 0.8rem;
+    }
+
+    .sub-job-location {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .exp-item {
+        margin-bottom: 1.5rem;
+    }
+
+    .exp-role h2 {
+        font-size: 1.3rem;
+    }
+
+    .exp-company,
+    .exp-date,
+    .exp-location {
+        font-size: 0.7rem;
+    }
+
+    .exp-toggle-btn {
+        width: 24px;
+        height: 24px;
+    }
+
+    .exp-details-content {
+        padding: 0.6rem;
+    }
+
+    .exp-details-content li {
+        font-size: 0.75rem;
+    }
+
+    .job-summary {
+        font-size: 0.8rem;
+    }
+
+    .job-highlights li {
+        font-size: 0.75rem;
+    }
+}

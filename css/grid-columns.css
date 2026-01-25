@@ -287,3 +287,140 @@
     padding-bottom: 0.5rem;
     margin-bottom: 1.5rem;
 }
+
+/* ========================================
+   GRID COLUMNS - RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* Reduce top margin on mobile */
+    :root {
+        --pane-top-margin: 4rem;
+    }
+
+    /* Experience column */
+    .experience-column.active-full {
+        padding: var(--pane-top-margin) 0.5rem 1.5rem;
+        max-width: 100%;
+    }
+
+    /* Skills container */
+    .skills-container-full {
+        padding: var(--pane-top-margin) 0 1.5rem 0;
+        max-width: 100%;
+    }
+
+    .skills-container-full .skill-matrix-view {
+        min-height: auto;
+    }
+
+    /* Soft skills */
+    .soft-skills-container-full {
+        padding: var(--pane-top-margin) 0.5rem 1.5rem;
+        max-width: 100%;
+    }
+
+    .soft-skills-paragraphs {
+        max-width: 100%;
+    }
+
+    .soft-skills-paragraphs p {
+        font-size: 0.95rem;
+    }
+
+    .soft-skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .soft-skill-card {
+        padding: 1.25rem;
+    }
+
+    .soft-skill-card h4 {
+        font-size: 1rem;
+    }
+
+    .soft-skill-card p {
+        font-size: 0.85rem;
+    }
+
+    /* Languages */
+    .languages-container-full {
+        padding: var(--pane-top-margin) 0.5rem 1.5rem;
+        max-width: 100%;
+        --lang-grid-columns: 1fr;
+    }
+
+    .languages-list {
+        max-width: 100%;
+    }
+
+    .language-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .language-calendar {
+        max-width: 100%;
+    }
+
+    .language-calendar-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+    }
+
+    .calendar-label {
+        grid-column: 1 / -1;
+        padding-left: 0;
+    }
+
+    .education-section {
+        max-width: 100%;
+        padding: 0.5rem;
+    }
+
+    .education-section .exp-item {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "title"
+            "date"
+            "firm"
+            "location"
+            "details";
+    }
+
+    .education-section .exp-role h2 {
+        font-size: 1.5rem;
+    }
+
+    .languages-block {
+        max-width: 100%;
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --pane-top-margin: 3rem;
+    }
+
+    .soft-skill-card {
+        padding: 1rem;
+    }
+
+    .soft-icon {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .language-calendar-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .calendar-cell {
+        font-size: 0.85rem;
+        padding: 0.35rem 0.5rem;
+    }
+}

@@ -74,3 +74,41 @@
     background: var(--accent-color);
     opacity: 1;
 }
+
+/* ========================================
+   COMPONENTS - RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* Theme toggle - adjust position */
+    .theme-toggle-container {
+        bottom: 15px;
+        right: 15px;
+        padding: 0.3rem;
+        gap: 0.3rem;
+    }
+
+    .theme-btn {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Sidebar nav hidden on mobile */
+    .sidebar-nav {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .theme-toggle-container {
+        bottom: 12px;
+        right: 12px;
+        padding: 0.25rem;
+        gap: 0.25rem;
+    }
+
+    .theme-btn {
+        width: 18px;
+        height: 18px;
+    }
+}

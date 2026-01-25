@@ -1360,3 +1360,227 @@
   font-size: 10px;
   /* text-shadow removed */
 }
+
+/* =========================================
+   MOBILE RESPONSIVE STYLES
+   ========================================= */
+
+/* Mobile navigation - base styles (element only rendered on mobile via JS) */
+.mobile-firm-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--header-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: sticky;
+  top: 106px;
+  z-index: 400;
+  margin-bottom: 0.5rem;
+}
+
+.mobile-firm-nav-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.mobile-firm-nav-btn:hover:not(:disabled) {
+  background: var(--hm-p-main);
+  color: white;
+  border-color: var(--hm-p-main);
+}
+
+.mobile-firm-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.mobile-firm-info {
+  text-align: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.mobile-firm-name {
+  font-size: 14px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobile-firm-years {
+  font-size: 11px;
+  color: var(--secondary-text);
+  font-weight: 600;
+}
+
+.mobile-firm-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.mobile-firm-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border-color);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-firm-dot.active {
+  background: var(--hm-p-main);
+  transform: scale(1.3);
+}
+
+/* Mobile mode specific overrides */
+.skill-matrix-view.mobile-mode .hm-layout-container {
+  width: 100%;
+  left: 0;
+  margin: 0;
+  padding: 0 8px;
+}
+
+.skill-matrix-view.mobile-mode .hm-skill-row {
+  display: flex;
+  align-items: center;
+}
+
+.skill-matrix-view.mobile-mode .hm-skill-label {
+  margin-left: 0;
+  border-right: none;
+}
+
+.skill-matrix-view.mobile-mode .hm-skill-track {
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.skill-matrix-view.mobile-mode .hm-heat-cell {
+  border-radius: 0;
+}
+
+/* Tools section separator in mobile */
+.skill-matrix-view.mobile-mode .hm-separator-top {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Mobile skill rows */
+.skill-matrix-view.mobile-mode .hm-skill-label {
+  width: clamp(190px, 68vw, 280px);
+  min-width: clamp(190px, 68vw, 280px);
+  margin-left: 0;
+  font-size: 10px;
+  padding: 0 8px 0 0;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.skill-matrix-view.mobile-mode .hm-skill-label.font-monospace {
+  font-size: 11px;
+}
+
+.skill-matrix-view.mobile-mode .hm-skill-row {
+  padding-left: 8px;
+  height: 20px;
+  min-height: 20px;
+  max-height: 20px;
+}
+
+.skill-matrix-view.mobile-mode .hm-skill-row::before {
+  display: none;
+}
+
+.skill-matrix-view.mobile-mode .hm-skill-track {
+  flex: 0 0 clamp(80px, 24vw, 140px);
+  max-width: clamp(80px, 24vw, 140px);
+}
+
+/* Hide diagonal headers/footers in mobile mode */
+.skill-matrix-view.mobile-mode .hm-header-zone,
+.skill-matrix-view.mobile-mode .hm-footer-zone {
+  display: none;
+}
+
+/* Mobile legend positioning */
+.skill-matrix-view.mobile-mode .hm-legend {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  margin: 1rem auto;
+  justify-content: center;
+}
+
+.skill-matrix-view.mobile-mode .hm-legend.hm-legend-style-stacked {
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  gap: 8px;
+}
+
+.skill-matrix-view.mobile-mode .hm-stacked-button-col {
+  order: 1;
+  margin-top: 8px;
+}
+
+.skill-matrix-view.mobile-mode .hm-stacked-content-col {
+  align-items: center;
+}
+
+.skill-matrix-view.mobile-mode .hm-stacked-row {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Mobile cell sizing */
+.skill-matrix-view.mobile-mode .hm-heat-cell {
+  height: 20px;
+  min-height: 20px;
+}
+
+/* Ensure proper touch targets on mobile */
+@media (hover: none) and (pointer: coarse) {
+  .hm-skill-row {
+    min-height: 28px;
+  }
+
+  .hm-heat-cell {
+    min-height: 28px;
+  }
+
+  .mobile-firm-nav-btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .mobile-firm-dot {
+    min-width: 24px;
+    min-height: 24px;
+    padding: 8px;
+  }
+}

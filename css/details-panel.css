@@ -100,6 +100,65 @@ body.show-details .details-panel {
     display: none;
 }
 
+/* Mobile tabs toggle (hidden by default) */
+.tabs-toggle {
+    display: none;
+    position: sticky;
+    top: 0;
+    z-index: 520;
+    background-color: var(--header-bg);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding-top: calc(var(--sticky-height) + 12px);
+    padding-bottom: 0.5rem;
+}
+
+.tabs-toggle-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+}
+
+.tabs-toggle-icon {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.tabs-toggle-icon span {
+    width: 16px;
+    height: 2px;
+    background: var(--text-color);
+    border-radius: 2px;
+    display: block;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+body.tabs-open .tabs-toggle-icon span:nth-child(1) {
+    transform: translateY(5px) rotate(45deg);
+}
+
+body.tabs-open .tabs-toggle-icon span:nth-child(2) {
+    opacity: 0;
+}
+
+body.tabs-open .tabs-toggle-icon span:nth-child(3) {
+    transform: translateY(-5px) rotate(-45deg);
+}
+
 /* Tabs Navigation - Sticky below header */
 .details-tabs {
     display: flex;
@@ -183,4 +242,82 @@ body.show-details .details-panel {
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+/* ========================================
+   DETAILS PANEL - RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .details-panel {
+        /* Use dvh for better mobile browser support */
+        height: 100dvh;
+    }
+
+    .details-wrapper {
+        padding: 0 0.75rem;
+        height: 100dvh;
+    }
+
+    .details-tabs {
+        gap: 0;
+        padding-top: calc(var(--sticky-height) + 30px);
+        padding-bottom: 0;
+        padding-left: 0;
+        padding-right: 0;
+        overflow-x: auto;
+        overflow-y: hidden;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x proximity;
+        scrollbar-width: none;
+    }
+
+    .details-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .details-tabs::after {
+        left: 5%;
+        right: 5%;
+    }
+
+    .tab-btn {
+        flex-shrink: 0;
+        padding: 0.6rem 1rem 0.5rem;
+        font-size: 13px;
+        scroll-snap-align: start;
+        white-space: nowrap;
+    }
+
+    .tab-btn.active::after {
+        height: 2px;
+    }
+
+    /* Pull indicator positioning */
+    .pull-indicator {
+        top: calc(var(--sticky-height) + 16px);
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .details-tabs {
+        padding-top: calc(var(--sticky-height) + 20px);
+    }
+
+    .tab-btn {
+        padding: 0.5rem 0.75rem 0.4rem;
+        font-size: 12px;
+    }
+
+    .pull-indicator {
+        width: 36px;
+        height: 36px;
+    }
+
+    .pull-indicator .arrow {
+        font-size: 1rem;
+    }
 }
