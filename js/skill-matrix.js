@@ -2,59 +2,59 @@
 // DATA: Chronological Heatmap
 // ==========================================
 const careerData = {
-  "employers": [
+  employers: [
     {
-      "id": "fefund",
-      "name": "FE fundinfo",
-      "start": "2023-10",
-      "end": "2025-05",
-      "headerOffset": 15,
-      "footerOffset": 15,
-      "skills": {
+      id: "fefund",
+      name: "FE fundinfo",
+      start: "2023-10",
+      end: "2025-05",
+      headerOffset: 15,
+      footerOffset: 15,
+      skills: {
         "Application Support": 3,
         "Incident Management": 1,
-        "Troubleshooting": 3,
-        "Monitoring": 1,
-        "SQL": 3,
-        "Python": 3,
+        Troubleshooting: 3,
+        Monitoring: 1,
+        SQL: 3,
+        Python: 3,
         "REST APIs": 3,
         "Data Automation": 3,
         "Master Data Management": 3,
-        "Jira": 3,
+        Jira: 3,
         "Web Development": 2,
         "HTML & CSS": 2,
         "Process Automation": 3,
-        "DuckDB": 3,
+        DuckDB: 3,
         "Excel VBA": 2,
         "Agile/Scrum": 1,
-        "WebSockets": 1,
-        "Bash": 3,
+        WebSockets: 1,
+        Bash: 3,
         "Testing & Debugging": 2,
         "Log Analysis": 1,
         "Linux/Unix": 1,
-        "Customer Interactions": 3
+        "Customer Interactions": 3,
       },
-      "dur": 19
+      dur: 19,
     },
     {
-      "id": "elwood",
-      "name": "Elwood Technology",
-      "start": "2022-05",
-      "end": "2023-06",
-      "headerOffset": 15,
-      "footerOffset": 15,
-      "skills": {
+      id: "elwood",
+      name: "Elwood Technology",
+      start: "2022-05",
+      end: "2023-06",
+      headerOffset: 15,
+      footerOffset: 15,
+      skills: {
         "Application Support": 3,
         "Incident Management": 3,
-        "Troubleshooting": 3,
-        "Monitoring": 3,
-        "SQL": 3,
-        "Python": 3,
-        "WebSockets": 3,
+        Troubleshooting: 3,
+        Monitoring: 3,
+        SQL: 3,
+        Python: 3,
+        WebSockets: 3,
         "REST APIs": 3,
-        "Bash": 3,
+        Bash: 3,
         "Testing & Debugging": 3,
-        "Jira": 3,
+        Jira: 3,
         "Data Automation": 2,
         "Fix Protocol": 2,
         "Log Analysis": 3,
@@ -65,37 +65,37 @@ const careerData = {
         "Web Development": 1,
         "HTML & CSS": 1,
         "Process Automation": 3,
-        "DuckDB": 3,
+        DuckDB: 3,
         "Excel VBA": 1,
         "Shell Scripting": 3,
         "Algorithmic Trading": 3,
         "Linux/Unix": 3,
         "Bloomberg Terminal": 2,
-        "Customer Interactions": 3
+        "Customer Interactions": 3,
       },
-      "dur": 13
+      dur: 13,
     },
     {
-      "id": "broadridge",
-      "name": "Broadridge",
-      "start": "2018-05",
-      "end": "2022-05",
-      "headerOffset": 15,
-      "footerOffset": 15,
-      "skills": {
+      id: "broadridge",
+      name: "Broadridge",
+      start: "2018-05",
+      end: "2022-05",
+      headerOffset: 15,
+      footerOffset: 15,
+      skills: {
         "Application Support": 3,
         "Incident Management": 3,
-        "Troubleshooting": 3,
-        "Monitoring": 3,
-        "SQL": 3,
-        "Python": 3,
+        Troubleshooting: 3,
+        Monitoring: 3,
+        SQL: 3,
+        Python: 3,
         "REST APIs": 3,
-        "Bash": 2,
+        Bash: 2,
         "Testing & Debugging": 3,
-        "Jira": 1,
+        Jira: 1,
         "Data Automation": 3,
         "Client Relations": 2,
-        "WebSockets": 2,
+        WebSockets: 2,
         "Master Data Management": 3,
         "Web Development": 2,
         "HTML & CSS": 2,
@@ -106,30 +106,30 @@ const careerData = {
         "On-call Support": 3,
         "Shell Scripting": 1,
         "Linux/Unix": 2,
-        "Customer Interactions": 3
+        "Customer Interactions": 3,
       },
-      "dur": 48
+      dur: 48,
     },
     {
-      "id": "qb",
-      "name": "Quantitative Brokers",
-      "start": "2017-02",
-      "end": "2018-04",
-      "headerOffset": 15,
-      "footerOffset": 15,
-      "skills": {
+      id: "qb",
+      name: "Quantitative Brokers",
+      start: "2017-02",
+      end: "2018-04",
+      headerOffset: 15,
+      footerOffset: 15,
+      skills: {
         "Application Support": 3,
         "Incident Management": 3,
-        "Troubleshooting": 3,
-        "Monitoring": 3,
-        "SQL": 3,
-        "Python": 3,
-        "Bash": 3,
+        Troubleshooting: 3,
+        Monitoring: 3,
+        SQL: 3,
+        Python: 3,
+        Bash: 3,
         "Testing & Debugging": 3,
         "Data Automation": 2,
-        "Jira": 3,
+        Jira: 3,
         "Algorithmic Trading": 3,
-        "WebSockets": 3,
+        WebSockets: 3,
         "REST APIs": 3,
         "Master Data Management": 2,
         "Web Development": 1,
@@ -143,30 +143,30 @@ const careerData = {
         "Shell Scripting": 2,
         "Linux/Unix": 3,
         "Bloomberg Terminal": 3,
-        "Customer Interactions": 3
+        "Customer Interactions": 3,
       },
-      "dur": 14
+      dur: 14,
     },
     {
-      "id": "tethys",
-      "name": "Tethys Technology",
-      "start": "2015-08",
-      "end": "2017-02",
-      "headerOffset": 15,
-      "footerOffset": 15,
-      "skills": {
+      id: "tethys",
+      name: "Tethys Technology",
+      start: "2015-08",
+      end: "2017-02",
+      headerOffset: 15,
+      footerOffset: 15,
+      skills: {
         "Application Support": 3,
         "Incident Management": 3,
-        "Troubleshooting": 3,
-        "Monitoring": 3,
-        "SQL": 3,
-        "Python": 3,
+        Troubleshooting: 3,
+        Monitoring: 3,
+        SQL: 3,
+        Python: 3,
         "Testing & Debugging": 3,
         "Data Automation": 2,
         "Linux/Unix": 3,
-        "WebSockets": 2,
+        WebSockets: 2,
         "REST APIs": 3,
-        "Bash": 3,
+        Bash: 3,
         "Master Data Management": 2,
         "HTML & CSS": 2,
         "Process Automation": 3,
@@ -179,32 +179,32 @@ const careerData = {
         "Shell Scripting": 1,
         "Algorithmic Trading": 3,
         "Bloomberg Terminal": 2,
-        "Customer Interactions": 3
+        "Customer Interactions": 3,
       },
-      "dur": 18
+      dur: 18,
     },
     {
-      "id": "bloomberg",
-      "name": "Bloomberg",
-      "start": "2014-10",
-      "end": "2015-06",
-      "headerOffset": 15,
-      "footerOffset": 15,
-      "skills": {
-        "Troubleshooting": 1,
-        "Monitoring": 1,
-        "SQL": 2,
-        "Python": 3,
+      id: "bloomberg",
+      name: "Bloomberg",
+      start: "2014-10",
+      end: "2015-06",
+      headerOffset: 15,
+      footerOffset: 15,
+      skills: {
+        Troubleshooting: 1,
+        Monitoring: 1,
+        SQL: 2,
+        Python: 3,
         "Master Data Management": 1,
         "Data Automation": 3,
         "Bloomberg Terminal": 3,
         "Excel VBA": 1,
-        "Customer Interactions": 3
+        "Customer Interactions": 3,
       },
-      "dur": 8
-    }
+      dur: 8,
+    },
   ],
-  "taskSkills": [
+  taskSkills: [
     "Application Support",
     "Incident Management",
     "Troubleshooting",
@@ -221,9 +221,9 @@ const careerData = {
     "On-call Support",
     "Customer Interactions",
     "Client Relations",
-    "Algorithmic Trading"
+    "Algorithmic Trading",
   ],
-  "toolSkills": [
+  toolSkills: [
     "SQL",
     "Python",
     "REST APIs",
@@ -236,30 +236,33 @@ const careerData = {
     "Linux/Unix",
     "Fix Protocol",
     "Shell Scripting",
-    "Bloomberg Terminal"
+    "Bloomberg Terminal",
   ],
   /* Merged list for rendering logic */
   get skillList() {
-      return [...this.taskSkills, ...this.toolSkills];
+    return [...this.taskSkills, ...this.toolSkills];
   },
   /* Set setter to allow reordering/manipulation if needed, though split implies fixed groups */
   set skillList(val) {
-      // no-op or handle if needed for drag-drop reordering entire list
-      // For now, if we drag drop, we might lose the split distinction if we just stomp this.
-      // But let's keep it simple. The rendering will use this flattened list.
-      // If drag/drop happens, we might need to update task/tool lists or just treat it as a flat list thenceforth.
-      this._customSkillList = val;
-  }
+    // no-op or handle if needed for drag-drop reordering entire list
+    // For now, if we drag drop, we might lose the split distinction if we just stomp this.
+    // But let's keep it simple. The rendering will use this flattened list.
+    // If drag/drop happens, we might need to update task/tool lists or just treat it as a flat list thenceforth.
+    this._customSkillList = val;
+  },
 };
 
 // Handle potential overwrite of getter by simple assignment in drag/drop or admin
 Object.defineProperty(careerData, "skillList", {
-    get: function() { return this._customSkillList || [...this.taskSkills, ...this.toolSkills]; },
-    set: function(val) { this._customSkillList = val; }
+  get: function () {
+    return this._customSkillList || [...this.taskSkills, ...this.toolSkills];
+  },
+  set: function (val) {
+    this._customSkillList = val;
+  },
 });
 
 const container = document.getElementById("skillMatrixContainer");
-
 
 // ==========================================
 // ADMIN MODE STATE
@@ -271,12 +274,14 @@ window.toggleAdminMode = function () {
   isAdminMode = !isAdminMode;
   const btn = document.getElementById("adminModeToggle");
   const controls = document.getElementById("adminControls");
-  
+
   if (btn) {
-    btn.style.background = isAdminMode ? "rgba(76, 175, 80, 0.4)" : "rgba(255, 255, 255, 0.15)";
+    btn.style.background = isAdminMode
+      ? "rgba(76, 175, 80, 0.4)"
+      : "rgba(255, 255, 255, 0.15)";
     btn.textContent = isAdminMode ? "Disable Admin Mode" : "Enable Admin Mode";
   }
-  
+
   if (controls) {
     controls.style.display = isAdminMode ? "flex" : "none";
   }
@@ -297,41 +302,56 @@ window.openRatingDropdown = function (rowIdx, colIdx, event) {
 
   const skillName = careerData.skillList[rowIdx];
   const employer = careerData.employers[colIdx];
-  
+
   // Create Dropdown UI
   const dd = document.createElement("div");
   dd.className = "admin-rating-dropdown";
-  
+
   const levels = [
-    { val: 0, label: "Clear", color: "#333" }, 
-    { val: 3, label: "Daily Activity (3)", color: "var(--hm-p-main)", opacity: 0.95 },   // Darkest
-    { val: 2, label: "Periodic Activity (2)", color: "var(--hm-p-main)", opacity: 0.6 },    // Medium
-    { val: 1, label: "On Demand (1)", color: "var(--hm-p-main)", opacity: 0.25 }    // Lightest
+    { val: 0, label: "Clear", color: "#333" },
+    {
+      val: 3,
+      label: "Daily Activity (3)",
+      color: "var(--hm-p-main)",
+      opacity: 0.95,
+    }, // Darkest
+    {
+      val: 2,
+      label: "Periodic Activity (2)",
+      color: "var(--hm-p-main)",
+      opacity: 0.6,
+    }, // Medium
+    {
+      val: 1,
+      label: "On Demand (1)",
+      color: "var(--hm-p-main)",
+      opacity: 0.25,
+    }, // Lightest
   ];
 
-  levels.forEach(lvl => {
+  levels.forEach((lvl) => {
     const item = document.createElement("div");
     item.className = "admin-rating-option";
-    
+
     // Mini color box
     const box = document.createElement("div");
     box.className = "admin-rating-color";
     box.style.background = lvl.color;
     if (lvl.opacity) box.style.opacity = lvl.opacity;
-    
+
     item.appendChild(box);
     item.appendChild(document.createTextNode(lvl.label));
-    
+
     item.onclick = () => {
       setRating(rowIdx, colIdx, lvl.val);
       closeRatingDropdown();
     };
-    
+
     dd.appendChild(item);
   });
 
   document.body.appendChild(dd);
-  
+
   // Position it
   dd.style.left = `${event.clientX}px`;
   dd.style.top = `${event.clientY}px`;
@@ -348,7 +368,7 @@ window.closeRatingDropdown = function () {
 window.setRating = function (rowIdx, colIdx, level) {
   const skillName = careerData.skillList[rowIdx];
   const employer = careerData.employers[colIdx];
-  
+
   if (level === 0) {
     delete employer.skills[skillName];
   } else {
@@ -360,7 +380,6 @@ window.setRating = function (rowIdx, colIdx, level) {
 document.addEventListener("click", () => {
   closeRatingDropdown();
 });
-
 
 // Reorder Logic (Drag & Drop)
 let dragSrcIndex = null;
@@ -374,7 +393,7 @@ window.handleDragStart = function (e, index) {
 
 window.handleDragOver = function (e) {
   if (e.preventDefault) e.preventDefault();
-  return false; 
+  return false;
 };
 
 window.handleDragEnter = function (e) {
@@ -387,21 +406,21 @@ window.handleDragLeave = function (e) {
 
 window.handleDrop = function (e, targetIndex) {
   if (e.stopPropagation) e.stopPropagation();
-  
+
   // Reorder Data
   if (dragSrcIndex !== null && dragSrcIndex !== targetIndex) {
-      // Move item
-      const item = careerData.skillList.splice(dragSrcIndex, 1)[0];
-      careerData.skillList.splice(targetIndex, 0, item);
-      renderHeatmapView();
+    // Move item
+    const item = careerData.skillList.splice(dragSrcIndex, 1)[0];
+    careerData.skillList.splice(targetIndex, 0, item);
+    renderHeatmapView();
   }
   return false;
 };
 
 window.handleDragEnd = function (e) {
   this.classList.remove("dragging");
-  document.querySelectorAll(".hm-skill-row").forEach(row => {
-      row.classList.remove("drag-over");
+  document.querySelectorAll(".hm-skill-row").forEach((row) => {
+    row.classList.remove("drag-over");
   });
 };
 
@@ -412,11 +431,11 @@ window.editSkillName = function (idx) {
   const newName = prompt("Edit Skill Name:", current);
   if (newName && newName !== current) {
     // Migrate data
-    careerData.employers.forEach(e => {
-        if (e.skills[current] !== undefined) {
-            e.skills[newName] = e.skills[current];
-            delete e.skills[current];
-        }
+    careerData.employers.forEach((e) => {
+      if (e.skills[current] !== undefined) {
+        e.skills[newName] = e.skills[current];
+        delete e.skills[current];
+      }
     });
     careerData.skillList[idx] = newName;
     renderHeatmapView();
@@ -424,26 +443,26 @@ window.editSkillName = function (idx) {
 };
 
 window.editEmployerName = function (idx) {
-    if (!isAdminMode) return;
-    const emp = careerData.employers[idx];
-    const newName = prompt("Edit Firm Name:", emp.name);
-    if (newName) {
-        emp.name = newName;
-        renderHeatmapView();
-    }
+  if (!isAdminMode) return;
+  const emp = careerData.employers[idx];
+  const newName = prompt("Edit Firm Name:", emp.name);
+  if (newName) {
+    emp.name = newName;
+    renderHeatmapView();
+  }
 };
 
 window.editEmployerYears = function (idx) {
-    if (!isAdminMode) return;
-    const emp = careerData.employers[idx];
-    const newStart = prompt("Start Date (YYYY-MM):", emp.start);
-    const newEnd = prompt("End Date (YYYY-MM):", emp.end);
-    
-    if (newStart && newEnd) {
-        emp.start = newStart;
-        emp.end = newEnd;
-        renderHeatmapView();
-    }
+  if (!isAdminMode) return;
+  const emp = careerData.employers[idx];
+  const newStart = prompt("Start Date (YYYY-MM):", emp.start);
+  const newEnd = prompt("End Date (YYYY-MM):", emp.end);
+
+  if (newStart && newEnd) {
+    emp.start = newStart;
+    emp.end = newEnd;
+    renderHeatmapView();
+  }
 };
 
 // Add New Skill
@@ -463,7 +482,7 @@ window.removeSkill = function (skillName) {
   const idx = careerData.skillList.indexOf(skillName);
   if (idx > -1) {
     careerData.skillList.splice(idx, 1);
-    careerData.employers.forEach(e => {
+    careerData.employers.forEach((e) => {
       delete e.skills[skillName];
     });
     renderHeatmapView();
@@ -474,18 +493,20 @@ window.removeSkill = function (skillName) {
 window.saveCareerData = async function () {
   const jsonStr = JSON.stringify(careerData, null, 2);
   try {
-     await navigator.clipboard.writeText("const careerData = " + jsonStr + ";");
-     alert("Data copied to clipboard! You can paste it into js/skill-matrix.js");
-     
-     const blob = new Blob(["const careerData = " + jsonStr + ";"], { type: "text/javascript" });
-     const url = URL.createObjectURL(blob);
-     const a = document.createElement("a");
-     a.href = url;
-     a.download = "skill-matrix-data.js";
-     document.body.appendChild(a);
-     a.click();
-     document.body.removeChild(a);
-     URL.revokeObjectURL(url);
+    await navigator.clipboard.writeText("const careerData = " + jsonStr + ";");
+    alert("Data copied to clipboard! You can paste it into js/skill-matrix.js");
+
+    const blob = new Blob(["const careerData = " + jsonStr + ";"], {
+      type: "text/javascript",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "skill-matrix-data.js";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   } catch (err) {
     console.error("Save failed:", err);
     alert("Failed to save/copy. Check console.");
@@ -542,35 +563,41 @@ function renderHeatmapView() {
   careerData.skillList.forEach((skill, idx) => {
     let labelContent = skill;
     let preBtns = "";
-    
+
     if (isAdminMode) {
-        // Drag Handle
-        preBtns += `<span class="admin-drag-handle"></span>`;
-        
-        // Delete
-        preBtns += `<span class="admin-delete-btn" onclick="removeSkill('${skill}')">-</span>`;
-        
-        // Editable Name
-        labelContent = `<span class="hm-editable-text" onclick="editSkillName(${idx})">${skill}</span>`;
+      // Drag Handle
+      preBtns += `<span class="admin-drag-handle"></span>`;
+
+      // Delete
+      preBtns += `<span class="admin-delete-btn" onclick="removeSkill('${skill}')">-</span>`;
+
+      // Editable Name
+      labelContent = `<span class="hm-editable-text" onclick="editSkillName(${idx})">${skill}</span>`;
     }
 
-    const rowAttrs = isAdminMode 
-       ? `draggable="true" 
+    const rowAttrs = isAdminMode
+      ? `draggable="true" 
           ondragstart="handleDragStart(event, ${idx})" 
           ondragover="handleDragOver(event)" 
           ondrop="handleDrop(event, ${idx})" 
           ondragenter="handleDragEnter(event)" 
           ondragleave="handleDragLeave(event)" 
           ondragend="handleDragEnd(event)"`
-       : "";
+      : "";
 
     // Check for "Tool" (technical) skill
-    const isTool = careerData.toolSkills && careerData.toolSkills.includes(skill);
-    const isFirstTool = careerData.toolSkills && careerData.toolSkills[0] === skill;
-    
+    const isTool =
+      careerData.toolSkills && careerData.toolSkills.includes(skill);
+    const isFirstTool =
+      careerData.toolSkills && careerData.toolSkills[0] === skill;
+
     // Style classes
-    const labelClass = isTool ? "hm-skill-label font-monospace" : "hm-skill-label";
-    const rowClass = isFirstTool ? "hm-skill-row hm-separator-top" : "hm-skill-row";
+    const labelClass = isTool
+      ? "hm-skill-label font-monospace"
+      : "hm-skill-label";
+    const rowClass = isFirstTool
+      ? "hm-skill-row hm-separator-top"
+      : "hm-skill-row";
 
     html += `<div class="${rowClass}" data-row="${idx}" ${rowAttrs}>
             <div class="${labelClass}">${preBtns} ${labelContent}</div>
@@ -579,8 +606,10 @@ function renderHeatmapView() {
                   .map((e, colIdx) => {
                     const level = e.skills[skill] || 0;
                     // Admin Mode: Click handler calls dropdown
-                    const clickAttr = isAdminMode ? `onclick="openRatingDropdown(${idx}, ${colIdx}, event)"` : "";
-                    
+                    const clickAttr = isAdminMode
+                      ? `onclick="openRatingDropdown(${idx}, ${colIdx}, event)"`
+                      : "";
+
                     return `<div class="hm-heat-cell ${COLOR_MAP[level]}" 
                                  data-col="${colIdx}" 
                                  data-row="${idx}" 
@@ -607,29 +636,34 @@ function renderHeatmapView() {
 }
 
 function renderDiagonalHeader(isFooter, totalDur) {
-  const legendHtml = !isFooter
-    ? `
-        <!-- Download Button linked to Legend area -->
-        <button class="matrix-download-btn" onclick="openMatrixExportModal()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7 10 12 15 17 10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
-                <circle cx="12" cy="12" r="3"/>
-            </svg>
-        </button>
-
-        <div class="hm-legend">
-            <div class="hm-legend-item"><div class="hm-legend-box bg-level-3"></div> Core</div>
-            <div class="hm-legend-item"><div class="hm-legend-box bg-level-2"></div> Regular</div>
-            <div class="hm-legend-item"><div class="hm-legend-box bg-level-1"></div> On Demand</div>
-            <div class="hm-legend-note">Cadence across roles</div>
-        </div>
-    `
-    : "";
+    const legendHtml = !isFooter
+      ? `
+          <div class="hm-legend hm-legend-style-stacked">
+              <div class="hm-stacked-button-col">
+                  <button class="matrix-download-btn-combined" onclick="openMatrixExportModal()" title="Export PDF / View Options">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                          <polyline points="7 10 12 15 17 10"/>
+                          <line x1="12" y1="15" x2="12" y2="3"/>
+                      </svg>
+                      <div class="btn-divider"></div>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                  </button>
+              </div>
+              <div class="hm-stacked-content-col">
+                  <span class="hm-stacked-title">Cadence across roles:</span>
+                  <div class="hm-stacked-row">
+                      <div class="hm-legend-item"><div class="hm-legend-box bg-level-3"></div> Core</div>
+                      <div class="hm-legend-item"><div class="hm-legend-box bg-level-2"></div> Regular</div>
+                      <div class="hm-legend-item"><div class="hm-legend-box bg-level-1"></div> On Demand</div>
+                  </div>
+              </div>
+          </div>
+      `
+      : "";
 
   let html = `<div class="hm-diagonal-zone ${isFooter ? "hm-footer-zone" : "hm-header-zone"}">
         <div class="hm-label-placeholder">${legendHtml}</div>
@@ -642,14 +676,14 @@ function renderDiagonalHeader(isFooter, totalDur) {
     const endYear = e.end.split("-")[0];
     // EDITABLE: Years or Name
     let text = isFooter ? e.name : `${startYear}-${endYear}`;
-    
+
     // Add edit hooks
     if (isAdminMode) {
-       if (isFooter) {
-           text = `<span class="hm-editable-text" onclick="editEmployerName(${idx})">${text}</span>`;
-       } else {
-           text = `<span class="hm-editable-text" onclick="editEmployerYears(${idx})">${text}</span>`;
-       }
+      if (isFooter) {
+        text = `<span class="hm-editable-text" onclick="editEmployerName(${idx})">${text}</span>`;
+      } else {
+        text = `<span class="hm-editable-text" onclick="editEmployerYears(${idx})">${text}</span>`;
+      }
     }
     const width = (e.dur / totalDur) * 100;
 
@@ -700,43 +734,51 @@ function initColumnHighlight() {
 
   // Clear previous highlights
   function clearHighlights() {
-    container.querySelectorAll(".highlight-target, .highlight-col, .highlight-row").forEach((el) => {
-      el.classList.remove("highlight-target", "highlight-col", "highlight-row");
-    });
+    container
+      .querySelectorAll(".highlight-target, .highlight-col, .highlight-row")
+      .forEach((el) => {
+        el.classList.remove(
+          "highlight-target",
+          "highlight-col",
+          "highlight-row",
+        );
+      });
   }
 
   // Highlight crosshair
   function highlightCrosshair(rowIdx, colIdx) {
     clearHighlights();
-    
+
     // 1. Column Highlight (Vertical Axis)
     if (colIdx !== undefined && colIdx !== null) {
       container.querySelectorAll(`[data-col="${colIdx}"]`).forEach((el) => {
-         // Headers use col-highlight distinct style if needed, or share. 
-         // For now, mapping to generic axis class
-         el.classList.add("highlight-col");
+        // Headers use col-highlight distinct style if needed, or share.
+        // For now, mapping to generic axis class
+        el.classList.add("highlight-col");
       });
     }
 
     // 2. Row Highlight (Horizontal Axis) - Only if we have a row index (i.e. inside the grid)
     if (rowIdx !== undefined && rowIdx !== null) {
-       container.querySelectorAll(`[data-row="${rowIdx}"]`).forEach((el) => {
-          // The row itself (container) or cells? 
-          // Highlighting the row container might be easier for borders. 
-          // Let's highlight the cells to match column logic.
-          // Note: hm-skill-row has data-row, but individual cells need it too?
-          // Actually, we can target the row container if we style it, but the user asked for CELL masking.
-          // Let's assume we target the cells. We need to ensure cells have data-row.
-          // UPDATE: I will add data-row to cells in renderHeatmapView first.
-          // Assuming cells have data-row:
-          el.classList.add("highlight-row");
-       });
-       // Also highlight the row parent/label if needed? User didn't ask.
+      container.querySelectorAll(`[data-row="${rowIdx}"]`).forEach((el) => {
+        // The row itself (container) or cells?
+        // Highlighting the row container might be easier for borders.
+        // Let's highlight the cells to match column logic.
+        // Note: hm-skill-row has data-row, but individual cells need it too?
+        // Actually, we can target the row container if we style it, but the user asked for CELL masking.
+        // Let's assume we target the cells. We need to ensure cells have data-row.
+        // UPDATE: I will add data-row to cells in renderHeatmapView first.
+        // Assuming cells have data-row:
+        el.classList.add("highlight-row");
+      });
+      // Also highlight the row parent/label if needed? User didn't ask.
     }
 
     // 3. Target Cell (Intersection)
     if (rowIdx !== undefined && colIdx !== undefined) {
-      const target = container.querySelector(`.hm-heat-cell[data-row="${rowIdx}"][data-col="${colIdx}"]`);
+      const target = container.querySelector(
+        `.hm-heat-cell[data-row="${rowIdx}"][data-col="${colIdx}"]`,
+      );
       if (target) {
         target.classList.add("highlight-target");
         // Target overrides axis styles
@@ -759,7 +801,7 @@ function initColumnHighlight() {
       // Header hover -> Only column highlight, no row
       highlightCrosshair(null, col);
     } else {
-       clearHighlights();
+      clearHighlights();
     }
   });
 
@@ -845,27 +887,32 @@ function renderExportMatrix(container) {
 
   // Header Container (Title + Legend)
   html += '<div class="export-header-container">';
-  
-  // Left side: Title + Subtitle/Source
-  html += '<div class="export-header-left">';
-  html += '<div class="export-title-name">Alim Hasanov</div>';
-  html += '<div class="export-title-desc">Tasks & Tools Progression</div>';
-  html += '<div class="export-subtitle">alimhasanov.com | 2014-2025</div>';
-  html += '</div>';
 
-  // Right side: Legend
-  html += `<div class="export-legend top-right">
-    <div class="export-legend-item"><div class="export-legend-box level-3"></div> Core</div>
-    <div class="export-legend-item"><div class="export-legend-box level-2"></div> Regular</div>
-    <div class="export-legend-item"><div class="export-legend-box level-1"></div> On Demand</div>
-    <div class="export-legend-note">Cadence across roles</div>
+  // Title + Subtitle/Source (Full Width)
+  html += '<div class="export-header-full">';
+  html += '<div class="export-title-name">Alim Hasanov</div>';
+  html += `<div class="export-title-desc">
+    <span style="font-weight: 900">TASKS</span> & <span class="font-monospace" style="font-weight: 700">TOOLS</span> Progression | 2014-2025
   </div>`;
-  
-  html += '</div>'; // End header container
+  html += '<div class="export-subtitle">alimhasanov.com</div>';
+  html += "</div>";
+
+  html += "</div>"; // End header container
+
+  // Legend HTML (to be placed in label placeholder)
+  const legendHtml = `<div class="export-legend stacked">
+    <div class="export-legend-note">Cadence across roles:</div>
+    <div class="export-legend-separator"></div>
+    <div class="export-legend-row">
+      <div class="export-legend-item"><div class="export-legend-box level-3"></div> Core</div>
+      <div class="export-legend-item"><div class="export-legend-box level-2"></div> Regular</div>
+      <div class="export-legend-item"><div class="export-legend-box level-1"></div> On Demand</div>
+    </div>
+  </div>`;
 
   // Diagonal header zone (like original matrix)
   html += '<div class="export-diagonal-zone">';
-  html += '<div class="export-label-placeholder"></div>';
+  html += `<div class="export-label-placeholder">${legendHtml}</div>`;
   html += '<div class="export-diagonal-track">';
 
   careerData.employers.forEach((e, idx) => {
@@ -877,22 +924,28 @@ function renderExportMatrix(container) {
 
     html += `<div class="export-diagonal-item" style="width: ${width}%">
       <div class="export-separator-line"></div>
-      ${idx === 0 ? '<div class="export-separator-line export-first-sep"></div>' : ''}
+      ${idx === 0 ? '<div class="export-separator-line export-first-sep"></div>' : ""}
       <div class="export-angled-text">${text}</div>
     </div>`;
   });
 
-  html += '</div></div>';
+  html += "</div></div>";
 
   // Skill rows with borders
   careerData.skillList.forEach((skill) => {
     // Check for "Tool" (technical) skill
-    const isTool = careerData.toolSkills && careerData.toolSkills.includes(skill);
-    const isFirstTool = careerData.toolSkills && careerData.toolSkills[0] === skill;
-    
+    const isTool =
+      careerData.toolSkills && careerData.toolSkills.includes(skill);
+    const isFirstTool =
+      careerData.toolSkills && careerData.toolSkills[0] === skill;
+
     // Style classes
-    const labelClass = isTool ? "export-skill-label font-monospace" : "export-skill-label";
-    const rowClass = isFirstTool ? "export-skill-row hm-separator-top" : "export-skill-row"; // Re-using hm-separator-top if compat, or check CSS
+    const labelClass = isTool
+      ? "export-skill-label font-monospace"
+      : "export-skill-label";
+    const rowClass = isFirstTool
+      ? "export-skill-row hm-separator-top"
+      : "export-skill-row"; // Re-using hm-separator-top if compat, or check CSS
 
     html += `<div class="${rowClass}">
       <div class="${labelClass}">${skill}</div>
@@ -907,8 +960,6 @@ function renderExportMatrix(container) {
       </div>
     </div>`;
   });
-
-
 
   html += "</div>";
   container.innerHTML = html;

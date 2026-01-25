@@ -74,7 +74,7 @@
 .uat-section-content.swiss-grid h3,
 .uat-section-content.swiss-grid .list-text,
 .uat-section-content.swiss-grid .bucket-text {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-main);
     font-weight: 800; /* Super bold */
     font-size: 1.2rem;
     letter-spacing: -0.03em;
@@ -83,7 +83,7 @@
 
 .uat-section-content.swiss-grid p,
 .uat-section-content.swiss-grid .list-date {
-    font-family: monospace;
+    font-family: var(--font-mono);
     font-size: 0.8rem;
     color: var(--secondary-text);
 }
@@ -115,7 +115,7 @@
 .uat-section-content.swiss-type .list-text::before,
 .uat-section-content.swiss-type .bucket-text::before {
     content: "0" counter(item-counter) " ";
-    font-family: monospace;
+    font-family: var(--font-mono);
     color: var(--secondary-text);
     font-size: 0.7rem;
     margin-right: 1rem;
@@ -160,7 +160,7 @@
 
 .uat-section-content.swiss-accent h3,
 .uat-section-content.swiss-accent .list-text {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-main);
     font-weight: 600;
 }
 
@@ -194,7 +194,7 @@
 .uat-section-content.swiss-table .list-text,
 .uat-section-content.swiss-table .bucket-text {
     font-size: 0.9rem;
-    font-family: 'Roboto Mono', monospace;
+    font-family: var(--font-mono);
     font-weight: 400;
 }
 

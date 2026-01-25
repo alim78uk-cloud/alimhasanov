@@ -400,7 +400,7 @@
   bottom: 4px; /* Resting just above the first row */
   display: flex;
   flex-direction: row;
-  gap: 16px;
+  gap: 8px;
   z-index: 500;
   background: var(--bg-color); /* Solid background */
   padding: 4px 8px;
@@ -435,19 +435,18 @@
 
 .hm-skill-label.font-monospace,
 .font-monospace {
-  font-family: "Courier New", Courier, monospace;
+  font-family: var(--font-mono);
   font-size: 16.5px; /* Optically adjusted to match 15px Sans-Serif */
   letter-spacing: -0.5px;
   font-weight: 700;
 }
 .hm-legend-note {
-  margin-left: auto; /* Push to right */
   font-size: 9px; /* Reduced */
-  font-weight: 500;
-  font-style: italic;
+  font-weight: 700;
+  text-transform: uppercase;
   color: var(--secondary-text);
-  opacity: 0.7;
   margin-top: 2px;
+  margin-right: 8px;
 }
 .hm-pos-bottom {
   bottom: 0;
@@ -655,7 +654,9 @@
 .matrix-export-preview {
   background: white;
   /* MANUALLY ADJUST EXPORT MARGINS HERE */
-  padding-right: 140px; /* Sets equal space on all sides */
+  /* MANUALLY ADJUST EXPORT MARGINS HERE */
+  padding-right: 140px; /* Reset to original to center the matrix visually */
+  padding-left: 50px;
   padding-left: 50px;
   padding-bottom: 50px;
   padding-top: 50px;
@@ -668,8 +669,7 @@
    EXPORT-READY MATRIX STYLES
    ========================================= */
 .matrix-export-preview .export-matrix {
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-main);
   background: white;
   color: #333;
   min-width: 780px;
@@ -683,12 +683,59 @@
   height: 150px;
   margin-bottom: 0;
   overflow: visible;
+  /* Ensure header container is centered */
+}
+
+/* Header Container */
+.matrix-export-preview .export-header-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.matrix-export-preview .export-header-full {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.matrix-export-preview .export-title-name {
+  font-family: var(--font-main);
+  font-size: 32px; /* Larger (was 24px) */
+  font-weight: 900;
+  color: #333;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 4px;
+  letter-spacing: -0.5px;
+}
+
+.matrix-export-preview .export-title-desc {
+  font-family: var(--font-main);
+  font-size: 16px; /* Larger (was 14px) */
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.matrix-export-preview .export-subtitle {
+  font-family: var(--font-main);
+  font-size: 11px;
+  color: #666;
+  margin-bottom: 0;
 }
 
 .matrix-export-preview .export-label-placeholder {
-  width: 160px;
+  width: 160px; /* Revert to original width */
   min-width: 160px;
   flex-shrink: 0;
+  display: flex;
+  align-items: flex-end; /* Align legend to bottom */
+  padding-bottom: 28px; /* Increased margin below legend */
 }
 
 .matrix-export-preview .export-diagonal-track {
@@ -755,10 +802,10 @@
 }
 
 .matrix-export-preview .export-skill-label {
-  width: 160px;
+  width: 160px; /* Revert to original width */
   min-width: 160px;
   font-size: 9px;
-  font-weight: 900; /* Increased to match web view */
+  font-weight: 900;
   text-transform: uppercase;
   display: flex;
   align-items: center;
@@ -769,10 +816,10 @@
 }
 
 .matrix-export-preview .export-skill-label.font-monospace {
-    font-family: "Courier New", Courier, monospace;
-    font-weight: 700;
-    font-size: 10px; /* Optically adjusted up from 9px */
-    letter-spacing: -0.3px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 10px; /* Optically adjusted up from 9px */
+  letter-spacing: -0.3px;
 }
 
 .matrix-export-preview .export-skill-track {
@@ -822,35 +869,51 @@
   background-color: white;
 }
 
-.matrix-export-preview .export-header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start; /* Align top to match Name */
-  margin-bottom: 20px;
-  padding-left: 160px; /* Align with matrix start (label width) */
-}
+/* CSS removed/moved above */
 
 /* ... */
 
-.matrix-export-preview .export-legend.top-right {
+/* Unused legacy classes removed or overridden */
+
+.matrix-export-preview .export-legend.stacked {
+  display: flex;
+  flex-direction: column; /* Stack Note on top of Row */
+  align-items: flex-start;
+  gap: 4px;
   padding: 0;
-  margin-top: 2px; /* Optical alignment with Title text */
-  margin-bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.matrix-export-preview .export-header-left {
-  display: flex;
-  flex-direction: column;
+.matrix-export-preview .export-legend-separator {
+  width: 100%;
+  height: 1px;
+  background-color: #eee;
+  margin: 2px 0;
 }
 
-.matrix-export-preview .export-legend {
-  display: flex;
-  gap: 16px;
-  /* Removed padding/margin as it's now flexed */
-  font-size: 9px;
-  font-weight: 600;
+.matrix-export-preview .export-legend-note {
+  font-size: 8px;
+  font-weight: 700;
   text-transform: uppercase;
-  color: #666;
+  color: #888;
+  margin: 0;
+  order: 0; /* Top */
+}
+
+.matrix-export-preview .export-legend-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px; /* Tighter gap */
+  order: 1;
+}
+
+.matrix-export-preview .export-legend-item {
+  font-size: 7px; /* Smaller font to fit */
+  font-weight: 700;
+  color: #555;
+  white-space: nowrap;
 }
 
 .matrix-export-preview .export-legend-item {
@@ -860,8 +923,8 @@
 }
 
 .matrix-export-preview .export-legend-box {
-  width: 12px;
-  height: 12px;
+  width: 8px; /* Reduced from 12px */
+  height: 8px; /* Reduced from 12px */
   border-radius: 2px;
 }
 
@@ -891,18 +954,10 @@
   opacity: 1;
 }
 
-.matrix-export-preview .export-title-name {
-  font-family: "Inter", sans-serif;
-  font-size: 24px; /* Large like header */
-  font-weight: 900;
-  color: #333;
-  text-transform: uppercase;
-  line-height: 1.1;
-  margin-bottom: 2px;
-}
+/* CSS for title moved to header-container block above */
 
 .matrix-export-preview .export-title-desc {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-main);
   font-size: 14px;
   font-weight: 700;
   color: #333;
@@ -910,7 +965,7 @@
 }
 
 .matrix-export-preview .export-subtitle {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-main);
   font-size: 10px;
   color: #666;
   margin-bottom: 0;

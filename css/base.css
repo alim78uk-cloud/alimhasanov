@@ -13,7 +13,7 @@ html, body {
     overflow: hidden;
     background-color: var(--bg-color);
     color: var(--text-color);
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-main);
     line-height: 1.4;
     transition: background-color 0.4s ease, color 0.4s ease;
 }

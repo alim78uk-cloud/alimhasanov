@@ -18,6 +18,10 @@
 
     --transition-duration: 0.8s;
     --transition-ease: cubic-bezier(0.65, 0, 0.35, 1);
+
+    /* Typography */
+    --font-main: 'Inter', sans-serif;
+    --font-mono: 'Courier New', Courier, monospace;
 }
 
 /* Dark Theme */
