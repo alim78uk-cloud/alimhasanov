@@ -48,8 +48,6 @@
       <div class="nav-dot" data-panel="details" id="navDetails"></div>
     </nav>
 
-
-
     <!-- Debug Layout Tool (Collapsible) -->
     <div
       id="debugContainer"
@@ -491,7 +489,7 @@
             data-en="APPLICATION and DATA MANAGEMENT | AUTOMATION"
             data-de="Anwendungsunterstützung | Datenmanagement"
           >
-            APPLICATION and DATA MANAGEMENT | AUTOMATION
+            APPLICATION and DATA MANAGEMENT |<br>AUTOMATION
           </div>
           <div class="hero-description" id="heroDescription">
             <p
@@ -533,6 +531,15 @@
         <!-- Name Area -->
         <div class="name-area">
           <h1 class="name" id="nameTitle">Alim<br />Hasanov</h1>
+        </div>
+
+        <!-- Fixed Mode Toggle (Fixed position in header) -->
+        <div class="fixed-mode-toggle">
+          <div class="mode-toggle" id="modeToggleHero">
+            <span class="mode-label active" id="labelOnHero">PROD</span>
+            <div class="toggle-switch"></div>
+            <span class="mode-label" id="labelOffHero">UAT</span>
+          </div>
         </div>
 
         <!-- Journey Trace -->
@@ -630,15 +637,6 @@
             <img src="images/darkblue_centered.png" alt="Alim Hasanov" />
           </div>
         </div>
-
-        <!-- Fixed Mode Toggle (Moved out of name-area) -->
-        <div class="fixed-mode-toggle">
-          <div class="mode-toggle" id="modeToggleHero">
-            <span class="mode-label active" id="labelOnHero">PROD</span>
-            <div class="toggle-switch"></div>
-            <span class="mode-label" id="labelOffHero">UAT</span>
-          </div>
-        </div>
       </div>
     </header>
 
@@ -666,7 +664,8 @@
         <div class="details-tabs" id="prod-tabs">
           <button class="tab-btn active" data-tab="cv" id="tabBtnCV">CV</button>
           <button class="tab-btn" data-tab="tech" id="tabBtnTech">
-            <span style="font-weight: 900">TASKS</span> and <span class="font-monospace" style="font-weight: 700">TOOLS</span>
+            <span style="font-weight: 900">TASKS</span> and
+            <span class="font-monospace" style="font-weight: 700">TOOLS</span>
           </button>
           <button class="tab-btn" data-tab="soft" id="tabBtnSoft">
             Soft Skills
@@ -1011,8 +1010,7 @@
                               data-en="Onboarded and trained new &amp; potential clients:"
                               data-de="Onboarded and trained new &amp; potential clients:"
                             >
-                              Onboarded and trained new &amp; potential
-                              clients:
+                              Onboarded and trained new &amp; potential clients:
                             </li>
                             <li
                               data-en="Organized and managed training sessions for clients"
@@ -1148,8 +1146,8 @@
                         Advised Tier-1 banks and institutional clients on
                         clearing report processing, led business-as-usual
                         support, and managed onboarding of new clients to
-                        internal reporting engines, ensuring compliance with
-                        CCP requirements.
+                        internal reporting engines, ensuring compliance with CCP
+                        requirements.
                       </span>
                     </div>
                     <div class="job-highlights">
@@ -1180,8 +1178,8 @@
                           data-de="Onboarded new clients (including a Tier 1 bank) and mapped new CCP reports according to their requirements and internal engine"
                         >
                           Onboarded new clients (including a Tier 1 bank) and
-                          mapped new CCP reports according to their
-                          requirements and internal engine
+                          mapped new CCP reports according to their requirements
+                          and internal engine
                         </li>
                         <li
                           data-en="Introduced previously undocumented business and procedures specifications"
@@ -1306,8 +1304,8 @@
                           data-en="Supported a Linux-based electronic trading environment for futures and fixed income"
                           data-de="Supported a Linux-based electronic trading environment for futures and fixed income"
                         >
-                          Supported a Linux-based electronic trading
-                          environment for futures and fixed income
+                          Supported a Linux-based electronic trading environment
+                          for futures and fixed income
                         </li>
                         <li
                           data-en="Reduced client trading incidents related to contract availability"
@@ -1549,8 +1547,7 @@
                         data-de="Maintained the quality and reliability of fundamental data for a global platform used by institutional clients"
                       >
                         Maintained the quality and reliability of fundamental
-                        data for a global platform used by institutional
-                        clients
+                        data for a global platform used by institutional clients
                       </span>
                     </div>
                     <div class="job-highlights">
@@ -1566,8 +1563,8 @@
                           data-en="Developed workflow solutions and improved processes by applying IT and problem-solving skills"
                           data-de="Developed workflow solutions and improved processes by applying IT and problem-solving skills"
                         >
-                          Developed workflow solutions and improved processes
-                          by applying IT and problem-solving skills
+                          Developed workflow solutions and improved processes by
+                          applying IT and problem-solving skills
                         </li>
                       </ul>
                     </div>
@@ -1661,7 +1658,8 @@
                                 data-en="Responsible for business development, sales, KPIs, and profitability analysis."
                                 data-de="Verantwortlich für Geschäftsentwicklung, Vertrieb and Prognosen, KPIs und Rentabilitätsanalyse."
                               >
-                                Responsible for business development, sales, KPIs, and profitability analysis.
+                                Responsible for business development, sales,
+                                KPIs, and profitability analysis.
                               </li>
                               <li
                                 data-en="Managed daily operations, staffing, inventory and marketing."
@@ -1832,13 +1830,21 @@
             <div class="soft-skills-container-full">
               <div class="soft-skills-paragraphs">
                 <p>
-                  As someone who has lived and worked in several countries and cultures, I’ve learned to stay open-minded, adaptable, and flexible — whether I’m dealing with clients or collaborating with colleagues.
+                  As someone who has lived and worked in several countries and
+                  cultures, I’ve learned to stay open-minded, adaptable, and
+                  flexible — whether I’m dealing with clients or collaborating
+                  with colleagues.
                 </p>
                 <p>
-                  Curious by nature, I’m always open to trying new tools or refining processes. In the fast-evolving age of AI, this has become quasi a job requirement.
+                  Curious by nature, I’m always open to trying new tools or
+                  refining processes. In the fast-evolving age of AI, this has
+                  become quasi a job requirement.
                 </p>
                 <p>
-                  Solving issues — or making a process less error-prone by automating it — whether for an external client or an internal request, by digging into logs or trying to replicate a bug, feels like solving a puzzle. That’s the best part of the job.
+                  Solving issues — or making a process less error-prone by
+                  automating it — whether for an external client or an internal
+                  request, by digging into logs or trying to replicate a bug,
+                  feels like solving a puzzle. That’s the best part of the job.
                 </p>
               </div>
             </div>
@@ -2268,7 +2274,6 @@
         <div class="matrix-export-modal-header">
           <h2>TASKS and TOOLS Progression 2014-2025</h2>
           <div class="matrix-export-controls">
-
             <button class="matrix-export-btn" onclick="downloadMatrixAsPDF()">
               <svg
                 width="16"
@@ -2313,7 +2318,12 @@
     <div
       id="addSkillModal"
       class="matrix-export-modal"
-      style="display: none; z-index: 10001; justify-content: center; align-items: center;"
+      style="
+        display: none;
+        z-index: 10001;
+        justify-content: center;
+        align-items: center;
+      "
     >
       <div
         class="matrix-export-modal-content"
@@ -2322,7 +2332,7 @@
           height: auto;
           background: var(--bg-color, #fff);
           border-radius: 8px;
-          box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+          box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
           overflow: hidden;
           display: flex;
           flex-direction: column;
@@ -2351,7 +2361,7 @@
         </div>
         <div
           class="matrix-export-modal-body add-skill-modal-body"
-          style="padding: 20px; width: 100%; box-sizing: border-box;"
+          style="padding: 20px; width: 100%; box-sizing: border-box"
         >
           <label style="display: block; margin-bottom: 8px; font-weight: 600"
             >Skill Name:</label
@@ -2372,7 +2382,10 @@
           <label style="display: block; margin-bottom: 8px; font-weight: 600"
             >Skill Type:</label
           >
-          <div class="add-skill-type-row" style="display: flex; gap: 16px; margin-bottom: 20px">
+          <div
+            class="add-skill-type-row"
+            style="display: flex; gap: 16px; margin-bottom: 20px"
+          >
             <label style="display: flex; align-items: center; cursor: pointer">
               <input
                 type="radio"
@@ -2394,7 +2407,10 @@
             </label>
           </div>
 
-          <div class="add-skill-actions" style="display: flex; justify-content: flex-end; gap: 8px">
+          <div
+            class="add-skill-actions"
+            style="display: flex; justify-content: flex-end; gap: 8px"
+          >
             <button
               type="button"
               onclick="closeAddSkillModal()"
