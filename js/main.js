@@ -304,10 +304,10 @@ modeToggle.addEventListener("click", () => {
 
   // Update tagline and header subtitle
   const taglineText = isOffHours
-    ? "Explorer | Reader | Human"
+    ? "Tinkerer | Traveler | Reader | Human"
     : defaultHeroTagline || defaultHeaderSubtitle;
   const subtitleText = isOffHours
-    ? "Explorer | Reader | Human"
+    ? "Tinkerer | Traveler | Reader | Human"
     : defaultHeaderSubtitle || defaultHeroTagline;
   heroTagline.textContent = taglineText;
   headerSubtitle.textContent = subtitleText;
