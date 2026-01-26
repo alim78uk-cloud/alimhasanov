@@ -42,7 +42,8 @@ const careerData = {
           "client_training_onboarding",
           "rest_api",
           "bash_scripting",
-          "jira_confluence"
+          "jira_confluence",
+          "pandas_python_data_library"
         ]
       },
       "dur": 19
@@ -92,7 +93,8 @@ const careerData = {
           "client_training_onboarding",
           "rest_api",
           "bash_scripting",
-          "jira_confluence"
+          "jira_confluence",
+          "pandas_python_data_library"
         ]
       },
       "dur": 13
@@ -113,9 +115,9 @@ const careerData = {
           "websockets",
           "web_development",
           "html_css",
-          "automation_of_manual_processes",
           "bash_scripting",
-          "git_version_control"
+          "git_version_control",
+          "pandas_python_data_library"
         ],
         "3": [
           "application_support",
@@ -137,7 +139,8 @@ const careerData = {
           "client_interactions",
           "client_training_onboarding",
           "rest_api",
-          "excel_vba"
+          "excel_vba",
+          "automation_of_manual_processes"
         ]
       },
       "dur": 48
@@ -163,7 +166,8 @@ const careerData = {
           "data_validation_reconciliation",
           "built_internal_tools",
           "client_training_onboarding",
-          "git_version_control"
+          "git_version_control",
+          "pandas_python_data_library"
         ],
         "3": [
           "application_support",
@@ -270,7 +274,6 @@ const careerData = {
       "dur": 8
     }
   ],
-  // skills map: id -> display label
   "skills": {
     "application_support": "Application Support",
     "troubleshooting_debugging": "Troubleshooting & Debugging",
@@ -304,7 +307,8 @@ const careerData = {
     "git_version_control": "Git/Version Control",
     "websockets": "WebSockets",
     "fix_protocol": "Fix Protocol",
-    "bloomberg_terminal": "Bloomberg Terminal"
+    "bloomberg_terminal": "Bloomberg Terminal",
+    "pandas_python_data_library": "pandas (python data library)"
   },
   "taskSkills": [
     "application_support",
@@ -334,6 +338,7 @@ const careerData = {
     "bash_scripting",
     "jira_confluence",
     "duckdb",
+    "pandas_python_data_library",
     "excel_vba",
     "html_css",
     "shell_scripting",
