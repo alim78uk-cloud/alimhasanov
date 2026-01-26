@@ -5,14 +5,15 @@
     .skills-column, .soft-skills-column { display: none; }
     .grid-layout { grid-template-columns: 1fr; }
     .exp-item {
-        grid-template-columns: 1fr auto;
+        grid-template-columns: 1fr 1fr !important; /* Force 2 columns for Date | Location */
         grid-template-areas:
             "title toggle"
-            "date date"
+            "date location"
             "firm firm"
-            "location location"
+            "links links"
             "details details";
-        row-gap: 0.5rem;
+        row-gap: 0.25rem;
+        margin-bottom: 0.5rem; /* Reduced spacing */
     }
 
     /* Skill Matrix - Tablet adjustments */
@@ -127,7 +128,7 @@
 
     /* ---- HERO SECTION ---- */
     .header {
-        padding: 1rem 1.25rem 1.5rem;
+        padding: 0.5rem 1.25rem 1.5rem; /* Reduced top padding by 50% (was 1rem) */
         align-items: center;
     }
 
@@ -203,30 +204,54 @@
     }
 
     .sidebar-nav {
-        display: none;
+        display: flex;
+        left: 2px !important;
+        right: auto !important;
+        top: 50%;
+        transform: translateY(-50%);
     }
 
     /* ---- COLLAPSED HEADER ---- */
     .header.collapsed {
-        padding: 0 1rem;
-        height: calc(var(--sticky-height) + 20px);
+        padding: 0px 0.5rem 1px 0.5rem; 
+        height: var(--h-total-height, 48px); /* User final-ish: 48px */
+        background-color: var(--bg-color); 
+    }
+
+    /* ---- COLLAPSED GRID LAYOUT ---- */
+    .header.collapsed .header-content {
+        display: grid;
+        /* User final-ish: 21% 55% 19% 7% */
+        grid-template-columns: var(--h-col-1, 21%) var(--h-col-2, 55%) var(--h-col-3, 19%) var(--h-col-4, 7%); 
+        grid-template-rows: var(--h-row-ratio, 1.4fr 0.9fr); /* User final-ish: 1.4fr 0.9fr */
+        align-items: stretch; 
+        column-gap: 0;
+        row-gap: 0.5rem; /* Added space between rows */
+        width: 100%;
+        height: 100% !important; 
+        padding-top: 0;
+        overflow: visible; 
     }
 
     .header.collapsed .name {
-        font-size: 0.8rem;
         font-weight: 700;
+        white-space: nowrap;
     }
 
     .header.collapsed .name-area {
-        gap: 0.75rem;
+        gap: 0;
         /* Position handled in overrides below */
     }
 
     /* Header controls - mobile positioning */
     .header-controls {
-        right: 1rem;
-        gap: 0.75rem;
+        right: 0.5rem;
+        gap: 0.8rem;
         top: calc(12px + var(--sticky-height) / 2);
+    }
+
+    .header.collapsed .sticky-profile {
+        display: none; /* Hide duplicate photo if present */
     }
 
     .language-switcher {
@@ -245,47 +270,128 @@
         height: 8px;
     }
 
-    .header-linkedin svg {
-        width: 12px;
-        height: 12px;
+    .header-linkedin svg, 
+    .contact-email-btn svg {
+        width: var(--h-icon-size, 16px); /* User final-ish: 16px */
+        height: var(--h-icon-size, 16px); /* User final-ish: 16px */
     }
 
     .fixed-mode-toggle {
-        left: 1rem;
+        left: 0.5rem;
         top: calc(12px + var(--sticky-height) / 2);
     }
 
     /* ---- COLLAPSED HEADER OVERRIDES ---- */
-    .sticky-profile {
-        width: 35px;
-        height: 35px;
-        margin-left: -2px;
-    }
-
     .header-subtitle {
-        font-size: 0.45rem;
-        line-height: 1.2;
+        font-size: var(--h-sub-size, 0.65rem); /* User final-ish: 0.65rem */
+        line-height: 1.1;
+        white-space: nowrap;
+        text-align: center;
+        opacity: 0.8;
     }
 
-    .header.collapsed .name-area {
-        position: absolute;
-        left: 50%;
-        top: 15%;
-        transform: translateX(-50%);
-        width: auto;
-        justify-content: center;
+    /* ---- COLLAPSED HEADER GRID ITEMS PLACEMENT ---- */
+    
+    /* 1. Toggle (Left) */
+    .header.collapsed .fixed-mode-toggle {
+        position: static;
+        display: flex;
+        grid-column: 1;
+        grid-row: 1;
+        justify-self: start;
+        align-self: end; /* Pull to bottom of Row 1 */
         margin: 0;
-        z-index: 10;
-        pointer-events: none; /* Let clicks pass if needed, or auto */
+        transform: none;
+        width: 100%; 
+        padding-bottom: 2px; /* Subtle lift */
     }
 
+    /* 2. Name (Center) */
+    .header.collapsed .name-area {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: center;
+        align-self: end; /* Pull to bottom of Row 1 */
+        margin: 0;
+        transform: none;
+        width: auto;
+        display: flex;
+        align-items: center; 
+    }
+
+    .header.collapsed .name {
+        margin: 0; 
+        line-height: 1;
+        font-size: var(--h-name-size, 1.25rem) !important; /* User final-ish: 1.25rem */
+    }
+
+    /* 3. Subtitle (Row 2, Full Width) */
     .header.collapsed .header-center {
-        top: 65%;
+        position: static;
+        transform: none;
+        opacity: 1;
+        pointer-events: auto;
+        grid-column: 1 / span 4; 
+        grid-row: 2;
+        display: flex;
+        justify-content: center;
+        align-items: start; /* Pull to top of Row 2 */
+        width: 100%;
+        margin: 0;
+        padding-top: 2px; /* Close to Row 1 */
+    }
+    
+    .header.collapsed .header-subtitle {
+        text-align: center;
+        margin: 0;
+    }
+
+    /* 4. Icons (Right of Name) */
+    .header.collapsed .header-controls {
+        position: static;
+        display: flex;
+        gap: 0.5rem; 
+        grid-column: 3;
+        grid-row: 1;
+        justify-self: center;
+        align-self: end; /* Pull to bottom of Row 1 */
+        margin: 0;
+        width: auto;
+        padding: 0 0 4px 0; /* Align with name baseline roughly */
+        transform: none; 
+    }
+
+    /* 5. Photo (Far Right, Row 1 Only) */
+    .header.collapsed .profile-container {
+        position: static;
+        grid-column: 4;
+        grid-row: 1; 
+        width: var(--h-photo-size, 38px); /* User final-ish: 38px */
+        height: var(--h-photo-size, 38px); /* User final-ish: 38px */
+        margin: 0;
+        z-index: 20;
+        border-radius: 50% !important;
+        overflow: hidden !important; 
+        justify-self: end;
+        align-self: end; /* Pull to bottom of cell */
+        box-shadow: none !important; 
+        background-color: var(--bg-color) !important; 
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(4px) !important; /* Nudge photo a bit lower as requested */
+    }
+    
+    .header.collapsed .profile-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 1 !important;
+        visibility: visible !important;
     }
 
     /* ---- DETAILS PANEL ---- */
     .details-wrapper {
-        padding: 0 0.75rem;
+        padding: 0 0.25rem; /* Reduced padding from 0.75rem */
     }
 
     .tabs-toggle {
@@ -297,15 +403,21 @@
         display: none;
         flex-direction: column;
         gap: 0;
-        padding: 0.25rem;
-        margin: 0 0 0.75rem;
-        position: static;
+        padding: 0.5rem 1rem;
+        margin: 0;
+        position: fixed; /* Fixed to viewport to stay on top and visible */
+        top: 4.5rem; /* Moved lower as requested */
+        right: 0.5rem; /* Align close to edge */
+        z-index: 9999; /* Max z-index */
         overflow: visible;
-        align-items: stretch;
-        background: var(--card-bg);
-        border: 1px solid var(--border-color);
-        border-radius: 12px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        align-items: flex-end; /* Align items to right */
+        background: var(--header-bg); /* Glass effect */
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 8px; /* Slight radius for the menu itself looks better even if user said remove border, they likely meant the white box look. Glass needs bounds. */
+        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        width: max-content; /* Fit width to content */
     }
 
     .details-tabs::after {
@@ -313,14 +425,37 @@
     }
 
     .tab-btn {
-        width: 100%;
-        padding: 0.7rem 0.9rem;
-        font-size: 0.85rem;
-        text-align: left;
+        width: auto; /* Shrink to fit text for correct underline width */
+        padding: 0.5rem 0; /* Reduced padding */
+        font-size: 1.15rem; /* Increased size by ~30% */
+        text-align: right; /* Align text to right */
+        color: var(--secondary-text);
+        background: transparent;
+    }
+
+    .tab-btn.active {
+        color: var(--text-color); /* Active text color back to normal */
+        font-weight: 700;
+        background: transparent;
+        position: relative; /* Ensure anchor */
+    }
+
+    .tabs-toggle-label {
+        font-size: 1.15rem;
+        font-weight: 700;
+        border-bottom: 2px solid var(--accent-color);
+        line-height: 1.2;
     }
 
     .tab-btn.active::after {
-        display: none;
+        display: block;
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--accent-color);
     }
 
     body.tabs-open #prod-tabs {
@@ -347,7 +482,7 @@
     .hm-layout-container {
         width: 100%;
         left: 0;
-        margin: -80px auto 0 auto;
+        margin: -100px auto 0 auto; /* Moved up further */
         padding: 0;
     }
 
@@ -358,14 +493,48 @@
     /* Experience items */
     .exp-item {
         padding: 1rem;
+        grid-template-columns: minmax(0, 1fr) auto !important; /* Constrain width to prevent overflow */
+        grid-template-areas:
+            "title toggle"
+            "date location"
+            "firm firm"
+            "links links"
+            "details details";
+        column-gap: 0;
+        row-gap: 0.25rem;
+        margin-bottom: 0.5rem;
     }
 
     .exp-title {
         font-size: 1rem;
     }
 
-    .exp-date, .exp-firm, .exp-location {
-        font-size: 0.85rem;
+    .exp-date {
+        justify-content: flex-start; /* Align left */
+        padding-left: 0.5rem; /* Inner padding */
+        width: 100%;
+        background: rgba(0,0,0,0.08); /* Unified gray */
+        border-radius: 4px 0 0 4px; /* Left rounded only */
+        height: 1.6rem;
+    }
+
+    .exp-location {
+        justify-content: flex-end; /* Align right */
+        padding-right: 0.5rem; /* Inner padding */
+        width: 100%;
+        background: rgba(0,0,0,0.08); /* Unified gray */
+        border-radius: 0 4px 4px 0; /* Right rounded only */
+        height: 1.6rem;
+    }
+
+    .exp-role h2 {
+        font-size: 1.1rem; /* Increased back up, allowing wrap */
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        line-height: 1.2;
+        padding-right: 0.25rem;
+        letter-spacing: -0.01em;
     }
 
     /* Soft skills grid */
@@ -401,6 +570,13 @@
     .tabs-toggle-btn {
         padding: 0.65rem 0.9rem;
         font-size: 0.75rem;
+    }
+
+    /* Remove styles for the toggle button on mobile to show just lines */
+    .tabs-toggle-btn {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
     }
 
     .tabs-toggle-icon span {

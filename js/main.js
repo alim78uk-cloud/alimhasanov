@@ -32,17 +32,20 @@ let isAnimating = false;
 // ========================================
 // Environment Check (Hide Admin in Prod)
 // ========================================
-const isLocal =
-  window.location.hostname === "localhost" ||
-  window.location.hostname === "127.0.0.1" ||
-  window.location.hostname === ""; // Support file:// protocol
+// ========================================
+// Environment Check (Hide Admin in Prod)
+// ========================================
+// const isLocal =
+//   window.location.hostname === "localhost" ||
+//   window.location.hostname === "127.0.0.1" ||
+//   window.location.hostname === ""; // Support file:// protocol
 
-if (isLocal) {
-  const adminContainer = document.getElementById("adminContainer");
-  const debugContainer = document.getElementById("debugContainer");
-  if (adminContainer) adminContainer.style.display = "flex";
-  if (debugContainer) debugContainer.style.display = "flex";
-}
+// if (isLocal) {
+//   const adminContainer = document.getElementById("adminContainer");
+//   const debugContainer = document.getElementById("debugContainer");
+//   if (adminContainer) adminContainer.style.display = "flex";
+//   if (debugContainer) debugContainer.style.display = "flex";
+// }
 
 // ========================================
 // Panel Transition

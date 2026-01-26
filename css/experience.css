@@ -156,7 +156,7 @@
         "details details details details";
     column-gap: 0.5rem;
     row-gap: 0.25rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 0.5rem; /* Reduced again to minimum */
     background: transparent !important;
     padding: 0;
     border: none;
