@@ -1529,8 +1529,11 @@
   height: 20px;
   min-height: 20px;
   max-height: 20px;
-  border-bottom: 1px solid var(--hm-row-border-color); /* Explicit bottom border */
-  border-top: none !important; /* Force no top border */
+  border-bottom: 1px solid var(--hm-row-border-color);
+  border-top: none !important;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto; /* Center the row */
 }
 
 .skill-matrix-view.mobile-mode .hm-skill-row::before {
@@ -1540,6 +1543,11 @@
 .skill-matrix-view.mobile-mode .hm-skill-track {
   flex: 0 0 clamp(80px, 24vw, 140px);
   max-width: clamp(80px, 24vw, 140px);
+}
+
+/* In mobile view, the single heat cell should fill the track width */
+.skill-matrix-view.mobile-mode .hm-heat-cell {
+  width: 100% !important;
 }
 
 /* Hide diagonal headers/footers in mobile mode */
@@ -1683,13 +1691,29 @@
 
 /* Download Button Styling */
 .mobile-download-btn {
-  border-color: transparent !important; /* Ghost button style */
+  border-color: transparent !important;
   color: var(--secondary-text) !important;
   background: transparent !important;
   padding: 4px !important;
-  width: 36px !important; /* Match other nav buttons size */
+  width: 36px !important;
   height: 36px !important;
-  display: flex !important; /* Default flex */
+  display: flex !important;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+/* Tablet: larger button */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .mobile-download-btn {
+    width: 44px !important;
+    height: 44px !important;
+    padding: 8px !important;
+  }
+
+  .mobile-download-btn svg {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1701,6 +1725,7 @@
 .mobile-download-btn:hover {
   color: var(--accent-color) !important;
   background: rgba(0,0,0,0.05) !important;
+  transform: scale(1.05);
 }
 
 /* Reduce container margin on mobile/tablet */

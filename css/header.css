@@ -165,15 +165,18 @@
 }
 
 /* Header Controls - Container for right-side elements */
+/* Positioned so email icon aligns exactly with right edge of tabs underline (80% of content area) */
 .header-controls {
   position: fixed;
   top: calc(30px + var(--sticky-height) / 2);
-  right: calc(max(2rem, 50% - var(--details-max-width) / 2 + 2rem) + 225px);
+  left: calc(50% + 0.3 * var(--details-max-width));
   transform: translateY(-50%);
   display: flex;
   align-items: center;
   gap: 1.5rem;
   z-index: 200;
+  padding-left: 0;
+  margin-left: 0;
 }
 
 
@@ -250,9 +253,12 @@
 .header.collapsed .name-area {
   display: flex;
   align-items: center;
-  gap: 1.5rem; /* Space between name and toggle */
-  margin-left: 0; /* Reset margin in sticky mode */
-  transform: none; /* Reset transform in collapsed state */
+  gap: 1.5rem;
+  margin-left: 0;
+  transform: none;
+  /* Position name so its end aligns with tabs underline left edge (20%) */
+  position: absolute;
+  right: 80%; /* 100% - 20% = name ends at 20% from left */
 }
 
 .header.collapsed .name-area .mode-toggle {
@@ -291,8 +297,8 @@
 
 /* Sticky Profile - Overlapping */
 .sticky-profile {
-  width: 100px; /* Large */
-  height: 100px;
+  width: 80px; /* 20% smaller than original 100px */
+  height: 80px;
   border-radius: 50%;
   overflow: hidden;
   background: transparent !important;
@@ -399,12 +405,11 @@
   font-size: 1.2rem;
 }
 
-/* Header Center - Subtitle */
+/* Header Center - Subtitle - Centered to match tabs bar */
 .header-center {
   position: absolute;
   left: 50%;
   top: 50%;
-  margin-left: 17px; /* Optically center between unequal width controls (126px vs 160px gap) */
   transform: translate(-50%, -50%);
   opacity: 0;
   pointer-events: none;
@@ -498,17 +503,20 @@
 
 /* ========================================
    Fixed Mode Toggle - Desktop: Flag hanging from right edge
+   Aligned so tabs underline passes through middle of flag
    ======================================== */
 .fixed-mode-toggle {
   position: fixed;
-  top: calc(30px + var(--sticky-height) / 2);
+  top: calc(var(--sticky-height) + 85px); /* Aligns middle with tabs underline */
   transform: translateY(-50%);
   right: 0;
   z-index: 201;
   background: var(--bg-color);
   padding: 0.5rem 0.75rem;
   border-radius: 4px 0 0 4px;
-  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    -4px 4px 12px rgba(0, 0, 0, 0.1),
+    -1px 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 /* ========================================
@@ -603,10 +611,12 @@
     left: 2rem !important;
     top: calc(30px + var(--sticky-height) / 2);
     transform: translateY(-50%);
+    border-radius: 4px; /* All corners rounded when not on edge */
   }
 
   .header-controls {
-    right: 2rem !important; /* Force symmetry with right edge */
+    left: auto !important; /* Reset desktop left positioning */
+    right: 2rem !important;
   }
 
   /* Fix Collapsed State on Tablet - 2 Rows */
@@ -650,14 +660,15 @@
   /* Row 1 Center: Name */
   .header.collapsed .name-area {
     position: static;
+    right: auto; /* Reset desktop right positioning */
     grid-column: 2;
     grid-row: 1;
     margin: 0;
     transform: none !important;
     justify-content: center;
     text-align: center;
-    align-self: center; /* Center execution vertically */
-    z-index: 20; /* Ensure name is above if needed */
+    align-self: center;
+    z-index: 20;
   }
 
   .header.collapsed .name {
@@ -707,6 +718,7 @@
     grid-row: 1;
     transform: none !important;
     justify-self: end;
+    left: auto !important; /* Reset desktop left positioning */
     right: auto !important;
     top: auto !important;
     padding: 0;
@@ -879,13 +891,16 @@
   }
 
   .header.collapsed .name-area {
+    position: static; /* Reset absolute positioning for mobile */
+    right: auto;
     gap: 0.75rem;
     justify-content: flex-start;
   }
 
   /* Header controls - mobile */
   .header-controls {
-    right: 1rem !important; /* Override desktop calc */
+    left: auto !important; /* Reset desktop left positioning */
+    right: 1rem !important;
     gap: 0.75rem;
     top: calc(15px + var(--sticky-height) / 2);
   }
@@ -912,6 +927,7 @@
     left: 1rem;
     top: calc(15px + var(--sticky-height) / 2);
     transform: translateY(-50%);
+    border-radius: 4px; /* All corners rounded when not on edge */
   }
 
   .header-linkedin svg {
@@ -996,5 +1012,6 @@
   .fixed-mode-toggle {
     right: auto;
     left: 0.5rem;
+    border-radius: 4px; /* All corners rounded when not on edge */
   }
 }

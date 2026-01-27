@@ -505,13 +505,18 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-function toggleExp(element) {
+function toggleExp(element, event) {
   if (document.body.classList.contains("off-hours")) return;
 
   const wrapper = element.querySelector(".exp-details-wrapper");
   if (!wrapper) return;
 
   const isExpanded = element.classList.contains("expanded");
+
+  // If expanded and click/touch is inside the content area, don't collapse
+  if (isExpanded && event && event.target.closest(".exp-details-wrapper")) {
+    return;
+  }
 
   if (isExpanded) {
     element.classList.remove("expanded");

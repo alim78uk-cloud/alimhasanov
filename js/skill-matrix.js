@@ -1194,7 +1194,7 @@ let isMobileView = false;
 let currentFirmIndex = 0;
 
 function checkMobileView() {
-  return window.matchMedia("(max-width: 1024px)").matches;
+  return window.matchMedia("(max-width: 1200px)").matches;
 }
 
 function updateMobileState() {
