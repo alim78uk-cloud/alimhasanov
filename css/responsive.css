@@ -138,6 +138,7 @@
     /* Add breathing room for all tab content */
     .tab-pane {
         padding: 0.6rem 2rem; /* Reduced top padding by 40% */
+        padding-bottom: 3rem; /* Bottom margin for tablet view */
     }
 
     /* Tabs - make scrollable */
@@ -150,6 +151,11 @@
         justify-content: center; /* Center tabs as requested */
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border: none;
+        box-shadow: none;
     }
 
     .details-tabs::-webkit-scrollbar {
@@ -164,7 +170,7 @@
     .tabs-nav-wrapper {
         display: flex;
         gap: 1rem;
-        border-bottom: 3px solid rgba(0, 0, 0, 0.03); /* Moved border here */
+        border-bottom: none;
         padding-bottom: 0;
         width: max-content; /* Shrink to fit content */
     }
@@ -173,6 +179,13 @@
         flex-shrink: 0;
         padding: 0.75rem 1rem 2px; /* Closer underline */
         font-size: 16px; /* 20% larger than 13px */
+    }
+
+    #prod-tabs,
+    #uat-tabs {
+        background: transparent;
+        border: none;
+        box-shadow: none;
     }
 
     /* Header controls */
@@ -204,35 +217,6 @@
         height: 16px;
     }
 
-    /* ---- TOOLS TABLE: Sticky firm nav, smaller legend, download button ---- */
-    
-    /* Firm nav: ensure sticky with background for content to scroll behind */
-    .mobile-firm-nav {
-        position: sticky;
-        top: var(--sticky-height, 52px);
-        z-index: 400;
-        background: var(--bg-color);
-        margin-bottom: 0.5rem;
-    }
-
-    /* Legend: smaller font, simplified layout */
-    .skill-matrix-view.mobile-mode .hm-legend.hm-legend-style-stacked {
-        padding: 8px 12px;
-        gap: 6px;
-    }
-
-    .skill-matrix-view.mobile-mode .hm-stacked-title {
-        font-size: 8px;
-    }
-
-    .skill-matrix-view.mobile-mode .hm-legend.hm-legend-style-stacked .hm-legend-item {
-        font-size: 8px;
-    }
-
-    .skill-matrix-view.mobile-mode .hm-legend-box {
-        width: 10px;
-        height: 10px;
-    }
 }
 
 /* ========================================
@@ -241,6 +225,7 @@
 @media (max-width: 768px) {
     :root {
         --sticky-height: 52px;
+        --mobile-tools-sticky-top: calc(var(--sticky-height) + 24px + 40px + 2px);
     }
 
     /* ---- HERO SECTION ---- */
@@ -535,7 +520,7 @@
         background: var(--header-bg); /* Glass effect */
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        border-radius: 8px; /* Slight radius for the menu itself looks better even if user said remove border, they likely meant the white box look. Glass needs bounds. */
+        border-radius: 8px;
         border: 1px solid rgba(255,255,255,0.1);
         box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         width: max-content; /* Fit width to content */
@@ -596,6 +581,9 @@
     /* PROD mode (not off-hours): Hide UAT tabs, PROD tabs via toggle */
     #prod-tabs {
         display: none !important;
+        background: transparent;
+        border: none;
+        box-shadow: none;
     }
     
     body:not(.off-hours) #uat-tabs {
@@ -613,6 +601,9 @@
     
     body.off-hours #uat-tabs {
         display: none !important;
+        background: transparent;
+        border: none;
+        box-shadow: none;
     }
     
     body.tabs-open.off-hours #uat-tabs {
@@ -704,78 +695,6 @@
         padding: 1.5rem;
     }
 
-    /* ---- TOOLS TABLE: Mobile - Fixed header with firm nav + legend ---- */
-    
-    /* 
-     * Fixed header container: contains firm nav + legend, all sticky.
-     * Top value = height of tabs-toggle when stuck:
-     *   - tabs-toggle padding-top: calc(52px + 24px) = 76px
-     *   - tabs-toggle button height: ~40px
-     *   - tabs-toggle padding-bottom: 2px
-     *   - Total: ~118px, but needs fine tuning
-     * Using calc for maintainability
-     */
-    .mobile-skills-fixed-header {
-        position: sticky;
-        top: calc(var(--sticky-height, 52px) + 24px + 40px + 2px);
-        z-index: 400;
-        /* Glassmorphism effect - semi-transparent background with blur */
-        background: var(--header-bg);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        padding-top: 8px;
-        padding-bottom: 8px;
-    }
-
-    /* Firm nav: inside fixed header, not sticky itself anymore */
-    .mobile-firm-nav {
-        position: relative;
-        top: auto;
-        z-index: auto;
-        background: transparent;
-        box-shadow: none;
-        padding: 0.5rem 1rem;
-        margin-bottom: 0;
-    }
-
-    /* Legend: single horizontal row below firm nav */
-    .mobile-legend-row {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 4px 8px;
-        background: transparent;
-    }
-
-    .mobile-legend-title {
-        font-size: 8px;
-        font-weight: 800;
-        text-transform: uppercase;
-        color: var(--text-color);
-        letter-spacing: 0.03em;
-    }
-
-    .mobile-legend-item {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        font-size: 8px;
-        font-weight: 700;
-        text-transform: uppercase;
-        color: var(--text-color);
-    }
-
-    .mobile-legend-row .hm-legend-box {
-        width: 10px;
-        height: 10px;
-    }
-
-    /* Hide the old hm-legend in mobile mode */
-    .skill-matrix-view.mobile-mode .hm-legend.hm-legend-style-stacked {
-        display: none;
-    }
 
     /* Download button next to TASKS AND TOOLS tab - visible only when tab is active */
     .tab-btn.active .tab-download-btn {
