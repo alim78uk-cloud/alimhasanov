@@ -20,7 +20,7 @@
   position: relative;
 
   /* Center the entire table (label + matrix) */
-  width: 900px; /* Reduced by 10% from 1000px */
+  width: 700px; /* Reduced from 900px to make columns narrower */
   max-width: 100%;
   margin: -106px auto 0 auto; /* Pulls container up to dock flush with tabs */
   padding-top: 0;
