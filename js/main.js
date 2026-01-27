@@ -495,6 +495,16 @@ updateTabsToggleLabel();
 // ========================================
 // Experience Item Expand/Collapse
 // ========================================
+// Initialize any pre-expanded items on page load
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".exp-item.expanded").forEach((item) => {
+    const wrapper = item.querySelector(".exp-details-wrapper");
+    if (wrapper) {
+      wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+    }
+  });
+});
+
 function toggleExp(element) {
   if (document.body.classList.contains("off-hours")) return;
 
