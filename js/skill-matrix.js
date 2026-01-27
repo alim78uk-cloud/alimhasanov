@@ -306,7 +306,7 @@ const careerData = {
     "linux_unix": "Linux/Unix",
     "git_version_control": "Git/Version Control",
     "websockets": "WebSockets",
-    "fix_protocol": "Fix Protocol",
+    "fix_protocol": "FIX Protocol",
     "bloomberg_terminal": "Bloomberg Terminal",
     "pandas_python_data_library": "pandas (python data library)"
   },
