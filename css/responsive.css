@@ -389,20 +389,15 @@
         height: 8px;
     }
 
-    .header-linkedin svg, 
+    .header-linkedin svg,
     .contact-email-btn svg {
-        width: var(--h-icon-size, 16px); /* User final-ish: 16px */
-        height: var(--h-icon-size, 16px); /* User final-ish: 16px */
-    }
-
-    .fixed-mode-toggle {
-        left: 0.5rem;
-        top: calc(12px + var(--sticky-height) / 2);
+        width: var(--h-icon-size, 16px);
+        height: var(--h-icon-size, 16px);
     }
 
     /* ---- COLLAPSED HEADER OVERRIDES ---- */
     .header-subtitle {
-        font-size: var(--h-sub-size, 0.6rem); /* Reduced from 0.65rem */
+        font-size: var(--h-sub-size, 0.6rem);
         line-height: 1.1;
         white-space: nowrap;
         text-align: center;
@@ -410,32 +405,25 @@
     }
 
     /* ---- COLLAPSED HEADER GRID ITEMS PLACEMENT ---- */
-    
-    /* 1. Toggle (Left) */
-    .header.collapsed .fixed-mode-toggle {
-        position: static;
-        display: flex;
+
+    /* Name with Toggle (Left) */
+    .header.collapsed .name-area {
         grid-column: 1;
         grid-row: 1;
         justify-self: start;
-        align-self: end; /* Pull to bottom of Row 1 */
-        margin: 0;
-        transform: none;
-        width: 100%; 
-        padding-bottom: 2px; /* Subtle lift */
-    }
-
-    /* 2. Name (Center) */
-    .header.collapsed .name-area {
-        grid-column: 2;
-        grid-row: 1;
-        justify-self: center;
-        align-self: end; /* Pull to bottom of Row 1 */
+        align-self: end;
         margin: 0;
         transform: none;
         width: auto;
         display: flex;
-        align-items: center; 
+        flex-direction: row;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .header.collapsed .name-toggle-wrapper {
+        order: 1;
+        width: auto;
     }
 
     .header.collapsed .name {
