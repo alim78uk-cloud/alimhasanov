@@ -66,9 +66,7 @@
               data-en="Hands-on with application management, automating data flows, and vendor integrations. Mostly you will find me troubleshooting APIs, querying databases, reading logs or debugging a client issue - or tinkering on automating a task."
               data-de=""
             >
-              Core experience: managing applications, automating data flows, and
-              handling vendor integrations — monitoring services, APIs,
-              databases, logs, and configurations.
+              Hands-on with application management, automating data flows, and vendor integrations. Mostly you will find me troubleshooting APIs, querying databases, reading logs or debugging a client issue - or tinkering on automating a task.
             </p>
             <p
               data-en="With a get-it-done attitude, I enjoy being the SME and the interface between clients and internal development teams, syncing business needs with IT."
@@ -221,6 +219,13 @@
             aria-expanded="false"
             aria-controls="prod-tabs uat-tabs"
           >
+            <span class="toggle-download-btn" id="toggleDownloadBtn" onclick="event.stopPropagation(); openMatrixExportModal();" title="Export PDF" style="display: none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+            </span>
             <span class="tabs-toggle-label" id="tabsToggleLabel">Menu</span>
             <span class="tabs-toggle-icon" aria-hidden="true">
               <span></span>
@@ -232,17 +237,26 @@
 
         <!-- New Tabs Navigation -->
         <div class="details-tabs" id="prod-tabs">
-          <button class="tab-btn active" data-tab="cv" id="tabBtnCV">CV</button>
-          <button class="tab-btn" data-tab="tech" id="tabBtnTech">
-            <span style="font-weight: 900">TASKS</span> and
-            <span class="font-monospace" style="font-weight: 700">TOOLS</span>
-          </button>
-          <button class="tab-btn" data-tab="soft" id="tabBtnSoft">
-            Soft Skills
-          </button>
-          <button class="tab-btn" data-tab="lang" id="tabBtnLang">
-            Languages and Education
-          </button>
+          <div class="tabs-nav-wrapper">
+            <button class="tab-btn active" data-tab="cv" id="tabBtnCV">CV</button>
+            <button class="tab-btn" data-tab="tech" id="tabBtnTech">
+              <span class="tab-download-btn" onclick="event.stopPropagation(); openMatrixExportModal();" title="Export PDF">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </span>
+              <span style="font-weight: 900">TASKS</span> and
+              <span class="font-monospace" style="font-weight: 700">TOOLS</span>
+            </button>
+            <button class="tab-btn" data-tab="soft" id="tabBtnSoft">
+              Soft Skills
+            </button>
+            <button class="tab-btn" data-tab="lang" id="tabBtnLang">
+              Languages and Education
+            </button>
+          </div>
         </div>
 
         <!-- UAT Tabs (Visible only in Off-Hours) -->
@@ -1430,11 +1444,11 @@
                     <span class="language-level">Fluent</span>
                   </div>
                   <div class="language-row">
-                    <span class="language-name">Bulgarian</span>
+                    <span class="language-name">Turkish</span>
                     <span class="language-level">Native</span>
                   </div>
                   <div class="language-row">
-                    <span class="language-name">Turkish</span>
+                    <span class="language-name">Bulgarian</span>
                     <span class="language-level">Native</span>
                   </div>
                   <div class="language-row language-row-german">

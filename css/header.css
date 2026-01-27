@@ -59,7 +59,9 @@
   text-transform: uppercase;
   transition: all var(--transition-duration) var(--transition-ease);
   transform-origin: bottom left;
+  transform-origin: bottom left;
   cursor: pointer; /* Clickable to go home/prod */
+  z-index: 10;
 }
 
 .header.collapsed .name {
@@ -75,7 +77,7 @@
   position: relative; /* Changed from absolute to stack with Name */
   margin-bottom: -1.5rem; /* Negative margin to bring closer to name */
   margin-top: 120px; /* Push down to avoid overlap with fixed header controls */
-  margin-left: 8vw; /* Move towards center */
+  margin-left: 12vw; /* Base shift for desktop: Increased from 8vw to 12vw */
   max-width: 50%;
   opacity: 1;
   transform: translateY(0);
@@ -114,6 +116,7 @@
   color: var(--secondary-text);
   font-weight: 300; /* Lighter weight for professional look */
   letter-spacing: 0.015em; /* Subtle spacing */
+  text-align: justify; /* Justified text for cleaner appearance */
 }
 
 .hero-description p {
@@ -127,8 +130,8 @@
 /* Profile Image - Big in Hero, Hidden when collapsed */
 .profile-container {
   position: absolute;
-  top: 22%; /* Moved down to cluster with text */
-  right: 5%; /* Moved in from right (-5%) to center */
+  top: 12%; /* Moved further up (was 15%) */
+  right: -5%; /* Moved further right (was 0%) */
   width: min(45vw, 600px);
   aspect-ratio: 1;
   border-radius: 50%;
@@ -138,12 +141,15 @@
     transform var(--transition-duration) var(--transition-ease);
   transform-origin: top right;
   background: none !important;
+  background: none !important;
   will-change: opacity, transform;
+  z-index: 10;
 }
 
 .header.collapsed .profile-container {
-  opacity: 0;
-  pointer-events: none;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
   transform: scale(0.1);
 }
 
@@ -162,7 +168,7 @@
 .header-controls {
   position: fixed;
   top: calc(30px + var(--sticky-height) / 2);
-  right: max(2rem, calc(50% - var(--details-max-width) / 2 + 2rem));
+  right: calc(max(2rem, 50% - var(--details-max-width) / 2 + 2rem) + 225px);
   transform: translateY(-50%);
   display: flex;
   align-items: center;
@@ -191,7 +197,7 @@
   font-size: 0.85rem;
   font-weight: 500;
   padding: 0;
-  padding-bottom: 4px; /* Space for underline */
+  padding-bottom: 2px; /* Closer underline */
   border-radius: 0;
   opacity: 0.6;
   cursor: pointer;
@@ -214,7 +220,7 @@
 .lang-btn.active::after {
   content: "";
   position: absolute;
-  bottom: -4px;
+  bottom: 0; /* Closer distance */
   left: 0;
   right: 0;
   height: 2px;
@@ -229,10 +235,11 @@
   transition: all var(--transition-duration) var(--transition-ease);
   transform-origin: bottom left;
   margin-top: auto;
-  margin-left: 8vw; /* Move towards center */
+  margin-left: 12vw; /* Base shift for desktop: Increased from 8vw */
+  margin-left: 12vw; /* Base shift for desktop: Increased from 8vw */
   transform: translateY(
-    -2rem
-  ); /* Pull name up to bring closer to description */
+    -3.5rem
+  ); /* Pull name up slightly less (was -4.5rem) */
 }
 
 /* Mode toggle positioning within name-area */
@@ -296,12 +303,20 @@
   margin-left: -10px;
   margin-top: 0; /* Aligned with other header items */
   box-shadow: none;
-  position: relative;
+  position: absolute; /* Always absolute to prevent flow shift */
+  top: 50%;
+  right: -120px; /* Positioned to the right of the icons */
+  transform: translateY(-50%) scale(0.5);
+  pointer-events: none; /* Prevent interaction when hidden */
+  visibility: hidden; /* Explicitly hide until collapsed */
 }
 
 .header.collapsed .sticky-profile {
   opacity: 1;
-  transform: scale(1) translateY(8px); /* Offset slightly lower */
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(-50%) scale(1); /* Center vertically */
+  position: absolute; /* Keep absolute! */
 }
 
 .sticky-profile img {
@@ -320,12 +335,12 @@
   display: flex;
   gap: 0.75rem;
   margin-top: 1.5rem;
-  margin-left: 8vw; /* Move towards center */
+  margin-left: 12vw; /* Base shift for desktop: Increased from 8vw */
   font-size: 1.8rem;
   font-weight: 900;
   align-items: center;
   opacity: 1;
-  transform: translateY(-2rem); /* Match name-area shift */
+  transform: translateY(-3.5rem); /* Match name-area shift (was -4.5rem) */
   transition:
     opacity 0.4s ease-out 0.6s,
     transform var(--transition-duration) var(--transition-ease);
@@ -389,6 +404,7 @@
   position: absolute;
   left: 50%;
   top: 50%;
+  margin-left: 17px; /* Optically center between unequal width controls (126px vs 160px gap) */
   transform: translate(-50%, -50%);
   opacity: 0;
   pointer-events: none;
@@ -440,7 +456,7 @@
   transition: all 0.3s ease;
   cursor: pointer;
   position: relative;
-  padding-bottom: 4px; /* Space for underline */
+  padding-bottom: 2px; /* Closer underline */
 }
 
 .mode-label:hover {
@@ -458,7 +474,7 @@
 .mode-label.active::after {
   content: "";
   position: absolute;
-  bottom: -4px;
+  bottom: 0; /* Closer distance */
   left: 0;
   right: 0;
   height: 2px;
@@ -488,7 +504,7 @@
   /* Vertically centered in the sticky header bar */
   top: calc(30px + var(--sticky-height) / 2);
   /* Horizontally positioned after the Name (approx 2rem padding + ~220px name width) */
-  left: calc(max(2rem, 50% - var(--details-max-width) / 2 + 2rem) + 240px);
+  left: calc(max(2rem, 50% - var(--details-max-width) / 2 + 2rem) + 225px);
   transform: translateY(-50%);
   z-index: 201; /* Above header controls */
 }
@@ -501,7 +517,7 @@
 @media (max-width: 1440px) and (min-width: 1025px) {
   .hero-summary {
     margin-top: 140px; /* More space to clear PROD/UAT toggle */
-    margin-left: 12vw; /* Push right to clear toggle */
+    margin-left: 15vw; /* Laptop override: Increased from 12vw to 15vw */
   }
 }
 
@@ -519,10 +535,10 @@
 
   /* Summary: at top, centered with proper margins away from sidebar clues */
   .hero-summary {
-    order: 1;
-    max-width: 65%;
-    margin: 0 auto 1.5rem auto;
-    padding: 0 4rem;
+    order: 4; /* Moved to bottom */
+    max-width: 90%; /* Increased width (was 65%) */
+    margin: 1.5rem auto 0 auto;
+    padding: 0 1rem; /* Reduced padding (was 0 4rem) */
     text-align: center;
   }
 
@@ -532,12 +548,12 @@
 
   .hero-description {
     font-size: 1rem;
-    text-align: center;
+    text-align: justify;
   }
 
-  /* Photo: below summary, centered */
+  /* Photo: at top */
   .profile-container {
-    order: 2;
+    order: 1; /* Moved to top */
     position: relative !important;
     top: auto !important;
     right: auto !important;
@@ -545,7 +561,6 @@
     min-height: 160px !important;
     max-width: 160px !important;
     margin: 0 auto 1rem auto !important;
-    opacity: 1 !important;
     transform: none !important;
     flex-shrink: 0 !important;
   }
@@ -558,7 +573,7 @@
 
   /* Name area: below photo */
   .name-area {
-    order: 3;
+    order: 2; /* Below photo */
     margin: 0;
     gap: 1rem;
     transform: none;
@@ -572,12 +587,158 @@
 
   /* Journey trace: below name */
   .journey-trace {
-    order: 4;
+    order: 3;
     margin: 0;
     font-size: 1.2rem;
     gap: 0.5rem;
     transform: none;
     justify-content: center;
+  }
+
+  /* Symmetrical Header Controls for Tablet */
+  .fixed-mode-toggle {
+    left: 2rem !important; /* Force symmetry with left edge */
+  }
+
+  .header-controls {
+    right: 2rem !important; /* Force symmetry with right edge */
+  }
+
+  /* Fix Collapsed State on Tablet - 2 Rows */
+  .header.collapsed {
+    height: auto;
+    min-height: 100px; /* Reduced min-height */
+    padding: 1rem 2rem 0 2rem; /* Reduced bottom padding further */
+    align-items: flex-start;
+  }
+
+  .header.collapsed .header-content {
+    display: grid;
+    /* Col 1: Toggle, Col 2: Name (Center), Col 3: Icons (Right) */
+    grid-template-columns: 1fr auto 1fr;
+    /* Row 1: Reduced height for smaller Photo/Name, Row 2: Auto for Subtitle */
+    grid-template-rows: 70px auto;
+    align-items: center;
+    padding: 0;
+    gap: 0;
+    width: 100%;
+    position: relative;
+  }
+
+  /* Row 1 Left: Toggle */
+  .header.collapsed .fixed-mode-toggle {
+    position: static !important;
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+    transform: none !important;
+    justify-self: start;
+    width: auto;
+  }
+  
+  /* Reset mode toggle margin */
+  .header.collapsed .name-area .mode-toggle,
+  .header.collapsed .fixed-mode-toggle .mode-toggle {
+      margin: 0;
+  }
+
+  /* Row 1 Center: Name */
+  .header.collapsed .name-area {
+    position: static;
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    transform: none !important;
+    justify-content: center;
+    text-align: center;
+    align-self: center; /* Center execution vertically */
+    z-index: 20; /* Ensure name is above if needed */
+  }
+
+  .header.collapsed .name {
+    font-size: 1.5rem;
+    text-align: center;
+    white-space: nowrap;
+    line-height: 1;
+    margin: 0;
+  }
+
+  /* Row 1 Center-Right: Photo (Absolute)
+     Positioned relative to header-content, aiming for Row 1 center */
+  .header.collapsed .sticky-profile {
+    display: block !important;
+    position: absolute !important;
+    /* Center of Row 1 is 35px. Name bottom is approx 47px. 
+       Visual bottom of photo (scale 0.5 -> 25px radius) should be 47px.
+       So center should be 47 - 25 = 22px. Setting to 24px for slight visual adjustment. */
+    top: 24px; 
+    /* Center of Container */
+    left: 50%;
+    /* Offset: Bring closer to name. Reduced from 95px. */
+    margin-left: 75px; 
+    /* Center vertically relative to the 'top' point defined above, and scale */
+    transform: translateY(-50%) scale(0.5) !important;
+    transform-origin: center center;
+    
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    right: auto !important;
+    width: 100px;
+    height: 100px;
+    box-shadow: none;
+    z-index: 15; 
+  }
+  
+  .header.collapsed .sticky-profile img {
+      opacity: 1 !important;
+      visibility: visible !important;
+  }
+
+  /* Row 1 Right: Icons */
+  .header.collapsed .header-controls {
+    position: static !important;
+    grid-column: 3;
+    grid-row: 1;
+    transform: none !important;
+    justify-self: end;
+    right: auto !important;
+    top: auto !important;
+    padding: 0;
+    margin: 0;
+    gap: 1.5rem;
+    align-self: center;
+  }
+
+  /* Row 2: Subtitle */
+  .header.collapsed .header-center {
+    position: static !important;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    transform: none !important;
+    margin: 0;
+    text-align: center;
+    padding-top: 0; /* Removed padding */
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-self: start;
+    margin-top: -15px; /* Increase negative margin to pull tighter to name */
+  }
+
+  .header.collapsed .header-subtitle {
+    font-size: 0.9rem;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* Hide Hero Elements */
+  .header.collapsed .hero-summary,
+  .header.collapsed .journey-trace,
+  .header.collapsed .profile-container {
+    display: none !important;
   }
 }
 
@@ -600,20 +761,20 @@
     height: 100%;
   }
 
-  /* 1. Summary at Top */
+  /* 1. Summary at Bottom */
   .hero-summary {
-    order: 1;
+    order: 4;
     position: relative;
     top: auto;
     max-width: 100%;
-    margin: 6rem auto 0.5rem auto; /* Reduced bottom margin */
+    margin: 1rem auto; /* Adjusted margins */
     text-align: center;
     width: 100%;
   }
 
-  /* 2. Photo Middle */
+  /* 2. Photo Top */
   .profile-container {
-    order: 2;
+    order: 1;
     position: relative;
     top: auto;
     right: auto;
@@ -635,7 +796,7 @@
 
   /* 3. Name Below Photo */
   .name-area {
-    order: 3;
+    order: 2;
     grid-area: unset;
     margin: 0;
     justify-content: center;
@@ -652,7 +813,7 @@
 
   /* 4. Journey/ISO Below Name */
   .journey-trace {
-    order: 4;
+    order: 3;
     grid-area: unset;
     font-size: 0.4rem; /* Reduced by ~30% (was 0.55rem) */
     flex-wrap: wrap;
@@ -685,7 +846,8 @@
   .hero-description {
     font-size: 0.9rem;
     line-height: 1.5;
-    padding: 0 1rem; 
+    padding: 0 1rem;
+    text-align: justify;
   }
 
   .j-code {
@@ -718,7 +880,7 @@
 
   /* Header controls - mobile */
   .header-controls {
-    right: 1rem;
+    right: 1rem !important; /* Override desktop calc */
     gap: 0.75rem;
     top: calc(15px + var(--sticky-height) / 2);
   }
@@ -754,6 +916,7 @@
     width: 70px;
     height: 70px;
     margin-left: -5px;
+    visibility: hidden; /* Ensure hidden on mobile hero too */
   }
 
   .header.collapsed .sticky-profile {
@@ -788,6 +951,7 @@
 
   .hero-description {
     font-size: 0.85rem;
+    text-align: justify;
   }
 
   .journey-trace {

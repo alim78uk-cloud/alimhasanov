@@ -2,18 +2,19 @@
    UAT / Swiss Style Dashboard (Off Hours)
    ======================================== */
 
-/* Toggle Tabs Visibility */
-body:not(.off-hours) #uat-tabs {
-    display: none !important;
-}
+/* Toggle Tabs Visibility - Desktop only (Mobile handled in responsive.css) */
+@media (min-width: 769px) {
+    body:not(.off-hours) #uat-tabs {
+        display: none !important;
+    }
 
-body.off-hours #prod-tabs {
-    display: none !important;
-}
+    body.off-hours #prod-tabs {
+        display: none !important;
+    }
 
-body.off-hours #uat-tabs {
-    display: flex !important;
-    /* Ensure it picks up details-tabs styling from details-panel.css */
+    body.off-hours #uat-tabs {
+        display: flex !important;
+    }
 }
 
 /* Hide PROD experience and columns in off-hours */
@@ -42,7 +43,7 @@ body.off-hours #personal-section {
 .uat-display {
     max-width: 1400px;
     margin: 0 auto;
-    padding: var(--pane-top-margin, 6.2rem) 0 5rem 0;
+    padding: var(--pane-top-margin, 6.2rem) 2rem 5rem 2rem;
     min-height: 500px;
 }
 
@@ -101,6 +102,13 @@ body.off-hours #personal-section {
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: 220px;
     gap: 1.5rem;
+}
+
+/* Latest Books Centering */
+#section-hobbies .bento-grid {
+    max-width: 700px; /* Matched to Top 5 width */
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 .bento-card {
@@ -255,6 +263,8 @@ body.off-hours #personal-section {
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
     max-width: 700px;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 .culture-col {
@@ -340,6 +350,8 @@ body.off-hours #personal-section {
     gap: 0;
     padding-bottom: 0;
     max-width: 400px;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 .bucket-card {
@@ -405,13 +417,49 @@ body.off-hours #personal-section {
 /* Responsive */
 @media (max-width: 1024px) {
     .bento-grid { grid-template-columns: repeat(2, 1fr); }
+    .weekend-grid { 
+        grid-template-columns: 1fr; /* Single column on tablet */
+        max-width: 600px; /* Constrain width for better appearance */
+    }
+    .centered-card {
+        grid-column: span 1; /* Reset to single column */
+    }
     .span-2x2, .span-2x1 { grid-column: span 2; }
+    
+    /* Increase caption font size by 50% on tablet */
+    .weekend-grid .card-caption h3 {
+        font-size: 1.2rem;
+        white-space: normal;
+    }
 }
 
 @media (max-width: 768px) {
+    .uat-display {
+        padding: 4rem 0.5rem 3rem 0.5rem; /* Reduced top/bottom padding */
+    }
+
     .bento-grid {
         grid-template-columns: 1fr;
-        grid-auto-rows: minmax(180px, auto);
+        grid-auto-rows: minmax(160px, auto); /* Reduced row height */
+        gap: 0.85rem; /* Reduced gap */
+    }
+    
+    .weekend-grid {
+        grid-template-columns: 1fr;
+        gap: 0.85rem; /* Reduced gap */
+        max-width: 100%; /* Full width on mobile */
+    }
+    
+    .centered-card {
+        grid-column: span 1; /* Reset to single column */
+    }
+
+    .card-content {
+        padding: 1rem; /* Tightened internal padding */
+    }
+
+    .uat-header {
+        margin-bottom: 1.5rem; /* Reduced space below UAT headers */
     }
     
     .span-1x1, .span-1x2, .span-2x1, .span-2x2 { grid-column: span 1; grid-row: span 1; }
@@ -419,4 +467,10 @@ body.off-hours #personal-section {
     .split-grid { grid-template-columns: 1fr; }
     
     .bucket-card { width: 100%; }
+    
+    /* Increase caption font size by 30% on mobile, then reduced by 20% = 0.85rem */
+    .weekend-grid .card-caption h3 {
+        font-size: 0.85rem;
+        white-space: normal;
+    }
 }

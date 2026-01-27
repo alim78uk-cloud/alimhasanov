@@ -910,43 +910,39 @@ function renderMobileView(skillIds, levelMaps) {
 
   let html = '';
 
-  // Mobile navigation header
-  html += `<div class="mobile-firm-nav">
-    <button class="mobile-firm-nav-btn" onclick="navigateFirm(-1)" ${currentFirmIndex === 0 ? 'disabled' : ''}>
-      <span>←</span>
-    </button>
-    <div class="mobile-firm-info">
-      <div class="mobile-firm-name">${employer.name}</div>
-      <div class="mobile-firm-years">${startYear} - ${endYear}</div>
-      <div class="mobile-firm-dots">
-        ${careerData.employers.map((_, idx) =>
-          `<div class="mobile-firm-dot ${idx === currentFirmIndex ? 'active' : ''}" onclick="goToFirm(${idx})"></div>`
-        ).join('')}
-      </div>
-    </div>
-    <button class="mobile-firm-nav-btn" onclick="navigateFirm(1)" ${currentFirmIndex === careerData.employers.length - 1 ? 'disabled' : ''}>
-      <span>→</span>
-    </button>
-  </div>`;
-
-  // Legend (mobile positioned)
-  html += `<div class="hm-legend hm-legend-style-stacked">
-    <div class="hm-stacked-content-col">
-      <span class="hm-stacked-title">Cadence at ${employer.name}:</span>
-      <div class="hm-stacked-row">
-        <div class="hm-legend-item"><div class="hm-legend-box bg-level-3"></div> Core</div>
-        <div class="hm-legend-item"><div class="hm-legend-box bg-level-2"></div> Regular</div>
-        <div class="hm-legend-item"><div class="hm-legend-box bg-level-1"></div> On Demand</div>
-      </div>
-    </div>
-    <div class="hm-stacked-button-col">
-      <button class="matrix-download-btn-combined" onclick="openMatrixExportModal()" title="Export PDF">
+  // Fixed header area that contains firm nav + legend (all sticky together)
+  html += `<div class="mobile-skills-fixed-header">
+    <!-- Mobile navigation header -->
+    <div class="mobile-firm-nav">
+      <button class="mobile-firm-nav-btn" onclick="navigateFirm(-1)" ${currentFirmIndex === 0 ? 'disabled' : ''}>
+        <span>←</span>
+      </button>
+      <button class="mobile-firm-nav-btn mobile-download-btn" onclick="openMatrixExportModal()" title="Download PDF">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
           <polyline points="7 10 12 15 17 10"/>
           <line x1="12" y1="15" x2="12" y2="3"/>
         </svg>
       </button>
+      <div class="mobile-firm-info">
+        <div class="mobile-firm-name">${employer.name}</div>
+        <div class="mobile-firm-years">${startYear} - ${endYear}</div>
+        <div class="mobile-firm-dots">
+          ${careerData.employers.map((_, idx) =>
+            `<div class="mobile-firm-dot ${idx === currentFirmIndex ? 'active' : ''}" onclick="goToFirm(${idx})"></div>`
+          ).join('')}
+        </div>
+      </div>
+      <button class="mobile-firm-nav-btn" onclick="navigateFirm(1)" ${currentFirmIndex === careerData.employers.length - 1 ? 'disabled' : ''}>
+        <span>→</span>
+      </button>
+    </div>
+    <!-- Legend - single horizontal row below firm nav -->
+    <div class="mobile-legend-row">
+      <span class="mobile-legend-title">Cadence:</span>
+      <div class="mobile-legend-item"><div class="hm-legend-box bg-level-3"></div> Core</div>
+      <div class="mobile-legend-item"><div class="hm-legend-box bg-level-2"></div> Regular</div>
+      <div class="mobile-legend-item"><div class="hm-legend-box bg-level-1"></div> On Demand</div>
     </div>
   </div>`;
 
@@ -1067,7 +1063,7 @@ function renderDiagonalHeader(isFooter, totalDur) {
       - Origin is top-left for the clipper (matching CSS), but text rotation origin is its own.
     */
     const textPosStyle = isFooter
-      ? `top: 6px; right: calc(50% + ${offset}px); transform: skewX(45deg) rotate(-45deg); transform-origin: top right;`
+      ? `top: 3px; right: calc(50% + ${offset}px); transform: skewX(45deg) rotate(-45deg); transform-origin: top right;`
       : `bottom: 6px; left: calc(50% + ${offset}px); transform: rotate(-45deg); transform-origin: bottom left;`;
 
     // Wrapper Position

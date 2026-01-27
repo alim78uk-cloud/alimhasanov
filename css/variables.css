@@ -13,7 +13,7 @@
     --header-bg: rgba(244, 244, 240, 0.75); /* Semi-transparent for glass effect */
     --sticky-height: 40px; /* User selected */
     --details-top-padding: 4.8rem; /* User selected */
-    --details-max-width: 1780px; /* User selected */
+    --details-max-width: 1425px; /* Reduced by ~20% from 1780px */
 
     --transition-duration: 0.8s;
     --transition-ease: cubic-bezier(0.65, 0, 0.35, 1);

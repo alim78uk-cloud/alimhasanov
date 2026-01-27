@@ -45,6 +45,7 @@
     max-width: 820px;
     margin: 0 auto;
     text-align: left;
+    padding: 0 0.75rem; /* Reduced padding (half of previous 1.5rem) */
 }
 
 .soft-skills-paragraphs p {
@@ -54,6 +55,7 @@
     font-weight: 300;
     letter-spacing: 0.015em;
     margin-bottom: 1.2rem;
+    text-align: justify; /* Justified text for cleaner appearance */
 }
 
 /* Languages Tab */
@@ -200,27 +202,29 @@
     margin-bottom: 1.6rem;
 }
 
-.education-section .exp-item {
-    grid-template-columns: 6.5rem 1fr 9rem;
-    grid-template-areas:
-        "title title title"
-        "date firm location"
-        "details details details";
-}
+@media (min-width: 769px) {
+    .education-section .exp-item {
+        grid-template-columns: 6.5rem 1fr 9rem;
+        grid-template-areas:
+            "title title title"
+            "date firm location"
+            "details details details";
+    }
 
-.education-section .exp-date,
-.education-section .exp-location {
-    font-size: 0.75rem;
-    height: 1.3rem;
-    line-height: 1.3rem;
-    padding: 0 0.5rem;
-}
+    .education-section .exp-date,
+    .education-section .exp-location {
+        font-size: 0.75rem;
+        height: 1.3rem;
+        line-height: 1.3rem;
+        padding: 0 0.5rem;
+    }
 
-.education-section .exp-company {
-    font-size: 0.72rem;
-    height: 1.3rem;
-    line-height: 1.3rem;
-    padding: 0 0.5rem;
+    .education-section .exp-company {
+        font-size: 0.72rem;
+        height: 1.3rem;
+        line-height: 1.3rem;
+        padding: 0 0.5rem;
+    }
 }
 
 .education-section .exp-role h2 {
@@ -295,18 +299,18 @@
 @media (max-width: 768px) {
     /* Reduce top margin on mobile */
     :root {
-        --pane-top-margin: 4rem;
+        --pane-top-margin: 2rem; /* Reduced from 4rem */
     }
 
     /* Experience column */
     .experience-column.active-full {
-        padding: var(--pane-top-margin) 0.5rem 1.5rem;
+        padding: var(--pane-top-margin) 0.25rem 1.5rem;
         max-width: 100%;
     }
 
     /* Skills container */
     .skills-container-full {
-        padding: var(--pane-top-margin) 0 1.5rem 0;
+        padding: var(--pane-top-margin) 0.25rem 1.5rem;
         max-width: 100%;
     }
 
@@ -316,7 +320,7 @@
 
     /* Soft skills */
     .soft-skills-container-full {
-        padding: var(--pane-top-margin) 0.5rem 1.5rem;
+        padding: var(--pane-top-margin) 0.75rem 0.75rem; /* Reduced horizontal padding by half */
         max-width: 100%;
     }
 
@@ -347,9 +351,9 @@
 
     /* Languages */
     .languages-container-full {
-        padding: var(--pane-top-margin) 0.5rem 1.5rem;
+        padding: var(--pane-top-margin) 0.25rem 1.5rem;
         max-width: 100%;
-        --lang-grid-columns: 1fr;
+        --lang-grid-columns: 1.2fr 1fr 1fr; /* Restored to 3 columns */
     }
 
     .languages-list {
@@ -357,8 +361,9 @@
     }
 
     .language-row {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row; /* Keep on one line as requested */
+        justify-content: space-between;
+        align-items: center;
         gap: 0.25rem;
     }
 
@@ -367,32 +372,88 @@
     }
 
     .language-calendar-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 0.5rem;
+        grid-template-columns: var(--lang-grid-columns);
+        gap: 0.35rem var(--lang-grid-gap);
     }
 
     .calendar-label {
-        grid-column: 1 / -1;
-        padding-left: 0;
+        padding-left: var(--lang-sub-indent);
     }
 
     .education-section {
         max-width: 100%;
-        padding: 0.5rem;
+        padding: 0.25rem;
     }
 
     .education-section .exp-item {
-        grid-template-columns: 1fr;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
         grid-template-areas:
-            "title"
-            "date"
-            "firm"
-            "location"
-            "details";
+            "title title"
+            "date location"
+            "firm firm"
+            "details details" !important;
+        column-gap: 0 !important;
+        row-gap: 0.35rem !important; /* Slightly more gap for clarity */
+        margin-bottom: 2rem !important;
+        width: 100% !important;
+    }
+
+    .education-section .exp-role {
+        grid-area: title !important;
+        display: flex !important;
+        align-items: center !important;
+        width: 100% !important;
     }
 
     .education-section .exp-role h2 {
-        font-size: 1.5rem;
+        font-size: clamp(0.85rem, 4.4vw, 1.05rem) !important;
+        white-space: normal !important;
+        line-height: 1.2 !important;
+        letter-spacing: -0.01em !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .education-section .exp-date {
+        grid-area: date !important;
+        justify-content: flex-start !important;
+        padding-left: 0.5rem !important;
+        background: rgba(0,0,0,0.08) !important;
+        border-radius: 4px 0 0 4px !important;
+        height: 1.6rem !important;
+        font-size: 0.75rem !important;
+        width: 100% !important;
+    }
+
+    .education-section .exp-location {
+        grid-area: location !important;
+        justify-content: flex-end !important;
+        padding-right: 0.5rem !important;
+        background: rgba(0,0,0,0.08) !important;
+        border-radius: 0 4px 4px 0 !important;
+        height: 1.6rem !important;
+        font-size: 0.75rem !important;
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+
+    .education-section .exp-company {
+        grid-area: firm !important;
+        background: var(--text-color) !important;
+        color: var(--bg-color) !important;
+        height: auto !important;
+        min-height: 1.6rem !important;
+        padding: 0.3rem 0.6rem !important;
+        border-radius: 4px !important;
+        font-size: 0.75rem !important;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        white-space: normal !important;
+        word-break: break-word !important;
     }
 
     .languages-block {
@@ -403,7 +464,7 @@
 
 @media (max-width: 480px) {
     :root {
-        --pane-top-margin: 3rem;
+        --pane-top-margin: 1.5rem; /* Reduced from 3rem */
     }
 
     .soft-skill-card {
@@ -416,7 +477,8 @@
     }
 
     .language-calendar-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: var(--lang-grid-columns);
+        gap: 0.35rem var(--lang-grid-gap);
     }
 
     .calendar-cell {

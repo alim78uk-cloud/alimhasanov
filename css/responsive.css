@@ -4,16 +4,75 @@
 @media (max-width: 1024px) and (min-width: 769px) {
     .skills-column, .soft-skills-column { display: none; }
     .grid-layout { grid-template-columns: 1fr; }
-    .exp-item {
-        grid-template-columns: 1fr 1fr !important; /* Force 2 columns for Date | Location */
+    .exp-item,
+    .education-section .exp-item {
+        padding: 1.5rem !important;
+        grid-template-columns: 1fr auto !important; /* Match mobile: Date takes space, Location fits content */
+        column-gap: 0 !important; /* Fuse the bars */
         grid-template-areas:
             "title toggle"
             "date location"
             "firm firm"
             "links links"
             "details details";
-        row-gap: 0.25rem;
-        margin-bottom: 0.5rem; /* Reduced spacing */
+        row-gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    /* MATCH MOBILE LAYOUT FOR EDUCATION SPECIFICALLY IF NEEDED overrides */
+    /* The above generic .exp-item rule covers both if they share the class. 
+       However, we need to ensure .education-section .exp-item doesn't have 
+       specific desktop overrides persisting. */
+    .education-section .exp-item {
+        /* Force the areas again to be sure */
+        grid-template-areas:
+            "title toggle"
+            "date location"
+            "firm firm"
+            "links links"
+            "details details" !important;
+    }
+
+    /* Reduce degree title font size further */
+    .education-section .exp-role h2 {
+        font-size: 1.4rem;
+    }
+
+    /* Match Mobile Date/Location Bar Design */
+    .exp-date {
+        justify-content: flex-start;
+        padding-left: 0.75rem;
+        width: 100%;
+        background: rgba(0,0,0,0.08); /* Unified gray */
+        border-radius: 4px 0 0 4px;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        font-size: 0.9rem;
+    }
+
+    .exp-location {
+        justify-content: flex-end;
+        padding-right: 0.75rem;
+        padding-left: 0.75rem; /* Add left padding */
+        width: 100%;
+        background: rgba(0,0,0,0.08); /* Unified gray */
+        border-radius: 0 4px 4px 0;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        font-size: 0.9rem;
+        white-space: nowrap; /* Prevent location wrapping */
+    }
+
+    /* Content margins */
+    .exp-details-content {
+        margin-top: 1.5rem; /* Increased margin */
+        padding: 0 1rem; /* Increased padding */
+    }
+
+    .job-summary, .job-highlights {
+        margin-bottom: 1rem;
     }
 
     /* Skill Matrix - Tablet adjustments */
@@ -59,12 +118,26 @@
 
     .hm-header-zone .hm-angled-text,
     .hm-footer-zone .hm-angled-text {
+        font-weight: 900;
+        opacity: 0.6;
+    }
+
+    .hm-header-zone .hm-angled-text {
         font-size: 10px;
     }
 
-    /* Details panel padding */
+    .hm-footer-zone .hm-angled-text {
+        font-size: 7px;
+    }
+
+    /* Details panel padding - Align with Header (2rem) */
     .details-wrapper {
-        padding: 0 1rem;
+        padding: 0 2rem;
+    }
+
+    /* Add breathing room for all tab content */
+    .tab-pane {
+        padding: 0.6rem 2rem; /* Reduced top padding by 40% */
     }
 
     /* Tabs - make scrollable */
@@ -72,8 +145,9 @@
         gap: 1rem;
         padding-left: 1rem;
         padding-right: 1rem;
+        padding-top: 110px; /* Reduced to bring tabs closer to header */
         overflow-x: auto;
-        justify-content: flex-start;
+        justify-content: center; /* Center tabs as requested */
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
     }
@@ -82,10 +156,23 @@
         display: none;
     }
 
+    /* Ensure grey underline spans content width only */
+    .details-tabs::after {
+        display: none; /* remove full width underline */
+    }
+
+    .tabs-nav-wrapper {
+        display: flex;
+        gap: 1rem;
+        border-bottom: 3px solid rgba(0, 0, 0, 0.03); /* Moved border here */
+        padding-bottom: 0;
+        width: max-content; /* Shrink to fit content */
+    }
+
     .tab-btn {
         flex-shrink: 0;
-        padding: 0.75rem 1rem 0.5rem;
-        font-size: 13px;
+        padding: 0.75rem 1rem 2px; /* Closer underline */
+        font-size: 16px; /* 20% larger than 13px */
     }
 
     /* Header controls */
@@ -116,6 +203,36 @@
         width: 16px;
         height: 16px;
     }
+
+    /* ---- TOOLS TABLE: Sticky firm nav, smaller legend, download button ---- */
+    
+    /* Firm nav: ensure sticky with background for content to scroll behind */
+    .mobile-firm-nav {
+        position: sticky;
+        top: var(--sticky-height, 52px);
+        z-index: 400;
+        background: var(--bg-color);
+        margin-bottom: 0.5rem;
+    }
+
+    /* Legend: smaller font, simplified layout */
+    .skill-matrix-view.mobile-mode .hm-legend.hm-legend-style-stacked {
+        padding: 8px 12px;
+        gap: 6px;
+    }
+
+    .skill-matrix-view.mobile-mode .hm-stacked-title {
+        font-size: 8px;
+    }
+
+    .skill-matrix-view.mobile-mode .hm-legend.hm-legend-style-stacked .hm-legend-item {
+        font-size: 8px;
+    }
+
+    .skill-matrix-view.mobile-mode .hm-legend-box {
+        width: 10px;
+        height: 10px;
+    }
 }
 
 /* ========================================
@@ -140,7 +257,7 @@
     }
 
     .name {
-        font-size: clamp(1.8rem, 8vw, 2.6rem);
+        font-size: clamp(1.6rem, 7.5vw, 2.3rem);
     }
 
     .hero-summary {
@@ -215,7 +332,9 @@
     .header.collapsed {
         padding: 0px 0.5rem 1px 0.5rem; 
         height: var(--h-total-height, 48px); /* User final-ish: 48px */
-        background-color: var(--bg-color); 
+        background-color: var(--header-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
 
     /* ---- COLLAPSED GRID LAYOUT ---- */
@@ -223,10 +342,10 @@
         display: grid;
         /* User final-ish: 21% 55% 19% 7% */
         grid-template-columns: var(--h-col-1, 21%) var(--h-col-2, 55%) var(--h-col-3, 19%) var(--h-col-4, 7%); 
-        grid-template-rows: var(--h-row-ratio, 1.4fr 0.9fr); /* User final-ish: 1.4fr 0.9fr */
+        grid-template-rows: var(--h-row-ratio, 1.3fr 0.8fr); /* Tightened row ratio */
         align-items: stretch; 
         column-gap: 0;
-        row-gap: 0.5rem; /* Added space between rows */
+        row-gap: 0.25rem; /* Reduced from 0.5rem */
         width: 100%;
         height: 100% !important; 
         padding-top: 0;
@@ -283,7 +402,7 @@
 
     /* ---- COLLAPSED HEADER OVERRIDES ---- */
     .header-subtitle {
-        font-size: var(--h-sub-size, 0.65rem); /* User final-ish: 0.65rem */
+        font-size: var(--h-sub-size, 0.6rem); /* Reduced from 0.65rem */
         line-height: 1.1;
         white-space: nowrap;
         text-align: center;
@@ -322,7 +441,7 @@
     .header.collapsed .name {
         margin: 0; 
         line-height: 1;
-        font-size: var(--h-name-size, 1.25rem) !important; /* User final-ish: 1.25rem */
+        font-size: var(--h-name-size, 1.15rem) !important; /* Reduced from 1.25rem */
     }
 
     /* 3. Subtitle (Row 2, Full Width) */
@@ -397,6 +516,8 @@
     .tabs-toggle {
         display: flex;
         margin-top: 10px;
+        /* Track the height for use in sticky child elements */
+        --tabs-toggle-stuck-height: 50px;
     }
 
     .details-tabs {
@@ -424,13 +545,24 @@
         display: none;
     }
 
+    /* Make tabs-nav-wrapper vertical for dropdown on mobile */
+    .tabs-nav-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        border-bottom: none;
+        width: 100%;
+        align-items: flex-end;
+    }
+
     .tab-btn {
         width: auto; /* Shrink to fit text for correct underline width */
-        padding: 0.5rem 0; /* Reduced padding */
+        padding: 0.5rem 0 2px 0; /* Tightened padding for closer underline */
         font-size: 1.15rem; /* Increased size by ~30% */
         text-align: right; /* Align text to right */
         color: var(--secondary-text);
         background: transparent;
+        text-transform: uppercase;
     }
 
     .tab-btn.active {
@@ -445,6 +577,7 @@
         font-weight: 700;
         border-bottom: 2px solid var(--accent-color);
         line-height: 1.2;
+        text-transform: uppercase;
     }
 
     .tab-btn.active::after {
@@ -458,14 +591,30 @@
         background-color: var(--accent-color);
     }
 
-    body.tabs-open #prod-tabs {
-        display: flex;
+    /* Mobile Tabs Visibility - Both hidden by default, shown via burger menu */
+    
+    /* PROD mode (not off-hours): Hide UAT tabs, PROD tabs via toggle */
+    #prod-tabs {
+        display: none !important;
     }
-
+    
+    body:not(.off-hours) #uat-tabs {
+        display: none !important;
+    }
+    
+    body.tabs-open:not(.off-hours) #prod-tabs {
+        display: flex !important;
+    }
+    
+    /* UAT mode (off-hours): Hide PROD tabs, UAT tabs via toggle */
+    body.off-hours #prod-tabs {
+        display: none !important;
+    }
+    
     body.off-hours #uat-tabs {
         display: none !important;
     }
-
+    
     body.tabs-open.off-hours #uat-tabs {
         display: flex !important;
     }
@@ -554,6 +703,127 @@
         max-width: 400px;
         padding: 1.5rem;
     }
+
+    /* ---- TOOLS TABLE: Mobile - Fixed header with firm nav + legend ---- */
+    
+    /* 
+     * Fixed header container: contains firm nav + legend, all sticky.
+     * Top value = height of tabs-toggle when stuck:
+     *   - tabs-toggle padding-top: calc(52px + 24px) = 76px
+     *   - tabs-toggle button height: ~40px
+     *   - tabs-toggle padding-bottom: 2px
+     *   - Total: ~118px, but needs fine tuning
+     * Using calc for maintainability
+     */
+    .mobile-skills-fixed-header {
+        position: sticky;
+        top: calc(var(--sticky-height, 52px) + 24px + 40px + 2px);
+        z-index: 400;
+        /* Glassmorphism effect - semi-transparent background with blur */
+        background: var(--header-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    /* Firm nav: inside fixed header, not sticky itself anymore */
+    .mobile-firm-nav {
+        position: relative;
+        top: auto;
+        z-index: auto;
+        background: transparent;
+        box-shadow: none;
+        padding: 0.5rem 1rem;
+        margin-bottom: 0;
+    }
+
+    /* Legend: single horizontal row below firm nav */
+    .mobile-legend-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 4px 8px;
+        background: transparent;
+    }
+
+    .mobile-legend-title {
+        font-size: 8px;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--text-color);
+        letter-spacing: 0.03em;
+    }
+
+    .mobile-legend-item {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 8px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--text-color);
+    }
+
+    .mobile-legend-row .hm-legend-box {
+        width: 10px;
+        height: 10px;
+    }
+
+    /* Hide the old hm-legend in mobile mode */
+    .skill-matrix-view.mobile-mode .hm-legend.hm-legend-style-stacked {
+        display: none;
+    }
+
+    /* Download button next to TASKS AND TOOLS tab - visible only when tab is active */
+    .tab-btn.active .tab-download-btn {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        margin-right: 6px;
+        padding: 2px;
+        border-radius: 4px;
+        background: transparent;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .tab-btn.active .tab-download-btn:hover {
+        background: var(--hm-p-main, var(--accent-color));
+        color: white;
+    }
+
+    .tab-btn.active .tab-download-btn svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    /* Download button in mobile tabs toggle (next to "TASKS AND TOOLS" label) */
+    .toggle-download-btn {
+        display: none; /* Hidden by default, shown via JS when tech tab is active */
+        align-items: center;
+        justify-content: center;
+        margin-right: 8px;
+        padding: 4px;
+        border-radius: 4px;
+        background: transparent;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .toggle-download-btn:hover {
+        background: var(--hm-p-main, var(--accent-color));
+        color: white;
+    }
+
+    .toggle-download-btn svg {
+        width: 16px;
+        height: 16px;
+    }
 }
 
 /* ========================================
@@ -570,6 +840,11 @@
     .tabs-toggle-btn {
         padding: 0.65rem 0.9rem;
         font-size: 0.75rem;
+    }
+
+    .tab-btn {
+        padding: 0.5rem 0.75rem 2px; /* Closer underline */
+        font-size: 12px;
     }
 
     /* Remove styles for the toggle button on mobile to show just lines */
@@ -589,7 +864,7 @@
     }
 
     .name {
-        font-size: clamp(1.6rem, 9.5vw, 2.2rem);
+        font-size: clamp(1.4rem, 8.5vw, 2rem);
     }
 
     .hero-tagline {

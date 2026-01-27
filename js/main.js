@@ -392,6 +392,17 @@ function getActiveTabLabel() {
 function updateTabsToggleLabel() {
   if (!tabsToggleLabel) return;
   tabsToggleLabel.textContent = getActiveTabLabel();
+  
+  // Show/hide download button based on whether tech tab is active
+  const toggleDownloadBtn = document.getElementById("toggleDownloadBtn");
+  if (toggleDownloadBtn) {
+    const selector = document.body.classList.contains("off-hours")
+      ? "#uat-tabs .tab-btn.active"
+      : "#prod-tabs .tab-btn.active";
+    const activeBtn = document.querySelector(selector);
+    const isTechTab = activeBtn?.dataset?.tab === "tech";
+    toggleDownloadBtn.style.display = isTechTab ? "inline-flex" : "none";
+  }
 }
 
 function closeTabsMenu() {
