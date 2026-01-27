@@ -43,7 +43,8 @@ const careerData = {
           "rest_api",
           "bash_scripting",
           "jira_confluence",
-          "pandas_python_data_library"
+          "pandas_python_data_library",
+          "power_bi"
         ]
       },
       "dur": 19
@@ -308,7 +309,8 @@ const careerData = {
     "websockets": "WebSockets",
     "fix_protocol": "FIX Protocol",
     "bloomberg_terminal": "Bloomberg Terminal",
-    "pandas_python_data_library": "pandas (python data library)"
+    "pandas_python_data_library": "pandas (python data library)",
+    "power_bi": "Power BI"
   },
   "taskSkills": [
     "application_support",
@@ -340,6 +342,7 @@ const careerData = {
     "duckdb",
     "pandas_python_data_library",
     "excel_vba",
+    "power_bi",
     "html_css",
     "shell_scripting",
     "linux_unix",
