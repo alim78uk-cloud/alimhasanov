@@ -497,16 +497,18 @@
 }
 
 /* ========================================
-   Fixed Mode Toggle
+   Fixed Mode Toggle - Desktop: Flag hanging from right edge
    ======================================== */
 .fixed-mode-toggle {
   position: fixed;
-  /* Vertically centered in the sticky header bar */
   top: calc(30px + var(--sticky-height) / 2);
-  /* Horizontally positioned after the Name (approx 2rem padding + ~220px name width) */
-  left: calc(max(2rem, 50% - var(--details-max-width) / 2 + 2rem) + 225px);
   transform: translateY(-50%);
-  z-index: 201; /* Above header controls */
+  right: 0;
+  z-index: 201;
+  background: var(--bg-color);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px 0 0 4px;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.08);
 }
 
 /* ========================================
@@ -597,7 +599,10 @@
 
   /* Symmetrical Header Controls for Tablet */
   .fixed-mode-toggle {
-    left: 2rem !important; /* Force symmetry with left edge */
+    right: auto !important;
+    left: 2rem !important;
+    top: calc(30px + var(--sticky-height) / 2);
+    transform: translateY(-50%);
   }
 
   .header-controls {
@@ -903,7 +908,10 @@
   }
 
   .fixed-mode-toggle {
+    right: auto;
     left: 1rem;
+    top: calc(15px + var(--sticky-height) / 2);
+    transform: translateY(-50%);
   }
 
   .header-linkedin svg {
@@ -986,6 +994,7 @@
   }
 
   .fixed-mode-toggle {
-    left: calc(max(0.75rem, 50% - var(--details-max-width) / 2 + 0.75rem) + 80px);
+    right: auto;
+    left: 0.5rem;
   }
 }
