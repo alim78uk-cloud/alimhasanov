@@ -462,7 +462,7 @@
        We use high z-index and ensure body.tabs-open raises the panel.
        ======================================== */
     body.tabs-open .details-panel {
-        z-index: 9990 !important;
+        z-index: 10120 !important; /* Lift above header/profile in hero view */
         visibility: visible !important;
     }
 
@@ -481,7 +481,7 @@
         position: fixed;
         top: calc(var(--sticky-height) + 32px); /* Aligned just below the burger button tier */
         right: 1.5rem;
-        z-index: 10060 !important;
+        z-index: 10160 !important; /* Keep dropdown above header/profile image */
         overflow: visible;
         align-items: flex-end;
         background: var(--bg-color);
@@ -602,7 +602,7 @@
 
     /* Raise details-panel when dropdown is open to escape stacking context */
     body.tabs-open .details-panel {
-        z-index: 9990 !important;
+        z-index: 10120 !important; /* Lift above header/profile in hero view */
     }
 
     /* Hide email/LinkedIn icons in header - moved to burger menu */
@@ -1024,7 +1024,7 @@
         position: fixed;
         top: calc(var(--sticky-height) + 32px); /* Brought closer to burger button */
         right: 0.75rem;
-        z-index: 10060 !important;
+        z-index: 10160 !important; /* Keep dropdown above header/profile image */
         overflow: visible;
         align-items: flex-end;
         background: var(--bg-color);
