@@ -1,7 +1,7 @@
 /* ========================================
    RESPONSIVE - Tablet (768px - 1024px)
    ======================================== */
-@media (max-width: 1023px) and (min-width: 769px) {
+@media (max-width: 1024px) and (min-width: 769px) {
     /* ========================================
        TABLET: Fixed Header + Sub-header Layout
        ======================================== */
@@ -58,48 +58,76 @@
        TABLET: Fixed Sub-header Controls
        ======================================== */
 
-    /* PROD/UAT Toggle - Fixed below header, LEFT - always visible with glass */
+    /* PROD/UAT Toggle - Fixed in header bar, Left */
     .fixed-mode-toggle {
         position: fixed !important;
-        top: calc(var(--sticky-height) + 12px) !important;
+        top: 15px !important;
         left: 1.5rem !important;
         right: auto !important;
-        z-index: 201;
-        background: var(--header-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        padding: 0.5rem 0.75rem;
-        border-radius: 6px;
+        z-index: 10005;
+        background: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        transform: none !important;
+        height: 32px !important;
         display: flex !important;
-        align-items: center;
+        align-items: center !important;
         opacity: 1 !important;
         visibility: visible !important;
-        box-shadow:
-            -2px 2px 6px rgba(0, 0, 0, 0.05),
-            -1px 1px 2px rgba(0, 0, 0, 0.04);
+        box-shadow: none !important;
+        border: none !important;
     }
 
-    /* Burger menu area - Fixed below header, RIGHT with glass */
+    /* Burger menu area - Fixed in header bar, Right */
     .header-controls {
         position: fixed !important;
-        top: calc(var(--sticky-height) + 12px) !important;
+        top: 15px !important;
         right: 1.5rem !important;
         left: auto !important;
         transform: none !important;
-        z-index: 201;
-        background: var(--header-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        padding: 0.4rem 0.6rem;
-        border-radius: 6px;
+        z-index: 10005;
+        background: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
         display: flex !important;
-        align-items: center;
-        gap: 0.75rem;
+        align-items: center !important;
+        gap: 0.5rem;
+        height: 32px !important;
+        width: auto !important;
         opacity: 1 !important;
         visibility: visible !important;
-        box-shadow:
-            -2px 2px 6px rgba(0, 0, 0, 0.05),
-            -1px 1px 2px rgba(0, 0, 0, 0.04);
+        box-shadow: none !important;
+        border: none !important;
+    }
+
+    /* Burger menu button - ensure visibility */
+    .mobile-burger-btn {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        padding: 4px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        width: 32px !important;
+        height: 32px !important;
+        min-width: 32px !important;
+        min-height: 32px !important;
+        flex-shrink: 0 !important;
+    }
+
+    .mobile-burger-btn span {
+        width: 22px !important;
+        height: 2px !important;
+        background: var(--text-color) !important;
+        border-radius: 2px;
+        display: block !important;
     }
 
     /* Burger menu button */
@@ -121,18 +149,82 @@
         transition: transform 0.2s ease, opacity 0.2s ease;
     }
 
-    /* Active tab label - shown next to burger (non-hero only) with red underline */
-    .mobile-active-tab-label {
-        display: none;
-        font-size: 0.85rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        color: var(--text-color);
-        position: static !important;
-        top: auto !important;
+    /* ========================================
+       TABLET: Collapsed Header (Non-Hero)
+       Adopting Mobile View "Nuclear Option" for visibility
+       ======================================== */
+    :root {
+        --sticky-height: 75px; /* Enough for 2 rows */
+    }
+
+    .header.collapsed {
+        padding: 0;
+        height: var(--sticky-height);
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        z-index: 10000 !important;
+    }
+
+    /* Row 1: Name */
+    .header.collapsed .name-area {
+        position: fixed !important;
+        top: 15px !important;
+        left: 50% !important;
         right: auto !important;
-        padding-bottom: 2px;
-        border-bottom: 2px solid var(--accent-color);
+        transform: translateX(-50%) !important;
+        width: auto !important;
+        margin: 0 !important;
+        z-index: 10005 !important;
+        display: flex !important;
+        justify-content: center !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: none !important;
+    }
+
+    /* Hide the line break in collapsed state */
+    .header.collapsed .name br {
+        display: none !important;
+    }
+
+    .header.collapsed .name {
+        pointer-events: auto !important;
+        font-size: 1.25rem !important;
+        font-weight: 700;
+        line-height: 1 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        white-space: nowrap !important;
+        color: var(--text-color) !important;
+        text-align: center;
+    }
+
+    /* Row 2: Subtitle */
+    .header.collapsed .header-center {
+        position: fixed !important;
+        top: 43px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        width: auto !important;
+        z-index: 10005 !important;
+        display: flex !important;
+        justify-content: center !important;
+        margin: 0 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: none !important;
+    }
+
+    .header.collapsed .header-subtitle {
+        font-size: 0.7rem !important;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--secondary-text) !important;
+        text-align: center;
+        display: block !important;
     }
 
     body.show-details .mobile-active-tab-label {

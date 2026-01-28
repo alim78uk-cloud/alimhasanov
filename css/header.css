@@ -556,7 +556,6 @@ body.off-hours .hero-tagline {
   }
 }
 
-/* 1280x800 range */
 @media (max-width: 1281px) and (min-width: 1025px) {
   .header:not(.collapsed) .name-area {
     margin-left: 15.5vw;
@@ -572,7 +571,7 @@ body.off-hours .hero-tagline {
 }
 
 
-@media (max-width: 1023px) and (min-width: 769px) {
+@media (max-width: 1024px) and (min-width: 769px) {
   /* ========================================
      TABLET: Hero Layout - Centered vertical stack
      ======================================== */
@@ -651,75 +650,6 @@ body.off-hours .hero-tagline {
     justify-content: center;
   }
 
-  /* ========================================
-     TABLET: Collapsed Header - Name + Subtitle only
-     Toggle and burger are fixed OUTSIDE header (handled in responsive.css)
-     ======================================== */
-  .header.collapsed {
-    height: var(--sticky-height);
-    padding: 0 2rem;
-    align-items: center;
-    z-index: 102 !important;
-  }
-
-  .header.collapsed .header-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    gap: 0.45rem;
-  }
-
-  .header.collapsed .name-area {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    position: static;
-    margin: 0;
-    transform: none !important;
-    justify-content: center;
-  }
-
-  .header.collapsed .name {
-    display: block !important;
-    visibility: visible !important;
-    font-size: 1.3rem;
-    text-align: center;
-    white-space: nowrap;
-    line-height: 1;
-    margin: 0;
-  }
-
-  .header.collapsed .header-center {
-    display: block !important;
-    visibility: visible !important;
-    position: static !important;
-    transform: none !important;
-    margin: 0;
-    text-align: center;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-  }
-
-  .header.collapsed .header-subtitle {
-    display: block !important;
-    visibility: visible !important;
-    font-size: 0.7rem;
-    white-space: nowrap;
-    text-align: center;
-    line-height: 1;
-  }
-
-  /* Hide elements not needed in collapsed header */
-  .header.collapsed .hero-summary,
-  .header.collapsed .journey-trace,
-  .header.collapsed .profile-container,
-  .header.collapsed .sticky-profile {
-    display: none !important;
-  }
 }
 
 @media (max-width: 768px) {
