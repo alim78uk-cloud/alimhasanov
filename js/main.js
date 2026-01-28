@@ -21,6 +21,12 @@ const defaultHeaderSubtitle =
   headerSubtitle?.dataset?.en || headerSubtitle?.textContent?.trim() || "";
 const heroDescription = document.getElementById("heroDescription");
 const defaultHeroDescription = heroDescription?.innerHTML || "";
+const prodProfile = {
+  src: "images/darkblue_centered.png",
+};
+const uatProfile = {
+  src: "images/uat_image_nobg.png",
+};
 
 // ========================================
 // State
@@ -28,6 +34,79 @@ const defaultHeroDescription = heroDescription?.innerHTML || "";
 let currentPanel = "hero"; // 'hero' or 'details'
 let isOffHours = false;
 let isAnimating = false;
+
+function applyMode(nextIsOffHours, { animate = true } = {}) {
+  isOffHours = nextIsOffHours;
+
+  document.body.classList.toggle("off-hours", isOffHours);
+  labelOn.classList.toggle("active", !isOffHours);
+  labelOff.classList.toggle("active", isOffHours);
+
+  // Update tagline and header subtitle
+  const taglineText = isOffHours
+    ? "Tinkerer | Traveler | Reader | Human"
+    : defaultHeroTagline || defaultHeaderSubtitle;
+  const subtitleText = isOffHours
+    ? "Tinkerer | Traveler | Reader | Human"
+    : defaultHeaderSubtitle || defaultHeroTagline;
+  heroTagline.textContent = taglineText;
+  headerSubtitle.textContent = subtitleText;
+
+  // Update Hero Description for UAT
+  if (heroDescription) {
+    if (isOffHours) {
+      heroDescription.innerHTML = `
+        <p style="margin-bottom: 0.5rem">Always curious</p>
+        <p style="margin-bottom: 0.5rem">A nerd by nature</p>
+        <p style="margin-bottom: 0.5rem">Endless travelling</p>
+        <p style="margin-bottom: 0.5rem">Allergic to honey</p>
+        <p style="margin-bottom: 0.5rem">News junkie</p>
+      `;
+    } else {
+      heroDescription.innerHTML = defaultHeroDescription;
+    }
+  }
+
+  const targetProfile = isOffHours ? uatProfile : prodProfile;
+
+  if (!allProfileImgs.length) return;
+
+  if (!animate) {
+    allProfileImgs.forEach((img) => {
+      img.style.transition = "none";
+      img.style.opacity = "1";
+      img.src = targetProfile.src;
+    });
+
+    requestAnimationFrame(() => {
+      allProfileImgs.forEach((img) => {
+        img.style.transition = "opacity 0.3s ease";
+      });
+    });
+
+    return;
+  }
+
+  // Image Transition
+  allProfileImgs.forEach((img) => {
+    // Only animate opacity to avoid seeing the flip
+    img.style.transition = "opacity 0.3s ease";
+    img.style.opacity = "0";
+  });
+
+  setTimeout(() => {
+    allProfileImgs.forEach((img) => {
+      img.src = targetProfile.src;
+    });
+
+    // Fade back in
+    requestAnimationFrame(() => {
+      allProfileImgs.forEach((img) => {
+        img.style.opacity = "1";
+      });
+    });
+  }, 300);
+}
 
 // ========================================
 // Environment Check (Hide Admin in Prod)
@@ -56,6 +135,10 @@ const headerCenter = document.querySelector(".header-center");
 const headerRight = document.querySelector(".header-controls");
 const tabsToggleBtn = document.getElementById("tabsToggleBtn");
 const tabsToggleLabel = document.getElementById("tabsToggleLabel");
+
+// Mobile burger menu elements
+const mobileBurgerBtn = document.getElementById("mobileBurgerBtn");
+const mobileActiveTabLabel = document.getElementById("mobileActiveTabLabel");
 
 function goToPanel(panel) {
   if (isAnimating || panel === currentPanel) return;
@@ -172,6 +255,9 @@ function resetElasticPull() {
 document.addEventListener(
   "wheel",
   (e) => {
+    // Disable scroll-triggered transitions on mobile/tablet - user scrolls hero manually
+    if (window.innerWidth <= 1024) return;
+
     if (isAnimating) return;
 
     if (currentPanel === "details") {
@@ -267,6 +353,9 @@ document.addEventListener(
 document.addEventListener(
   "touchend",
   (e) => {
+    // Disable swipe-triggered transitions on mobile/tablet - user navigates via burger menu
+    if (window.innerWidth <= 1024) return;
+
     if (isAnimating) return;
 
     const touchEndY = e.changedTouches[0].clientY;
@@ -299,67 +388,7 @@ nameTitle.addEventListener("click", () => {
 // Mode Toggle (Office Hours ON/OFF)
 // ========================================
 modeToggle.addEventListener("click", () => {
-  isOffHours = !isOffHours;
-
-  document.body.classList.toggle("off-hours", isOffHours);
-  labelOn.classList.toggle("active", !isOffHours);
-  labelOff.classList.toggle("active", isOffHours);
-
-  // Update tagline and header subtitle
-  const taglineText = isOffHours
-    ? "Tinkerer | Traveler | Reader | Human"
-    : defaultHeroTagline || defaultHeaderSubtitle;
-  const subtitleText = isOffHours
-    ? "Tinkerer | Traveler | Reader | Human"
-    : defaultHeaderSubtitle || defaultHeroTagline;
-  heroTagline.textContent = taglineText;
-  headerSubtitle.textContent = subtitleText;
-
-  // Update Hero Description for UAT
-  if (heroDescription) {
-    if (isOffHours) {
-      heroDescription.innerHTML = `
-        <p style="margin-bottom: 0.5rem">Always curious</p>
-        <p style="margin-bottom: 0.5rem">A nerd by nature</p>
-        <p style="margin-bottom: 0.5rem">Endless travelling</p>
-        <p style="margin-bottom: 0.5rem">Allergic to honey</p>
-        <p style="margin-bottom: 0.5rem">News junkie</p>
-      `;
-    } else {
-      heroDescription.innerHTML = defaultHeroDescription;
-    }
-  }
-
-  // Image Transition
-  const prodSrc = "images/darkblue_centered.png";
-  const uatSrc = "images/uat_image_nobg.png";
-
-  allProfileImgs.forEach((img) => {
-    // Only animate opacity to avoid seeing the flip
-    img.style.transition = "opacity 0.3s ease";
-    img.style.opacity = "0";
-  });
-
-  setTimeout(() => {
-    const targetSrc = isOffHours ? uatSrc : prodSrc;
-    const targetBlend = isOffHours ? "normal" : "multiply";
-    // Prod (default CSS) is scaleX(-1). UAT needs scaleX(1).
-    // We apply this instantly while invisible.
-    const targetTransform = isOffHours ? "scaleX(1)" : "";
-
-    allProfileImgs.forEach((img) => {
-      img.src = targetSrc;
-      img.style.mixBlendMode = targetBlend;
-      img.style.transform = targetTransform;
-    });
-
-    // Fade back in
-    requestAnimationFrame(() => {
-      allProfileImgs.forEach((img) => {
-        img.style.opacity = "1";
-      });
-    });
-  }, 300);
+  applyMode(!isOffHours, { animate: true });
 
   // Reset scroll when switching modes
   const detailsWrapper = document.querySelector(".details-wrapper");
@@ -368,6 +397,7 @@ modeToggle.addEventListener("click", () => {
   updateTabsToggleLabel();
   closeTabsMenu();
 });
+
 
 // ========================================
 // Student Jobs Expand/Collapse
@@ -386,24 +416,20 @@ function getActiveTabLabel() {
     ? "#uat-tabs .tab-btn.active"
     : "#prod-tabs .tab-btn.active";
   const activeBtn = document.querySelector(selector);
-  return activeBtn?.textContent?.trim() || "Menu";
+  
+  if (!activeBtn) return "Menu";
+
+  // Using innerText is more reliable for gathering formatted text from elements
+  // We'll clone to avoid any side effects from cleaning nodes
+  const clone = activeBtn.cloneNode(true);
+  
+  // Remove download bits if any exist (safety)
+  const downloads = clone.querySelectorAll('.tab-download-btn, .mobile-tab-download-icon');
+  downloads.forEach(d => d.remove());
+
+  return clone.innerText.trim().replace(/\s+/g, ' ') || "Menu";
 }
 
-function updateTabsToggleLabel() {
-  if (!tabsToggleLabel) return;
-  tabsToggleLabel.textContent = getActiveTabLabel();
-  
-  // Show/hide download button based on whether tech tab is active
-  const toggleDownloadBtn = document.getElementById("toggleDownloadBtn");
-  if (toggleDownloadBtn) {
-    const selector = document.body.classList.contains("off-hours")
-      ? "#uat-tabs .tab-btn.active"
-      : "#prod-tabs .tab-btn.active";
-    const activeBtn = document.querySelector(selector);
-    const isTechTab = activeBtn?.dataset?.tab === "tech";
-    toggleDownloadBtn.style.display = isTechTab ? "inline-flex" : "none";
-  }
-}
 
 function closeTabsMenu() {
   if (!tabsToggleBtn) return;
@@ -416,7 +442,19 @@ function toggleTabsMenu() {
   const willOpen = !document.body.classList.contains("tabs-open");
   document.body.classList.toggle("tabs-open", willOpen);
   tabsToggleBtn.setAttribute("aria-expanded", String(willOpen));
-  if (willOpen) updateTabsToggleLabel();
+
+  if (willOpen) {
+    // When opening menu on hero page, highlight Home tab
+    if (currentPanel === "hero") {
+      const tabsContainer = document.body.classList.contains("off-hours")
+        ? "#uat-tabs" : "#prod-tabs";
+      const allBtns = document.querySelectorAll(`${tabsContainer} .tab-btn`);
+      allBtns.forEach(b => b.classList.remove("active"));
+      const homeBtn = document.querySelector(`${tabsContainer} .tab-btn[data-tab="home"]`);
+      if (homeBtn) homeBtn.classList.add("active");
+    }
+    updateTabsToggleLabel();
+  }
 }
 
 if (tabsToggleBtn) {
@@ -425,12 +463,90 @@ if (tabsToggleBtn) {
   });
 }
 
+// Mobile burger button listener
+if (mobileBurgerBtn) {
+  mobileBurgerBtn.addEventListener("click", () => {
+    toggleTabsMenu();
+  });
+}
+
+function updateTabsToggleLabel() {
+  const activeLabelText = getActiveTabLabel();
+  
+  // Update original label (if visible)
+  if (tabsToggleLabel) {
+    tabsToggleLabel.textContent = activeLabelText;
+  }
+
+  // Update mobile active tab label (shown below header)
+  if (mobileActiveTabLabel) {
+    if (activeLabelText === "Home" || currentPanel === "hero") {
+      mobileActiveTabLabel.innerHTML = "";
+      mobileActiveTabLabel.style.display = "none";
+    } else {
+      let finalHtml = activeLabelText;
+      
+      // 1. Styling for "TASKS AND TOOLS" - Explicitly handle spacing and bolding
+      // Check if this is the tech tab to be absolutely sure we don't merge words
+      // Scope to the correct container to prevent false positives from hidden mode tabs
+      const containerSelector = document.body.classList.contains("off-hours") ? "#uat-tabs" : "#prod-tabs";
+      const activeBtn = document.querySelector(`${containerSelector} .tab-btn.active`);
+      const isTechTab = activeBtn?.dataset?.tab === "tech";
+
+      if (isTechTab) {
+         finalHtml = '<span style="font-weight: 700;">TASKS</span>&nbsp;AND&nbsp;<span class="font-monospace">TOOLS</span>';
+      } else {
+          // General replacements for other cases if they happen to contain these words
+          if (finalHtml.includes("TASKS")) {
+             finalHtml = finalHtml.replace("TASKS", '<span style="font-weight: 700;">TASKS</span>');
+          }
+          if (finalHtml.includes("TOOLS")) {
+             finalHtml = finalHtml.replace("TOOLS", '<span class="font-monospace">TOOLS</span>');
+          }
+      }
+
+      // 2. Add Download Icon if "TASKS AND TOOLS" (active tab check)
+      if (isTechTab) {
+        // Build download icon
+        const downloadIcon = `
+          <div class="mobile-tab-download-icon" onclick="if(window.openMatrixExportModal) { window.openMatrixExportModal(); event.stopPropagation(); }" style="display:inline-flex; align-items:center; margin-right:6px; cursor:pointer;">
+             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+             </svg>
+          </div>`;
+          finalHtml = downloadIcon + finalHtml;
+          
+          mobileActiveTabLabel.style.display = "flex";
+          mobileActiveTabLabel.style.alignItems = "center";
+      } else {
+          mobileActiveTabLabel.style.display = "block";
+      }
+
+      mobileActiveTabLabel.innerHTML = finalHtml;
+    }
+  }
+}
+
 // ========================================
 // Details Panel Tab Switching (PROD)
 // ========================================
 const prodTabBtns = document.querySelectorAll("#prod-tabs .tab-btn");
 prodTabBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
+    // Check if Home tab
+    if (btn.dataset.tab === "home") {
+        goToPanel("hero");
+        closeTabsMenu();
+        // Hide the mobile tab label when going home
+        if (mobileActiveTabLabel) {
+          mobileActiveTabLabel.textContent = "";
+          mobileActiveTabLabel.style.display = "none";
+        }
+        return; // Don't activate tab styling for Home
+    }
+
     // 1. Switch active button
     prodTabBtns.forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
@@ -458,6 +574,9 @@ prodTabBtns.forEach((btn) => {
       }
     }
 
+    if (currentPanel === "hero") {
+        goToPanel("details");
+    }
     updateTabsToggleLabel();
     closeTabsMenu();
   });
@@ -469,6 +588,18 @@ prodTabBtns.forEach((btn) => {
 const uatTabBtns = document.querySelectorAll("#uat-tabs .tab-btn");
 uatTabBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
+    // Check if Home tab
+    if (btn.dataset.tab === "home") {
+        goToPanel("hero");
+        closeTabsMenu();
+        // Hide the mobile tab label when going home
+        if (mobileActiveTabLabel) {
+          mobileActiveTabLabel.textContent = "";
+          mobileActiveTabLabel.style.display = "none";
+        }
+        return; // Don't activate tab styling for Home
+    }
+
     // 1. Toggle active class on nav items
     uatTabBtns.forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
@@ -485,6 +616,9 @@ uatTabBtns.forEach((btn) => {
       targetContent.classList.add("active");
     }
 
+    if (currentPanel === "hero") {
+        goToPanel("details");
+    }
     updateTabsToggleLabel();
     closeTabsMenu();
   });
@@ -577,7 +711,6 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-
 // ========================================
 // Theme Toggle
 // ========================================
@@ -665,6 +798,13 @@ langBtns.forEach((btn) => {
 });
 switchLanguage(savedLang, false);
 
+// Sync UAT state on load if the page is pre-set to off-hours (e.g., UAT environment).
+if (document.body.classList.contains("off-hours")) {
+  applyMode(true, { animate: false });
+}
+
+
+
 // UAT: Toggle Bucket List Items
 document.querySelectorAll(".bucket-item").forEach((item) => {
   item.addEventListener("click", () => {
@@ -700,7 +840,7 @@ function openContactModal() {
 function closeContactModal() {
   if (contactModal) contactModal.classList.remove("active");
   document.body.style.overflow = ""; // Restore scrolling
-  
+
   // Reset form after a delay (animation time)
   setTimeout(() => {
     if (contactForm) contactForm.reset();
@@ -724,14 +864,14 @@ if (contactEmailBtns.length) {
 if (contactForm) {
   contactForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    
+
     const submitBtn = contactForm.querySelector(".contact-submit");
     const originalBtnText = submitBtn.innerHTML;
-    
+
     // UI Loading State
     submitBtn.classList.add("loading");
-    submitBtn.innerHTML = '<span>Sending...</span>';
-    
+    submitBtn.innerHTML = "<span>Sending...</span>";
+
     // --- USER CONFIGURATION REQUIRED ---
     // Update these IDs after creating your Google Form
     const FORM_ID = "1FAIpQLSc722ZnUmi2V0zEEWpnmITQVCe8d8laS1dsY7dry3gcFRAi1A";
@@ -739,13 +879,13 @@ if (contactForm) {
       name: "entry.778663532",
       email: "entry.1304901056",
       subject: "entry.245579432",
-      message: "entry.502832612"
+      message: "entry.502832612",
     };
     // ------------------------------------
 
     const formData = new FormData(contactForm);
     const googleFormUrl = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
-    
+
     // We use URLSearchParams for the POST body
     const params = new URLSearchParams();
     params.append(ENTRY_IDS.name, formData.get("name"));
@@ -763,18 +903,19 @@ if (contactForm) {
         mode: "no-cors",
         body: params,
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        }
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
       });
 
       // Submission Success UI
       contactFormContainer.style.opacity = "0";
       contactFormContainer.style.pointerEvents = "none";
       contactSuccess.classList.add("active");
-
     } catch (error) {
       console.error("Form submission error:", error);
-      alert("Something went wrong. Please try again or use alim78uk@gmail.com directly.");
+      alert(
+        "Something went wrong. Please try again or use alim78uk@gmail.com directly.",
+      );
     } finally {
       submitBtn.classList.remove("loading");
       submitBtn.innerHTML = originalBtnText;

@@ -2,13 +2,178 @@
    RESPONSIVE - Tablet (768px - 1024px)
    ======================================== */
 @media (max-width: 1024px) and (min-width: 769px) {
+    /* ========================================
+       TABLET: Fixed Header + Sub-header Layout
+       ======================================== */
+
+    /* Hide sidebar nav dots on tablet */
+    .sidebar-nav {
+        display: none !important;
+    }
+
+    /* Hide email/LinkedIn icons in header - moved to burger menu */
+    .header-controls .header-linkedin,
+    .header-controls .contact-email-btn {
+        display: none !important;
+    }
+
+    /* ========================================
+       TABLET: Glass Bar at Top of Screen
+       Must be above header (z-index 100)
+       ======================================== */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--sticky-height);
+        background: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        z-index: 9999;
+        pointer-events: none;
+    }
+
+    /* Hero state: Hide only collapsed-header elements, keep hero content visible */
+    .header:not(.collapsed) .header-center,
+    .header:not(.collapsed) .header-controls .sticky-profile {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* Make hero page scrollable on tablet too */
+    .header:not(.collapsed) {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .header:not(.collapsed) .header-content {
+        min-height: 100%;
+        height: auto;
+        padding-bottom: 2rem;
+    }
+
+    /* ========================================
+       TABLET: Fixed Sub-header Controls
+       ======================================== */
+
+    /* PROD/UAT Toggle - Fixed below header, LEFT - always visible with glass */
+    .fixed-mode-toggle {
+        position: fixed !important;
+        top: calc(var(--sticky-height) + 12px) !important;
+        left: 1.5rem !important;
+        right: auto !important;
+        z-index: 201;
+        background: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 0.5rem 0.75rem;
+        border-radius: 6px;
+        display: flex !important;
+        align-items: center;
+        opacity: 1 !important;
+        visibility: visible !important;
+        box-shadow:
+            -2px 2px 6px rgba(0, 0, 0, 0.05),
+            -1px 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Burger menu area - Fixed below header, RIGHT with glass */
+    .header-controls {
+        position: fixed !important;
+        top: calc(var(--sticky-height) + 12px) !important;
+        right: 1.5rem !important;
+        left: auto !important;
+        transform: none !important;
+        z-index: 201;
+        background: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 0.4rem 0.6rem;
+        border-radius: 6px;
+        display: flex !important;
+        align-items: center;
+        gap: 0.75rem;
+        opacity: 1 !important;
+        visibility: visible !important;
+        box-shadow:
+            -2px 2px 6px rgba(0, 0, 0, 0.05),
+            -1px 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Burger menu button */
+    .mobile-burger-btn {
+        display: flex !important;
+        flex-direction: column;
+        gap: 4px;
+        padding: 6px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    .mobile-burger-btn span {
+        width: 20px;
+        height: 2px;
+        background: var(--text-color);
+        border-radius: 2px;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    /* Active tab label - shown next to burger (non-hero only) with red underline */
+    .mobile-active-tab-label {
+        display: none;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--text-color);
+        position: static !important;
+        top: auto !important;
+        right: auto !important;
+        padding-bottom: 2px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    body.show-details .mobile-active-tab-label {
+        display: block;
+    }
+
+    /* Social links in burger menu - icons only, row layout */
+    .menu-social-links {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 1rem;
+        width: 100%;
+        padding-bottom: 0.75rem;
+        margin-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .menu-social-link span {
+        display: none; /* Hide text labels */
+    }
+
+    .menu-social-link {
+        padding: 0.5rem;
+    }
+
+    /* Hide original tabs-toggle button (we use burger in header-controls) */
+    .tabs-toggle {
+        display: none !important;
+    }
+
+    /* ========================================
+       TABLET: Experience Items Layout
+       ======================================== */
     .skills-column, .soft-skills-column { display: none; }
     .grid-layout { grid-template-columns: 1fr; }
     .exp-item,
     .education-section .exp-item {
         padding: 1.5rem !important;
-        grid-template-columns: 1fr auto !important; /* Match mobile: Date takes space, Location fits content */
-        column-gap: 0 !important; /* Fuse the bars */
+        grid-template-columns: 1fr auto !important;
+        column-gap: 0 !important;
         grid-template-areas:
             "title toggle"
             "date location"
@@ -19,12 +184,7 @@
         margin-bottom: 1rem;
     }
 
-    /* MATCH MOBILE LAYOUT FOR EDUCATION SPECIFICALLY IF NEEDED overrides */
-    /* The above generic .exp-item rule covers both if they share the class. 
-       However, we need to ensure .education-section .exp-item doesn't have 
-       specific desktop overrides persisting. */
     .education-section .exp-item {
-        /* Force the areas again to be sure */
         grid-template-areas:
             "title toggle"
             "date location"
@@ -33,17 +193,15 @@
             "details details" !important;
     }
 
-    /* Reduce degree title font size further */
     .education-section .exp-role h2 {
         font-size: 1.4rem;
     }
 
-    /* Match Mobile Date/Location Bar Design */
     .exp-date {
         justify-content: flex-start;
         padding-left: 0.75rem;
         width: 100%;
-        background: rgba(0,0,0,0.08); /* Unified gray */
+        background: rgba(0,0,0,0.08);
         border-radius: 4px 0 0 4px;
         height: 2rem;
         display: flex;
@@ -54,28 +212,29 @@
     .exp-location {
         justify-content: flex-end;
         padding-right: 0.75rem;
-        padding-left: 0.75rem; /* Add left padding */
+        padding-left: 0.75rem;
         width: 100%;
-        background: rgba(0,0,0,0.08); /* Unified gray */
+        background: rgba(0,0,0,0.08);
         border-radius: 0 4px 4px 0;
         height: 2rem;
         display: flex;
         align-items: center;
         font-size: 0.9rem;
-        white-space: nowrap; /* Prevent location wrapping */
+        white-space: nowrap;
     }
 
-    /* Content margins */
     .exp-details-content {
-        margin-top: 1.5rem; /* Increased margin */
-        padding: 0 1rem; /* Increased padding */
+        margin-top: 1.5rem;
+        padding: 0 1rem;
     }
 
     .job-summary, .job-highlights {
         margin-bottom: 1rem;
     }
 
-    /* Skill Matrix - Tablet adjustments */
+    /* ========================================
+       TABLET: Skill Matrix
+       ======================================== */
     .hm-layout-container {
         width: 100%;
         left: 0;
@@ -130,71 +289,6 @@
         font-size: 7px;
     }
 
-    /* Details panel padding - Align with Header (2rem) */
-    .details-wrapper {
-        padding: 0 2rem;
-    }
-
-    /* Add breathing room for all tab content */
-    .tab-pane {
-        padding: 0.6rem 2rem; /* Reduced top padding by 40% */
-        padding-bottom: 3rem; /* Bottom margin for tablet view */
-    }
-
-    /* Tabs - make scrollable */
-    .details-tabs {
-        gap: 1rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        padding-top: 110px; /* Reduced to bring tabs closer to header */
-        overflow-x: auto;
-        justify-content: center; /* Center tabs as requested */
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        background: transparent;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        border: none;
-        box-shadow: none;
-    }
-
-    .details-tabs::-webkit-scrollbar {
-        display: none;
-    }
-
-    /* Ensure grey underline spans content width only */
-    .details-tabs::after {
-        display: none; /* remove full width underline */
-    }
-
-    .tabs-nav-wrapper {
-        display: flex;
-        gap: 1rem;
-        border-bottom: none;
-        padding-bottom: 0;
-        width: max-content; /* Shrink to fit content */
-    }
-
-    .tab-btn {
-        flex-shrink: 0;
-        padding: 0.75rem 1rem 2px; /* Closer underline */
-        font-size: 16px; /* 20% larger than 13px */
-    }
-
-    #prod-tabs,
-    #uat-tabs {
-        background: transparent;
-        border: none;
-        box-shadow: none;
-    }
-
-    /* Header controls */
-    .header-controls {
-        right: 1rem;
-        gap: 1rem;
-    }
-
-    /* Legend - compact */
     .hm-legend.hm-legend-style-stacked {
         padding: 6px 10px;
         gap: 8px;
@@ -217,320 +311,58 @@
         height: 16px;
     }
 
-}
-
-/* ========================================
-   RESPONSIVE - Mobile (<768px)
-   ======================================== */
-@media (max-width: 768px) {
-    :root {
-        --sticky-height: 52px;
-        --mobile-tools-sticky-top: calc(var(--sticky-height) + 24px + 40px + 2px);
-    }
-
-    /* ---- HERO SECTION ---- */
-    .header {
-        padding: 0.5rem 1.25rem 1.5rem; /* Reduced top padding by 50% (was 1rem) */
-        align-items: center;
-    }
-
-    .header-content {
-        justify-content: flex-start;
-        align-items: center;
-        text-align: center;
-        padding-top: 10vh;
-    }
-
-    .name {
-        font-size: clamp(1.6rem, 7.5vw, 2.3rem);
-    }
-
-    .hero-summary {
-        order: 4;
-        position: relative;
-        top: auto;
-        max-width: 100%;
-        margin: 1.5rem 0 0.5rem;
-        margin-left: 0;
-        text-align: center;
-    }
-
-    .hero-description {
-        font-size: 0.95rem;
-        line-height: 1.6;
-    }
-
-    .profile-container {
-        position: relative;
-        top: auto;
-        right: auto;
-        width: 140px; /* Specific size matching header.css */
-        max-width: 140px;
-        height: 140px;
-        margin: 0 auto;
-        order: 1;
-        /* Ensure no cropping overrides from here */
-        overflow: visible !important;
-        border-radius: 0 !important;
-    }
-
-    .name-area {
-        order: 2;
-        margin-left: 0;
-        justify-content: center;
-        flex-wrap: nowrap; /* Prevent wrapping */
-        gap: 0.75rem;
-        transform: none;
-    }
-    
-    .name {
-        white-space: nowrap; /* Force single line */
-    }
-
-    .journey-trace {
-        order: 3;
-        font-size: 0.4rem; /* Reduced ISO size */
-        flex-wrap: wrap;
-        justify-content: center;
-        margin: 0.2rem auto 0 auto;
-        transform: none;
-        gap: 0.3rem;
-    }
-
-    .j-code {
-        font-size: 0.9rem;
-    }
-
-    .j-arrow {
-        font-size: 0.8rem;
-    }
-
-    .sidebar-nav {
-        display: flex;
-        left: 2px !important;
-        right: auto !important;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    /* ---- COLLAPSED HEADER ---- */
-    .header.collapsed {
-        padding: 0px 0.5rem 1px 0.5rem; 
-        height: var(--h-total-height, 48px); /* User final-ish: 48px */
-        background-color: var(--header-bg);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-    }
-
-    /* ---- COLLAPSED GRID LAYOUT ---- */
-    .header.collapsed .header-content {
-        display: grid;
-        /* User final-ish: 21% 55% 19% 7% */
-        grid-template-columns: var(--h-col-1, 21%) var(--h-col-2, 55%) var(--h-col-3, 19%) var(--h-col-4, 7%); 
-        grid-template-rows: var(--h-row-ratio, 1.3fr 0.8fr); /* Tightened row ratio */
-        align-items: stretch; 
-        column-gap: 0;
-        row-gap: 0.25rem; /* Reduced from 0.5rem */
-        width: 100%;
-        height: 100% !important; 
-        padding-top: 0;
-        overflow: visible; 
-    }
-
-    .header.collapsed .name {
-        font-weight: 700;
-        white-space: nowrap;
-    }
-
-    .header.collapsed .name-area {
-        gap: 0;
-        /* Position handled in overrides below */
-    }
-
-    /* Header controls - mobile positioning */
-    .header-controls {
-        right: 0.5rem;
-        gap: 0.8rem;
-        top: calc(12px + var(--sticky-height) / 2);
-    }
-
-    .header.collapsed .sticky-profile {
-        display: none; /* Hide duplicate photo if present */
-    }
-
-    .language-switcher {
-        gap: 0.5rem;
-    }
-
-    .lang-btn {
-        font-size: 0.75rem;
-    }
-
-    .mode-label {
-        font-size: 0.55rem;
-    }
-    
-    .mode-toggle .toggle-switch {
-        height: 8px;
-    }
-
-    .header-linkedin svg, 
-    .contact-email-btn svg {
-        width: var(--h-icon-size, 16px); /* User final-ish: 16px */
-        height: var(--h-icon-size, 16px); /* User final-ish: 16px */
-    }
-
-    .fixed-mode-toggle {
-        left: 0.5rem;
-        top: calc(12px + var(--sticky-height) / 2);
-    }
-
-    /* ---- COLLAPSED HEADER OVERRIDES ---- */
-    .header-subtitle {
-        font-size: var(--h-sub-size, 0.6rem); /* Reduced from 0.65rem */
-        line-height: 1.1;
-        white-space: nowrap;
-        text-align: center;
-        opacity: 0.8;
-    }
-
-    /* ---- COLLAPSED HEADER GRID ITEMS PLACEMENT ---- */
-    
-    /* 1. Toggle (Left) */
-    .header.collapsed .fixed-mode-toggle {
-        position: static;
-        display: flex;
-        grid-column: 1;
-        grid-row: 1;
-        justify-self: start;
-        align-self: end; /* Pull to bottom of Row 1 */
-        margin: 0;
-        transform: none;
-        width: 100%; 
-        padding-bottom: 2px; /* Subtle lift */
-    }
-
-    /* 2. Name (Center) */
-    .header.collapsed .name-area {
-        grid-column: 2;
-        grid-row: 1;
-        justify-self: center;
-        align-self: end; /* Pull to bottom of Row 1 */
-        margin: 0;
-        transform: none;
-        width: auto;
-        display: flex;
-        align-items: center; 
-    }
-
-    .header.collapsed .name {
-        margin: 0; 
-        line-height: 1;
-        font-size: var(--h-name-size, 1.15rem) !important; /* Reduced from 1.25rem */
-    }
-
-    /* 3. Subtitle (Row 2, Full Width) */
-    .header.collapsed .header-center {
-        position: static;
-        transform: none;
-        opacity: 1;
-        pointer-events: auto;
-        grid-column: 1 / span 4; 
-        grid-row: 2;
-        display: flex;
-        justify-content: center;
-        align-items: start; /* Pull to top of Row 2 */
-        width: 100%;
-        margin: 0;
-        padding-top: 2px; /* Close to Row 1 */
-    }
-    
-    .header.collapsed .header-subtitle {
-        text-align: center;
-        margin: 0;
-    }
-
-    /* 4. Icons (Right of Name) */
-    .header.collapsed .header-controls {
-        position: static;
-        display: flex;
-        gap: 0.5rem; 
-        grid-column: 3;
-        grid-row: 1;
-        justify-self: center;
-        align-self: end; /* Pull to bottom of Row 1 */
-        margin: 0;
-        width: auto;
-        padding: 0 0 4px 0; /* Align with name baseline roughly */
-        transform: none; 
-    }
-
-    /* 5. Photo (Far Right, Row 1 Only) */
-    .header.collapsed .profile-container {
-        position: static;
-        grid-column: 4;
-        grid-row: 1; 
-        width: var(--h-photo-size, 38px); /* User final-ish: 38px */
-        height: var(--h-photo-size, 38px); /* User final-ish: 38px */
-        margin: 0;
-        z-index: 20;
-        border-radius: 50% !important;
-        overflow: hidden !important; 
-        justify-self: end;
-        align-self: end; /* Pull to bottom of cell */
-        box-shadow: none !important; 
-        background-color: var(--bg-color) !important; 
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: translateY(4px) !important; /* Nudge photo a bit lower as requested */
-    }
-    
-    .header.collapsed .profile-container img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
-
-    /* ---- DETAILS PANEL ---- */
+    /* ========================================
+       TABLET: Details Panel & Tab Content
+       ======================================== */
     .details-wrapper {
-        padding: 0 0.25rem; /* Reduced padding from 0.75rem */
+        padding: 0 2rem;
     }
 
-    .tabs-toggle {
-        display: flex;
-        margin-top: 10px;
-        /* Track the height for use in sticky child elements */
-        --tabs-toggle-stuck-height: 50px;
+    .tab-pane {
+        padding: 0.6rem 2rem;
+        padding-top: calc(var(--sticky-height) + 80px); /* Space for header + sub-header */
+        padding-bottom: 3rem;
+    }
+
+    /* ========================================
+       TABLET: Burger Menu Dropdown
+       Note: Dropdown is inside details-panel but needs to appear above everything.
+       We use high z-index and ensure body.tabs-open raises the panel.
+       ======================================== */
+    body.tabs-open .details-panel {
+        z-index: 9998 !important;
+        visibility: visible !important;
+    }
+
+    /* Ensure dropdown is visible even when details-panel is off-screen (hero page) */
+    body.tabs-open #prod-tabs,
+    body.tabs-open #uat-tabs {
+        visibility: visible !important;
     }
 
     .details-tabs {
         display: none;
         flex-direction: column;
         gap: 0;
-        padding: 0.5rem 1rem;
+        padding: 0.75rem 1rem;
         margin: 0;
-        position: fixed; /* Fixed to viewport to stay on top and visible */
-        top: 4.5rem; /* Moved lower as requested */
-        right: 0.5rem; /* Align close to edge */
-        z-index: 9999; /* Max z-index */
+        position: fixed;
+        top: calc(var(--sticky-height) + 60px); /* Below header + burger button */
+        right: 1.5rem;
+        z-index: 9999 !important;
         overflow: visible;
-        align-items: flex-end; /* Align items to right */
-        background: var(--header-bg); /* Glass effect */
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
+        align-items: flex-end;
+        background: var(--bg-color);
         border-radius: 8px;
-        border: 1px solid rgba(255,255,255,0.06);
-        box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-        width: max-content; /* Fit width to content */
+        border: 1px solid var(--border-color);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        width: max-content;
     }
 
     .details-tabs::after {
         display: none;
     }
 
-    /* Make tabs-nav-wrapper vertical for dropdown on mobile */
     .tabs-nav-wrapper {
         display: flex;
         flex-direction: column;
@@ -541,28 +373,21 @@
     }
 
     .tab-btn {
-        width: auto; /* Shrink to fit text for correct underline width */
-        padding: 0.5rem 0 2px 0; /* Tightened padding for closer underline */
-        font-size: 1.15rem; /* Increased size by ~30% */
-        text-align: right; /* Align text to right */
+        width: auto;
+        padding: 0.5rem 0 2px 0;
+        font-size: 1.15rem;
+        text-align: right;
         color: var(--secondary-text);
         background: transparent;
         text-transform: uppercase;
+        flex-shrink: 0;
     }
 
     .tab-btn.active {
-        color: var(--text-color); /* Active text color back to normal */
-        font-weight: 700;
+        color: var(--text-color);
+        font-weight: 500;
         background: transparent;
-        position: relative; /* Ensure anchor */
-    }
-
-    .tabs-toggle-label {
-        font-size: 1.15rem;
-        font-weight: 700;
-        border-bottom: 2px solid var(--accent-color);
-        line-height: 1.2;
-        text-transform: uppercase;
+        position: relative;
     }
 
     .tab-btn.active::after {
@@ -576,36 +401,575 @@
         background-color: var(--accent-color);
     }
 
-    /* Mobile Tabs Visibility - Both hidden by default, shown via burger menu */
-    
-    /* PROD mode (not off-hours): Hide UAT tabs, PROD tabs via toggle */
+    #prod-tabs,
+    #uat-tabs {
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+    }
+
+    /* PROD mode: Hide UAT tabs, PROD tabs via toggle */
     #prod-tabs {
         display: none !important;
-        background: transparent;
-        border: none;
-        box-shadow: none;
     }
-    
+
     body:not(.off-hours) #uat-tabs {
         display: none !important;
     }
-    
+
     body.tabs-open:not(.off-hours) #prod-tabs {
         display: flex !important;
     }
-    
-    /* UAT mode (off-hours): Hide PROD tabs, UAT tabs via toggle */
+
+    /* UAT mode: Hide PROD tabs, UAT tabs via toggle */
     body.off-hours #prod-tabs {
         display: none !important;
     }
-    
+
     body.off-hours #uat-tabs {
         display: none !important;
+    }
+
+    body.tabs-open.off-hours #uat-tabs {
+        display: flex !important;
+    }
+
+}
+
+/* ========================================
+   RESPONSIVE - Mobile (<768px)
+   ======================================== */
+@media (max-width: 768px) {
+    :root {
+        --sticky-height: 52px;
+        --mobile-tools-sticky-top: calc(var(--sticky-height) + 28px);
+    }
+
+    /* ========================================
+       MOBILE: Fixed Header + Sub-header Layout
+       ======================================== */
+
+    /* Hide sidebar nav dots on mobile */
+    .sidebar-nav {
+        display: none !important;
+    }
+
+    /* Raise details-panel when dropdown is open to escape stacking context */
+    body.tabs-open .details-panel {
+        z-index: 9998 !important;
+    }
+
+    /* Hide email/LinkedIn icons in header - moved to burger menu */
+    .header-controls .header-linkedin,
+    .header-controls .contact-email-btn {
+        display: none !important;
+    }
+
+    /* ========================================
+       MOBILE: Header - Always Fixed with Glass Bar at Top
+       ======================================== */
+    .header {
+        padding: 0.5rem 1rem 1.5rem;
+        align-items: flex-start;
+    }
+
+    /* Glass effect bar at top - must be above header (z-index 100) */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--sticky-height);
+        background: var(--header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        z-index: 9999;
+        pointer-events: none;
+    }
+
+    /* Hero state: Hide only the collapsed-header elements (subtitle, sticky profile) */
+    /* Name-area should remain visible as it contains the hero name */
+    .header:not(.collapsed) .header-center,
+    .header:not(.collapsed) .header-controls .sticky-profile {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* Make hero page scrollable */
+    .header:not(.collapsed) {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+
+
+    /* ========================================
+       MOBILE: Fixed Sub-header Controls
+       Both toggle and burger at same height, aligned
+       ======================================== */
+
+    /* PROD/UAT Toggle - Fixed below header, LEFT - always visible with glass */
+    .fixed-mode-toggle {
+        position: fixed !important;
+        top: 47px !important;
+        left: 0.75rem !important;
+        right: auto !important;
+        z-index: 201;
+        background: var(--header-bg) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        padding: 0.4rem 0.6rem;
+        border-radius: 6px;
+        transform: none !important;
+        height: 32px;
+        display: flex !important;
+        align-items: center;
+        opacity: 1 !important;
+        visibility: visible !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important; /* Downwards only */
+        border: none !important;
+    }
+
+    /* Burger menu area - Fixed below header, RIGHT with glass */
+    .header-controls {
+        position: fixed !important;
+        top: 47px !important;
+        right: 0.75rem !important;
+        left: auto !important;
+        transform: none !important;
+        z-index: 201;
+        background: var(--header-bg) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        padding: 0.4rem 0.6rem;
+        border-radius: 6px;
+        display: flex !important;
+        align-items: center;
+        gap: 0.5rem;
+        height: 32px;
+        opacity: 1 !important;
+        visibility: visible !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important; /* Downwards only */
+        border: none !important;
+    }
+
+    /* Burger menu button */
+    .mobile-burger-btn {
+        display: flex !important;
+        flex-direction: column;
+        gap: 3px;
+        padding: 6px;
         background: transparent;
         border: none;
-        box-shadow: none;
+        cursor: pointer;
     }
-    
+
+    .mobile-burger-btn span {
+        width: 18px;
+        height: 2px;
+        background: var(--text-color);
+        border-radius: 2px;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    /* Active tab label - shown next to burger (non-hero only) with red underline */
+    .mobile-active-tab-label {
+        display: none;
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: var(--text-color);
+        position: static !important;
+        top: auto !important;
+        right: auto !important;
+        z-index: auto;
+        padding-bottom: 2px;
+        border-bottom: 2px solid var(--accent-color);
+        gap: 6px; /* Ensure space between icon and words */
+    }
+
+    .mobile-active-tab-label .font-monospace {
+        font-family: var(--font-mono) !important;
+        font-size: 1.15em !important;
+        font-weight: 700 !important;
+        letter-spacing: 0;
+    }
+
+    body.show-details .mobile-active-tab-label {
+        display: block;
+    }
+
+    .mobile-tab-download-icon {
+        color: var(--secondary-text);
+        transition: color 0.2s ease;
+    }
+
+    .mobile-tab-download-icon:hover {
+        color: var(--accent-color);
+    }
+
+    /* Social links in burger menu - icons only, row layout */
+    .menu-social-links {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 1rem;
+        width: 100%;
+        padding-bottom: 0.75rem;
+        margin-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .menu-social-link span {
+        display: none;
+    }
+
+    .menu-social-link {
+        padding: 0.5rem;
+    }
+
+    /* Hide original tabs-toggle button (we use burger in header-controls) */
+    .tabs-toggle {
+        display: none !important;
+    }
+
+    /* ========================================
+       MOBILE: Hero Section - Tighter spacing
+       ======================================== */
+    .header-content {
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 100px; /* Matched to header.css */
+        padding-left: 0.5rem; /* Reduced from 1.5rem to widen content */
+        padding-right: 0.5rem; /* Reduced from 1.5rem to widen content */
+        gap: 0;
+    }
+
+    /* Override removed to ensure consistency */
+
+
+    .profile-container {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 100%;
+        height: auto;
+        max-width: var(--mobile-profile-max-width);
+        margin: var(--mobile-profile-margin-top) auto 0 auto;
+        order: 1;
+        overflow: visible !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        z-index: 9999;
+    }
+
+    .profile-container img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        object-position: center var(--mobile-profile-img-y);
+        transform: scaleX(-1) scale(var(--mobile-profile-img-scale));
+    }
+
+    .name-area {
+        order: 2;
+        margin: 1.5rem 0 0 0 !important;
+        justify-content: center;
+        flex-wrap: nowrap;
+        gap: 0.75rem;
+        transform: none;
+    }
+
+    .name {
+        order: 4;
+        position: relative;
+        top: auto;
+        max-width: 100%;
+        margin: 0;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .journey-trace {
+        order: 3;
+        font-size: 0.4rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 0;
+        transform: none;
+        gap: 0.3rem;
+    }
+
+    .j-code {
+        font-size: 0.9rem;
+    }
+
+    .j-arrow {
+        font-size: 0.8rem;
+    }
+
+    .hero-summary {
+        order: 4;
+        margin: 0.5rem auto 0 auto; /* Reset margins completely */
+        width: 100%;
+        max-width: 100%;
+        padding: 0; /* Remove internal padding, rely on parent */
+    }
+
+    .hero-description {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* ========================================
+       MOBILE: Collapsed Header (Non-Hero)
+       Row 1: Name, Row 2: Subtitle
+       ======================================== */
+    .header.collapsed {
+        padding: 0.5rem 1rem;
+        height: var(--sticky-height);
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        z-index: 10000 !important;
+        /* overflow: hidden !important; -- Removed to prevent clipping */
+    }
+
+    .header.collapsed .header-content {
+        /* Keep basic display but elements will be fixed */
+        display: block !important;
+        position: static !important;
+        width: 100% !important;
+        height: 100% !important;
+        padding-top: 0 !important;
+    }
+
+    /* Row 1: Name */
+    .header.collapsed .name-area {
+        /* Nuclear Option: Fixed Positioning to force visibility */
+        position: fixed !important;
+        top: 6px !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        transform: none !important;
+        z-index: 10005 !important;
+        display: flex !important;
+        justify-content: center !important;
+        margin: 0 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: none !important; /* Allow clicks to pass to buttons */
+    }
+
+    .header.collapsed .name {
+        pointer-events: auto !important; /* Restore clickability for name */
+        font-size: 1rem !important;
+        font-weight: 700;
+        line-height: 1.1;
+        white-space: nowrap;
+        color: var(--text-color) !important;
+        text-align: center;
+        opacity: 1 !important;
+    }
+
+    /* Row 2: Subtitle */
+    .header.collapsed .header-center {
+        /* Nuclear Option: Fixed Positioning to force visibility */
+        position: fixed !important;
+        top: 24px !important; /* Below name */
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        transform: none !important;
+        z-index: 10005 !important;
+        display: flex !important; /* Flex for better centering control */
+        justify-content: center !important;
+        margin: 0 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: none !important; /* Allow clicks to pass */
+    }
+
+    .header.collapsed .header-subtitle {
+        font-size: 0.55rem;
+        font-weight: 600;
+        line-height: 1;
+        white-space: nowrap;
+        text-align: center;
+        color: var(--secondary-text) !important;
+        opacity: 0.85 !important;
+        pointer-events: auto !important;
+    }
+
+    /* Hide hero elements in collapsed state (but NOT toggle - it's fixed outside) */
+    .header.collapsed .profile-container,
+    .header.collapsed .hero-summary,
+    .header.collapsed .journey-trace,
+    .header.collapsed .sticky-profile {
+        display: none !important;
+    }
+
+    /* Mode toggle styling */
+    .mode-label {
+        font-size: 0.6rem;
+    }
+
+    .mode-toggle .toggle-switch {
+        height: 8px;
+    }
+
+    .language-switcher {
+        gap: 0.5rem;
+    }
+
+    .lang-btn {
+        font-size: 0.75rem;
+    }
+
+    .header-linkedin svg,
+    .contact-email-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* ========================================
+       MOBILE: Details Panel & Tab Content
+       ======================================== */
+    .details-wrapper {
+        padding: 0 0.5rem;
+    }
+
+    /* Force details panel off-screen when not active */
+    body:not(.show-details) .details-panel {
+        top: 100vh !important;
+        visibility: hidden !important;
+        transition: top 0.5s ease, visibility 0.5s ease;
+    }
+
+    /* BUT when burger menu is open, show the dropdown even on hero page */
+    body.tabs-open:not(.show-details) .details-panel {
+        visibility: visible !important;
+        /* Keep panel off-screen but allow dropdown to be visible via fixed positioning */
+    }
+
+    body.tabs-open:not(.show-details) #prod-tabs,
+    body.tabs-open:not(.show-details) #uat-tabs {
+        visibility: visible !important;
+    }
+
+    .tab-pane {
+        padding-top: calc(var(--sticky-height) + 28px); /* Space for header + sub-header */
+    }
+
+    /* ========================================
+       MOBILE: Burger Menu Dropdown - no glass effect
+       ======================================== */
+    .details-tabs {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        padding: 0.6rem 1rem;
+        margin: 0;
+        position: fixed;
+        top: calc(var(--sticky-height) + 32px); /* Brought closer to burger button */
+        right: 0.75rem;
+        z-index: 9999 !important;
+        overflow: visible;
+        align-items: flex-end;
+        background: var(--bg-color);
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        width: max-content;
+    }
+
+    .details-tabs::after {
+        display: none;
+    }
+
+    .tabs-nav-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        border-bottom: none;
+        width: 100%;
+        align-items: flex-end;
+    }
+
+    .tab-btn {
+        width: auto;
+        padding: 0.5rem 0 2px 0;
+        font-size: 1.1rem;
+        text-align: right;
+        color: var(--secondary-text);
+        background: transparent;
+        text-transform: uppercase;
+        flex-shrink: 0;
+    }
+
+    .tab-btn .font-monospace {
+        font-family: var(--font-mono) !important;
+        font-size: 1.15em !important;
+        font-weight: 700 !important;
+    }
+
+    .tab-btn.active {
+        color: var(--text-color);
+        font-weight: 500;
+        background: transparent;
+        position: relative;
+    }
+
+    .tab-btn.active::after {
+        display: block;
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--accent-color);
+    }
+
+    .tabs-toggle-label {
+        font-size: 1.1rem;
+        font-weight: 700;
+        border-bottom: 2px solid var(--accent-color);
+        line-height: 1.2;
+        text-transform: uppercase;
+    }
+
+    #prod-tabs,
+    #uat-tabs {
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+    }
+
+    /* PROD mode: Hide UAT tabs, PROD tabs via toggle */
+    #prod-tabs {
+        display: none !important;
+    }
+
+    body:not(.off-hours) #uat-tabs {
+        display: none !important;
+    }
+
+    body.tabs-open:not(.off-hours) #prod-tabs {
+        display: flex !important;
+    }
+
+    /* UAT mode: Hide PROD tabs, UAT tabs via toggle */
+    body.off-hours #prod-tabs {
+        display: none !important;
+    }
+
+    body.off-hours #uat-tabs {
+        display: none !important;
+    }
+
     body.tabs-open.off-hours #uat-tabs {
         display: flex !important;
     }
@@ -627,7 +991,7 @@
     }
 
     .skill-matrix-view.mobile-mode .hm-layout-container {
-        margin-top: 0;
+        margin-top: -7.5rem; /* Very aggressive pull up */
     }
 
     /* Experience items */
@@ -696,53 +1060,9 @@
     }
 
 
-    /* Download button next to TASKS AND TOOLS tab - visible only when tab is active */
-    .tab-btn.active .tab-download-btn {
-        display: inline-flex !important;
-        align-items: center;
-        justify-content: center;
-        margin-right: 6px;
-        padding: 2px;
-        border-radius: 4px;
-        background: transparent;
-        color: var(--text-color);
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
 
-    .tab-btn.active .tab-download-btn:hover {
-        background: var(--hm-p-main, var(--accent-color));
-        color: white;
-    }
 
-    .tab-btn.active .tab-download-btn svg {
-        width: 14px;
-        height: 14px;
-    }
 
-    /* Download button in mobile tabs toggle (next to "TASKS AND TOOLS" label) */
-    .toggle-download-btn {
-        display: none; /* Hidden by default, shown via JS when tech tab is active */
-        align-items: center;
-        justify-content: center;
-        margin-right: 8px;
-        padding: 4px;
-        border-radius: 4px;
-        background: transparent;
-        color: var(--text-color);
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-
-    .toggle-download-btn:hover {
-        background: var(--hm-p-main, var(--accent-color));
-        color: white;
-    }
-
-    .toggle-download-btn svg {
-        width: 16px;
-        height: 16px;
-    }
 }
 
 /* ========================================
@@ -751,30 +1071,75 @@
 @media (max-width: 480px) {
     :root {
         --sticky-height: 48px;
+        --mobile-tools-sticky-top: calc(var(--sticky-height) + 22px);
     }
 
-    /* Most small mobile styles are in their respective component CSS files */
-    /* This section is for any overrides not covered elsewhere */
+    /* Sub-header controls - smaller on small screens with glass */
+    .fixed-mode-toggle {
+        top: 47px !important;
+        left: 0.5rem !important;
+        padding: 0.3rem 0.5rem;
+        height: 28px;
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        background: var(--header-bg) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important; /* Downwards only */
+        border: none !important;
+    }
 
-    .tabs-toggle-btn {
-        padding: 0.65rem 0.9rem;
-        font-size: 0.75rem;
+    .header-controls {
+        top: 47px !important;
+        right: 0.5rem !important;
+        padding: 0.3rem 0.5rem;
+        gap: 0.4rem;
+        height: 28px;
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        background: var(--header-bg) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important; /* Downwards only */
+        border: none !important;
+    }
+
+    .mobile-active-tab-label {
+        font-size: 0.65rem;
+    }
+
+    .mobile-burger-btn span {
+        width: 16px;
+    }
+
+    .mode-label {
+        font-size: 0.55rem;
+    }
+
+    /* Burger menu dropdown */
+    .details-tabs {
+        top: calc(var(--sticky-height) + 24px);
+        right: 0.5rem;
+        padding: 0.5rem 0.8rem;
     }
 
     .tab-btn {
-        padding: 0.5rem 0.75rem 2px; /* Closer underline */
-        font-size: 12px;
+        font-size: 1rem;
+        padding: 0.4rem 0 2px 0;
     }
 
-    /* Remove styles for the toggle button on mobile to show just lines */
-    .tabs-toggle-btn {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
+    .tab-btn .font-monospace {
+        font-family: var(--font-mono) !important;
+        font-size: 1.15em !important;
+        font-weight: 700 !important;
     }
 
-    .tabs-toggle-icon span {
-        width: 14px;
+    /* Hero elements */
+    .header-content {
+        gap: 0 !important;
+        padding-top: 100px !important;
     }
 
     .profile-container {
@@ -798,11 +1163,24 @@
         font-size: 0.85rem;
     }
 
-    /* Skill matrix - extra small adjustments */
+    /* Collapsed header */
+    .header.collapsed .name {
+        font-size: 0.85rem !important;
+    }
+
+    .header.collapsed .header-subtitle {
+        font-size: 0.5rem;
+    }
+
+    /* Skill matrix */
     .skill-matrix-view.mobile-mode .hm-skill-label {
         width: clamp(170px, 70vw, 240px);
         min-width: clamp(170px, 70vw, 240px);
         font-size: 9px;
+    }
+
+    .skill-matrix-view.mobile-mode .hm-skill-label.font-monospace {
+        font-size: 10.5px; /* Bumped from 9px for monospace tools */
     }
 
     .skill-matrix-view.mobile-mode .hm-skill-track {
@@ -812,10 +1190,6 @@
 
     .skill-matrix-view.mobile-mode .hm-skill-label.font-monospace {
         font-size: 10px;
-    }
-
-    .header.collapsed .name {
-        font-size: 0.7rem;
     }
 
     .mobile-firm-name {
@@ -830,5 +1204,10 @@
         width: 32px;
         height: 32px;
         font-size: 16px;
+    }
+
+    /* Fix gap: Match padding to the controls height (48+22=70px) */
+    .tab-pane {
+        padding-top: calc(var(--sticky-height) + 22px);
     }
 }

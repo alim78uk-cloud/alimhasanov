@@ -244,6 +244,7 @@
   max-width: clamp(80px, 12vw, 160px);
   line-height: 1.1;
   display: -webkit-box;
+  line-clamp: 2;
   -webkit-line-clamp: 2; /* Limit to two lines */
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -539,7 +540,7 @@
 .hm-skill-label.font-monospace,
 .font-monospace {
   font-family: var(--font-mono);
-  font-size: 16.5px; /* Optically adjusted to match 15px Sans-Serif */
+  font-size: 17.5px; /* Optically adjusted to match 15px Sans-Serif, plus requested bump */
   letter-spacing: -0.5px;
   font-weight: 700;
 }
@@ -1640,7 +1641,7 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   margin-bottom: 0;
-  padding-bottom: 12px; /* Increased bottom padding for spacing before table */
+  padding-bottom: 6px; /* Reduced from 12px for tighter spacing */
   border-bottom: 1px solid var(--border-color);
   transition: top 0.2s ease;
 }
@@ -1661,9 +1662,13 @@
   box-shadow: none;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  padding: 0.5rem 1rem 0.5rem 1rem; /* Added bottom padding for spacing before legend */
+  padding: 2px 0.5rem 1px 0.5rem; /* Tighter padding, closer to edges */
   margin-bottom: 0;
   border-bottom: none; /* Removed internal border */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Legend Row - Inside fixed header */
@@ -1673,7 +1678,7 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  padding: 0 1rem 8px 1rem;
+  padding: 0 1rem 4px 1rem;
 }
 
 .skill-matrix-view.mobile-mode .mobile-legend-title {
@@ -1741,5 +1746,5 @@
 
 /* Reduce container margin on mobile/tablet */
 .skill-matrix-view.mobile-mode .hm-layout-container {
-  margin-top: 0 !important; /* Remove negative margin used for desktop */
+  margin-top: 0; /* Remove negative margin used for desktop */
 }

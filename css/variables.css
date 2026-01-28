@@ -18,6 +18,19 @@
     --transition-duration: 0.8s;
     --transition-ease: cubic-bezier(0.65, 0, 0.35, 1);
 
+    /* Tablet Profile Photo Parameters */
+    --tablet-profile-size: 200px;
+    --tablet-profile-margin-top: -20px;
+    --tablet-profile-margin-bottom: 20px;
+    --tablet-profile-img-scale: 1.15;
+    --tablet-profile-img-y: center;
+
+    /* Mobile Profile Photo Parameters */
+    --mobile-profile-max-width: 450px;
+    --mobile-profile-margin-top: -29px;
+    --mobile-profile-img-scale: 1.2;
+    --mobile-profile-img-y: 50%;
+
     /* Typography */
     --font-main: 'Inter', sans-serif;
     --font-mono: 'Courier New', Courier, monospace;

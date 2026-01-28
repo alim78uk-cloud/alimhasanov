@@ -25,7 +25,6 @@
     <link rel="stylesheet" href="css/skill-matrix.css" />
     <link rel="stylesheet" href="css/skill-matrix-options.css" />
 
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   </head>
@@ -38,6 +37,7 @@
       </svg>
       <span class="arrow">↑</span>
     </div>
+
 
     <!-- Sidebar Navigation - Moved closer to content -->
     <nav
@@ -59,14 +59,17 @@
             data-en="APPLICATION and DATA MANAGEMENT | AUTOMATION"
             data-de="Anwendungsunterstützung | Datenmanagement"
           >
-            APPLICATION and DATA MANAGEMENT |<br>AUTOMATION
+            APPLICATION and DATA MANAGEMENT |<br />AUTOMATION
           </div>
           <div class="hero-description" id="heroDescription">
             <p
               data-en="Hands-on with application management, automating data flows, and vendor integrations. Mostly you will find me troubleshooting APIs, querying databases, reading logs or debugging a client issue - or tinkering on automating a task."
               data-de=""
             >
-              Hands-on with application management, automating data flows, and vendor integrations. Mostly you will find me troubleshooting APIs, querying databases, reading logs or debugging a client issue - or tinkering on automating a task.
+              Hands-on with application management, automating data flows, and
+              vendor integrations. Mostly you will find me troubleshooting APIs,
+              querying databases, reading logs or debugging a client issue - or
+              tinkering on automating a task.
             </p>
             <p
               data-en="With a get-it-done attitude, I enjoy being the SME and the interface between clients and internal development teams, syncing business needs with IT."
@@ -140,11 +143,17 @@
         <div class="header-controls" id="headerControls">
           <!-- Email -->
           <a
-            href="mailto:alim78uk@gmail.com"
+            href="#"
             id="contactEmailBtn"
             class="header-linkedin contact-email-btn"
             data-contact-email
             aria-label="Email Me"
+            onclick="
+              if (window.openContactModal) {
+                openContactModal();
+                return false;
+              }
+            "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -200,6 +209,22 @@
           </div>
           -->
 
+          <!-- Active Tab Label (shown next to burger on non-home tabs, mobile/tablet only) -->
+          <div class="mobile-active-tab-label" id="mobileActiveTabLabel"></div>
+
+          <!-- Burger Menu Button (visible on mobile/tablet only) -->
+          <button
+            type="button"
+            class="mobile-burger-btn"
+            id="mobileBurgerBtn"
+            aria-label="Open Menu"
+            aria-expanded="false"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
           <!-- Profile Photo -->
           <div class="sticky-profile">
             <img src="images/darkblue_centered.png" alt="Alim Hasanov" />
@@ -219,13 +244,6 @@
             aria-expanded="false"
             aria-controls="prod-tabs uat-tabs"
           >
-            <span class="toggle-download-btn" id="toggleDownloadBtn" onclick="event.stopPropagation(); openMatrixExportModal();" title="Export PDF" style="display: none;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7 10 12 15 17 10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-              </svg>
-            </span>
             <span class="tabs-toggle-label" id="tabsToggleLabel">Menu</span>
             <span class="tabs-toggle-icon" aria-hidden="true">
               <span></span>
@@ -237,17 +255,66 @@
 
         <!-- New Tabs Navigation -->
         <div class="details-tabs" id="prod-tabs">
+          <!-- Mobile Menu Social Links (hidden on desktop) -->
+          <div class="menu-social-links">
+            <a
+              href="#"
+              class="menu-social-link"
+              onclick="
+                if (window.openContactModal) {
+                  openContactModal();
+                  return false;
+                }
+              "
+              aria-label="Email Me"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+              <span>Email</span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/alimhasanovbg/"
+              target="_blank"
+              class="menu-social-link"
+              aria-label="LinkedIn Profile"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                />
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+          </div>
           <div class="tabs-nav-wrapper">
-            <button class="tab-btn active" data-tab="cv" id="tabBtnCV">CV</button>
+            <button class="tab-btn" data-tab="home" id="tabBtnHome">
+              Home
+            </button>
+            <button class="tab-btn active" data-tab="cv" id="tabBtnCV">
+              CV
+            </button>
             <button class="tab-btn" data-tab="tech" id="tabBtnTech">
-              <span class="tab-download-btn" onclick="event.stopPropagation(); openMatrixExportModal();" title="Export PDF">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                  <polyline points="7 10 12 15 17 10"/>
-                  <line x1="12" y1="15" x2="12" y2="3"/>
-                </svg>
-              </span>
-              <span style="font-weight: 900">TASKS</span> and
+              <span style="font-weight: 700">TASKS</span> AND
               <span class="font-monospace" style="font-weight: 700">TOOLS</span>
             </button>
             <button class="tab-btn" data-tab="soft" id="tabBtnSoft">
@@ -261,6 +328,60 @@
 
         <!-- UAT Tabs (Visible only in Off-Hours) -->
         <div class="details-tabs" id="uat-tabs" style="display: none">
+          <!-- Mobile Menu Social Links (hidden on desktop) -->
+          <div class="menu-social-links">
+            <a
+              href="#"
+              class="menu-social-link"
+              onclick="
+                if (window.openContactModal) {
+                  openContactModal();
+                  return false;
+                }
+              "
+              aria-label="Email Me"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+              <span>Email</span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/alimhasanovbg/"
+              target="_blank"
+              class="menu-social-link"
+              aria-label="LinkedIn Profile"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                />
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+          </div>
+          <button class="tab-btn" data-tab="home" data-target="home">
+            Home
+          </button>
           <button class="tab-btn active" data-target="section-weekend">
             Perfect Weekend
           </button>

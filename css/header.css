@@ -10,7 +10,7 @@
   z-index: 100;
   background: transparent;
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   padding: 5rem 2rem; /* breathing room */
   transition:
     height var(--transition-duration) var(--transition-ease),
@@ -102,12 +102,13 @@
 }
 
 .hero-tagline {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent-color);
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .hero-description {
@@ -116,7 +117,7 @@
   color: var(--secondary-text);
   font-weight: 300; /* Lighter weight for professional look */
   letter-spacing: 0.015em; /* Subtle spacing */
-  text-align: justify; /* Justified text for cleaner appearance */
+  text-align: center; /* Centered for both PROD and UAT */
 }
 
 .hero-description p {
@@ -125,6 +126,12 @@
 
 .hero-description p:last-child {
   margin-bottom: 0;
+}
+
+/* UAT Mode: Center hero text */
+body.off-hours .hero-description,
+body.off-hours .hero-tagline {
+  text-align: center;
 }
 
 /* Profile Image - Big in Hero, Hidden when collapsed */
@@ -152,6 +159,9 @@
   visibility: hidden !important;
   transform: scale(0.1);
 }
+
+
+
 
 .profile-container img {
   width: 100%;
@@ -238,11 +248,10 @@
   transition: all var(--transition-duration) var(--transition-ease);
   transform-origin: bottom left;
   margin-top: auto;
-  margin-left: 12vw; /* Base shift for desktop: Increased from 8vw */
-  margin-left: 12vw; /* Base shift for desktop: Increased from 8vw */
+  margin-left: 12vw; /* Base shift for desktop */
   transform: translateY(
-    -3.5rem
-  ); /* Pull name up slightly less (was -4.5rem) */
+    -22.5rem
+  ); /* Pull name up significantly to align with photo bottom */
 }
 
 /* Mode toggle positioning within name-area */
@@ -341,12 +350,12 @@
   display: flex;
   gap: 0.75rem;
   margin-top: 1.5rem;
-  margin-left: 12vw; /* Base shift for desktop: Increased from 8vw */
+  margin-left: 12.5vw;
   font-size: 1.8rem;
   font-weight: 900;
   align-items: center;
   opacity: 1;
-  transform: translateY(-3.5rem); /* Match name-area shift (was -4.5rem) */
+  transform: translateY(-24rem); /* Match name-area shift */
   transition:
     opacity 0.4s ease-out 0.6s,
     transform var(--transition-duration) var(--transition-ease);
@@ -515,8 +524,8 @@
   padding: 0.5rem 0.75rem;
   border-radius: 4px 0 0 4px;
   box-shadow:
-    -4px 4px 12px rgba(0, 0, 0, 0.1),
-    -1px 1px 3px rgba(0, 0, 0, 0.08);
+    -2px 2px 6px rgba(0, 0, 0, 0.05),
+    -1px 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 /* ========================================
@@ -532,23 +541,24 @@
 }
 
 @media (max-width: 1024px) and (min-width: 769px) {
-  /* Grid layout for tablet - centered single column */
+  /* ========================================
+     TABLET: Hero Layout - Centered vertical stack
+     ======================================== */
   .header-content {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     text-align: center;
-    padding-top: 100px;
-    gap: 1rem;
+    padding-top: 100px; /* Reduced from 250px to move content up */
+    gap: 0; /* Remove gap to pull name to photo */
   }
 
-  /* Summary: at top, centered with proper margins away from sidebar clues */
   .hero-summary {
-    order: 4; /* Moved to bottom */
-    max-width: 90%; /* Increased width (was 65%) */
+    order: 4;
+    max-width: 90%;
     margin: 1.5rem auto 0 auto;
-    padding: 0 1rem; /* Reduced padding (was 0 4rem) */
+    padding: 0 1rem;
     text-align: center;
   }
 
@@ -561,33 +571,38 @@
     text-align: justify;
   }
 
-  /* Photo: at top */
   .profile-container {
-    order: 1; /* Moved to top */
+    order: 1;
     position: relative !important;
     top: auto !important;
     right: auto !important;
-    width: 160px !important;
-    min-height: 160px !important;
-    max-width: 160px !important;
-    margin: 0 auto 1rem auto !important;
+    width: var(--tablet-profile-size) !important;
+    height: var(--tablet-profile-size) !important;
+    max-width: var(--tablet-profile-size) !important;
+    margin: var(--tablet-profile-margin-top) auto var(--tablet-profile-margin-bottom) auto !important;
     transform: none !important;
     flex-shrink: 0 !important;
+    overflow: visible !important;
+    border-radius: 0 !important;
+    background: transparent !important;
   }
 
   .profile-container img {
     width: 100% !important;
-    height: 160px !important;
-    object-fit: cover !important;
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: center var(--tablet-profile-img-y) !important;
+    transform: scaleX(-1) scale(var(--tablet-profile-img-scale)) !important;
+    transform-origin: center !important;
   }
 
-  /* Name area: below photo */
   .name-area {
-    order: 2; /* Below photo */
-    margin: 0;
-    gap: 1rem;
-    transform: none;
+    order: 2;
+    margin: 5px 0 0 0 !important; /* Nudge name slightly up */
     justify-content: center;
+    flex-wrap: nowrap;
+    gap: 0.75rem;
+    transform: none;
   }
 
   .name {
@@ -595,7 +610,6 @@
     text-align: center;
   }
 
-  /* Journey trace: below name */
   .journey-trace {
     order: 3;
     margin: 0;
@@ -605,177 +619,97 @@
     justify-content: center;
   }
 
-  /* Symmetrical Header Controls for Tablet */
-  .fixed-mode-toggle {
-    right: auto !important;
-    left: 2rem !important;
-    top: calc(30px + var(--sticky-height) / 2);
-    transform: translateY(-50%);
-    border-radius: 4px; /* All corners rounded when not on edge */
-  }
-
-  .header-controls {
-    left: auto !important; /* Reset desktop left positioning */
-    right: 2rem !important;
-  }
-
-  /* Fix Collapsed State on Tablet - 2 Rows */
+  /* ========================================
+     TABLET: Collapsed Header - Name + Subtitle only
+     Toggle and burger are fixed OUTSIDE header (handled in responsive.css)
+     ======================================== */
   .header.collapsed {
-    height: auto;
-    min-height: 100px; /* Reduced min-height */
-    padding: 1rem 2rem 0 2rem; /* Reduced bottom padding further */
-    align-items: flex-start;
+    height: var(--sticky-height);
+    padding: 0 2rem;
+    align-items: center;
+    z-index: 102 !important;
   }
 
   .header.collapsed .header-content {
-    display: grid;
-    /* Col 1: Toggle, Col 2: Name (Center), Col 3: Icons (Right) */
-    grid-template-columns: 1fr auto 1fr;
-    /* Row 1: Reduced height for smaller Photo/Name, Row 2: Auto for Subtitle */
-    grid-template-rows: 70px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 0;
-    gap: 0;
     width: 100%;
-    position: relative;
+    height: 100%;
+    padding: 0;
+    gap: 0.45rem;
   }
 
-  /* Row 1 Left: Toggle */
-  .header.collapsed .fixed-mode-toggle {
-    position: static !important;
-    grid-column: 1;
-    grid-row: 1;
-    margin: 0;
-    transform: none !important;
-    justify-self: start;
-    width: auto;
-  }
-  
-  /* Reset mode toggle margin */
-  .header.collapsed .name-area .mode-toggle,
-  .header.collapsed .fixed-mode-toggle .mode-toggle {
-      margin: 0;
-  }
-
-  /* Row 1 Center: Name */
   .header.collapsed .name-area {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     position: static;
-    right: auto; /* Reset desktop right positioning */
-    grid-column: 2;
-    grid-row: 1;
     margin: 0;
     transform: none !important;
     justify-content: center;
-    text-align: center;
-    align-self: center;
-    z-index: 20;
   }
 
   .header.collapsed .name {
-    font-size: 1.5rem;
+    display: block !important;
+    visibility: visible !important;
+    font-size: 1.3rem;
     text-align: center;
     white-space: nowrap;
     line-height: 1;
     margin: 0;
   }
 
-  /* Row 1 Center-Right: Photo (Absolute)
-     Positioned relative to header-content, aiming for Row 1 center */
-  .header.collapsed .sticky-profile {
-    display: block !important;
-    position: absolute !important;
-    /* Center of Row 1 is 35px. Name bottom is approx 47px. 
-       Visual bottom of photo (scale 0.5 -> 25px radius) should be 47px.
-       So center should be 47 - 25 = 22px. Setting to 24px for slight visual adjustment. */
-    top: 24px; 
-    /* Center of Container */
-    left: 50%;
-    /* Offset: Bring closer to name. Reduced from 95px. */
-    margin-left: 75px; 
-    /* Center vertically relative to the 'top' point defined above, and scale */
-    transform: translateY(-50%) scale(0.5) !important;
-    transform-origin: center center;
-    
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
-    right: auto !important;
-    width: 100px;
-    height: 100px;
-    box-shadow: none;
-    z-index: 15; 
-  }
-  
-  .header.collapsed .sticky-profile img {
-      opacity: 1 !important;
-      visibility: visible !important;
-  }
-
-  /* Row 1 Right: Icons */
-  .header.collapsed .header-controls {
-    position: static !important;
-    grid-column: 3;
-    grid-row: 1;
-    transform: none !important;
-    justify-self: end;
-    left: auto !important; /* Reset desktop left positioning */
-    right: auto !important;
-    top: auto !important;
-    padding: 0;
-    margin: 0;
-    gap: 1.5rem;
-    align-self: center;
-  }
-
-  /* Row 2: Subtitle */
   .header.collapsed .header-center {
+    display: block !important;
+    visibility: visible !important;
     position: static !important;
-    grid-column: 1 / -1;
-    grid-row: 2;
     transform: none !important;
     margin: 0;
     text-align: center;
-    padding-top: 0; /* Removed padding */
     opacity: 1 !important;
     pointer-events: auto !important;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    align-self: start;
-    margin-top: -15px; /* Increase negative margin to pull tighter to name */
   }
 
   .header.collapsed .header-subtitle {
-    font-size: 0.9rem;
-    white-space: normal;
+    display: block !important;
+    visibility: visible !important;
+    font-size: 0.7rem;
+    white-space: nowrap;
     text-align: center;
+    line-height: 1;
   }
 
-  /* Hide Hero Elements */
+  /* Hide elements not needed in collapsed header */
   .header.collapsed .hero-summary,
   .header.collapsed .journey-trace,
-  .header.collapsed .profile-container {
+  .header.collapsed .profile-container,
+  .header.collapsed .sticky-profile {
     display: none !important;
   }
 }
 
 @media (max-width: 768px) {
   .header {
-    padding: 2rem 1.5rem 2.5rem;
-    align-items: center;
-    height: 100dvh;
+    padding: 0;
+    align-items: flex-start;
+    height: 100dvh; /* Restore fixed height to allow internal scrolling */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   /* Switch to Flex Column for specific order: Summary -> Photo -> Name */
   .header-content {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center vertically */
+    justify-content: flex-start;
     align-items: center;
     text-align: center;
-    gap: 0.5rem; /* Reduced gap from 1.5rem to pull content together */
-    padding-top: 0;
-    height: 100%;
+    gap: 0;
+    padding: 100px 1.5rem 4rem; /* Reduced padding-top from 250px */
+    height: auto;
+    min-height: min-content;
   }
 
   /* 1. Summary at Bottom */
@@ -791,31 +725,35 @@
 
   /* 2. Photo Top */
   .profile-container {
-    order: 1;
     position: relative;
     top: auto;
     right: auto;
-    width: 140px; 
-    height: 140px;
-    max-width: 140px;
-    margin: 0 auto;
-    overflow: hidden !important; 
-    border-radius: 50% !important;
+    width: 100%;
+    height: auto;
+    max-width: var(--mobile-profile-max-width);
+    margin: var(--mobile-profile-margin-top) auto 0 auto;
+    order: 1;
+    overflow: visible !important;
+    border-radius: 0 !important;
+    background: transparent !important;
     align-self: center;
   }
   
   /* Reset image to normal centered */
   .profile-container img {
-      transform: scaleX(-1);
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      object-position: center var(--mobile-profile-img-y);
+      transform: scaleX(-1) scale(var(--mobile-profile-img-scale));
       transform-origin: center;
-      object-fit: cover;
   }
 
   /* 3. Name Below Photo */
   .name-area {
     order: 2;
     grid-area: unset;
-    margin: 0;
+    margin: 5px 0 0 0 !important; /* Nudge name slightly up */
     justify-content: center;
     gap: 0.5rem;
     align-self: center;
@@ -841,7 +779,7 @@
     align-self: center;
     white-space: normal;
     width: auto;
-    margin-top: 0.2rem;
+    margin-top: 0;
   }
 
   .mobile-hero-links {
@@ -875,84 +813,72 @@
     font-size: 0.6rem;
   }
 
-  /* Collapsed header - mobile */
+  /* ========================================
+     MOBILE: Collapsed Header - Name + Subtitle only
+     Toggle and burger are fixed OUTSIDE header (handled in responsive.css)
+     ======================================== */
   .header.collapsed {
     padding: 0 1rem;
-    height: calc(var(--sticky-height) + 20px);
+    height: var(--sticky-height);
+    /* overflow: hidden !important; -- Removed */
   }
 
   .header.collapsed .header-content {
-    text-align: left;
-  }
-
-  .header.collapsed .name {
-    font-size: 0.8rem;
-    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0.1rem;
+    height: 100%;
+    padding: 0;
   }
 
   .header.collapsed .name-area {
-    position: static; /* Reset absolute positioning for mobile */
-    right: auto;
-    gap: 0.75rem;
-    justify-content: flex-start;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: static;
+    margin: 0;
+    justify-content: center;
+    transform: none !important;
   }
 
-  /* Header controls - mobile */
-  .header-controls {
-    left: auto !important; /* Reset desktop left positioning */
-    right: 1rem !important;
-    gap: 0.75rem;
-    top: calc(15px + var(--sticky-height) / 2);
+  .header.collapsed .name {
+    display: block !important;
+    visibility: visible !important;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1;
+    margin: 0;
   }
 
-  .language-switcher {
-    gap: 0.4rem;
+  .header.collapsed .header-center {
+    display: block !important;
+    visibility: visible !important;
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    margin: 0;
   }
 
-  .lang-btn {
-    font-size: 0.7rem;
-    padding-bottom: 2px;
+  .header.collapsed .header-subtitle {
+    display: block !important;
+    visibility: visible !important;
+    font-size: 0.55rem;
+    line-height: 1;
+    margin: 0;
   }
 
-  .mode-label {
-    font-size: 0.7rem;
-  }
-
-  .mode-toggle .toggle-switch {
-    height: 10px;
-  }
-
-  .fixed-mode-toggle {
-    right: auto;
-    left: 1rem;
-    top: calc(15px + var(--sticky-height) / 2);
-    transform: translateY(-50%);
-    border-radius: 4px; /* All corners rounded when not on edge */
-  }
-
-  .header-linkedin svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  /* Sticky profile - smaller on mobile */
-  .sticky-profile {
-    width: 70px;
-    height: 70px;
-    margin-left: -5px;
-    visibility: hidden; /* Ensure hidden on mobile hero too */
-  }
-
+  /* Hide elements not needed in collapsed header on mobile */
+  .header.collapsed .hero-summary,
+  .header.collapsed .journey-trace,
+  .header.collapsed .profile-container,
   .header.collapsed .sticky-profile {
-    transform: scale(1) translateY(4px);
+    display: none !important;
   }
 
-  /* Header subtitle */
-  .header-subtitle {
-    font-size: 0.8rem;
-    white-space: normal;
-    text-align: center;
-  }
 }
 
 @media (max-width: 480px) {
@@ -987,31 +913,28 @@
   }
 
   .header.collapsed .name {
-    font-size: 0.7rem;
+    font-size: 0.85rem;
   }
 
-  .header-controls {
-    gap: 0.5rem;
+  .header.collapsed .header-subtitle {
+    font-size: 0.5rem;
   }
+}
 
-  .lang-btn, .mode-label {
-    font-size: 0.65rem;
-  }
+/* ========================================
+   Desktop Tweaks (Added via Agent)
+   ======================================== */
 
-  .sticky-profile {
-    width: 56px;
-    height: 56px;
-  }
+/* 1. Hide Mobile Active Tab Label by default (Fixed Leaking Label) */
+.mobile-active-tab-label {
+    display: none;
+}
 
-  .header-subtitle {
-    font-size: 0.7rem;
-    white-space: normal;
-    text-align: center;
-  }
-
-  .fixed-mode-toggle {
-    right: auto;
-    left: 0.5rem;
-    border-radius: 4px; /* All corners rounded when not on edge */
-  }
+/* 2. Hide Home Tab AND Mobile Label on Desktop (> 1024px) */
+@media (min-width: 1025px) {
+    .tab-btn[data-tab="home"],
+    .tab-btn[data-target="home"],
+    .mobile-active-tab-label {
+        display: none !important;
+    }
 }
