@@ -461,7 +461,7 @@
        Note: Dropdown is inside details-panel but needs to appear above everything.
        We use high z-index and ensure body.tabs-open raises the panel.
        ======================================== */
-    body.tabs-open .details-panel {
+    body.tabs-open:not(.show-details) .details-panel {
         z-index: 10120 !important; /* Lift above header/profile in hero view */
         visibility: visible !important;
     }
@@ -601,7 +601,7 @@
     }
 
     /* Raise details-panel when dropdown is open to escape stacking context */
-    body.tabs-open .details-panel {
+    body.tabs-open:not(.show-details) .details-panel {
         z-index: 10120 !important; /* Lift above header/profile in hero view */
     }
 
