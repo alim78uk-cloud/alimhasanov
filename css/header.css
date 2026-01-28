@@ -892,6 +892,11 @@ body.off-hours .hero-tagline {
     display: none !important;
 }
 
+/* Hide burger button on desktop by default */
+.mobile-burger-btn {
+    display: none;
+}
+
 /* 2. Hide Home Tab AND Mobile Label on Desktop (> 1024px) */
 @media (min-width: 1251px) {
     .tab-btn[data-tab="home"],
