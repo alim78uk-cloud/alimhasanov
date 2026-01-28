@@ -448,6 +448,11 @@ body.show-details .exp-item:nth-child(7) { transition-delay: 0.4s; }
         font-size: 1.5rem;
     }
 
+    /* Let titles use full row width so they stay on one line when space allows */
+    .exp-role {
+        grid-column: 1 / -1;
+    }
+
     .exp-company,
     .exp-date,
     .exp-location {
