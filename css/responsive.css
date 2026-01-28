@@ -1,12 +1,12 @@
 /* ========================================
-   RESPONSIVE - Tablet (768px - 1024px)
+   RESPONSIVE - Tablet (768px - 1250px)
    ======================================== */
-@media (max-width: 1024px) and (min-width: 769px) {
+@media (max-width: 1250px) and (min-width: 769px) {
     /* ========================================
        TABLET: Header & Glass Bar
        ======================================== */
     .header {
-        z-index: 10000 !important;
+        z-index: 10080 !important;
         height: 100vh; /* Ensure hero height is correct */
         pointer-events: none !important; /* Allow clicks to pass through to details-panel */
     }
@@ -90,7 +90,7 @@
         top: 75px !important;
         left: 1.5rem !important;
         right: auto !important;
-        z-index: 10005;
+        z-index: 10070;
         background: var(--header-bg) !important;
         backdrop-filter: blur(12px) !important;
         -webkit-backdrop-filter: blur(12px) !important;
@@ -113,7 +113,7 @@
         right: 1.5rem !important;
         left: auto !important;
         transform: none !important;
-        z-index: 10005;
+        z-index: 10080;
         background: var(--header-bg) !important;
         backdrop-filter: blur(12px) !important;
         -webkit-backdrop-filter: blur(12px) !important;
@@ -146,7 +146,7 @@
         min-width: 40px !important;
         min-height: 40px !important;
         flex-shrink: 0 !important;
-        z-index: 10010 !important;
+        z-index: 10050 !important;
     }
 
     .mobile-burger-btn span {
@@ -164,6 +164,7 @@
        ======================================== */
     :root {
         --sticky-height: 75px; /* Enough for 2 rows */
+        --mobile-tools-sticky-top: calc(var(--sticky-height) + 32px);
     }
 
     .header.collapsed {
@@ -184,7 +185,7 @@
         transform: translateX(-50%) !important;
         width: auto !important;
         margin: 0 !important;
-        z-index: 10005 !important;
+        z-index: 10070 !important;
         display: flex !important;
         justify-content: center !important;
         opacity: 1 !important;
@@ -217,7 +218,7 @@
         right: auto !important;
         transform: translateX(-50%) !important;
         width: auto !important;
-        z-index: 10005 !important;
+        z-index: 10070 !important;
         display: flex !important;
         justify-content: center !important;
         margin: 0 !important;
@@ -227,7 +228,7 @@
     }
 
     .header.collapsed .header-subtitle {
-        font-size: 0.7rem !important;
+        font-size: 0.8rem !important;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -373,12 +374,12 @@
         width: 200px;
         min-width: 200px;
         margin-left: -200px;
-        font-size: 15.5px; /* Increased by 40% from 11px */
+        font-size: 18px; /* Significantly increased from 11px */
         padding: 0 8px;
     }
 
     .hm-skill-label.font-monospace {
-        font-size: 19px; /* Increased by approx 60% from 12px */
+        font-size: 24px; /* Significantly increased from 12px */
     }
 
     .hm-label-placeholder {
@@ -450,13 +451,18 @@
         padding-bottom: 3rem;
     }
 
+    /* Tablet: tighten gap under header for PROD only */
+    body:not(.off-hours) .tab-pane {
+        padding-top: calc(var(--sticky-height) + 8px);
+    }
+
     /* ========================================
        TABLET: Burger Menu Dropdown
        Note: Dropdown is inside details-panel but needs to appear above everything.
        We use high z-index and ensure body.tabs-open raises the panel.
        ======================================== */
     body.tabs-open .details-panel {
-        z-index: 9998 !important;
+        z-index: 10020 !important;
         visibility: visible !important;
     }
 
@@ -475,7 +481,7 @@
         position: fixed;
         top: calc(var(--sticky-height) + 32px); /* Aligned just below the burger button tier */
         right: 1.5rem;
-        z-index: 9999 !important;
+        z-index: 10060 !important;
         overflow: visible;
         align-items: flex-end;
         background: var(--bg-color);
@@ -581,7 +587,7 @@
 
     /* Raise details-panel when dropdown is open to escape stacking context */
     body.tabs-open .details-panel {
-        z-index: 9998 !important;
+        z-index: 10020 !important;
     }
 
     /* Hide email/LinkedIn icons in header - moved to burger menu */
@@ -921,7 +927,7 @@
     }
 
     .header.collapsed .header-subtitle {
-        font-size: 0.55rem;
+        font-size: 0.65rem;
         font-weight: 600;
         line-height: 1;
         white-space: nowrap;
@@ -1003,7 +1009,7 @@
         position: fixed;
         top: calc(var(--sticky-height) + 32px); /* Brought closer to burger button */
         right: 0.75rem;
-        z-index: 9999 !important;
+        z-index: 10060 !important;
         overflow: visible;
         align-items: flex-end;
         background: var(--bg-color);
@@ -1296,7 +1302,7 @@
     }
 
     .header.collapsed .header-subtitle {
-        font-size: 0.5rem;
+        font-size: 0.6rem;
     }
 
     /* Skill matrix */

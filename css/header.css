@@ -440,7 +440,7 @@ body.off-hours .hero-tagline {
 }
 
 .header-subtitle {
-  font-size: 1rem; /* Increased from 0.75rem */
+  font-size: 1.15rem; /* Increased from 1rem */
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -828,7 +828,7 @@ body.off-hours .hero-tagline {
   .header.collapsed .header-subtitle {
     display: block !important;
     visibility: visible !important;
-    font-size: 0.55rem;
+    font-size: 0.65rem;
     line-height: 1;
     margin: 0;
   }
@@ -879,7 +879,7 @@ body.off-hours .hero-tagline {
   }
 
   .header.collapsed .header-subtitle {
-    font-size: 0.5rem;
+    font-size: 0.6rem;
   }
 }
 
@@ -889,11 +889,11 @@ body.off-hours .hero-tagline {
 
 /* 1. Hide Mobile Active Tab Label by default (Fixed Leaking Label) */
 .mobile-active-tab-label {
-    display: none;
+    display: none !important;
 }
 
 /* 2. Hide Home Tab AND Mobile Label on Desktop (> 1024px) */
-@media (min-width: 1025px) {
+@media (min-width: 1251px) {
     .tab-btn[data-tab="home"],
     .tab-btn[data-target="home"],
     .mobile-active-tab-label {

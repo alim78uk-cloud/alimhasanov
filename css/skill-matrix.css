@@ -1646,11 +1646,20 @@
   transition: top 0.2s ease;
 }
 
-/* Tablet Specific Override (769px+) - Reduce whitespace further */
+/* Tablet Specific Override (769px+) - Match mobile sticky offset logic */
 @media (min-width: 769px) {
   .skill-matrix-view.mobile-mode .mobile-skills-fixed-header {
-    top: 55px; /* Tighter fit for tablet */
+    top: var(--mobile-tools-sticky-top, 72px);
+    border-bottom: none;
   }
+}
+
+/* Remove top/bottom borders on first/last rows in mobile/tablet */
+.skill-matrix-view.mobile-mode .hm-skill-row:first-of-type {
+  border-top: none;
+}
+.skill-matrix-view.mobile-mode .hm-skill-row:last-of-type {
+  border-bottom: none;
 }
 
 /* Firm Nav - Inside fixed header */

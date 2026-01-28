@@ -240,8 +240,8 @@ function resetElasticPull() {
 document.addEventListener(
   "wheel",
   (e) => {
-    // Disable scroll-triggered transitions on mobile/tablet - user scrolls hero manually
-    if (window.innerWidth <= 1024) return;
+    // Disable scroll-triggered transitions when burger menu is available
+    if (window.innerWidth <= 1250) return;
 
     if (isAnimating) return;
 
@@ -338,8 +338,8 @@ document.addEventListener(
 document.addEventListener(
   "touchend",
   (e) => {
-    // Disable swipe-triggered transitions on mobile/tablet - user navigates via burger menu
-    if (window.innerWidth <= 1024) return;
+    // Disable swipe-triggered transitions when burger menu is available
+    if (window.innerWidth <= 1250) return;
 
     if (isAnimating) return;
 
@@ -920,4 +920,3 @@ if (contactForm) {
     }
   });
 }
-
