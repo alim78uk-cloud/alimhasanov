@@ -117,11 +117,16 @@
    HERO DEBUG TOOL
    ======================================== */
 .debug-container {
+    display: none; /* Hidden in PROD */
     position: fixed;
     bottom: 20px;
     left: 20px;
     z-index: 10000;
     font-family: 'Inter', sans-serif;
+}
+
+body.off-hours .debug-container {
+    display: block; /* Visible in UAT (off-hours) */
 }
 
 .debug-toggle {
