@@ -450,10 +450,23 @@ if (tabsToggleBtn) {
 
 // Mobile burger button listener
 if (mobileBurgerBtn) {
-  mobileBurgerBtn.addEventListener("click", () => {
+  mobileBurgerBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); // Prevent document click from immediate close
     toggleTabsMenu();
   });
 }
+
+// Click outside to close burger menu
+document.addEventListener("click", (e) => {
+  if (!document.body.classList.contains("tabs-open")) return;
+
+  const isBurgerClick = mobileBurgerBtn?.contains(e.target);
+  const isMenuClick = e.target.closest(".details-tabs");
+
+  if (!isBurgerClick && !isMenuClick) {
+    closeTabsMenu();
+  }
+});
 
 function updateTabsToggleLabel() {
   const activeLabelText = getActiveTabLabel();

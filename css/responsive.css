@@ -236,8 +236,33 @@
         display: block !important;
     }
 
+    /* Active tab label - shown next to burger (non-hero only) with red underline */
+    .mobile-active-tab-label {
+        display: none;
+        font-size: 1.1rem; /* Matched to what TASKS/TOOLS feels like */
+        font-weight: 500;
+        text-transform: uppercase;
+        color: var(--text-color);
+        position: static !important;
+        top: auto !important;
+        right: auto !important;
+        z-index: auto;
+        padding-bottom: 2px;
+        border-bottom: 2px solid var(--accent-color);
+        gap: 6px; /* Ensure space between icon and words */
+    }
+
+    .mobile-active-tab-label .font-monospace {
+        font-family: var(--font-mono) !important;
+        font-size: 1.15em !important;
+        font-weight: 700 !important;
+        letter-spacing: 0;
+    }
+
     body.show-details .mobile-active-tab-label {
-        display: block;
+        display: block !important;
+        display: flex !important; /* To align with icon if present */
+        align-items: center;
     }
 
     /* Social links in burger menu - icons only, row layout */
@@ -448,7 +473,7 @@
         padding: 0.75rem 1rem;
         margin: 0;
         position: fixed;
-        top: calc(var(--sticky-height) + 60px); /* Below header + burger button */
+        top: calc(var(--sticky-height) + 32px); /* Aligned just below the burger button tier */
         right: 1.5rem;
         z-index: 9999 !important;
         overflow: visible;
@@ -673,10 +698,10 @@
         transition: transform 0.2s ease, opacity 0.2s ease;
     }
 
-    /* Active tab label - shown next to burger (non-hero only) with red underline */
+    /* Active tab label - updated size */
     .mobile-active-tab-label {
         display: none;
-        font-size: 0.85rem;
+        font-size: 1.1rem;
         font-weight: 500;
         text-transform: uppercase;
         color: var(--text-color);
@@ -686,7 +711,7 @@
         z-index: auto;
         padding-bottom: 2px;
         border-bottom: 2px solid var(--accent-color);
-        gap: 6px; /* Ensure space between icon and words */
+        gap: 6px;
     }
 
     .mobile-active-tab-label .font-monospace {
@@ -697,7 +722,8 @@
     }
 
     body.show-details .mobile-active-tab-label {
-        display: block;
+        display: flex !important;
+        align-items: center;
     }
 
     .mobile-tab-download-icon {
@@ -1221,7 +1247,7 @@
 
     /* Burger menu dropdown */
     .details-tabs {
-        top: calc(var(--sticky-height) + 24px);
+        top: calc(var(--sticky-height) + 27px); /* Align just below the sub-header tier */
         right: 0.5rem;
         padding: 0.5rem 0.8rem;
     }
