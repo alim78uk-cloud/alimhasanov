@@ -3,8 +3,30 @@
    ======================================== */
 @media (max-width: 1024px) and (min-width: 769px) {
     /* ========================================
-       TABLET: Fixed Header + Sub-header Layout
+       TABLET: Header & Glass Bar
        ======================================== */
+    .header {
+        z-index: 10000 !important;
+        height: 100vh; /* Ensure hero height is correct */
+        pointer-events: none !important; /* Allow clicks to pass through to details-panel */
+    }
+
+    .header.collapsed {
+        height: var(--sticky-height) !important;
+    }
+
+    /* Re-enable pointer events for interactive elements */
+    .hero-summary,
+    .profile-container,
+    .name-area,
+    .fixed-mode-toggle,
+    .header-controls {
+        pointer-events: auto !important;
+    }
+
+    .header-content {
+        pointer-events: none !important;
+    }
 
     /* Hide sidebar nav dots on tablet */
     .sidebar-nav {
@@ -18,9 +40,13 @@
     }
 
     /* ========================================
-       TABLET: Glass Bar at Top of Screen
-       Must be above header (z-index 100)
+       TABLET: Header & Glass Bar
+       Must be above hero (z-index 100)
        ======================================== */
+    .header {
+        z-index: 10000 !important; /* Ensure header and controls are above glass bar */
+    }
+
     body::before {
         content: "";
         position: fixed;
@@ -58,41 +84,41 @@
        TABLET: Fixed Sub-header Controls
        ======================================== */
 
-    /* PROD/UAT Toggle - Fixed in header bar, Left */
+    /* PROD/UAT Toggle - Fixed position, shifted lower like mobile */
     .fixed-mode-toggle {
         position: fixed !important;
-        top: 15px !important;
+        top: 75px !important;
         left: 1.5rem !important;
         right: auto !important;
         z-index: 10005;
-        background: transparent !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        padding: 0 !important;
-        border-radius: 0 !important;
+        background: var(--header-bg) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        padding: 0.4rem 0.6rem !important;
+        border-radius: 6px !important;
         transform: none !important;
         height: 32px !important;
         display: flex !important;
         align-items: center !important;
         opacity: 1 !important;
         visibility: visible !important;
-        box-shadow: none !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
         border: none !important;
     }
 
-    /* Burger menu area - Fixed in header bar, Right */
+    /* Burger menu area - Fixed position, shifted lower like mobile */
     .header-controls {
         position: fixed !important;
-        top: 15px !important;
+        top: 75px !important;
         right: 1.5rem !important;
         left: auto !important;
         transform: none !important;
         z-index: 10005;
-        background: transparent !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        padding: 0 !important;
-        border-radius: 0 !important;
+        background: var(--header-bg) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        padding: 0.4rem 0.6rem !important;
+        border-radius: 6px !important;
         display: flex !important;
         align-items: center !important;
         gap: 0.5rem;
@@ -100,52 +126,35 @@
         width: auto !important;
         opacity: 1 !important;
         visibility: visible !important;
-        box-shadow: none !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
         border: none !important;
     }
 
-    /* Burger menu button - ensure visibility */
+    /* Burger menu button - consolidated */
     .mobile-burger-btn {
         display: flex !important;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 4px;
-        padding: 4px;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        width: 32px !important;
-        height: 32px !important;
-        min-width: 32px !important;
-        min-height: 32px !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 4px !important;
+        padding: 6px !important;
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer !important;
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
         flex-shrink: 0 !important;
+        z-index: 10010 !important;
     }
 
     .mobile-burger-btn span {
-        width: 22px !important;
+        width: 24px !important;
         height: 2px !important;
         background: var(--text-color) !important;
         border-radius: 2px;
         display: block !important;
-    }
-
-    /* Burger menu button */
-    .mobile-burger-btn {
-        display: flex !important;
-        flex-direction: column;
-        gap: 4px;
-        padding: 6px;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-    }
-
-    .mobile-burger-btn span {
-        width: 20px;
-        height: 2px;
-        background: var(--text-color);
-        border-radius: 2px;
         transition: transform 0.2s ease, opacity 0.2s ease;
     }
 
@@ -190,7 +199,7 @@
 
     .header.collapsed .name {
         pointer-events: auto !important;
-        font-size: 1.25rem !important;
+        font-size: 1.2rem !important;
         font-weight: 700;
         line-height: 1 !important;
         margin: 0 !important;
