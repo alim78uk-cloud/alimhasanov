@@ -462,7 +462,7 @@
        We use high z-index and ensure body.tabs-open raises the panel.
        ======================================== */
     body.tabs-open .details-panel {
-        z-index: 10020 !important;
+        z-index: 9990 !important;
         visibility: visible !important;
     }
 
@@ -602,7 +602,7 @@
 
     /* Raise details-panel when dropdown is open to escape stacking context */
     body.tabs-open .details-panel {
-        z-index: 10020 !important;
+        z-index: 9990 !important;
     }
 
     /* Hide email/LinkedIn icons in header - moved to burger menu */
