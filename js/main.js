@@ -108,23 +108,6 @@ function applyMode(nextIsOffHours, { animate = true } = {}) {
   }, 300);
 }
 
-// ========================================
-// Environment Check (Hide Admin in Prod)
-// ========================================
-// ========================================
-// Environment Check (Hide Admin in Prod)
-// ========================================
-// const isLocal =
-//   window.location.hostname === "localhost" ||
-//   window.location.hostname === "127.0.0.1" ||
-//   window.location.hostname === ""; // Support file:// protocol
-
-// if (isLocal) {
-//   const adminContainer = document.getElementById("adminContainer");
-//   const debugContainer = document.getElementById("debugContainer");
-//   if (adminContainer) adminContainer.style.display = "flex";
-//   if (debugContainer) debugContainer.style.display = "flex";
-// }
 
 // ========================================
 // Panel Transition
@@ -158,8 +141,6 @@ function goToPanel(panel) {
       document.body.classList.add("show-details");
       nameTitle.innerHTML = "Alim Hasanov";
 
-      // Sync Debug tool (reset inline styles if collapsed)
-      if (window.updateHeroDebug) window.updateHeroDebug();
 
       // Update nav
       navHero.classList.remove("active");
@@ -176,8 +157,6 @@ function goToPanel(panel) {
       document.body.classList.remove("show-details");
       nameTitle.innerHTML = "Alim<br>Hasanov";
 
-      // Sync Debug tool (apply inline styles if expanded)
-      if (window.updateHeroDebug) window.updateHeroDebug();
 
       // Clean up pre-fade classes
       headerCenter.classList.remove("pre-fade-out");
@@ -929,96 +908,3 @@ if (contactForm) {
   });
 }
 
-// ========================================
-// Hero Debug Tool Logic
-// ========================================
-function initHeroDebug() {
-  const container = document.getElementById("heroDebugContainer");
-  const toggle = document.getElementById("heroDebugToggle");
-  const sliderV = document.getElementById("sliderV");
-  const sliderH = document.getElementById("sliderH");
-  const sliderF = document.getElementById("sliderF");
-  const valV = document.getElementById("valV");
-  const valH = document.getElementById("valH");
-  const valF = document.getElementById("valF");
-  const nameArea = document.querySelector(".name-area");
-  const nameElement = document.getElementById("nameTitle");
-  const journeyTrace = document.querySelector(".journey-trace");
-
-  if (!container || !toggle || !sliderV || !sliderH || !sliderF || !nameArea) return;
-
-  // Set initial slider positions based on screen size to match CSS
-  const is1440 = window.innerWidth <= 1440 && window.innerWidth > 1281;
-  const is1280 = window.innerWidth <= 1281 && window.innerWidth > 1024;
-  const is1024 = window.innerWidth === 1024;
-
-  if (is1440) {
-      sliderV.value = 4;
-      sliderH.value = 14.5;
-      sliderF.value = 8;
-  } else if (is1280) {
-      sliderV.value = 4;
-      sliderH.value = 15.5;
-      sliderF.value = 5.4;
-  } else if (is1024) {
-      sliderV.value = 26;
-      sliderH.value = 15.5;
-      sliderF.value = 5.4;
-  }
-
-  toggle.addEventListener("click", () => {
-    container.classList.toggle("active");
-  });
-
-  const update = (e) => {
-    const v = sliderV.value;
-    const h = sliderH.value;
-    const f = sliderF.value;
-    
-    valV.textContent = `${v}rem`;
-    valH.textContent = `${h}vw`;
-    valF.textContent = `${f}rem`;
-
-    // Only apply inline styles on Desktop AND if NOT collapsed
-    const isCollapsed = document.getElementById("header").classList.contains("collapsed");
-
-    if (window.innerWidth > 1023 && !isCollapsed) {
-        nameArea.style.transform = `translateY(${v}rem)`;
-        nameArea.style.marginLeft = `${h}vw`;
-
-        if (nameElement) {
-            nameElement.style.fontSize = `${f}rem`;
-        }
-
-        if (journeyTrace) {
-            journeyTrace.style.marginLeft = `${parseFloat(h) + 0.5}vw`;
-            journeyTrace.style.transform = `translateY(${parseFloat(v) - 1.5}rem)`;
-        }
-    } else {
-        // Reset inline styles on Mobile/Tablet OR if Collapsed
-        nameArea.style.transform = "";
-        nameArea.style.marginLeft = "";
-        if (nameElement) nameElement.style.fontSize = "";
-        if (journeyTrace) {
-            journeyTrace.style.marginLeft = "";
-            journeyTrace.style.transform = "";
-        }
-    }
-  };
-
-  window.updateHeroDebug = update;
-
-  sliderV.addEventListener("input", update);
-  sliderH.addEventListener("input", update);
-  sliderF.addEventListener("input", update);
-  
-  // Initial call to sync labels/state
-  update();
-}
-
-// Call init
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHeroDebug);
-} else {
-    initHeroDebug();
-}
