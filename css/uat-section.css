@@ -415,7 +415,7 @@ body.off-hours #personal-section {
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
     .bento-grid { grid-template-columns: repeat(2, 1fr); }
     .weekend-grid { 
         grid-template-columns: 1fr; /* Single column on tablet */

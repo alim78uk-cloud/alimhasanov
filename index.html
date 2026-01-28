@@ -2285,6 +2285,25 @@
       </div>
     </div>
 
+    <!-- Hero Debug Tool -->
+    <div id="heroDebugContainer" class="debug-container">
+      <button id="heroDebugToggle" class="debug-toggle">DEBUG HERO</button>
+      <div id="heroDebugPanel" class="debug-panel">
+        <div class="debug-item">
+          <label>Vertical (translateY): <span id="valV">-1rem</span></label>
+          <input type="range" id="sliderV" min="-200" max="200" step="0.5" value="-1">
+        </div>
+        <div class="debug-item">
+          <label>Horizontal (margin-left): <span id="valH">15vw</span></label>
+          <input type="range" id="sliderH" min="-200" max="200" step="0.5" value="15">
+        </div>
+        <div class="debug-item">
+          <label>Font Size: <span id="valF">9rem</span></label>
+          <input type="range" id="sliderF" min="1" max="20" step="0.1" value="9">
+        </div>
+      </div>
+    </div>
+
     <!-- JavaScript -->
     <script src="js/main.js"></script>
 

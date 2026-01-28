@@ -1,7 +1,7 @@
 /* ========================================
    RESPONSIVE - Tablet (768px - 1024px)
    ======================================== */
-@media (max-width: 1024px) and (min-width: 769px) {
+@media (max-width: 1023px) and (min-width: 769px) {
     /* ========================================
        TABLET: Fixed Header + Sub-header Layout
        ======================================== */

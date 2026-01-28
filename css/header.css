@@ -77,7 +77,7 @@
   position: relative; /* Changed from absolute to stack with Name */
   margin-bottom: -1.5rem; /* Negative margin to bring closer to name */
   margin-top: 120px; /* Push down to avoid overlap with fixed header controls */
-  margin-left: 12vw; /* Base shift for desktop: Increased from 8vw to 12vw */
+  margin-left: 15vw; /* Base shift for desktop: Updated based on debug tool */
   max-width: 50%;
   opacity: 1;
   transform: translateY(0);
@@ -248,9 +248,9 @@ body.off-hours .hero-tagline {
   transition: all var(--transition-duration) var(--transition-ease);
   transform-origin: bottom left;
   margin-top: auto;
-  margin-left: 12vw; /* Base shift for desktop */
+  margin-left: 15vw; /* Base shift for desktop */
   transform: translateY(
-    -22.5rem
+    -1rem
   ); /* Pull name up significantly to align with photo bottom */
 }
 
@@ -350,12 +350,12 @@ body.off-hours .hero-tagline {
   display: flex;
   gap: 0.75rem;
   margin-top: 1.5rem;
-  margin-left: 12.5vw;
+  margin-left: 15.5vw;
   font-size: 1.8rem;
   font-weight: 900;
   align-items: center;
   opacity: 1;
-  transform: translateY(-24rem); /* Match name-area shift */
+  transform: translateY(-2.5rem); /* Match name-area shift (-1rem - 1.5rem offset) */
   transition:
     opacity 0.4s ease-out 0.6s,
     transform var(--transition-duration) var(--transition-ease);
@@ -529,18 +529,50 @@ body.off-hours .hero-tagline {
 }
 
 /* ========================================
-   HEADER - RESPONSIVE
+   HEADER - RESPONSIVE (DESKTOP RESOLUTIONS)
    ======================================== */
 
-/* Laptop screens (1280-1440px) - add spacing to clear toggle */
-@media (max-width: 1440px) and (min-width: 1025px) {
-  .hero-summary {
-    margin-top: 140px; /* More space to clear PROD/UAT toggle */
-    margin-left: 15vw; /* Laptop override: Increased from 12vw to 15vw */
+/* WIDE SCREENS (> 1680px) */
+@media (min-width: 1681px) {
+  /* Targeted values for high resolution */
+}
+
+/* 1680x1050 range */
+@media (max-width: 1680px) and (min-width: 1441px) {
+}
+
+/* 1440x900 range */
+@media (max-width: 1440px) and (min-width: 1282px) {
+  .header:not(.collapsed) .name-area {
+    margin-left: 14.5vw;
+    transform: translateY(4rem);
+  }
+  .header:not(.collapsed) .name {
+    font-size: 8rem;
+  }
+  .header:not(.collapsed) .journey-trace {
+    margin-left: 15vw;
+    transform: translateY(2.5rem);
   }
 }
 
-@media (max-width: 1024px) and (min-width: 769px) {
+/* 1280x800 range */
+@media (max-width: 1281px) and (min-width: 1025px) {
+  .header:not(.collapsed) .name-area {
+    margin-left: 15.5vw;
+    transform: translateY(4rem);
+  }
+  .header:not(.collapsed) .name {
+    font-size: 5.4rem;
+  }
+  .header:not(.collapsed) .journey-trace {
+    margin-left: 16vw;
+    transform: translateY(2.5rem);
+  }
+}
+
+
+@media (max-width: 1023px) and (min-width: 769px) {
   /* ========================================
      TABLET: Hero Layout - Centered vertical stack
      ======================================== */
