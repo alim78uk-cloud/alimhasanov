@@ -1055,21 +1055,41 @@ window.downloadCV = async function () {
     // Render the export matrix
     window.renderExportMatrix(matrixContainer);
     
-    // Wait a bit for rendering
-    await new Promise(resolve => setTimeout(resolve, 200));
+    // Wait longer for rendering to complete
+    await new Promise(resolve => setTimeout(resolve, 500));
     
     // Capture the matrix as PDF using html2canvas
     const canvas = await window.html2canvas(matrixContainer, {
       scale: 2,
       useCORS: true,
       logging: false,
-      backgroundColor: '#ffffff'
+      backgroundColor: '#ffffff',
+      allowTaint: false,
+      removeContainer: false
     });
     
+    // Validate canvas
+    if (!canvas || canvas.width === 0 || canvas.height === 0) {
+      throw new Error('Failed to render skills matrix to canvas');
+    }
+    
     const imgData = canvas.toDataURL('image/png');
+    
+    // Validate PNG data
+    if (!imgData || !imgData.startsWith('data:image/png')) {
+      throw new Error('Failed to generate PNG from canvas');
+    }
+    
     const imgWidth = 297; // A4 landscape width in mm
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    matrixPdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+    
+    // Add image with error handling
+    try {
+      matrixPdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+    } catch (imgError) {
+      console.error('Error adding image to PDF:', imgError);
+      throw new Error('Failed to add skills matrix image to PDF');
+    }
     
     // Get the matrix PDF as bytes
     const matrixPdfBytes = matrixPdf.output('arraybuffer');
