@@ -653,6 +653,31 @@
   gap: 16px;
 }
 
+.matrix-checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.matrix-checkbox-container:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: var(--accent-color);
+}
+
+.matrix-checkbox-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-color);
+  user-select: none;
+}
+
 .matrix-export-toggle {
   display: flex;
   align-items: center;

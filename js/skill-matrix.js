@@ -992,20 +992,6 @@ function renderDiagonalHeader(isFooter, totalDur) {
     const legendHtml = !isFooter
       ? `
           <div class="hm-legend hm-legend-style-stacked">
-              <div class="hm-stacked-button-col">
-                  <button class="matrix-download-btn-combined" onclick="openMatrixExportModal()" title="Export PDF / View Options">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                          <polyline points="7 10 12 15 17 10"/>
-                          <line x1="12" y1="15" x2="12" y2="3"/>
-                      </svg>
-                      <div class="btn-divider"></div>
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
-                        <circle cx="12" cy="12" r="3"/>
-                      </svg>
-                  </button>
-              </div>
               <div class="hm-stacked-content-col">
                   <span class="hm-stacked-title">Cadence across roles:</span>
                   <div class="hm-stacked-row">
@@ -1421,6 +1407,8 @@ function renderExportMatrix(container) {
 window.downloadMatrixAsPDF = async function () {
   const preview = document.getElementById("matrixExportPreview");
   const btn = document.querySelector(".matrix-export-btn");
+  const checkbox = document.getElementById("includeCV");
+  const includeCV = checkbox && checkbox.checked;
 
   if (!preview || !window.html2canvas || !window.jspdf) {
     console.error("Required libraries not loaded");
@@ -1481,7 +1469,52 @@ window.downloadMatrixAsPDF = async function () {
     });
 
     pdf.addImage(imgData, "PNG", xOffset, yOffset, finalWidth, finalHeight);
-    pdf.save("AlimHasanov_Skills.pdf");
+
+    // If Include CV is checked, prepend the CV pages
+    if (includeCV && window.PDFLib) {
+      try {
+        const { PDFDocument } = window.PDFLib;
+        
+        // Get the skills matrix PDF as bytes
+        const matrixPdfBytes = pdf.output('arraybuffer');
+        const matrixPdfDoc = await PDFDocument.load(matrixPdfBytes);
+        
+        // Fetch the CV PDF
+        const cvResponse = await fetch("AlimHasasov_CV_public.pdf");
+        const cvBytes = await cvResponse.arrayBuffer();
+        const cvPdfDoc = await PDFDocument.load(cvBytes);
+        
+        // Create a new PDF and copy CV pages first, then matrix pages
+        const combinedPdf = await PDFDocument.create();
+        
+        // Copy all CV pages
+        const cvPages = await combinedPdf.copyPages(cvPdfDoc, cvPdfDoc.getPageIndices());
+        cvPages.forEach(page => combinedPdf.addPage(page));
+        
+        // Copy matrix page
+        const [matrixPage] = await combinedPdf.copyPages(matrixPdfDoc, [0]);
+        combinedPdf.addPage(matrixPage);
+        
+        // Save combined PDF
+        const combinedPdfBytes = await combinedPdf.save();
+        const blob = new Blob([combinedPdfBytes], { type: 'application/pdf' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Alim_Hasanov_CV_with_Skills.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      } catch (error) {
+        console.error('Error merging with CV:', error);
+        alert('Unable to merge with CV. This feature requires the page to be served over HTTP. Downloading skills matrix only.');
+        pdf.save("AlimHasanov_Skills.pdf");
+      }
+    } else {
+      // Just save the skills matrix
+      pdf.save("AlimHasanov_Skills.pdf");
+    }
   } catch (error) {
     console.error("PDF generation failed:", error);
     alert("Failed to generate PDF. Please try again.");

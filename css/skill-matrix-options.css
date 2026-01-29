@@ -63,12 +63,13 @@
 /* OPTION 2: STACKED (Professional) - FINALIZED V2 */
 .hm-legend-style-stacked {
   position: absolute;
-  left: 16px; 
-  right: 12px; 
+  left: 50%; 
+  transform: translateX(-50%);
   bottom: 8px;
   display: flex;
   flex-direction: row; 
   align-items: center; /* Center align items vertically */
+  justify-content: center; /* Center horizontally */
   gap: 16px;
   
   background: none; 
@@ -79,7 +80,7 @@
   min-width: 350px; 
 }
 
-/* 1. Button Column (Left) */
+/* 1. Button Column (Left) - No longer used but keeping for compatibility */
 .hm-stacked-button-col {
   display: flex;
   align-items: center; /* Center button in its column */
@@ -90,7 +91,7 @@
 .hm-stacked-content-col {
   display: flex;
   flex-direction: column;
-  flex-grow: 1; 
+  flex-grow: 0; /* Don't grow, let it be auto-width */
   justify-content: center; /* Center content vertically */
 }
 
@@ -105,12 +106,13 @@
   padding-bottom: 4px;
   margin-bottom: 4px;
   width: 100%;
+  text-align: center; /* Center the title */
 }
 
 .hm-stacked-row {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Ensure horizontal alignment */
+  justify-content: center; /* Center the legend items */
   gap: 24px; 
 }
 

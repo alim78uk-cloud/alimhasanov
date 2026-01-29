@@ -228,18 +228,28 @@ body.tabs-open .tabs-toggle-icon span:nth-child(3) {
   color: var(--text-color);
 }
 
-/* Download button inside TASKS & TOOLS tab - hidden by default */
+/* Download button inside tabs - hidden by default */
 .tab-download-btn {
   display: none;
   margin-right: 0.5rem;
   align-items: center;
+  justify-content: center;
   color: var(--text-color);
-  opacity: 0.7;
-  transition: opacity 0.2s ease;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  padding: 2px;
+  border-radius: 4px;
 }
 
 .tab-download-btn:hover {
   opacity: 1;
+  background: rgba(0, 0, 0, 0.05);
+  transform: scale(1.1);
+}
+
+.tab-download-btn svg {
+  display: block;
 }
 
 /* Show only when parent tab is active */

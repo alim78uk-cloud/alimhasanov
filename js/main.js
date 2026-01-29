@@ -490,6 +490,7 @@ function updateTabsToggleLabel() {
       const containerSelector = document.body.classList.contains("off-hours") ? "#uat-tabs" : "#prod-tabs";
       const activeBtn = document.querySelector(`${containerSelector} .tab-btn.active`);
       const isTechTab = activeBtn?.dataset?.tab === "tech";
+      const isCVTab = activeBtn?.dataset?.tab === "cv";
 
       if (isTechTab) {
          finalHtml = '<span style="font-weight: 700;">TASKS</span>&nbsp;AND&nbsp;<span class="font-monospace">TOOLS</span>';
@@ -503,11 +504,25 @@ function updateTabsToggleLabel() {
           }
       }
 
-      // 2. Add Download Icon if "TASKS AND TOOLS" (active tab check)
+      // 2. Add Download Icon for TASKS & TOOLS or CV tabs
       if (isTechTab) {
-        // Build download icon
+        // Build download icon for TASKS & TOOLS
         const downloadIcon = `
           <div class="mobile-tab-download-icon" onclick="if(window.openMatrixExportModal) { window.openMatrixExportModal(); event.stopPropagation(); }" style="display:inline-flex; align-items:center; margin-right:6px; cursor:pointer;">
+             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+             </svg>
+          </div>`;
+          finalHtml = downloadIcon + finalHtml;
+          
+          mobileActiveTabLabel.style.display = "flex";
+          mobileActiveTabLabel.style.alignItems = "center";
+      } else if (isCVTab) {
+        // Build download icon for CV
+        const downloadIcon = `
+          <div class="mobile-tab-download-icon" onclick="if(window.openCVExportModal) { window.openCVExportModal(); event.stopPropagation(); }" style="display:inline-flex; align-items:center; margin-right:6px; cursor:pointer;">
              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                 <polyline points="7 10 12 15 17 10"/>
@@ -920,3 +935,183 @@ if (contactForm) {
     }
   });
 }
+
+// ========================================
+// CV Export Modal
+// ========================================
+window.openCVExportModal = function () {
+  const modal = document.getElementById("cvExportModal");
+  if (!modal) return;
+
+  modal.classList.add("active");
+  document.body.style.overflow = "hidden";
+};
+
+window.closeCVExportModal = function () {
+  const modal = document.getElementById("cvExportModal");
+  if (modal) {
+    modal.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+};
+
+// Download CV only
+window.downloadCVOnly = async function () {
+  try {
+    // Fetch the PDF as a blob to force download
+    const response = await fetch("AlimHasasov_CV_public.pdf");
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "Alim_Hasanov_CV.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error("Error downloading CV:", error);
+    // Fallback to simple link
+    const link = document.createElement("a");
+    link.href = "AlimHasasov_CV_public.pdf";
+    link.download = "Alim_Hasanov_CV.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+  closeCVExportModal();
+};
+
+// Download CV with Skills Matrix appended
+window.downloadCV = async function () {
+  const checkbox = document.getElementById("includeSkillsMatrix");
+  const includeMatrix = checkbox && checkbox.checked;
+
+  if (!includeMatrix) {
+    // Simple download using blob to force download
+    try {
+      const response = await fetch("AlimHasasov_CV_public.pdf");
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "Alim_Hasanov_CV.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading CV:", error);
+      // Fallback
+      const link = document.createElement("a");
+      link.href = "AlimHasasov_CV_public.pdf";
+      link.download = "Alim_Hasanov_CV.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+    closeCVExportModal();
+    return;
+  }
+
+  // Download with skills matrix merged
+  try {
+    // Show loading state
+    const btn = document.querySelector('.cv-download-submit');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<span>Generating PDF...</span>';
+    btn.disabled = true;
+
+    // Load pdf-lib
+    const { PDFDocument } = window.PDFLib;
+    
+    // Fetch the existing CV PDF
+    const cvResponse = await fetch("AlimHasasov_CV_public.pdf");
+    const cvBytes = await cvResponse.arrayBuffer();
+    
+    // Load the CV PDF
+    const cvPdf = await PDFDocument.load(cvBytes);
+    
+    // Create a new PDF for the skills matrix
+    const { jsPDF } = window.jspdf;
+    const matrixPdf = new jsPDF({
+      orientation: 'landscape',
+      unit: 'mm',
+      format: 'a4'
+    });
+    
+    // Render the skills matrix to the PDF
+    const matrixContainer = document.getElementById('matrixExportPreview');
+    if (!matrixContainer || !window.renderExportMatrix) {
+      throw new Error('Skills matrix not available');
+    }
+    
+    // Render the export matrix
+    window.renderExportMatrix(matrixContainer);
+    
+    // Wait a bit for rendering
+    await new Promise(resolve => setTimeout(resolve, 200));
+    
+    // Capture the matrix as PDF using html2canvas
+    const canvas = await window.html2canvas(matrixContainer, {
+      scale: 2,
+      useCORS: true,
+      logging: false,
+      backgroundColor: '#ffffff'
+    });
+    
+    const imgData = canvas.toDataURL('image/png');
+    const imgWidth = 297; // A4 landscape width in mm
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    matrixPdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+    
+    // Get the matrix PDF as bytes
+    const matrixPdfBytes = matrixPdf.output('arraybuffer');
+    const matrixPdfDoc = await PDFDocument.load(matrixPdfBytes);
+    
+    // Copy pages from matrix PDF to CV PDF
+    const [matrixPage] = await cvPdf.copyPages(matrixPdfDoc, [0]);
+    cvPdf.addPage(matrixPage);
+    
+    // Save the combined PDF
+    const combinedPdfBytes = await cvPdf.save();
+    
+    // Download
+    const blob = new Blob([combinedPdfBytes], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'Alim_Hasanov_CV_with_Skills_Matrix.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    
+    // Restore button
+    btn.innerHTML = originalText;
+    btn.disabled = false;
+    
+    closeCVExportModal();
+  } catch (error) {
+    console.error('Error combining PDFs:', error);
+    alert('Unable to combine PDFs. This feature requires the page to be served over HTTP. Downloading CV only instead.');
+    
+    // Fallback to simple download
+    const link = document.createElement("a");
+    link.href = "AlimHasasov_CV_public.pdf";
+    link.download = "Alim_Hasanov_CV.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    closeCVExportModal();
+    
+    // Restore button
+    const btn = document.querySelector('.cv-download-submit');
+    if (btn) {
+      btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>Download CV';
+      btn.disabled = false;
+    }
+  }
+};

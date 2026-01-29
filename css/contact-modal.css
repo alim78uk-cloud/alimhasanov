@@ -284,3 +284,128 @@
     font-size: 0.85rem;
   }
 }
+
+/* ========================================
+   CV EXPORT MODAL
+   ======================================== */
+
+.cv-export-modal-surface {
+  max-width: 450px;
+}
+
+.cv-export-modal-surface .contact-modal-close {
+  top: 12px;
+  right: 12px;
+}
+
+.cv-export-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.cv-checkbox-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.cv-checkbox-container:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: var(--accent-color);
+}
+
+.cv-checkbox-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.cv-checkbox-custom {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  background: var(--bg-color);
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cv-checkbox-input:checked + .cv-checkbox-custom {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.cv-checkbox-input:checked + .cv-checkbox-custom::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  top: 3px;
+}
+
+.cv-checkbox-label {
+  font-size: 0.95rem;
+  color: var(--text-color);
+  line-height: 1.5;
+  user-select: none;
+}
+
+.cv-download-submit {
+  margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+  .cv-export-modal-surface {
+    max-width: 420px;
+  }
+
+  .cv-checkbox-container {
+    padding: 14px;
+  }
+
+  .cv-checkbox-custom {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+  }
+
+  .cv-checkbox-label {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cv-export-modal-surface {
+    max-width: 94%;
+  }
+
+  .cv-checkbox-container {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .cv-checkbox-custom {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+  }
+
+  .cv-checkbox-label {
+    font-size: 0.85rem;
+  }
+}
