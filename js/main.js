@@ -1024,8 +1024,12 @@ window.downloadCV = async function () {
     btn.innerHTML = '<span>Generating PDF...</span>';
     btn.disabled = true;
 
-    // Load pdf-lib
-    const { PDFDocument } = window.PDFLib;
+    // Load pdf-lib - check multiple possible exports
+    const PDFLib = window.PDFLib || window.pdfLib || window['pdf-lib'];
+    if (!PDFLib) {
+      throw new Error('pdf-lib not loaded');
+    }
+    const { PDFDocument } = PDFLib;
     
     // Fetch the existing CV PDF
     const cvResponse = await fetch("AlimHasasov_CV_public.pdf");

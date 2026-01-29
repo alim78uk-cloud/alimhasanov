@@ -1471,9 +1471,10 @@ window.downloadMatrixAsPDF = async function () {
     pdf.addImage(imgData, "PNG", xOffset, yOffset, finalWidth, finalHeight);
 
     // If Include CV is checked, prepend the CV pages
-    if (includeCV && window.PDFLib) {
+    const PDFLib = window.PDFLib || window.pdfLib || window['pdf-lib'];
+    if (includeCV && PDFLib) {
       try {
-        const { PDFDocument } = window.PDFLib;
+        const { PDFDocument } = PDFLib;
         
         // Get the skills matrix PDF as bytes
         const matrixPdfBytes = pdf.output('arraybuffer');
