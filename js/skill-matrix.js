@@ -1284,6 +1284,31 @@ window.switchHeatmapTheme = function (element, themeName) {
 // EXPORT FUNCTIONALITY
 // ==========================================
 
+async function addPageNumbersToPdf(pdfDoc, PDFLib) {
+  const { StandardFonts, rgb } = PDFLib;
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  const totalPages = pdfDoc.getPageCount();
+
+  for (let index = 0; index < totalPages; index += 1) {
+    const page = pdfDoc.getPage(index);
+    const { width, height } = page.getSize();
+    const label = `${index + 1}/${totalPages}`;
+    const fontSize = 9;
+    const margin = 24;
+    const textWidth = font.widthOfTextAtSize(label, fontSize);
+    const x = Math.max(margin, width - margin - textWidth);
+    const y = Math.max(margin, 18);
+
+    page.drawText(label, {
+      x,
+      y,
+      size: fontSize,
+      font,
+      color: rgb(0.4, 0.4, 0.4),
+    });
+  }
+}
+
 // Open export modal and render export-ready matrix
 window.openMatrixExportModal = function () {
   const modal = document.getElementById("matrixExportModal");
@@ -1496,6 +1521,8 @@ window.downloadMatrixAsPDF = async function () {
         const [matrixPage] = await combinedPdf.copyPages(matrixPdfDoc, [0]);
         combinedPdf.addPage(matrixPage);
         
+        await addPageNumbersToPdf(combinedPdf, PDFLib);
+
         // Save combined PDF
         const combinedPdfBytes = await combinedPdf.save();
         const blob = new Blob([combinedPdfBytes], { type: 'application/pdf' });

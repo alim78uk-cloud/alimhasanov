@@ -955,30 +955,113 @@ window.closeCVExportModal = function () {
   }
 };
 
+function triggerDownload(url, filename) {
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+function downloadPdfBytes(bytes, filename) {
+  const blob = new Blob([bytes], { type: "application/pdf" });
+  const objectUrl = URL.createObjectURL(blob);
+  triggerDownload(objectUrl, filename);
+  setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+}
+
+async function downloadPdfFile(url, filename) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch ${url} (${response.status})`);
+    }
+    const blob = await response.blob();
+    const objectUrl = URL.createObjectURL(blob);
+    triggerDownload(objectUrl, filename);
+    setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+    return true;
+  } catch (error) {
+    console.error("Error downloading file:", error);
+    triggerDownload(url, filename);
+    return false;
+  }
+}
+
+async function addPageNumbers(pdfDoc, PDFLib) {
+  const { StandardFonts, rgb } = PDFLib;
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  const totalPages = pdfDoc.getPageCount();
+
+  for (let index = 0; index < totalPages; index += 1) {
+    const page = pdfDoc.getPage(index);
+    const { width, height } = page.getSize();
+    const label = `${index + 1}/${totalPages}`;
+    const fontSize = 9;
+    const margin = 24;
+    const textWidth = font.widthOfTextAtSize(label, fontSize);
+    const x = Math.max(margin, width - margin - textWidth);
+    const y = Math.max(margin, 18);
+
+    page.drawText(label, {
+      x,
+      y,
+      size: fontSize,
+      font,
+      color: rgb(0.4, 0.4, 0.4),
+    });
+  }
+}
+
+async function downloadCvWithPageNumbers(filename) {
+  const PDFLib = window.PDFLib || window.pdfLib || window["pdf-lib"];
+  if (!PDFLib) {
+    throw new Error("pdf-lib not loaded");
+  }
+  const { PDFDocument } = PDFLib;
+  const cvResponse = await fetch("AlimHasasov_CV_public.pdf");
+  const cvBytes = await cvResponse.arrayBuffer();
+  const cvPdf = await PDFDocument.load(cvBytes);
+  await addPageNumbers(cvPdf, PDFLib);
+  const numberedBytes = await cvPdf.save();
+  downloadPdfBytes(numberedBytes, filename);
+}
+
+function createOffscreenMatrixPreview() {
+  const wrapper = document.createElement("div");
+  wrapper.style.position = "fixed";
+  wrapper.style.left = "-2000px";
+  wrapper.style.top = "0";
+  wrapper.style.width = "1200px";
+  wrapper.style.height = "auto";
+  wrapper.style.overflow = "visible";
+  wrapper.style.zIndex = "-1";
+  wrapper.style.display = "flex";
+  wrapper.style.justifyContent = "center";
+  wrapper.style.alignItems = "flex-start";
+  wrapper.style.pointerEvents = "none";
+
+  const preview = document.createElement("div");
+  preview.className = "matrix-export-preview";
+  preview.style.boxShadow = "none";
+  preview.style.display = "inline-block";
+  wrapper.appendChild(preview);
+
+  document.body.appendChild(wrapper);
+  return { wrapper, preview };
+}
+
 // Download CV only
 window.downloadCVOnly = async function () {
   try {
-    // Fetch the PDF as a blob to force download
-    const response = await fetch("AlimHasasov_CV_public.pdf");
-    const blob = await response.blob();
-    const url = URL.createObjectURL(blob);
-    
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "AlimHasanov_CV_public.pdf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    await downloadCvWithPageNumbers("AlimHasanov_CV_public.pdf");
   } catch (error) {
     console.error("Error downloading CV:", error);
-    // Fallback to simple link
-    const link = document.createElement("a");
-    link.href = "AlimHasasov_CV_public.pdf";
-    link.download = "AlimHasanov_CV_public.pdf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    await downloadPdfFile(
+      "AlimHasasov_CV_public.pdf",
+      "AlimHasanov_CV_public.pdf",
+    );
   }
   closeCVExportModal();
 };
@@ -991,26 +1074,13 @@ window.downloadCV = async function () {
   if (!includeMatrix) {
     // Simple download using blob to force download
     try {
-      const response = await fetch("AlimHasasov_CV_public.pdf");
-      const blob = await response.blob();
-      const url = URL.createObjectURL(blob);
-      
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "AlimHasanov_CV_public.pdf";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
+      await downloadCvWithPageNumbers("AlimHasanov_CV_public.pdf");
     } catch (error) {
-      console.error("Error downloading CV:", error);
-      // Fallback
-      const link = document.createElement("a");
-      link.href = "AlimHasasov_CV_public.pdf";
-      link.download = "AlimHasanov_CV_public.pdf";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      console.error("Error adding page numbers to CV:", error);
+      await downloadPdfFile(
+        "AlimHasasov_CV_public.pdf",
+        "AlimHasanov_CV_public.pdf",
+      );
     }
     closeCVExportModal();
     return;
@@ -1020,9 +1090,11 @@ window.downloadCV = async function () {
   try {
     // Show loading state
     const btn = document.querySelector('.cv-download-submit');
-    const originalText = btn.innerHTML;
-    btn.innerHTML = '<span>Generating PDF...</span>';
-    btn.disabled = true;
+    const originalText = btn ? btn.innerHTML : "";
+    if (btn) {
+      btn.innerHTML = '<span>Generating PDF...</span>';
+      btn.disabled = true;
+    }
 
     // Load pdf-lib - check multiple possible exports
     const PDFLib = window.PDFLib || window.pdfLib || window['pdf-lib'];
@@ -1030,6 +1102,16 @@ window.downloadCV = async function () {
       throw new Error('pdf-lib not loaded');
     }
     const { PDFDocument } = PDFLib;
+
+    if (!window.html2canvas) {
+      throw new Error('html2canvas not loaded');
+    }
+    if (!window.jspdf || !window.jspdf.jsPDF) {
+      throw new Error('jsPDF not loaded');
+    }
+    if (typeof window.renderExportMatrix !== "function") {
+      throw new Error('Skills matrix not available');
+    }
     
     // Fetch the existing CV PDF
     const cvResponse = await fetch("AlimHasasov_CV_public.pdf");
@@ -1045,90 +1127,110 @@ window.downloadCV = async function () {
       unit: 'mm',
       format: 'a4'
     });
-    
-    // Render the skills matrix to the PDF
-    const matrixContainer = document.getElementById('matrixExportPreview');
-    if (!matrixContainer || !window.renderExportMatrix) {
-      throw new Error('Skills matrix not available');
-    }
-    
-    // Render the export matrix
-    window.renderExportMatrix(matrixContainer);
-    
-    // Wait longer for rendering to complete
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    // Capture the matrix as PDF using html2canvas
-    const canvas = await window.html2canvas(matrixContainer, {
-      scale: 2,
-      useCORS: true,
-      logging: false,
-      backgroundColor: '#ffffff',
-      allowTaint: false,
-      removeContainer: false
-    });
-    
-    // Validate canvas
-    if (!canvas || canvas.width === 0 || canvas.height === 0) {
-      throw new Error('Failed to render skills matrix to canvas');
-    }
-    
-    const imgData = canvas.toDataURL('image/png');
-    
-    // Validate PNG data
-    if (!imgData || !imgData.startsWith('data:image/png')) {
-      throw new Error('Failed to generate PNG from canvas');
-    }
-    
-    const imgWidth = 297; // A4 landscape width in mm
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    
-    // Add image with error handling
+
+    const { wrapper, preview } = createOffscreenMatrixPreview();
     try {
-      matrixPdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-    } catch (imgError) {
-      console.error('Error adding image to PDF:', imgError);
-      throw new Error('Failed to add skills matrix image to PDF');
+      // Render the export matrix into an offscreen container
+      window.renderExportMatrix(preview);
+
+      // Allow layout + fonts to settle before capture
+      await new Promise(resolve => requestAnimationFrame(resolve));
+      if (document.fonts && document.fonts.ready) {
+        await document.fonts.ready;
+      }
+      const exportMatrix = preview.querySelector(".export-matrix");
+      if (exportMatrix) {
+        const styles = getComputedStyle(preview);
+        const padLeft = parseFloat(styles.paddingLeft) || 0;
+        const padRight = parseFloat(styles.paddingRight) || 0;
+        const requiredWidth = exportMatrix.scrollWidth + padLeft + padRight;
+        preview.style.width = `${Math.ceil(requiredWidth)}px`;
+      }
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      // Capture the matrix as PDF using html2canvas
+      const canvas = await window.html2canvas(preview, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff',
+        allowTaint: false,
+        removeContainer: false
+      });
+
+      // Validate canvas
+      if (!canvas || canvas.width === 0 || canvas.height === 0) {
+        throw new Error('Failed to render skills matrix to canvas');
+      }
+    
+      const imgData = canvas.toDataURL('image/png');
+    
+      // Validate PNG data
+      if (!imgData || !imgData.startsWith('data:image/png')) {
+        throw new Error('Failed to generate PNG from canvas');
+      }
+    
+      const pdfWidth = 297; // A4 landscape width in mm
+      const pdfHeight = 210; // A4 landscape height in mm
+      const margin = 10;
+      const maxWidth = pdfWidth - margin * 2;
+      const maxHeight = pdfHeight - margin * 2;
+      let finalWidth = maxWidth;
+      let finalHeight = (canvas.height * finalWidth) / canvas.width;
+      if (finalHeight > maxHeight) {
+        finalHeight = maxHeight;
+        finalWidth = (canvas.width * finalHeight) / canvas.height;
+      }
+      const xOffset = (pdfWidth - finalWidth) / 2;
+      const yOffset = margin;
+    
+      // Add image with error handling
+      try {
+        matrixPdf.addImage(imgData, 'PNG', xOffset, yOffset, finalWidth, finalHeight);
+      } catch (imgError) {
+        console.error('Error adding image to PDF:', imgError);
+        throw new Error('Failed to add skills matrix image to PDF');
+      }
+    
+      // Get the matrix PDF as bytes
+      const matrixPdfBytes = matrixPdf.output('arraybuffer');
+      const matrixPdfDoc = await PDFDocument.load(matrixPdfBytes);
+    
+      // Copy pages from matrix PDF to CV PDF
+      const [matrixPage] = await cvPdf.copyPages(matrixPdfDoc, [0]);
+      cvPdf.addPage(matrixPage);
+    } finally {
+      wrapper.remove();
     }
     
-    // Get the matrix PDF as bytes
-    const matrixPdfBytes = matrixPdf.output('arraybuffer');
-    const matrixPdfDoc = await PDFDocument.load(matrixPdfBytes);
-    
-    // Copy pages from matrix PDF to CV PDF
-    const [matrixPage] = await cvPdf.copyPages(matrixPdfDoc, [0]);
-    cvPdf.addPage(matrixPage);
-    
+    await addPageNumbers(cvPdf, PDFLib);
+
     // Save the combined PDF
     const combinedPdfBytes = await cvPdf.save();
     
     // Download
-    const blob = new Blob([combinedPdfBytes], { type: 'application/pdf' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'AlimHasanov_CV_public.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    downloadPdfBytes(combinedPdfBytes, "AlimHasanov_CV_public.pdf");
     
     // Restore button
-    btn.innerHTML = originalText;
-    btn.disabled = false;
+    if (btn) {
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+    }
     
     closeCVExportModal();
   } catch (error) {
     console.error('Error combining PDFs:', error);
-    alert('Unable to combine PDFs. This feature requires the page to be served over HTTP. Downloading CV only instead.');
+    const isFileProtocol = window.location && window.location.protocol === "file:";
+    const message = isFileProtocol
+      ? 'Unable to combine PDFs when opening the file directly. Please serve the page over HTTP(S). Downloading CV only instead.'
+      : 'Unable to combine PDFs. Downloading CV only instead.';
+    alert(message);
     
     // Fallback to simple download
-    const link = document.createElement("a");
-    link.href = "AlimHasasov_CV_public.pdf";
-    link.download = "AlimHasanov_CV_public.pdf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    await downloadPdfFile(
+      "AlimHasasov_CV_public.pdf",
+      "AlimHasanov_CV_public.pdf",
+    );
     closeCVExportModal();
     
     // Restore button
