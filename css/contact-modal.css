@@ -365,6 +365,16 @@
   user-select: none;
 }
 
+.cv-download-warning {
+  margin: 10px 4px 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(180, 105, 14, 0.12);
+  color: #8a5a00;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
 .cv-download-submit {
   margin-top: 8px;
 }
@@ -387,6 +397,10 @@
   .cv-checkbox-label {
     font-size: 0.9rem;
   }
+
+  .cv-download-warning {
+    font-size: 0.82rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -407,5 +421,9 @@
 
   .cv-checkbox-label {
     font-size: 0.85rem;
+  }
+
+  .cv-download-warning {
+    font-size: 0.78rem;
   }
 }

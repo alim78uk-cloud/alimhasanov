@@ -649,8 +649,22 @@
 
 .matrix-export-controls {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 16px;
+}
+
+.matrix-download-warning {
+  max-width: 420px;
+  width: 420px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(180, 105, 14, 0.12);
+  color: #8a5a00;
+  font-size: 11px;
+  line-height: 1.2;
+  max-height: 2.4em;
+  overflow: hidden;
+  min-height: 40px;
 }
 
 .matrix-checkbox-container {
@@ -663,6 +677,7 @@
   border-radius: 8px;
   border: 1px solid var(--border-color);
   transition: all 0.2s ease;
+  min-height: 40px;
 }
 
 .matrix-checkbox-container:hover {
@@ -1763,6 +1778,37 @@
   .mobile-download-btn svg {
     width: 24px;
     height: 24px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .matrix-export-modal-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .matrix-export-controls {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .matrix-checkbox-container {
+    order: 0;
+  }
+
+  .matrix-export-btn {
+    order: 1;
+  }
+
+  .matrix-export-close {
+    order: 2;
+  }
+
+  .matrix-download-warning {
+    order: 3;
+    width: 100%;
+    max-width: none;
   }
 }
 
