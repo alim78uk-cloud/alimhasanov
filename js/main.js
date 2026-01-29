@@ -965,7 +965,7 @@ window.downloadCVOnly = async function () {
     
     const link = document.createElement("a");
     link.href = url;
-    link.download = "Alim_Hasanov_CV.pdf";
+    link.download = "AlimHasanov_CV_public.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -975,7 +975,7 @@ window.downloadCVOnly = async function () {
     // Fallback to simple link
     const link = document.createElement("a");
     link.href = "AlimHasasov_CV_public.pdf";
-    link.download = "Alim_Hasanov_CV.pdf";
+    link.download = "AlimHasanov_CV_public.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -997,7 +997,7 @@ window.downloadCV = async function () {
       
       const link = document.createElement("a");
       link.href = url;
-      link.download = "Alim_Hasanov_CV.pdf";
+      link.download = "AlimHasanov_CV_public.pdf";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -1007,7 +1007,7 @@ window.downloadCV = async function () {
       // Fallback
       const link = document.createElement("a");
       link.href = "AlimHasasov_CV_public.pdf";
-      link.download = "Alim_Hasanov_CV.pdf";
+      link.download = "AlimHasanov_CV_public.pdf";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -1087,7 +1087,7 @@ window.downloadCV = async function () {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'Alim_Hasanov_CV_with_Skills_Matrix.pdf';
+    link.download = 'AlimHasanov_CV_public.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -1105,7 +1105,7 @@ window.downloadCV = async function () {
     // Fallback to simple download
     const link = document.createElement("a");
     link.href = "AlimHasasov_CV_public.pdf";
-    link.download = "Alim_Hasanov_CV.pdf";
+    link.download = "AlimHasanov_CV_public.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
