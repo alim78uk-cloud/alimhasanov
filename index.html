@@ -311,21 +311,27 @@
               Home
             </button>
             <button class="tab-btn active" data-tab="cv" id="tabBtnCV">
-              <a 
-                href="#" 
+              <a
+                href="#"
                 class="tab-download-btn"
-                onclick="event.stopPropagation(); if(window.openCVExportModal) { openCVExportModal(); } return false;"
+                onclick="
+                  event.stopPropagation();
+                  if (window.openCVExportModal) {
+                    openCVExportModal();
+                  }
+                  return false;
+                "
                 aria-label="Download CV as PDF"
               >
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="16" 
-                  height="16" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  stroke-width="2" 
-                  stroke-linecap="round" 
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
                   stroke-linejoin="round"
                 >
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -336,21 +342,27 @@
               CV
             </button>
             <button class="tab-btn" data-tab="tech" id="tabBtnTech">
-              <a 
-                href="#" 
+              <a
+                href="#"
                 class="tab-download-btn"
-                onclick="event.stopPropagation(); if(window.openMatrixExportModal) { openMatrixExportModal(); } return false;"
+                onclick="
+                  event.stopPropagation();
+                  if (window.openMatrixExportModal) {
+                    openMatrixExportModal();
+                  }
+                  return false;
+                "
                 aria-label="Download Skills Matrix as PDF"
               >
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="16" 
-                  height="16" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  stroke-width="2" 
-                  stroke-linecap="round" 
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
                   stroke-linejoin="round"
                 >
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -2022,15 +2034,19 @@
       <div class="matrix-export-modal-content">
         <div class="matrix-export-modal-header">
           <h2>TASKS and TOOLS Progression 2014-2025</h2>
-          <div class="matrix-export-controls">
+          <div class="matrix-export-controls" data-1p-ignore>
             <div class="matrix-download-warning">
-              If file download fails, it may be blocked by your organization’s security settings. Check with your network admin, or try another network.
+              If file download fails, it may be blocked by your organization’s
+              security settings. Check with your network admin, or try another
+              network.
             </div>
-            <label class="matrix-checkbox-container">
-              <input 
-                type="checkbox" 
-                id="includeCV" 
+            <label class="matrix-checkbox-container" data-1p-ignore>
+              <input
+                type="checkbox"
+                id="includeCV"
                 class="cv-checkbox-input"
+                data-1p-ignore
+                autocomplete="off"
               />
               <span class="cv-checkbox-custom"></span>
               <span class="matrix-checkbox-label">Include CV</span>
@@ -2092,26 +2108,33 @@
           </svg>
         </button>
 
-        <div class="cv-export-form">
-          <label class="cv-checkbox-container">
-            <input 
-              type="checkbox" 
-              id="includeSkillsMatrix" 
+        <div class="cv-export-form" data-1p-ignore>
+          <label class="cv-checkbox-container" data-1p-ignore>
+            <input
+              type="checkbox"
+              id="includeSkillsMatrix"
               class="cv-checkbox-input"
+              data-1p-ignore
+              autocomplete="off"
             />
             <span class="cv-checkbox-custom"></span>
             <span class="cv-checkbox-label">
-              Include <span style="font-weight: 700">TASKS</span> & 
-              <span class="font-monospace" style="font-weight: 700">TOOLS</span> 
+              Include <span style="font-weight: 700">TASKS</span> &
+              <span class="font-monospace" style="font-weight: 700">TOOLS</span>
               progression
             </span>
           </label>
 
           <div class="cv-download-warning">
-            If file download fails, it may be blocked by your organization’s security settings. Check with your network admin, or try another network.
+            If file download fails, it may be blocked by your organization’s
+            security settings. Check with your network admin, or try another
+            network.
           </div>
 
-          <button class="contact-submit cv-download-submit" onclick="downloadCV()">
+          <button
+            class="contact-submit cv-download-submit"
+            onclick="downloadCV()"
+          >
             <svg
               width="18"
               height="18"
