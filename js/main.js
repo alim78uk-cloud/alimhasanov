@@ -191,6 +191,21 @@ let accumulatedDelta = 0;
 const WHEEL_THRESHOLD = 130;
 const ELASTIC_MAX = 70;
 let elasticOffset = 0;
+const HERO_SCROLL_EPS = 2;
+
+function getHeroScrollState() {
+  if (!header) {
+    return { canScroll: false, atTop: true, atBottom: true };
+  }
+
+  const canScroll = header.scrollHeight > header.clientHeight + HERO_SCROLL_EPS;
+  const atTop = header.scrollTop <= HERO_SCROLL_EPS;
+  const atBottom =
+    header.scrollTop + header.clientHeight >=
+    header.scrollHeight - HERO_SCROLL_EPS;
+
+  return { canScroll, atTop, atBottom };
+}
 
 const pullIndicator = document.getElementById("pullIndicator");
 const progressCircle = pullIndicator
@@ -301,6 +316,20 @@ document.addEventListener(
         // Don't prevent default - allow native scrolling on details-wrapper
       }
     } else {
+      const { canScroll, atTop, atBottom } = getHeroScrollState();
+
+      if (canScroll) {
+        if (e.deltaY > 0 && !atBottom) {
+          accumulatedDelta = 0;
+          return;
+        }
+
+        if (e.deltaY < 0 && !atTop) {
+          accumulatedDelta = 0;
+          return;
+        }
+      }
+
       e.preventDefault();
       accumulatedDelta += Math.abs(e.deltaY);
 
@@ -347,6 +376,8 @@ document.addEventListener(
     const deltaY = touchStartY - touchEndY;
 
     if (currentPanel === "hero" && deltaY > TOUCH_THRESHOLD) {
+      const { canScroll, atBottom } = getHeroScrollState();
+      if (canScroll && !atBottom) return;
       goToPanel("details");
     } else if (currentPanel === "details" && deltaY < -TOUCH_THRESHOLD) {
       const detailsWrapper = document.querySelector(".details-wrapper");

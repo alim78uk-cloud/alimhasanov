@@ -29,6 +29,11 @@
   align-items: center;
 }
 
+.header:not(.collapsed) {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .header-content {
   width: 100%;
   max-width: var(
@@ -40,6 +45,12 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+}
+
+.header:not(.collapsed) .header-content {
+  min-height: 100%;
+  height: auto;
+  padding-bottom: 2rem;
 }
 
 .header.collapsed .header-content {
@@ -567,6 +578,22 @@ body.off-hours .hero-tagline {
   .header:not(.collapsed) .journey-trace {
     margin-left: 16vw;
     transform: translateY(2.5rem);
+  }
+}
+
+/* Ultra-wide desktops: cap left offsets to prevent text/image overlap */
+@media (min-width: 2000px) {
+  .header:not(.collapsed) .hero-summary {
+    margin-left: clamp(8rem, 8vw, 14rem);
+    max-width: 45%;
+  }
+
+  .header:not(.collapsed) .name-area {
+    margin-left: clamp(8rem, 8vw, 14rem);
+  }
+
+  .header:not(.collapsed) .journey-trace {
+    margin-left: clamp(8.5rem, 8.5vw, 14.5rem);
   }
 }
 
