@@ -975,6 +975,20 @@ body.off-hours .hero-tagline {
   }
 }
 
+@media (min-width: 1025px) and (min-height: 1100px) {
+  .header:not(.collapsed) .header-content {
+    justify-content: flex-start;
+  }
+
+  .header:not(.collapsed) .name-area {
+    margin-top: clamp(1.5rem, 5vh, 4rem);
+  }
+
+  .header:not(.collapsed) .journey-trace {
+    margin-top: 1rem;
+  }
+}
+
 /* ========================================
    Desktop Tweaks (Added via Agent)
    ======================================== */
