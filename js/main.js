@@ -498,8 +498,11 @@ function updateTabsToggleLabel() {
       const isCVTab = activeBtn?.dataset?.tab === "cv";
 
       if (isTechTab) {
+        // Get current language to use correct translation
+        const currentLang = document.documentElement.lang || 'en';
+        const andText = currentLang === 'de' ? 'UND' : 'AND';
         finalHtml =
-          '<span style="font-weight: 700;">TASKS</span>&nbsp;AND&nbsp;<span class="font-monospace">TOOLS</span>';
+          `<span style="font-weight: 700;">TASKS</span>&nbsp;${andText}&nbsp;<span class="font-monospace">TOOLS</span>`;
       } else {
         // General replacements for other cases if they happen to contain these words
         if (finalHtml.includes("TASKS")) {
@@ -846,6 +849,8 @@ langBtns.forEach((btn) => {
 
     localStorage.setItem("language", lang);
     switchLanguage(lang, true);
+    // Update mobile tab label to reflect language change (e.g., AND vs UND)
+    updateTabsToggleLabel();
   });
 });
 
