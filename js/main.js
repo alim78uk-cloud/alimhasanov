@@ -4,23 +4,14 @@
 const header = document.getElementById("header");
 const detailsPanel = document.getElementById("detailsPanel");
 const nameTitle = document.getElementById("nameTitle");
-const heroTagline = document.getElementById("heroTagline");
-const headerSubtitle = document.getElementById("headerSubtitle");
 const modeToggle = document.getElementById("modeToggleHero");
 const labelOn = document.getElementById("labelOnHero");
 const labelOff = document.getElementById("labelOffHero");
 const navHero = document.getElementById("navHero");
 const navDetails = document.getElementById("navDetails");
-const profileImg = document.getElementById("profileImg");
 const allProfileImgs = document.querySelectorAll(
   ".profile-container img, .sticky-profile img",
 );
-const defaultHeroTagline =
-  heroTagline?.dataset?.en || heroTagline?.textContent?.trim() || "";
-const defaultHeaderSubtitle =
-  headerSubtitle?.dataset?.en || headerSubtitle?.textContent?.trim() || "";
-const heroDescription = document.getElementById("heroDescription");
-const defaultHeroDescription = heroDescription?.innerHTML || "";
 const prodProfile = {
   src: "images/darkblue_centered.png",
 };
@@ -35,37 +26,22 @@ let currentPanel = "hero"; // 'hero' or 'details'
 let isOffHours = false;
 let isAnimating = false;
 
+// Mark local/dev environments for dev-only UI.
+const isDevHost =
+  window.location.protocol === "file:" ||
+  ["localhost", "127.0.0.1", "0.0.0.0", "::1"].includes(
+    window.location.hostname,
+  );
+if (isDevHost) {
+  document.body.classList.add("dev-mode");
+}
+
 function applyMode(nextIsOffHours, { animate = true } = {}) {
   isOffHours = nextIsOffHours;
 
   document.body.classList.toggle("off-hours", isOffHours);
   labelOn.classList.toggle("active", !isOffHours);
   labelOff.classList.toggle("active", isOffHours);
-
-  // Update tagline and header subtitle
-  const taglineText = isOffHours
-    ? "Tinkerer | Traveler | Reader | Human"
-    : defaultHeroTagline || defaultHeaderSubtitle;
-  const subtitleText = isOffHours
-    ? "Tinkerer | Traveler | Reader | Human"
-    : defaultHeaderSubtitle || defaultHeroTagline;
-  heroTagline.textContent = taglineText;
-  headerSubtitle.textContent = subtitleText;
-
-  // Update Hero Description for UAT
-  if (heroDescription) {
-    if (isOffHours) {
-      heroDescription.innerHTML = `
-        <p style="margin-bottom: 0.5rem">Always curious</p>
-        <p style="margin-bottom: 0.5rem">A nerd by nature</p>
-        <p style="margin-bottom: 0.5rem">Endless travelling</p>
-        <p style="margin-bottom: 0.5rem">Allergic to honey</p>
-        <p style="margin-bottom: 0.5rem">News junkie</p>
-      `;
-    } else {
-      heroDescription.innerHTML = defaultHeroDescription;
-    }
-  }
 
   const targetProfile = isOffHours ? uatProfile : prodProfile;
 
@@ -108,7 +84,6 @@ function applyMode(nextIsOffHours, { animate = true } = {}) {
   }, 300);
 }
 
-
 // ========================================
 // Panel Transition
 // ========================================
@@ -139,8 +114,8 @@ function goToPanel(panel) {
     setTimeout(() => {
       header.classList.add("collapsed");
       document.body.classList.add("show-details");
-      nameTitle.innerHTML = "Alim Hasanov";
-
+      nameTitle.innerHTML =
+        '<span data-en="Alim" data-de="Alim">Alim</span> <span data-en="Hasanov" data-de="Hasanov">Hasanov</span>';
 
       // Update nav
       navHero.classList.remove("active");
@@ -155,8 +130,8 @@ function goToPanel(panel) {
     setTimeout(() => {
       header.classList.remove("collapsed");
       document.body.classList.remove("show-details");
-      nameTitle.innerHTML = "Alim<br>Hasanov";
-
+      nameTitle.innerHTML =
+        '<span data-en="Alim" data-de="Alim">Alim</span><br><span data-en="Hasanov" data-de="Hasanov">Hasanov</span>';
 
       // Clean up pre-fade classes
       headerCenter.classList.remove("pre-fade-out");
@@ -414,7 +389,6 @@ modeToggle.addEventListener("click", () => {
   closeTabsMenu();
 });
 
-
 // ========================================
 // Student Jobs Expand/Collapse
 // ========================================
@@ -432,20 +406,21 @@ function getActiveTabLabel() {
     ? "#uat-tabs .tab-btn.active"
     : "#prod-tabs .tab-btn.active";
   const activeBtn = document.querySelector(selector);
-  
+
   if (!activeBtn) return "Menu";
 
   // Using innerText is more reliable for gathering formatted text from elements
   // We'll clone to avoid any side effects from cleaning nodes
   const clone = activeBtn.cloneNode(true);
-  
+
   // Remove download bits if any exist (safety)
-  const downloads = clone.querySelectorAll('.tab-download-btn, .mobile-tab-download-icon');
-  downloads.forEach(d => d.remove());
+  const downloads = clone.querySelectorAll(
+    ".tab-download-btn, .mobile-tab-download-icon",
+  );
+  downloads.forEach((d) => d.remove());
 
-  return clone.innerText.trim().replace(/\s+/g, ' ') || "Menu";
+  return clone.innerText.trim().replace(/\s+/g, " ") || "Menu";
 }
-
 
 function closeTabsMenu() {
   if (!tabsToggleBtn) return;
@@ -463,10 +438,13 @@ function toggleTabsMenu() {
     // When opening menu on hero page, highlight Home tab
     if (currentPanel === "hero") {
       const tabsContainer = document.body.classList.contains("off-hours")
-        ? "#uat-tabs" : "#prod-tabs";
+        ? "#uat-tabs"
+        : "#prod-tabs";
       const allBtns = document.querySelectorAll(`${tabsContainer} .tab-btn`);
-      allBtns.forEach(b => b.classList.remove("active"));
-      const homeBtn = document.querySelector(`${tabsContainer} .tab-btn[data-tab="home"]`);
+      allBtns.forEach((b) => b.classList.remove("active"));
+      const homeBtn = document.querySelector(
+        `${tabsContainer} .tab-btn[data-tab="home"]`,
+      );
       if (homeBtn) homeBtn.classList.add("active");
     }
     updateTabsToggleLabel();
@@ -501,7 +479,7 @@ document.addEventListener("click", (e) => {
 
 function updateTabsToggleLabel() {
   const activeLabelText = getActiveTabLabel();
-  
+
   // Update original label (if visible)
   if (tabsToggleLabel) {
     tabsToggleLabel.textContent = activeLabelText;
@@ -514,25 +492,36 @@ function updateTabsToggleLabel() {
       mobileActiveTabLabel.style.display = "none";
     } else {
       let finalHtml = activeLabelText;
-      
+
       // 1. Styling for "TASKS AND TOOLS" - Explicitly handle spacing and bolding
       // Check if this is the tech tab to be absolutely sure we don't merge words
       // Scope to the correct container to prevent false positives from hidden mode tabs
-      const containerSelector = document.body.classList.contains("off-hours") ? "#uat-tabs" : "#prod-tabs";
-      const activeBtn = document.querySelector(`${containerSelector} .tab-btn.active`);
+      const containerSelector = document.body.classList.contains("off-hours")
+        ? "#uat-tabs"
+        : "#prod-tabs";
+      const activeBtn = document.querySelector(
+        `${containerSelector} .tab-btn.active`,
+      );
       const isTechTab = activeBtn?.dataset?.tab === "tech";
       const isCVTab = activeBtn?.dataset?.tab === "cv";
 
       if (isTechTab) {
-         finalHtml = '<span style="font-weight: 700;">TASKS</span>&nbsp;AND&nbsp;<span class="font-monospace">TOOLS</span>';
+        finalHtml =
+          '<span style="font-weight: 700;">TASKS</span>&nbsp;AND&nbsp;<span class="font-monospace">TOOLS</span>';
       } else {
-          // General replacements for other cases if they happen to contain these words
-          if (finalHtml.includes("TASKS")) {
-             finalHtml = finalHtml.replace("TASKS", '<span style="font-weight: 700;">TASKS</span>');
-          }
-          if (finalHtml.includes("TOOLS")) {
-             finalHtml = finalHtml.replace("TOOLS", '<span class="font-monospace">TOOLS</span>');
-          }
+        // General replacements for other cases if they happen to contain these words
+        if (finalHtml.includes("TASKS")) {
+          finalHtml = finalHtml.replace(
+            "TASKS",
+            '<span style="font-weight: 700;">TASKS</span>',
+          );
+        }
+        if (finalHtml.includes("TOOLS")) {
+          finalHtml = finalHtml.replace(
+            "TOOLS",
+            '<span class="font-monospace">TOOLS</span>',
+          );
+        }
       }
 
       // 2. Add Download Icon for TASKS & TOOLS or CV tabs
@@ -546,10 +535,10 @@ function updateTabsToggleLabel() {
                 <line x1="12" y1="15" x2="12" y2="3"/>
              </svg>
           </div>`;
-          finalHtml = downloadIcon + finalHtml;
-          
-          mobileActiveTabLabel.style.display = "flex";
-          mobileActiveTabLabel.style.alignItems = "center";
+        finalHtml = downloadIcon + finalHtml;
+
+        mobileActiveTabLabel.style.display = "flex";
+        mobileActiveTabLabel.style.alignItems = "center";
       } else if (isCVTab) {
         // Build download icon for CV
         const downloadIcon = `
@@ -560,12 +549,12 @@ function updateTabsToggleLabel() {
                 <line x1="12" y1="15" x2="12" y2="3"/>
              </svg>
           </div>`;
-          finalHtml = downloadIcon + finalHtml;
-          
-          mobileActiveTabLabel.style.display = "flex";
-          mobileActiveTabLabel.style.alignItems = "center";
+        finalHtml = downloadIcon + finalHtml;
+
+        mobileActiveTabLabel.style.display = "flex";
+        mobileActiveTabLabel.style.alignItems = "center";
       } else {
-          mobileActiveTabLabel.style.display = "block";
+        mobileActiveTabLabel.style.display = "block";
       }
 
       mobileActiveTabLabel.innerHTML = finalHtml;
@@ -581,14 +570,14 @@ prodTabBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     // Check if Home tab
     if (btn.dataset.tab === "home") {
-        goToPanel("hero");
-        closeTabsMenu();
-        // Hide the mobile tab label when going home
-        if (mobileActiveTabLabel) {
-          mobileActiveTabLabel.textContent = "";
-          mobileActiveTabLabel.style.display = "none";
-        }
-        return; // Don't activate tab styling for Home
+      goToPanel("hero");
+      closeTabsMenu();
+      // Hide the mobile tab label when going home
+      if (mobileActiveTabLabel) {
+        mobileActiveTabLabel.textContent = "";
+        mobileActiveTabLabel.style.display = "none";
+      }
+      return; // Don't activate tab styling for Home
     }
 
     // 1. Switch active button
@@ -619,7 +608,7 @@ prodTabBtns.forEach((btn) => {
     }
 
     if (currentPanel === "hero") {
-        goToPanel("details");
+      goToPanel("details");
     }
     updateTabsToggleLabel();
     closeTabsMenu();
@@ -634,14 +623,14 @@ uatTabBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     // Check if Home tab
     if (btn.dataset.tab === "home") {
-        goToPanel("hero");
-        closeTabsMenu();
-        // Hide the mobile tab label when going home
-        if (mobileActiveTabLabel) {
-          mobileActiveTabLabel.textContent = "";
-          mobileActiveTabLabel.style.display = "none";
-        }
-        return; // Don't activate tab styling for Home
+      goToPanel("hero");
+      closeTabsMenu();
+      // Hide the mobile tab label when going home
+      if (mobileActiveTabLabel) {
+        mobileActiveTabLabel.textContent = "";
+        mobileActiveTabLabel.style.display = "none";
+      }
+      return; // Don't activate tab styling for Home
     }
 
     // 1. Toggle active class on nav items
@@ -661,7 +650,7 @@ uatTabBtns.forEach((btn) => {
     }
 
     if (currentPanel === "hero") {
-        goToPanel("details");
+      goToPanel("details");
     }
     updateTabsToggleLabel();
     closeTabsMenu();
@@ -803,9 +792,17 @@ function switchLanguage(lang, animate = true) {
     setTimeout(() => {
       translatableElements.forEach((el) => {
         const translation = el.dataset[lang];
-        if (translation) {
+        if (translation !== undefined) {
           el.textContent = translation;
         }
+
+        // Handle Link Href Translation
+        // dataset property keys are camelCased (e.g. data-de-href -> deHref)
+        const newHref = el.dataset[lang + "Href"];
+        if (newHref) {
+          el.href = newHref;
+        }
+
         el.style.transition = "opacity 0.2s ease-in";
         el.style.opacity = "1";
       });
@@ -813,13 +810,38 @@ function switchLanguage(lang, animate = true) {
   } else {
     translatableElements.forEach((el) => {
       const translation = el.dataset[lang];
-      if (translation) {
+      if (translation !== undefined) {
         el.textContent = translation;
+      }
+
+      // Handle Link Href Translation
+      const newHref = el.dataset[lang + "Href"];
+      if (newHref) {
+        el.href = newHref;
       }
     });
   }
 
+  // Handle Placeholders (Instant switch, no animation needed)
+  const placeholderElements = document.querySelectorAll(
+    "[data-en-placeholder][data-de-placeholder]",
+  );
+  placeholderElements.forEach((el) => {
+    // dataset keys are camelCased: data-de-placeholder -> dePlaceholder
+    // We construct the key as lang + "Placeholder" (e.g. "enPlaceholder" or "dePlaceholder")
+    const key = lang + "Placeholder"; // e.g. "dePlaceholder"
+    const newPlaceholder = el.dataset[key];
+    if (newPlaceholder) {
+      el.placeholder = newPlaceholder;
+    }
+  });
+
   document.documentElement.lang = lang;
+
+  // Re-render heatmap if available (to update dynamic texts like legend)
+  if (typeof renderHeatmapView === "function") {
+    renderHeatmapView();
+  }
 }
 
 langBtns.forEach((btn) => {
@@ -846,8 +868,6 @@ switchLanguage(savedLang, false);
 if (document.body.classList.contains("off-hours")) {
   applyMode(true, { animate: false });
 }
-
-
 
 // UAT: Toggle Bucket List Items
 document.querySelectorAll(".bucket-item").forEach((item) => {
@@ -1090,7 +1110,7 @@ window.downloadCVOnly = async function () {
   } catch (error) {
     console.error("Error downloading CV:", error);
     await downloadPdfFile(
-      "AlimHasasov_CV_public.pdf",
+      "AlimHasanov_CV_public.pdf",
       "AlimHasanov_CV_public.pdf",
     );
   }
@@ -1109,7 +1129,7 @@ window.downloadCV = async function () {
     } catch (error) {
       console.error("Error adding page numbers to CV:", error);
       await downloadPdfFile(
-        "AlimHasasov_CV_public.pdf",
+        "AlimHasanov_CV_public.pdf",
         "AlimHasanov_CV_public.pdf",
       );
     }
@@ -1120,43 +1140,43 @@ window.downloadCV = async function () {
   // Download with skills matrix merged
   try {
     // Show loading state
-    const btn = document.querySelector('.cv-download-submit');
+    const btn = document.querySelector(".cv-download-submit");
     const originalText = btn ? btn.innerHTML : "";
     if (btn) {
-      btn.innerHTML = '<span>Generating PDF...</span>';
+      btn.innerHTML = "<span>Generating PDF...</span>";
       btn.disabled = true;
     }
 
     // Load pdf-lib - check multiple possible exports
-    const PDFLib = window.PDFLib || window.pdfLib || window['pdf-lib'];
+    const PDFLib = window.PDFLib || window.pdfLib || window["pdf-lib"];
     if (!PDFLib) {
-      throw new Error('pdf-lib not loaded');
+      throw new Error("pdf-lib not loaded");
     }
     const { PDFDocument } = PDFLib;
 
     if (!window.html2canvas) {
-      throw new Error('html2canvas not loaded');
+      throw new Error("html2canvas not loaded");
     }
     if (!window.jspdf || !window.jspdf.jsPDF) {
-      throw new Error('jsPDF not loaded');
+      throw new Error("jsPDF not loaded");
     }
     if (typeof window.renderExportMatrix !== "function") {
-      throw new Error('Skills matrix not available');
+      throw new Error("Skills matrix not available");
     }
-    
+
     // Fetch the existing CV PDF
-    const cvResponse = await fetch("AlimHasasov_CV_public.pdf");
+    const cvResponse = await fetch("AlimHasanov_CV_public.pdf");
     const cvBytes = await cvResponse.arrayBuffer();
-    
+
     // Load the CV PDF
     const cvPdf = await PDFDocument.load(cvBytes);
-    
+
     // Create a new PDF for the skills matrix
     const { jsPDF } = window.jspdf;
     const matrixPdf = new jsPDF({
-      orientation: 'landscape',
-      unit: 'mm',
-      format: 'a4'
+      orientation: "landscape",
+      unit: "mm",
+      format: "a4",
     });
 
     const { wrapper, preview } = createOffscreenMatrixPreview();
@@ -1165,7 +1185,7 @@ window.downloadCV = async function () {
       window.renderExportMatrix(preview);
 
       // Allow layout + fonts to settle before capture
-      await new Promise(resolve => requestAnimationFrame(resolve));
+      await new Promise((resolve) => requestAnimationFrame(resolve));
       if (document.fonts && document.fonts.ready) {
         await document.fonts.ready;
       }
@@ -1177,30 +1197,30 @@ window.downloadCV = async function () {
         const requiredWidth = exportMatrix.scrollWidth + padLeft + padRight;
         preview.style.width = `${Math.ceil(requiredWidth)}px`;
       }
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Capture the matrix as PDF using html2canvas
       const canvas = await window.html2canvas(preview, {
         scale: 2,
         useCORS: true,
         logging: false,
-        backgroundColor: '#ffffff',
+        backgroundColor: "#ffffff",
         allowTaint: false,
-        removeContainer: false
+        removeContainer: false,
       });
 
       // Validate canvas
       if (!canvas || canvas.width === 0 || canvas.height === 0) {
-        throw new Error('Failed to render skills matrix to canvas');
+        throw new Error("Failed to render skills matrix to canvas");
       }
-    
-      const imgData = canvas.toDataURL('image/png');
-    
+
+      const imgData = canvas.toDataURL("image/png");
+
       // Validate PNG data
-      if (!imgData || !imgData.startsWith('data:image/png')) {
-        throw new Error('Failed to generate PNG from canvas');
+      if (!imgData || !imgData.startsWith("data:image/png")) {
+        throw new Error("Failed to generate PNG from canvas");
       }
-    
+
       const pdfWidth = 297; // A4 landscape width in mm
       const pdfHeight = 210; // A4 landscape height in mm
       const margin = 10;
@@ -1214,60 +1234,69 @@ window.downloadCV = async function () {
       }
       const xOffset = (pdfWidth - finalWidth) / 2;
       const yOffset = margin;
-    
+
       // Add image with error handling
       try {
-        matrixPdf.addImage(imgData, 'PNG', xOffset, yOffset, finalWidth, finalHeight);
+        matrixPdf.addImage(
+          imgData,
+          "PNG",
+          xOffset,
+          yOffset,
+          finalWidth,
+          finalHeight,
+        );
       } catch (imgError) {
-        console.error('Error adding image to PDF:', imgError);
-        throw new Error('Failed to add skills matrix image to PDF');
+        console.error("Error adding image to PDF:", imgError);
+        throw new Error("Failed to add skills matrix image to PDF");
       }
-    
+
       // Get the matrix PDF as bytes
-      const matrixPdfBytes = matrixPdf.output('arraybuffer');
+      const matrixPdfBytes = matrixPdf.output("arraybuffer");
       const matrixPdfDoc = await PDFDocument.load(matrixPdfBytes);
-    
+
       // Copy pages from matrix PDF to CV PDF
       const [matrixPage] = await cvPdf.copyPages(matrixPdfDoc, [0]);
       cvPdf.addPage(matrixPage);
     } finally {
       wrapper.remove();
     }
-    
+
     await addPageNumbers(cvPdf, PDFLib);
 
     // Save the combined PDF
     const combinedPdfBytes = await cvPdf.save();
-    
+
     // Download
     downloadPdfBytes(combinedPdfBytes, "AlimHasanov_CV_public.pdf");
-    
+
     // Restore button
     if (btn) {
       btn.innerHTML = originalText;
       btn.disabled = false;
     }
-    
+
     closeCVExportModal();
   } catch (error) {
-    console.error('Error combining PDFs:', error);
-    const isFileProtocol = window.location && window.location.protocol === "file:";
+    console.error("Error combining PDFs:", error);
+    const isFileProtocol =
+      window.location && window.location.protocol === "file:";
     const message = isFileProtocol
-      ? 'Unable to combine PDFs when opening the file directly. Please serve the page over HTTP(S). Downloading CV only instead.'
-      : 'Unable to combine PDFs. Downloading CV only instead.';
+      ? "Unable to combine PDFs when opening the file directly. Please serve the page over HTTP(S). Downloading CV only instead."
+      : "Unable to combine PDFs. Downloading CV only instead.";
     alert(message);
-    
+
     // Fallback to simple download
     await downloadPdfFile(
       "AlimHasasov_CV_public.pdf",
       "AlimHasanov_CV_public.pdf",
     );
     closeCVExportModal();
-    
+
     // Restore button
-    const btn = document.querySelector('.cv-download-submit');
+    const btn = document.querySelector(".cv-download-submit");
     if (btn) {
-      btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>Download CV';
+      btn.innerHTML =
+        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>Download CV';
       btn.disabled = false;
     }
   }

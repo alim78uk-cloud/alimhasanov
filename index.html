@@ -1,30 +1,30 @@
 <!doctype html>
+
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Alim Hasanov | Application and Data Management</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;900&amp;display=swap"
       rel="stylesheet"
     />
     <!-- CSS Modules -->
-    <link rel="stylesheet" href="css/variables.css" />
-    <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/header.css" />
-    <link rel="stylesheet" href="css/details-panel.css" />
-    <link rel="stylesheet" href="css/grid-columns.css" />
-    <link rel="stylesheet" href="css/experience.css" />
-    <link rel="stylesheet" href="css/uat-section.css" />
-    <link rel="stylesheet" href="css/uat-styles-generated.css" />
-    <link rel="stylesheet" href="css/components.css" />
-    <link rel="stylesheet" href="css/responsive.css" />
-    <link rel="stylesheet" href="css/contact-modal.css" />
-    <link rel="stylesheet" href="css/skill-matrix.css" />
-    <link rel="stylesheet" href="css/skill-matrix-options.css" />
-
+    <link href="css/variables.css" rel="stylesheet" />
+    <link href="css/base.css" rel="stylesheet" />
+    <link href="css/header.css" rel="stylesheet" />
+    <link href="css/details-panel.css" rel="stylesheet" />
+    <link href="css/grid-columns.css" rel="stylesheet" />
+    <link href="css/experience.css" rel="stylesheet" />
+    <link href="css/uat-section.css" rel="stylesheet" />
+    <link href="css/uat-styles-generated.css" rel="stylesheet" />
+    <link href="css/components.css" rel="stylesheet" />
+    <link href="css/responsive.css" rel="stylesheet" />
+    <link href="css/contact-modal.css" rel="stylesheet" />
+    <link href="css/skill-matrix.css" rel="stylesheet" />
+    <link href="css/skill-matrix-options.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
@@ -32,13 +32,12 @@
   <body>
     <!-- Pull-to-close Progress Indicator -->
     <div class="pull-indicator" id="pullIndicator">
-      <svg viewBox="0 0 40 40">
+      <svg viewbox="0 0 40 40">
         <circle class="bg-circle" cx="20" cy="20" r="18"></circle>
         <circle class="progress-circle" cx="20" cy="20" r="18"></circle>
       </svg>
-      <span class="arrow">↑</span>
+      <span class="arrow" data-de="↑" data-en="↑">↑</span>
     </div>
-
     <!-- Sidebar Navigation - Moved closer to content -->
     <nav
       class="sidebar-nav"
@@ -47,107 +46,175 @@
       <div class="nav-dot active" data-panel="hero" id="navHero"></div>
       <div class="nav-dot" data-panel="details" id="navDetails"></div>
     </nav>
-
     <!-- HEADER (Hero that collapses to sticky) -->
     <header class="header" id="header">
       <div class="header-content">
         <!-- Hero Summary (visible in hero state) -->
         <div class="hero-summary">
-          <div
-            class="hero-tagline"
-            id="heroTagline"
-            data-en="APPLICATION and DATA MANAGEMENT | AUTOMATION"
-            data-de="Anwendungsunterstützung | Datenmanagement"
-          >
-            APPLICATION and DATA MANAGEMENT |<br />AUTOMATION
+          <div class="hero-tagline" id="heroTagline">
+            <span class="tagline-prod">
+              <span
+                class="tagline-line"
+                data-de="Applikations- und Datenmanagement |"
+                data-en="APPLICATION and DATA MANAGEMENT |"
+                >APPLICATION and DATA MANAGEMENT |</span
+              >
+              <span
+                class="tagline-line"
+                data-de="AUTOMATISIERUNG"
+                data-en="AUTOMATION"
+                >AUTOMATION</span
+              >
+            </span>
+            <span
+              class="tagline-uat"
+              data-de="TÜFTLER | WELTENBUMMLER | LESER | MI"
+              data-en="TINKERER | TRAVELER | READER | HI"
+              >TINKERER | TRAVELER | READER | HI</span
+            >
           </div>
           <div class="hero-description" id="heroDescription">
-            <p
-              data-en="Hands-on with application management, automating data flows, and vendor integrations. Mostly you will find me troubleshooting APIs, querying databases, reading logs or debugging a client issue - or tinkering on automating a task."
-              data-de=""
-            >
-              Hands-on with application management, automating data flows, and
-              vendor integrations. Mostly you will find me troubleshooting APIs,
-              querying databases, reading logs or debugging a client issue - or
-              tinkering on automating a task.
-            </p>
-            <p
-              data-en="With a get-it-done attitude, I enjoy being the SME and the interface between clients and internal development teams, syncing business needs with IT."
-              data-de=""
-            >
-              With a get-it-done attitude, I enjoy being the SME and the
-              interface between clients and internal development teams, syncing
-              business needs with IT.
-            </p>
-            <p
-              data-en="I’m in my element tracing bugs, testing new features, automating repetitive tasks with tools like Python, all the while facing clients and keeping them in the loop."
-              data-de=""
-            >
-              I’m in my element tracing bugs, testing new features, automating
-              repetitive tasks with tools like Python or SQL all the while
-              facing clients and keep them in the loop.
-            </p>
+            <div class="hero-description-prod">
+              <p
+                data-de="Ich bin hands-on unterwegs im Application Management, bei der Automatisierung von Datenflüssen und bei Vendor-Integrationen. Meistens finden Sie mich beim Troubleshooting von APIs, beim Abfragen von Datenbanken, beim Analysieren von Logs oder beim Debuggen eines Kundenproblems – oder ich tüftle gerade an einer Automatisierung."
+                data-en="Hands-on with application management, automating data flows, and vendor integrations. Mostly you will find me troubleshooting APIs, querying databases, reading logs or debugging a client issue - or tinkering on automating a task."
+              >
+                Hands-on with application management, automating data flows, and
+                vendor integrations. Mostly you will find me troubleshooting
+                APIs, querying databases, reading logs or debugging a client
+                issue - or tinkering on automating a task.
+              </p>
+              <p
+                data-de="Mit meiner „get-it-done“-Mentalität fühle ich mich als Fachexperte und Schnittstelle zwischen Kunden und internen Entwicklungsteams wohl und verbinde Business und IT."
+                data-en="With a get-it-done attitude, I enjoy being the SME and the interface between clients and internal development teams, syncing business needs with IT."
+              >
+                With a get-it-done attitude, I enjoy being the SME and the
+                interface between clients and internal development teams,
+                syncing business needs with IT.
+              </p>
+              <p
+                data-de="Ich bin in meinem Element, wenn ich Bugs nachverfolge, neue Features teste und repetitive Aufgaben mit Tools wie Python automatisiere – und dabei Kunden eng begleite und sie transparent auf dem Laufenden halte."
+                data-en="I’m in my element tracing bugs, testing new features, automating repetitive tasks with tools like Python, all the while facing clients and keeping them in the loop."
+              >
+                I’m in my element tracing bugs, testing new features, automating
+                repetitive tasks with tools like Python or SQL all the while
+                facing clients and keep them in the loop.
+              </p>
+            </div>
+            <div class="hero-description-uat">
+              <p data-de="Stets neugierig" data-en="Always curious">
+                Always curious
+              </p>
+              <p data-de="Von Natur aus Nerd" data-en="A nerd by nature">
+                A nerd by nature
+              </p>
+              <p data-de="Endlos unterwegs" data-en="Endless travelling">
+                Endless travelling
+              </p>
+              <p data-de="Allergisch gegen Honig" data-en="Allergic to honey">
+                Allergic to honey
+              </p>
+              <p data-de="News-Junkie" data-en="News junkie">News junkie</p>
+            </div>
           </div>
         </div>
-
         <!-- Profile Image -->
         <div class="profile-container">
           <img
-            src="images/darkblue_centered.png"
             alt="Alim Hasanov"
             id="profileImg"
+            src="images/darkblue_centered.png"
           />
         </div>
-
         <!-- Name Area -->
         <div class="name-area">
-          <h1 class="name" id="nameTitle">Alim<br />Hasanov</h1>
+          <h1 class="name" id="nameTitle">
+            <span data-de="Alim" data-en="Alim">Alim</span><br /><span
+              data-de="Hasanov"
+              data-en="Hasanov"
+              >Hasanov</span
+            >
+          </h1>
         </div>
-
         <!-- Fixed Mode Toggle (Fixed position in header) -->
         <div class="fixed-mode-toggle">
           <div class="mode-toggle" id="modeToggleHero">
-            <span class="mode-label active" id="labelOnHero">PROD</span>
+            <span
+              class="mode-label active"
+              data-de="PROD"
+              data-en="PROD"
+              id="labelOnHero"
+              >PROD</span
+            >
             <div class="toggle-switch"></div>
-            <span class="mode-label" id="labelOffHero">UAT</span>
+            <span
+              class="mode-label"
+              data-de="UAT"
+              data-en="UAT"
+              id="labelOffHero"
+              >UAT</span
+            >
           </div>
         </div>
-
         <!-- Journey Trace -->
         <div class="journey-trace">
-          <span class="j-code" data-title="Bulgaria">BG</span>
-          <span class="j-arrow">→</span>
-          <span class="j-code" data-title="Turkey">TR</span>
-          <span class="j-arrow">→</span>
-          <span class="j-code" data-title="Germany">DE</span>
-          <span class="j-arrow">→</span>
-          <span class="j-code" data-title="USA">US</span>
-          <span class="j-arrow">→</span>
-          <span class="j-code" data-title="United Kingdom">UK</span>
-          <span class="j-arrow">→</span>
-          <span class="j-code" data-title="Switzerland">CH</span>
-        </div>
-
-        <!-- Header Center - Subtitle (visible when collapsed) -->
-        <div class="header-center">
+          <span class="j-code" data-de="BG" data-en="BG" data-title="Bulgaria"
+            >BG</span
+          >
+          <span class="j-arrow" data-de="→" data-en="→">→</span>
+          <span class="j-code" data-de="TR" data-en="TR" data-title="Turkey"
+            >TR</span
+          >
+          <span class="j-arrow" data-de="→" data-en="→">→</span>
+          <span class="j-code" data-de="DE" data-en="DE" data-title="Germany"
+            >DE</span
+          >
+          <span class="j-arrow" data-de="→" data-en="→">→</span>
+          <span class="j-code" data-de="US" data-en="US" data-title="USA"
+            >US</span
+          >
+          <span class="j-arrow" data-de="→" data-en="→">→</span>
           <span
-            class="header-subtitle"
-            id="headerSubtitle"
-            data-en="APPLICATION and DATA MANAGEMENT | AUTOMATION"
-            data-de="Anwendungsunterstützung | Datenmanagement"
-            >APPLICATION and DATA MANAGEMENT | AUTOMATION</span
+            class="j-code"
+            data-de="UK"
+            data-en="UK"
+            data-title="United Kingdom"
+            >UK</span
+          >
+          <span class="j-arrow" data-de="→" data-en="→">→</span>
+          <span
+            class="j-code"
+            data-de="CH"
+            data-en="CH"
+            data-title="Switzerland"
+            >CH</span
           >
         </div>
-
+        <!-- Header Center - Subtitle (visible when collapsed) -->
+        <div class="header-center">
+          <span class="header-subtitle" id="headerSubtitle"
+            ><span
+              class="subtitle-prod"
+              data-de="Applikations- und Datenmanagement | Automatisierung"
+              data-en="APPLICATION and DATA MANAGEMENT | AUTOMATION"
+              >APPLICATION and DATA MANAGEMENT | AUTOMATION</span
+            ><span
+              class="subtitle-uat"
+              data-de="TÜFTLER | WELTENBUMMLER | LESER | MI"
+              data-en="TINKERER | TRAVELER | READER | HI"
+              >TINKERER | TRAVELER | READER | HI</span
+            ></span
+          >
+        </div>
         <!-- Header Controls - Right side (visible when collapsed) -->
         <div class="header-controls" id="headerControls">
           <!-- Email -->
           <a
+            aria-label="Email Me"
+            class="header-linkedin contact-email-btn"
+            data-contact-email=""
             href="#"
             id="contactEmailBtn"
-            class="header-linkedin contact-email-btn"
-            data-contact-email
-            aria-label="Email Me"
             onclick="
               if (window.openContactModal) {
                 openContactModal();
@@ -156,47 +223,51 @@
             "
           >
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
               fill="none"
+              height="24"
               stroke="currentColor"
-              stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
+              stroke-width="2"
+              viewbox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-              />
-              <polyline points="22,6 12,13 2,6" />
+              ></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
             </svg>
           </a>
-
           <!-- LinkedIn -->
           <a
+            aria-label="LinkedIn Profile"
+            class="header-linkedin"
             href="https://www.linkedin.com/in/alimhasanovbg/"
             target="_blank"
-            class="header-linkedin"
-            aria-label="LinkedIn Profile"
           >
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
               fill="currentColor"
+              height="24"
+              viewbox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-              />
+              ></path>
             </svg>
           </a>
-
-          <!-- Language Switcher (Hidden for now) -->
-          <!--
-          <div class="language-switcher">
-            <button class="lang-btn active" data-lang="en">EN</button>
+          <!-- Language Switcher (dev-only) -->
+          <div class="language-switcher dev-only">
+            <button
+              class="lang-btn active"
+              data-de="EN"
+              data-en="EN"
+              data-lang="en"
+            >
+              EN
+            </button>
             <div
               style="
                 width: 1px;
@@ -205,115 +276,124 @@
                 opacity: 0.3;
               "
             ></div>
-            <button class="lang-btn" data-lang="de">DE</button>
+            <button class="lang-btn" data-de="DE" data-en="DE" data-lang="de">
+              DE
+            </button>
           </div>
-          -->
-
           <!-- Active Tab Label (shown next to burger on non-home tabs, mobile/tablet only) -->
           <div class="mobile-active-tab-label" id="mobileActiveTabLabel"></div>
-
           <!-- Burger Menu Button (visible on mobile/tablet only) -->
           <button
-            type="button"
+            aria-expanded="false"
+            aria-label="Open Menu"
             class="mobile-burger-btn"
             id="mobileBurgerBtn"
-            aria-label="Open Menu"
-            aria-expanded="false"
+            type="button"
           >
             <span></span>
             <span></span>
             <span></span>
           </button>
-
           <!-- Profile Photo -->
           <div class="sticky-profile">
-            <img src="images/darkblue_centered.png" alt="Alim Hasanov" />
+            <img alt="Alim Hasanov" src="images/darkblue_centered.png" />
           </div>
         </div>
       </div>
     </header>
-
     <!-- DETAILS PANEL -->
     <section class="details-panel" id="detailsPanel">
       <div class="details-wrapper">
         <div class="tabs-toggle" id="tabsToggle">
           <button
-            type="button"
+            aria-controls="prod-tabs uat-tabs"
+            aria-expanded="false"
             class="tabs-toggle-btn"
             id="tabsToggleBtn"
-            aria-expanded="false"
-            aria-controls="prod-tabs uat-tabs"
+            type="button"
           >
-            <span class="tabs-toggle-label" id="tabsToggleLabel">Menu</span>
-            <span class="tabs-toggle-icon" aria-hidden="true">
+            <span
+              class="tabs-toggle-label"
+              data-de="Menu"
+              data-en="Menu"
+              id="tabsToggleLabel"
+              >Menu</span
+            >
+            <span aria-hidden="true" class="tabs-toggle-icon">
               <span></span>
               <span></span>
               <span></span>
             </span>
           </button>
         </div>
-
         <!-- New Tabs Navigation -->
         <div class="details-tabs" id="prod-tabs">
           <!-- Mobile Menu Social Links (hidden on desktop) -->
           <div class="menu-social-links">
             <a
-              href="#"
+              aria-label="Email Me"
               class="menu-social-link"
+              href="#"
               onclick="
                 if (window.openContactModal) {
                   openContactModal();
                   return false;
                 }
               "
-              aria-label="Email Me"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
                 fill="none"
+                height="20"
                 stroke="currentColor"
-                stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                stroke-width="2"
+                viewbox="0 0 24 24"
+                width="20"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
                   d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-                />
-                <polyline points="22,6 12,13 2,6" />
+                ></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
-              <span>Email</span>
+              <span data-de="Email" data-en="Email">Email</span>
             </a>
             <a
+              aria-label="LinkedIn Profile"
+              class="menu-social-link"
               href="https://www.linkedin.com/in/alimhasanovbg/"
               target="_blank"
-              class="menu-social-link"
-              aria-label="LinkedIn Profile"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
                 fill="currentColor"
+                height="20"
+                viewbox="0 0 24 24"
+                width="20"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
                   d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                />
+                ></path>
               </svg>
-              <span>LinkedIn</span>
+              <span data-de="LinkedIn" data-en="LinkedIn">LinkedIn</span>
             </a>
           </div>
           <div class="tabs-nav-wrapper">
-            <button class="tab-btn" data-tab="home" id="tabBtnHome">
+            <button
+              class="tab-btn"
+              data-de="Home"
+              data-en="Home"
+              data-tab="home"
+              id="tabBtnHome"
+            >
               Home
             </button>
             <button class="tab-btn active" data-tab="cv" id="tabBtnCV">
               <a
-                href="#"
+                aria-label="Download CV as PDF"
                 class="tab-download-btn"
+                href="#"
                 onclick="
                   event.stopPropagation();
                   if (window.openCVExportModal) {
@@ -321,30 +401,32 @@
                   }
                   return false;
                 "
-                aria-label="Download CV as PDF"
               >
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
                   fill="none"
+                  height="16"
                   stroke="currentColor"
-                  stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
+                  stroke-width="2"
+                  viewbox="0 0 24 24"
+                  width="16"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                   <polyline points="7 10 12 15 17 10"></polyline>
-                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                  <line x1="12" x2="12" y1="15" y2="3"></line>
                 </svg>
               </a>
-              CV
+              <span class="tab-label" data-de="Lebenslauf" data-en="CV"
+                >CV</span
+              >
             </button>
             <button class="tab-btn" data-tab="tech" id="tabBtnTech">
               <a
-                href="#"
+                aria-label="Download Skills Matrix as PDF"
                 class="tab-download-btn"
+                href="#"
                 onclick="
                   event.stopPropagation();
                   if (window.openMatrixExportModal) {
@@ -352,104 +434,152 @@
                   }
                   return false;
                 "
-                aria-label="Download Skills Matrix as PDF"
               >
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
                   fill="none"
+                  height="16"
                   stroke="currentColor"
-                  stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
+                  stroke-width="2"
+                  viewbox="0 0 24 24"
+                  width="16"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                   <polyline points="7 10 12 15 17 10"></polyline>
-                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                  <line x1="12" x2="12" y1="15" y2="3"></line>
                 </svg>
               </a>
-              <span style="font-weight: 700">TASKS</span> AND
-              <span class="font-monospace" style="font-weight: 700">TOOLS</span>
+              <span data-de="TASKS" data-en="TASKS" style="font-weight: 700"
+                >TASKS</span
+              >
+              <span data-de="UND" data-en="AND">AND</span>
+              <span
+                class="font-monospace"
+                data-de="TOOLS"
+                data-en="TOOLS"
+                style="font-weight: 700"
+                >TOOLS</span
+              >
             </button>
-            <button class="tab-btn" data-tab="soft" id="tabBtnSoft">
+            <button
+              class="tab-btn"
+              data-de="Persönliche Kompetenzen"
+              data-en="Soft Skills"
+              data-tab="soft"
+              id="tabBtnSoft"
+            >
               Soft Skills
             </button>
-            <button class="tab-btn" data-tab="lang" id="tabBtnLang">
+            <button
+              class="tab-btn"
+              data-de="Sprachen und Ausbildung"
+              data-en="Languages and Education"
+              data-tab="lang"
+              id="tabBtnLang"
+            >
               Languages and Education
             </button>
           </div>
         </div>
-
         <!-- UAT Tabs (Visible only in Off-Hours) -->
         <div class="details-tabs" id="uat-tabs" style="display: none">
           <!-- Mobile Menu Social Links (hidden on desktop) -->
           <div class="menu-social-links">
             <a
-              href="#"
+              aria-label="Email Me"
               class="menu-social-link"
+              href="#"
               onclick="
                 if (window.openContactModal) {
                   openContactModal();
                   return false;
                 }
               "
-              aria-label="Email Me"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
                 fill="none"
+                height="20"
                 stroke="currentColor"
-                stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                stroke-width="2"
+                viewbox="0 0 24 24"
+                width="20"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
                   d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-                />
-                <polyline points="22,6 12,13 2,6" />
+                ></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
-              <span>Email</span>
+              <span data-de="Email" data-en="Email">Email</span>
             </a>
             <a
+              aria-label="LinkedIn Profile"
+              class="menu-social-link"
               href="https://www.linkedin.com/in/alimhasanovbg/"
               target="_blank"
-              class="menu-social-link"
-              aria-label="LinkedIn Profile"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
                 fill="currentColor"
+                height="20"
+                viewbox="0 0 24 24"
+                width="20"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
                   d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                />
+                ></path>
               </svg>
-              <span>LinkedIn</span>
+              <span data-de="LinkedIn" data-en="LinkedIn">LinkedIn</span>
             </a>
           </div>
-          <button class="tab-btn" data-tab="home" data-target="home">
-            Home
-          </button>
-          <button class="tab-btn active" data-target="section-weekend">
-            Perfect Weekend
-          </button>
-          <button class="tab-btn" data-target="section-hobbies">
-            Latest Books
-          </button>
-          <button class="tab-btn" data-target="section-culture">Top 5</button>
-          <button class="tab-btn" data-target="section-bucket">
-            TO DO (GO)
-          </button>
+          <div class="tabs-nav-wrapper">
+            <button
+              class="tab-btn"
+              data-de="Home"
+              data-en="Home"
+              data-tab="home"
+              data-target="home"
+            >
+              Home
+            </button>
+            <button
+              class="tab-btn active"
+              data-de="Das perfekte Wochenende"
+              data-en="Perfect Weekend"
+              data-target="section-weekend"
+            >
+              Perfect Weekend
+            </button>
+            <button
+              class="tab-btn"
+              data-de="Zuletzt gelesen"
+              data-en="Latest Reads"
+              data-target="section-hobbies"
+            >
+              Latest Reads
+            </button>
+            <button
+              class="tab-btn"
+              data-de="Top 5"
+              data-en="Top 5"
+              data-target="section-culture"
+            >
+              Top 5
+            </button>
+            <button
+              class="tab-btn"
+              data-de="TO DO (GO)"
+              data-en="TO DO (GO)"
+              data-target="section-bucket"
+            >
+              TO DO (GO)
+            </button>
+          </div>
         </div>
-
         <div class="tab-container">
           <!-- 1. CV TAB -->
           <div class="tab-pane active" id="tab-cv">
@@ -461,86 +591,101 @@
                 onclick="toggleExp(this, event)"
               >
                 <div class="exp-role">
-                  <button class="exp-toggle-btn" aria-label="Toggle Details">
+                  <button aria-label="Toggle Details" class="exp-toggle-btn">
                     <svg
-                      viewBox="0 0 24 24"
-                      width="24"
+                      fill="none"
                       height="24"
                       stroke="currentColor"
-                      stroke-width="2"
-                      fill="none"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                      stroke-width="2"
+                      viewbox="0 0 24 24"
+                      width="24"
                     >
                       <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                   </button>
-                  <h2>Product Data Specialist</h2>
+                  <h2
+                    data-de="Product Data Specialist"
+                    data-en="Product Data Specialist"
+                  >
+                    Product Data Specialist
+                  </h2>
                 </div>
                 <div
                   class="exp-date"
-                  data-en="Oct 2023 - May 2025"
                   data-de="Okt. 2023 - Mai 2025"
+                  data-en="Oct 2023 - May 2025"
                 >
                   Oct 2023 - May 2025
                 </div>
                 <div class="exp-company">
-                  FE fundinfo
+                  <span
+                    class="company-name"
+                    data-de="FE fundinfo"
+                    data-en="FE fundinfo"
+                    >FE fundinfo</span
+                  >
                   <a
-                    href="https://www.fefundinfo.com"
-                    target="_blank"
                     class="website-icon"
+                    href="https://www.fefundinfo.com"
                     onclick="event.stopPropagation()"
+                    target="_blank"
                     ><svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
                       fill="none"
+                      height="14"
                       stroke="currentColor"
-                      stroke-width="2"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                      stroke-width="2"
+                      viewbox="0 0 24 24"
+                      width="14"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <circle cx="12" cy="12" r="10"></circle>
-                      <line x1="2" y1="12" x2="22" y2="12"></line>
+                      <line x1="2" x2="22" y1="12" y2="12"></line>
                       <path
                         d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
                       ></path></svg
                   ></a>
                   <a
-                    href="https://www.linkedin.com/company/fefundinfo/"
-                    target="_blank"
                     class="linkedin-icon"
+                    href="https://www.linkedin.com/company/fefundinfo/"
                     onclick="event.stopPropagation()"
+                    target="_blank"
                     ><svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
                       fill="currentColor"
+                      height="14"
+                      viewbox="0 0 24 24"
+                      width="14"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
                         d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                      /></svg
+                      ></path></svg
                   ></a>
                 </div>
-                <div class="exp-location">Zürich, CH</div>
-
+                <div
+                  class="exp-location"
+                  data-de="Zürich, CH"
+                  data-en="Zürich, CH"
+                >
+                  Zürich, CH
+                </div>
                 <div class="exp-details-wrapper">
                   <div class="exp-details-content">
                     <div class="job-summary">
                       <span
                         class="highlight-label"
-                        data-en="Highlight:"
                         data-de="Highlight:"
+                        data-en="Highlight:"
                       >
                         Highlight:
                       </span>
                       <span
                         class="highlight-text"
-                        data-en="I made data discovery faster for my team through automation and upgraded an outdated VBA tool to a modern web app to improve client experience"
                         data-de="I made data discovery faster for my team through automation and upgraded an outdated VBA tool to a modern web app to improve client experience"
+                        data-en="I made data discovery faster for my team through automation and upgraded an outdated VBA tool to a modern web app to improve client experience"
                       >
                         I made data discovery faster for my team through
                         automation and upgraded an old VBA tool to a modern web
@@ -550,37 +695,37 @@
                     <div class="job-highlights">
                       <ul>
                         <li
-                          data-en="Developed internal tools for data profiling and quality assessment using Python and SQL"
                           data-de="Developed internal tools for data profiling and quality assessment using Python and SQL"
+                          data-en="Developed internal tools for data profiling and quality assessment using Python and SQL"
                         >
                           Developed internal tools for data profiling and
                           quality assessment using Python and SQL
                         </li>
                         <li>
                           <span
-                            data-en="Automated internal reference data discovery and gathering processes, resulting in:"
                             data-de="Automated internal reference data discovery and gathering processes, resulting in:"
+                            data-en="Automated internal reference data discovery and gathering processes, resulting in:"
                           >
                             Automated internal reference data discovery and
                             gathering processes, resulting in:
                           </span>
                           <ul>
                             <li
-                              data-en="Simplified data access and discovery from multiple sources for internal teams"
                               data-de="Simplified data access and discovery from multiple sources for internal teams"
+                              data-en="Simplified data access and discovery from multiple sources for internal teams"
                             >
                               Simplified data access and discovery from multiple
                               sources for internal teams
                             </li>
                             <li
-                              data-en="Faster client ticket turnaround times"
                               data-de="Faster client ticket turnaround times"
+                              data-en="Faster client ticket turnaround times"
                             >
                               Faster client ticket turnaround times
                             </li>
                             <li
-                              data-en="Elimination of duplicate data submission and processing"
                               data-de="Elimination of duplicate data submission and processing"
+                              data-en="Elimination of duplicate data submission and processing"
                             >
                               Elimination of duplicate data submission &amp;
                               processing
@@ -589,44 +734,46 @@
                         </li>
                         <li>
                           <span
-                            data-en="Converted an Excel-VBA based tool into a modern web based UI ("
                             data-de="Converted an Excel-VBA based tool into a modern web based UI ("
+                            data-en="Converted an Excel-VBA based tool into a modern web based UI ("
                           >
                             Converted an Excel-VBA based tool into a modern web
                             based UI (
                           </span>
                           <a
                             class="highlight-link"
+                            data-de="see page"
+                            data-en="see page"
                             href="https://template.fefundinfo.com/"
-                            target="_blank"
-                            rel="noopener noreferrer"
                             onclick="event.stopPropagation()"
+                            rel="noopener noreferrer"
+                            target="_blank"
                           >
                             see page
                           </a>
                           <span
-                            data-en="), resulting in:"
                             data-de="), resulting in:"
+                            data-en="), resulting in:"
                           >
                             ), resulting in:
                           </span>
                           <ul>
                             <li
-                              data-en="Reduced client fund data submission errors and fewer support tickets"
                               data-de="Reduced client fund data submission errors and fewer support tickets"
+                              data-en="Reduced client fund data submission errors and fewer support tickets"
                             >
                               Reduced client fund data submission errors and
                               fewer support tickets
                             </li>
                             <li
-                              data-en="Minimized time of expensive manual interventions"
                               data-de="Minimized time of expensive manual interventions"
+                              data-en="Minimized time of expensive manual interventions"
                             >
                               Minimized time of expensive manual interventions
                             </li>
                             <li
-                              data-en="Improved fund data intake/processing turnaround time"
                               data-de="Improved fund data intake/processing turnaround time"
+                              data-en="Improved fund data intake/processing turnaround time"
                             >
                               Improved fund data intake/processing turnaround
                               time
@@ -634,115 +781,135 @@
                           </ul>
                         </li>
                         <li
-                          data-en="Guided asset managers on their fund data submission requirements"
                           data-de="Guided asset managers on their fund data submission requirements"
+                          data-en="Guided asset managers on their fund data submission requirements"
                         >
                           Guided asset managers on their fund data submission
                           requirements
                         </li>
                         <li
-                          data-en="Performed SQL-based data manipulation, cleansing, and reconciliation"
                           data-de="Performed SQL-based data manipulation, cleansing, and reconciliation"
+                          data-en="Performed SQL-based data manipulation, cleansing, and reconciliation"
                         >
                           Performed SQL-based data manipulation, cleansing, and
                           reconciliation
                         </li>
                         <li>
-                          <strong>Tools used:</strong> SQL, Python, JavaScript,
-                          HTML, Jira, DuckDB
+                          <strong data-de="Tools used:" data-en="Tools used:"
+                            >Tools used:</strong
+                          >
+                          <span
+                            data-de="SQL, Python, JavaScript, HTML, Jira, DuckDB"
+                            data-en="SQL, Python, JavaScript, HTML, Jira, DuckDB"
+                            >SQL, Python, JavaScript, HTML, Jira, DuckDB</span
+                          >
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
               </div>
-
               <div
                 class="exp-item"
                 data-skills="sql,python,unix,bash,bigquery"
                 onclick="toggleExp(this, event)"
               >
                 <div class="exp-role">
-                  <button class="exp-toggle-btn" aria-label="Toggle Details">
+                  <button aria-label="Toggle Details" class="exp-toggle-btn">
                     <svg
-                      viewBox="0 0 24 24"
-                      width="24"
+                      fill="none"
                       height="24"
                       stroke="currentColor"
-                      stroke-width="2"
-                      fill="none"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                      stroke-width="2"
+                      viewbox="0 0 24 24"
+                      width="24"
                     >
                       <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                   </button>
-                  <h2>Crypto Trading Support</h2>
+                  <h2
+                    data-de="Crypto Trading Support"
+                    data-en="Crypto Trading Support"
+                  >
+                    Crypto Trading Support
+                  </h2>
                 </div>
                 <div
                   class="exp-date"
-                  data-en="May 2022 - Jun 2023"
                   data-de="Mai 2022 - Juni 2023"
+                  data-en="May 2022 - Jun 2023"
                 >
                   May 2022 - Jun 2023
                 </div>
                 <div class="exp-company">
-                  Elwood Technology
+                  <span
+                    class="company-name"
+                    data-de="Elwood Technology"
+                    data-en="Elwood Technology"
+                    >Elwood Technology</span
+                  >
                   <a
-                    href="https://elwood.io"
-                    target="_blank"
                     class="website-icon"
+                    href="https://elwood.io"
                     onclick="event.stopPropagation()"
+                    target="_blank"
                     ><svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
                       fill="none"
+                      height="14"
                       stroke="currentColor"
-                      stroke-width="2"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                      stroke-width="2"
+                      viewbox="0 0 24 24"
+                      width="14"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <circle cx="12" cy="12" r="10"></circle>
-                      <line x1="2" y1="12" x2="22" y2="12"></line>
+                      <line x1="2" x2="22" y1="12" y2="12"></line>
                       <path
                         d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
                       ></path></svg
                   ></a>
                   <a
-                    href="https://www.linkedin.com/company/elwoodtechnologies"
-                    target="_blank"
                     class="linkedin-icon"
+                    href="https://www.linkedin.com/company/elwoodtechnologies"
                     onclick="event.stopPropagation()"
+                    target="_blank"
                     ><svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
                       fill="currentColor"
+                      height="14"
+                      viewbox="0 0 24 24"
+                      width="14"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
                         d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                      /></svg
+                      ></path></svg
                   ></a>
                 </div>
-                <div class="exp-location">London, UK</div>
-
+                <div
+                  class="exp-location"
+                  data-de="London, UK"
+                  data-en="London, UK"
+                >
+                  London, UK
+                </div>
                 <div class="exp-details-wrapper">
                   <div class="exp-details-content">
                     <div class="job-summary">
                       <span
                         class="highlight-label"
-                        data-en="Highlight:"
                         data-de="Highlight:"
+                        data-en="Highlight:"
                       >
                         Highlight:
                       </span>
                       <span
                         class="highlight-text"
-                        data-en="Was part of a close-knit team providing 24/7 global support for a crypto trading platform, resolving high-pressure incidents for institutional clients"
                         data-de="Was part of a close-knit team providing 24/7 global support for a crypto trading platform, resolving high-pressure incidents for institutional clients"
+                        data-en="Was part of a close-knit team providing 24/7 global support for a crypto trading platform, resolving high-pressure incidents for institutional clients"
                       >
                         Was part of a close-knit team providing 24/7 global
                         support for a crypto trading platform, resolving
@@ -752,30 +919,30 @@
                     <div class="job-highlights">
                       <ul>
                         <li
-                          data-en="24/7 Support of Crypto Trading Application for Spot, Futures, Options and Perpetuals"
                           data-de="24/7 Support of Crypto Trading Application for Spot, Futures, Options and Perpetuals"
+                          data-en="24/7 Support of Crypto Trading Application for Spot, Futures, Options and Perpetuals"
                         >
                           24/7 Support of Crypto Trading Application for Spot,
                           Futures, Options and Perpetuals
                         </li>
                         <li>
                           <span
-                            data-en="Direct client support for incident management, root cause analysis, and ticket resolution"
                             data-de="Direct client support for incident management, root cause analysis, and ticket resolution"
+                            data-en="Direct client support for incident management, root cause analysis, and ticket resolution"
                           >
                             Direct client support for incident management, root
                             cause analysis, and ticket resolution
                           </span>
                           <ul>
                             <li
-                              data-en="Onboarded and trained new &amp; potential clients:"
                               data-de="Onboarded and trained new &amp; potential clients:"
+                              data-en="Onboarded and trained new &amp; potential clients:"
                             >
                               Onboarded and trained new &amp; potential clients:
                             </li>
                             <li
-                              data-en="Organized and managed training sessions for clients"
                               data-de="Organized and managed training sessions for clients"
+                              data-en="Organized and managed training sessions for clients"
                             >
                               Organized and managed training sessions for
                               clients
@@ -783,126 +950,143 @@
                           </ul>
                         </li>
                         <li
-                          data-en="Conducted connectivity tests with clients"
                           data-de="Conducted connectivity tests with clients"
+                          data-en="Conducted connectivity tests with clients"
                         >
                           Conducted connectivity tests with clients
                         </li>
                         <li
-                          data-en="Backend, Frontend, API, and Algorithm support"
                           data-de="Backend, Frontend, API, and Algorithm support"
+                          data-en="Backend, Frontend, API, and Algorithm support"
                         >
                           Backend, Frontend, API, and Algorithm support
                         </li>
                         <li
-                          data-en="Supported REST APIs and WebSocket connectivity"
                           data-de="Supported REST APIs and WebSocket connectivity"
+                          data-en="Supported REST APIs and WebSocket connectivity"
                         >
                           Supported REST APIs and WebSocket connectivity
                         </li>
                         <li
-                          data-en="Monitored client connectivity and implemented and tested new connections"
                           data-de="Monitored client connectivity and implemented and tested new connections"
+                          data-en="Monitored client connectivity and implemented and tested new connections"
                         >
                           Monitored client connectivity and implemented and
                           tested new connections
                         </li>
                         <li>
-                          <strong>Tools used:</strong> SQL, Python, Unix, Bash,
-                          BigQuery, Zendesk
+                          <strong data-de="Tools used:" data-en="Tools used:"
+                            >Tools used:</strong
+                          >
+                          <span
+                            data-de="SQL, Python, Unix, Bash, BigQuery, Zendesk"
+                            data-en="SQL, Python, Unix, Bash, BigQuery, Zendesk"
+                            >SQL, Python, Unix, Bash, BigQuery, Zendesk</span
+                          >
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
               </div>
-
               <div
                 class="exp-item"
                 data-skills="sql,oracle,bash,python"
                 onclick="toggleExp(this, event)"
               >
                 <div class="exp-role">
-                  <button class="exp-toggle-btn" aria-label="Toggle Details">
+                  <button aria-label="Toggle Details" class="exp-toggle-btn">
                     <svg
-                      viewBox="0 0 24 24"
-                      width="24"
+                      fill="none"
                       height="24"
                       stroke="currentColor"
-                      stroke-width="2"
-                      fill="none"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                      stroke-width="2"
+                      viewbox="0 0 24 24"
+                      width="24"
                     >
                       <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                   </button>
-                  <h2>Senior Consultant</h2>
+                  <h2 data-de="Senior Consultant" data-en="Senior Consultant">
+                    Senior Consultant
+                  </h2>
                 </div>
                 <div
                   class="exp-date"
-                  data-en="May 2018 - May 2022"
                   data-de="Mai 2018 - Mai 2022"
+                  data-en="May 2018 - May 2022"
                 >
                   May 2018 - May 2022
                 </div>
                 <div class="exp-company">
-                  Broadridge Financial
+                  <span
+                    class="company-name"
+                    data-de="Broadridge Financial"
+                    data-en="Broadridge Financial"
+                    >Broadridge Financial</span
+                  >
                   <a
-                    href="https://www.broadridge.com"
-                    target="_blank"
                     class="website-icon"
+                    href="https://www.broadridge.com"
                     onclick="event.stopPropagation()"
+                    target="_blank"
                     ><svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
                       fill="none"
+                      height="14"
                       stroke="currentColor"
-                      stroke-width="2"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                      stroke-width="2"
+                      viewbox="0 0 24 24"
+                      width="14"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <circle cx="12" cy="12" r="10"></circle>
-                      <line x1="2" y1="12" x2="22" y2="12"></line>
+                      <line x1="2" x2="22" y1="12" y2="12"></line>
                       <path
                         d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
                       ></path></svg
                   ></a>
                   <a
-                    href="https://www.linkedin.com/company/broadridge"
-                    target="_blank"
                     class="linkedin-icon"
+                    href="https://www.linkedin.com/company/broadridge"
                     onclick="event.stopPropagation()"
+                    target="_blank"
                     ><svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
                       fill="currentColor"
+                      height="14"
+                      viewbox="0 0 24 24"
+                      width="14"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
                         d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                      /></svg
+                      ></path></svg
                   ></a>
                 </div>
-                <div class="exp-location">London, UK</div>
-
+                <div
+                  class="exp-location"
+                  data-de="London, UK"
+                  data-en="London, UK"
+                >
+                  London, UK
+                </div>
                 <div class="exp-details-wrapper">
                   <div class="exp-details-content">
                     <div class="job-summary">
                       <span
                         class="highlight-label"
-                        data-en="Highlight:"
                         data-de="Highlight:"
+                        data-en="Highlight:"
                       >
                         Highlight:
                       </span>
                       <span
                         class="highlight-text"
-                        data-en="Advised Tier-1 banks and institutional clients on clearing report processing, led business-as-usual support, and managed onboarding of new clients to internal reporting engines, ensuring compliance with CCP requirements."
                         data-de="Advised Tier-1 banks and institutional clients on clearing report processing, led business-as-usual support, and managed onboarding of new clients to internal reporting engines, ensuring compliance with CCP requirements."
+                        data-en="Advised Tier-1 banks and institutional clients on clearing report processing, led business-as-usual support, and managed onboarding of new clients to internal reporting engines, ensuring compliance with CCP requirements."
                       >
                         Advised Tier-1 banks and institutional clients on
                         clearing report processing, led business-as-usual
@@ -914,137 +1098,157 @@
                     <div class="job-highlights">
                       <ul>
                         <li
-                          data-en="Consulted and supported Tier 1 banks and other institutional clients with their clearing reports processing"
                           data-de="Consulted and supported Tier 1 banks and other institutional clients with their clearing reports processing"
+                          data-en="Consulted and supported Tier 1 banks and other institutional clients with their clearing reports processing"
                         >
                           Consulted and supported Tier 1 banks and other
                           institutional clients with their clearing reports
                           processing
                         </li>
                         <li
-                          data-en="BAU support &amp; Jira tickets management"
                           data-de="BAU support &amp; Jira tickets management"
+                          data-en="BAU support &amp; Jira tickets management"
                         >
                           BAU support &amp; Jira tickets management
                         </li>
                         <li
-                          data-en="Conducted connectivity and data flow tests with/for clients"
                           data-de="Conducted connectivity and data flow tests with/for clients"
+                          data-en="Conducted connectivity and data flow tests with/for clients"
                         >
                           Conducted connectivity and data flow tests with/for
                           clients
                         </li>
                         <li
-                          data-en="Onboarded new clients (including a Tier 1 bank) and mapped new CCP reports according to their requirements and internal engine"
                           data-de="Onboarded new clients (including a Tier 1 bank) and mapped new CCP reports according to their requirements and internal engine"
+                          data-en="Onboarded new clients (including a Tier 1 bank) and mapped new CCP reports according to their requirements and internal engine"
                         >
                           Onboarded new clients (including a Tier 1 bank) and
                           mapped new CCP reports according to their requirements
                           and internal engine
                         </li>
                         <li
-                          data-en="Introduced previously undocumented business and procedures specifications"
                           data-de="Introduced previously undocumented business and procedures specifications"
+                          data-en="Introduced previously undocumented business and procedures specifications"
                         >
                           Introduced previously undocumented business and
                           procedures specifications
                         </li>
                         <li>
-                          <strong>Tools used:</strong> SQL, Oracle DB, Tomcat,
-                          Bash, Python
+                          <strong data-de="Tools used:" data-en="Tools used:"
+                            >Tools used:</strong
+                          >
+                          <span
+                            data-de="SQL, Oracle DB, Tomcat, Bash, Python"
+                            data-en="SQL, Oracle DB, Tomcat, Bash, Python"
+                            >SQL, Oracle DB, Tomcat, Bash, Python</span
+                          >
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
               </div>
-
               <div
                 class="exp-item"
                 data-skills="linux,sql,kdb,python,bash"
                 onclick="toggleExp(this, event)"
               >
                 <div class="exp-role">
-                  <button class="exp-toggle-btn" aria-label="Toggle Details">
+                  <button aria-label="Toggle Details" class="exp-toggle-btn">
                     <svg
-                      viewBox="0 0 24 24"
-                      width="24"
+                      fill="none"
                       height="24"
                       stroke="currentColor"
-                      stroke-width="2"
-                      fill="none"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                      stroke-width="2"
+                      viewbox="0 0 24 24"
+                      width="24"
                     >
                       <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                   </button>
-                  <h2>Algorithmic Execution Desk Analyst</h2>
+                  <h2
+                    data-de="Algorithmic Execution Desk Analyst"
+                    data-en="Algorithmic Execution Desk Analyst"
+                  >
+                    Algorithmic Execution Desk Analyst
+                  </h2>
                 </div>
                 <div
                   class="exp-date"
-                  data-en="Feb 2017 - Apr 2018"
                   data-de="Feb. 2017 - Apr. 2018"
+                  data-en="Feb 2017 - Apr 2018"
                 >
                   Feb 2017 - Apr 2018
                 </div>
                 <div class="exp-company">
-                  Quantitative Brokers
+                  <span
+                    class="company-name"
+                    data-de="Quantitative Brokers"
+                    data-en="Quantitative Brokers"
+                    >Quantitative Brokers</span
+                  >
                   <a
-                    href="https://quantitativebrokers.com"
-                    target="_blank"
                     class="website-icon"
+                    href="https://quantitativebrokers.com"
                     onclick="event.stopPropagation()"
+                    target="_blank"
                     ><svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
                       fill="none"
+                      height="14"
                       stroke="currentColor"
-                      stroke-width="2"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                      stroke-width="2"
+                      viewbox="0 0 24 24"
+                      width="14"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <circle cx="12" cy="12" r="10"></circle>
-                      <line x1="2" y1="12" x2="22" y2="12"></line>
+                      <line x1="2" x2="22" y1="12" y2="12"></line>
                       <path
                         d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
                       ></path></svg
                   ></a>
                   <a
-                    href="https://www.linkedin.com/company/quantitative-brokers"
-                    target="_blank"
                     class="linkedin-icon"
+                    href="https://www.linkedin.com/company/quantitative-brokers"
                     onclick="event.stopPropagation()"
+                    target="_blank"
                     ><svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
                       fill="currentColor"
+                      height="14"
+                      viewbox="0 0 24 24"
+                      width="14"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
                         d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                      /></svg
+                      ></path></svg
                   ></a>
                 </div>
-                <div class="exp-location">London, UK</div>
-
+                <div
+                  class="exp-location"
+                  data-de="London, UK"
+                  data-en="London, UK"
+                >
+                  London, UK
+                </div>
                 <div class="exp-details-wrapper">
                   <div class="exp-details-content">
                     <div class="job-summary">
                       <span
                         class="highlight-label"
-                        data-en="Highlight:"
                         data-de="Highlight:"
+                        data-en="Highlight:"
                       >
                         Highlight:
                       </span>
                       <span
                         class="highlight-text"
-                        data-en="Maintained a Linux-based futures and fixed income trading environment, automated data expiry retrieval, reduced incident rates, and handled FIX certification processes for clients"
                         data-de="Maintained a Linux-based futures and fixed income trading environment, automated data expiry retrieval, reduced incident rates, and handled FIX certification processes for clients"
+                        data-en="Maintained a Linux-based futures and fixed income trading environment, automated data expiry retrieval, reduced incident rates, and handled FIX certification processes for clients"
                       >
                         Maintained a Linux-based futures and fixed income
                         trading environment, automated data expiry retrieval,
@@ -1055,128 +1259,149 @@
                     <div class="job-highlights">
                       <ul>
                         <li
-                          data-en="Automated retrieval of CME futures expiry data via Python, replacing error-prone manual processes"
                           data-de="Automated retrieval of CME futures expiry data via Python, replacing error-prone manual processes"
+                          data-en="Automated retrieval of CME futures expiry data via Python, replacing error-prone manual processes"
                         >
                           Automated retrieval of CME futures expiry data via
                           Python, replacing error-prone manual processes
                         </li>
                         <li
-                          data-en="Supported a Linux-based electronic trading environment for futures and fixed income"
                           data-de="Supported a Linux-based electronic trading environment for futures and fixed income"
+                          data-en="Supported a Linux-based electronic trading environment for futures and fixed income"
                         >
                           Supported a Linux-based electronic trading environment
                           for futures and fixed income
                         </li>
                         <li
-                          data-en="Reduced client trading incidents related to contract availability"
                           data-de="Reduced client trading incidents related to contract availability"
+                          data-en="Reduced client trading incidents related to contract availability"
                         >
                           Reduced client trading incidents related to contract
                           availability
                         </li>
                         <li
-                          data-en="Conducted inbound/outbound FIX certifications and scripted daily process automation"
                           data-de="Conducted inbound/outbound FIX certifications and scripted daily process automation"
+                          data-en="Conducted inbound/outbound FIX certifications and scripted daily process automation"
                         >
                           Conducted inbound/outbound FIX certifications and
                           scripted daily process automation
                         </li>
                         <li>
-                          <strong>Tools used:</strong> SQL, kdb, Python, Bash
+                          <strong data-de="Tools used:" data-en="Tools used:"
+                            >Tools used:</strong
+                          >
+                          <span
+                            data-de="SQL, kdb, Python, Bash"
+                            data-en="SQL, kdb, Python, Bash"
+                            >SQL, kdb, Python, Bash</span
+                          >
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
               </div>
-
               <div
                 class="exp-item"
                 data-skills="fix,excel,sql"
                 onclick="toggleExp(this, event)"
               >
                 <div class="exp-role">
-                  <button class="exp-toggle-btn" aria-label="Toggle Details">
+                  <button aria-label="Toggle Details" class="exp-toggle-btn">
                     <svg
-                      viewBox="0 0 24 24"
-                      width="24"
+                      fill="none"
                       height="24"
                       stroke="currentColor"
-                      stroke-width="2"
-                      fill="none"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                      stroke-width="2"
+                      viewbox="0 0 24 24"
+                      width="24"
                     >
                       <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                   </button>
-                  <h2>Implementation Analyst</h2>
+                  <h2
+                    data-de="Implementation Analyst"
+                    data-en="Implementation Analyst"
+                  >
+                    Implementation Analyst
+                  </h2>
                 </div>
                 <div
                   class="exp-date"
-                  data-en="Aug 2015 - Feb 2017"
                   data-de="Aug. 2015 - Feb. 2017"
+                  data-en="Aug 2015 - Feb 2017"
                 >
                   Aug 2015 - Feb 2017
                 </div>
                 <div class="exp-company">
-                  Tethys Technology
+                  <span
+                    class="company-name"
+                    data-de="Tethys Technology"
+                    data-en="Tethys Technology"
+                    >Tethys Technology</span
+                  >
                   <a
-                    href="https://tethystech.com"
-                    target="_blank"
                     class="website-icon"
+                    href="https://tethystech.com"
                     onclick="event.stopPropagation()"
+                    target="_blank"
                     ><svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
                       fill="none"
+                      height="14"
                       stroke="currentColor"
-                      stroke-width="2"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                      stroke-width="2"
+                      viewbox="0 0 24 24"
+                      width="14"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <circle cx="12" cy="12" r="10"></circle>
-                      <line x1="2" y1="12" x2="22" y2="12"></line>
+                      <line x1="2" x2="22" y1="12" y2="12"></line>
                       <path
                         d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
                       ></path></svg
                   ></a>
                   <a
-                    href="https://www.linkedin.com/company/tethys-technology"
-                    target="_blank"
                     class="linkedin-icon"
+                    href="https://www.linkedin.com/company/tethys-technology"
                     onclick="event.stopPropagation()"
+                    target="_blank"
                     ><svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
                       fill="currentColor"
+                      height="14"
+                      viewbox="0 0 24 24"
+                      width="14"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
                         d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                      /></svg
+                      ></path></svg
                   ></a>
                 </div>
-                <div class="exp-location">London, UK</div>
-
+                <div
+                  class="exp-location"
+                  data-de="London, UK"
+                  data-en="London, UK"
+                >
+                  London, UK
+                </div>
                 <div class="exp-details-wrapper">
                   <div class="exp-details-content">
                     <div class="job-summary">
                       <span
                         class="highlight-label"
-                        data-en="Highlight:"
                         data-de="Highlight:"
+                        data-en="Highlight:"
                       >
                         Highlight:
                       </span>
                       <span
                         class="highlight-text"
-                        data-en="Managed equity and options platforms for institutional clients and built automated monitoring tools for FIX connections."
                         data-de="Managed equity and options platforms for institutional clients and built automated monitoring tools for FIX connections."
+                        data-en="Managed equity and options platforms for institutional clients and built automated monitoring tools for FIX connections."
                       >
                         Managed equity and options platforms for institutional
                         clients and built automated monitoring tools for FIX
@@ -1186,30 +1411,30 @@
                     <div class="job-highlights">
                       <ul>
                         <li
-                          data-en="Provided support for equity and options electronic trading platforms and collaborated with developers on client issues"
                           data-de="Provided support for equity and options electronic trading platforms and collaborated with developers on client issues"
+                          data-en="Provided support for equity and options electronic trading platforms and collaborated with developers on client issues"
                         >
                           Provided support for equity andoptions electronic
                           trading platforms and collaborated with developers on
                           client issues
                         </li>
                         <li
-                          data-en="Sourced and analysed data series using scripting and SQL queries"
                           data-de="Sourced and analysed data series using scripting and SQL queries"
+                          data-en="Sourced and analysed data series using scripting and SQL queries"
                         >
                           Sourced and analysed data series using scripting and
                           SQL queries
                         </li>
                         <li
-                          data-en="Developed and tested prototype solutions based on workflow analyses"
                           data-de="Developed and tested prototype solutions based on workflow analyses"
+                          data-en="Developed and tested prototype solutions based on workflow analyses"
                         >
                           Developed and tested prototype solutions based on
                           workflow analyses
                         </li>
                         <li
-                          data-en="Built an automated Excel-VBA monitoring tool for tracking FIX session status and generating alerts"
                           data-de="Built an automated Excel-VBA monitoring tool for tracking FIX session status and generating alerts"
+                          data-en="Built an automated Excel-VBA monitoring tool for tracking FIX session status and generating alerts"
                         >
                           Built an automated Excel-VBA monitoring tool for
                           tracking FIX session status and generating alerts
@@ -1219,93 +1444,107 @@
                   </div>
                 </div>
               </div>
-
               <div
                 class="exp-item"
                 data-skills="sql,excel"
                 onclick="toggleExp(this, event)"
               >
                 <div class="exp-role">
-                  <button class="exp-toggle-btn" aria-label="Toggle Details">
+                  <button aria-label="Toggle Details" class="exp-toggle-btn">
                     <svg
-                      viewBox="0 0 24 24"
-                      width="24"
+                      fill="none"
                       height="24"
                       stroke="currentColor"
-                      stroke-width="2"
-                      fill="none"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                      stroke-width="2"
+                      viewbox="0 0 24 24"
+                      width="24"
                     >
                       <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                   </button>
-                  <h2>Global Data Analyst</h2>
+                  <h2
+                    data-de="Global Data Analyst"
+                    data-en="Global Data Analyst"
+                  >
+                    Global Data Analyst
+                  </h2>
                 </div>
                 <div
                   class="exp-date"
-                  data-en="Oct 2014 - Jun 2015"
                   data-de="Okt. 2014 - Juni 2015"
+                  data-en="Oct 2014 - Jun 2015"
                 >
                   Oct 2014 - Jun 2015
                 </div>
                 <div class="exp-company">
-                  Bloomberg L.P
+                  <span
+                    class="company-name"
+                    data-de="Bloomberg L.P"
+                    data-en="Bloomberg L.P"
+                    >Bloomberg L.P</span
+                  >
                   <a
-                    href="https://www.bloomberg.com"
-                    target="_blank"
                     class="website-icon"
+                    href="https://www.bloomberg.com"
                     onclick="event.stopPropagation()"
+                    target="_blank"
                     ><svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
                       fill="none"
+                      height="14"
                       stroke="currentColor"
-                      stroke-width="2"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                      stroke-width="2"
+                      viewbox="0 0 24 24"
+                      width="14"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <circle cx="12" cy="12" r="10"></circle>
-                      <line x1="2" y1="12" x2="22" y2="12"></line>
+                      <line x1="2" x2="22" y1="12" y2="12"></line>
                       <path
                         d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
                       ></path></svg
                   ></a>
                   <a
-                    href="https://www.linkedin.com/company/bloomberg-lp"
-                    target="_blank"
                     class="linkedin-icon"
+                    href="https://www.linkedin.com/company/bloomberg-lp"
                     onclick="event.stopPropagation()"
+                    target="_blank"
                     ><svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
                       fill="currentColor"
+                      height="14"
+                      viewbox="0 0 24 24"
+                      width="14"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
                         d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                      /></svg
+                      ></path></svg
                   ></a>
                 </div>
-                <div class="exp-location">London, UK</div>
-
+                <div
+                  class="exp-location"
+                  data-de="London, UK"
+                  data-en="London, UK"
+                >
+                  London, UK
+                </div>
                 <div class="exp-details-wrapper">
                   <div class="exp-details-content">
                     <div class="job-summary">
                       <span
                         class="highlight-label"
-                        data-en="Highlight:"
                         data-de="Highlight:"
+                        data-en="Highlight:"
                       >
                         Highlight:
                       </span>
                       <span
                         class="highlight-text"
-                        data-en="Maintained the quality and reliability of fundamental data for a global platform used by institutional clients"
                         data-de="Maintained the quality and reliability of fundamental data for a global platform used by institutional clients"
+                        data-en="Maintained the quality and reliability of fundamental data for a global platform used by institutional clients"
                       >
                         Maintained the quality and reliability of fundamental
                         data for a global platform used by institutional clients
@@ -1314,15 +1553,15 @@
                     <div class="job-highlights">
                       <ul>
                         <li
-                          data-en="Screened, selected and validated fundamental datasets to support accurate financial analysis"
                           data-de="Screened, selected and validated fundamental datasets to support accurate financial analysis"
+                          data-en="Screened, selected and validated fundamental datasets to support accurate financial analysis"
                         >
                           Screened, selected and validated fundamental datasets
                           to support accurate financial analysis
                         </li>
                         <li
-                          data-en="Developed workflow solutions and improved processes by applying IT and problem-solving skills"
                           data-de="Developed workflow solutions and improved processes by applying IT and problem-solving skills"
+                          data-en="Developed workflow solutions and improved processes by applying IT and problem-solving skills"
                         >
                           Developed workflow solutions and improved processes by
                           applying IT and problem-solving skills
@@ -1332,7 +1571,6 @@
                   </div>
                 </div>
               </div>
-
               <!-- Early Career Items (Collapsible) -->
               <div class="student-jobs-section">
                 <button
@@ -1341,19 +1579,19 @@
                 >
                   <svg
                     class="toggle-icon"
-                    viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
+                    stroke-width="2"
+                    viewbox="0 0 24 24"
                   >
                     <polyline points="6 9 12 15 18 9"></polyline>
                   </svg>
                   <span
                     class="toggle-label"
-                    data-en="Student Years"
                     data-de="Studentenjahre"
+                    data-en="Student Years"
                     >Student Years</span
                   >
                 </button>
@@ -1367,40 +1605,56 @@
                     >
                       <div class="exp-role">
                         <button
-                          class="exp-toggle-btn"
                           aria-label="Toggle Details"
+                          class="exp-toggle-btn"
                         >
                           <svg
-                            viewBox="0 0 24 24"
-                            width="24"
+                            fill="none"
                             height="24"
                             stroke="currentColor"
-                            stroke-width="2"
-                            fill="none"
                             stroke-linecap="round"
                             stroke-linejoin="round"
+                            stroke-width="2"
+                            viewbox="0 0 24 24"
+                            width="24"
                           >
                             <polyline points="6 9 12 15 18 9"></polyline>
                           </svg>
                         </button>
-                        <h2>Server &rarr; Manager</h2>
+                        <h2
+                          data-de="Server → Manager"
+                          data-en="Server → Manager"
+                        >
+                          Server → Manager
+                        </h2>
                       </div>
                       <div
                         class="exp-date"
-                        data-en="2004 - 2014"
                         data-de="2004 - 2014"
+                        data-en="2004 - 2014"
                       >
                         2004 - 2014
                       </div>
-                      <div class="exp-company">Kool Bean Restaurant</div>
-                      <div class="exp-location">Ocean View, DE, US</div>
-
+                      <div
+                        class="exp-company"
+                        data-de="Kool Bean Restaurant"
+                        data-en="Kool Bean Restaurant"
+                      >
+                        Kool Bean Restaurant
+                      </div>
+                      <div
+                        class="exp-location"
+                        data-de="Ocean View, DE, US"
+                        data-en="Ocean View, DE, US"
+                      >
+                        Ocean View, DE, US
+                      </div>
                       <div class="exp-details-wrapper">
                         <div class="exp-details-content">
                           <div
                             class="job-summary"
-                            data-en="Managed operations and business development for an expanding franchise. Built a custom technical solution for reservations."
                             data-de="Leitung von Betrieb und Geschäftsentwicklung für ein expandierendes Franchise. Entwicklung einer maßgeschneiderten technischen Lösung für Reservierungen."
+                            data-en="Managed operations and business development for an expanding franchise. Built a custom technical solution for reservations."
                           >
                             Managed operations and business development for an
                             expanding franchise. Built a custom technical
@@ -1409,22 +1663,22 @@
                           <div class="job-highlights">
                             <ul>
                               <li
-                                data-en="Built an in-house web interface for reservations using PHP and SQL."
                                 data-de="Entwicklung einer internen Web-Oberfläche für Reservierungen mit PHP and SQL."
+                                data-en="Built an in-house web interface for reservations using PHP and SQL."
                               >
                                 Built an in-house web interface for reservations
                                 using PHP and SQL.
                               </li>
                               <li
-                                data-en="Responsible for business development, sales, KPIs, and profitability analysis."
                                 data-de="Verantwortlich für Geschäftsentwicklung, Vertrieb and Prognosen, KPIs und Rentabilitätsanalyse."
+                                data-en="Responsible for business development, sales, KPIs, and profitability analysis."
                               >
                                 Responsible for business development, sales,
                                 KPIs, and profitability analysis.
                               </li>
                               <li
-                                data-en="Managed daily operations, staffing, inventory and marketing."
                                 data-de="Leitung des Tagesgeschäfts, Personalplanung, Lagerverwaltung und Marketing."
+                                data-en="Managed daily operations, staffing, inventory and marketing."
                               >
                                 Managed daily operations, staffing, inventory
                                 and marketing.
@@ -1434,7 +1688,6 @@
                         </div>
                       </div>
                     </div>
-
                     <!-- 2. Merrill Lynch -->
                     <div
                       class="exp-item"
@@ -1443,36 +1696,47 @@
                     >
                       <div class="exp-role">
                         <button
-                          class="exp-toggle-btn"
                           aria-label="Toggle Details"
+                          class="exp-toggle-btn"
                         >
                           <svg
-                            viewBox="0 0 24 24"
-                            width="24"
+                            fill="none"
                             height="24"
                             stroke="currentColor"
-                            stroke-width="2"
-                            fill="none"
                             stroke-linecap="round"
                             stroke-linejoin="round"
+                            stroke-width="2"
+                            viewbox="0 0 24 24"
+                            width="24"
                           >
                             <polyline points="6 9 12 15 18 9"></polyline>
                           </svg>
                         </button>
-                        <h2>Intern</h2>
+                        <h2 data-de="Intern" data-en="Intern">Intern</h2>
                       </div>
-                      <div class="exp-date" data-en="2006" data-de="2006">
+                      <div class="exp-date" data-de="2006" data-en="2006">
                         2006
                       </div>
-                      <div class="exp-company">Merrill Lynch</div>
-                      <div class="exp-location">Rehoboth Beach, DE, US</div>
-
+                      <div
+                        class="exp-company"
+                        data-de="Merrill Lynch"
+                        data-en="Merrill Lynch"
+                      >
+                        Merrill Lynch
+                      </div>
+                      <div
+                        class="exp-location"
+                        data-de="Rehoboth Beach, DE, US"
+                        data-en="Rehoboth Beach, DE, US"
+                      >
+                        Rehoboth Beach, DE, US
+                      </div>
                       <div class="exp-details-wrapper">
                         <div class="exp-details-content">
                           <div
                             class="job-summary"
-                            data-en="Gained early exposure to financial markets and provided technical support to brokers."
                             data-de="Frühe Erfahrung mit Finanzmärkten und technische Unterstützung für Makler."
+                            data-en="Gained early exposure to financial markets and provided technical support to brokers."
                           >
                             Gained early exposure to financial markets and
                             provided technical support to brokers.
@@ -1480,21 +1744,21 @@
                           <div class="job-highlights">
                             <ul>
                               <li
-                                data-en="Quantitative screening for mutual funds and equities on behalf of clients."
                                 data-de="Quantitative Analyse von Investmentfonds und Aktien im Auftrag von Kunden."
+                                data-en="Quantitative screening for mutual funds and equities on behalf of clients."
                               >
                                 Quantitative screening for mutual funds and
                                 equities on behalf of clients.
                               </li>
                               <li
-                                data-en="IT Support and advisory provided to brokers."
                                 data-de="IT-Support und Beratung für Makler."
+                                data-en="IT Support and advisory provided to brokers."
                               >
                                 IT Support and advisory provided to brokers.
                               </li>
                               <li
-                                data-en="Contact with diverse financial products."
                                 data-de="Kontakt mit verschiedenen Finanzprodukten."
+                                data-en="Contact with diverse financial products."
                               >
                                 Contact with diverse financial products.
                               </li>
@@ -1503,7 +1767,6 @@
                         </div>
                       </div>
                     </div>
-
                     <!-- 3. Interexchange -->
                     <div
                       class="exp-item"
@@ -1512,40 +1775,53 @@
                     >
                       <div class="exp-role">
                         <button
-                          class="exp-toggle-btn"
                           aria-label="Toggle Details"
+                          class="exp-toggle-btn"
                         >
                           <svg
-                            viewBox="0 0 24 24"
-                            width="24"
+                            fill="none"
                             height="24"
                             stroke="currentColor"
-                            stroke-width="2"
-                            fill="none"
                             stroke-linecap="round"
                             stroke-linejoin="round"
+                            stroke-width="2"
+                            viewbox="0 0 24 24"
+                            width="24"
                           >
                             <polyline points="6 9 12 15 18 9"></polyline>
                           </svg>
                         </button>
-                        <h2>Forex Cashier</h2>
+                        <h2 data-de="Forex Cashier" data-en="Forex Cashier">
+                          Forex Cashier
+                        </h2>
                       </div>
                       <div
                         class="exp-date"
-                        data-en="2000 - 2002"
                         data-de="2000 - 2002"
+                        data-en="2000 - 2002"
                       >
                         2000 - 2002
                       </div>
-                      <div class="exp-company">Interexchange</div>
-                      <div class="exp-location">Varna, BG</div>
-
+                      <div
+                        class="exp-company"
+                        data-de="Interexchange"
+                        data-en="Interexchange"
+                      >
+                        Interexchange
+                      </div>
+                      <div
+                        class="exp-location"
+                        data-de="Varna, BG"
+                        data-en="Varna, BG"
+                      >
+                        Varna, BG
+                      </div>
                       <div class="exp-details-wrapper">
                         <div class="exp-details-content">
                           <div
                             class="job-summary"
-                            data-en="Handled currency exchange operations and customer compliance."
                             data-de="Abwicklung von Devisengeschäften und Kundenberatung zu Vorschriften."
+                            data-en="Handled currency exchange operations and customer compliance."
                           >
                             Handled currency exchange operations and customer
                             compliance.
@@ -1553,15 +1829,15 @@
                           <div class="job-highlights">
                             <ul>
                               <li
-                                data-en="Informed customers about foreign currency regulations."
                                 data-de="Kundeninformation über Devisenvorschriften."
+                                data-en="Informed customers about foreign currency regulations."
                               >
                                 Informed customers about foreign currency
                                 regulations.
                               </li>
                               <li
-                                data-en="Quoted unit exchange rates following international rate sheets."
                                 data-de="Angabe von Wechselkursen gemäß internationaler Kurstabellen."
+                                data-en="Quoted unit exchange rates following international rate sheets."
                               >
                                 Quoted unit exchange rates following
                                 international rate sheets.
@@ -1576,32 +1852,39 @@
               </div>
             </div>
           </div>
-
           <!-- 2. TECH SKILLS TAB -->
           <div class="tab-pane" id="tab-tech">
             <div class="skills-container-full">
-              <div id="skillMatrixContainer" class="skill-matrix-view">
+              <div class="skill-matrix-view" id="skillMatrixContainer">
                 <!-- JS Injected -->
               </div>
             </div>
           </div>
-
           <!-- 3. SOFT SKILLS TAB -->
           <div class="tab-pane" id="tab-soft">
             <div class="soft-skills-container-full">
               <div class="soft-skills-paragraphs">
-                <p>
+                <p
+                  data-de="Als jemand, der in mehreren Ländern und Kulturen gelebt und gearbeitet hat, habe ich gelernt, offen zu bleiben, mich anzupassen und flexibel zu sein – sei es im Umgang mit Kunden oder in der Zusammenarbeit im Team."
+                  data-en="As someone who has lived and worked in several countries and cultures, I’ve learned to stay open-minded, adaptable, and flexible — whether I’m dealing with clients or collaborating with colleagues."
+                >
                   As someone who has lived and worked in several countries and
                   cultures, I’ve learned to stay open-minded, adaptable, and
                   flexible — whether I’m dealing with clients or collaborating
                   with colleagues.
                 </p>
-                <p>
+                <p
+                  data-de="Neugierig von Natur aus bin ich immer offen, neue Tools zu testen oder Prozesse zu verfeinern. Im schnell voranschreitenden Zeitalter der KI ist das quasi eine Jobanforderung geworden."
+                  data-en="Curious by nature, I’m always open to trying new tools or refining processes. In the fast-evolving age of AI, this has become quasi a job requirement."
+                >
                   Curious by nature, I’m always open to trying new tools or
                   refining processes. In the fast-evolving age of AI, this has
                   become quasi a job requirement.
                 </p>
-                <p>
+                <p
+                  data-de="Probleme zu lösen – oder einen Prozess durch Automatisierung weniger fehleranfällig zu machen – ob für einen externen Kunden oder eine interne Anfrage, indem ich in Logs eintauche oder versuche, einen Bug nachzustellen, fühlt sich für mich wie ein Puzzle an. Das ist der beste Teil des Jobs."
+                  data-en="Solving issues — or making a process less error-prone by automating it — whether for an external client or an internal request, by digging into logs or trying to replicate a bug, feels like solving a puzzle. That’s the best part of the job."
+                >
                   Solving issues — or making a process less error-prone by
                   automating it — whether for an external client or an internal
                   request, by digging into logs or trying to replicate a bug,
@@ -1610,154 +1893,288 @@
               </div>
             </div>
           </div>
-
           <!-- 4. LANGUAGES TAB -->
           <div class="tab-pane" id="tab-lang">
             <div class="languages-container-full">
               <div class="languages-block">
                 <div class="languages-list">
                   <div class="language-row">
-                    <span class="language-name">English</span>
-                    <span class="language-level">Fluent</span>
+                    <span
+                      class="language-name"
+                      data-de="Englisch"
+                      data-en="English"
+                      >English</span
+                    >
+                    <span
+                      class="language-level"
+                      data-de="Fliessend"
+                      data-en="Fluent"
+                      >Fluent</span
+                    >
                   </div>
                   <div class="language-row">
-                    <span class="language-name">Turkish</span>
-                    <span class="language-level">Native</span>
+                    <span
+                      class="language-name"
+                      data-de="Bulgarisch"
+                      data-en="Bulgarian"
+                      >Bulgarian</span
+                    >
+                    <span
+                      class="language-level"
+                      data-de="Muttersprache"
+                      data-en="Native"
+                      >Native</span
+                    >
                   </div>
                   <div class="language-row">
-                    <span class="language-name">Bulgarian</span>
-                    <span class="language-level">Native</span>
+                    <span
+                      class="language-name"
+                      data-de="Türkisch"
+                      data-en="Turkish"
+                      >Turkish</span
+                    >
+                    <span
+                      class="language-level"
+                      data-de="Muttersprache"
+                      data-en="Native"
+                      >Native</span
+                    >
                   </div>
                   <div class="language-row language-row-german">
-                    <span class="language-name">German</span>
-                    <span class="calendar-level calendar-level-inline">C1</span>
-                    <span class="calendar-level calendar-level-inline">C2</span>
+                    <span
+                      class="language-name"
+                      data-de="German"
+                      data-en="German"
+                      >German</span
+                    >
+                    <span
+                      class="calendar-level calendar-level-inline"
+                      data-de="C1"
+                      data-en="C1"
+                      >C1</span
+                    >
+                    <span
+                      class="calendar-level calendar-level-inline"
+                      data-de="C2"
+                      data-en="C2"
+                      >C2</span
+                    >
                   </div>
                 </div>
-
                 <div class="language-calendar">
                   <div class="language-calendar-grid">
-                    <div class="calendar-cell calendar-label">Reading</div>
-                    <div class="calendar-cell">✓</div>
-                    <div class="calendar-cell">Q4 2026</div>
-
-                    <div class="calendar-cell calendar-label">Listening</div>
-                    <div class="calendar-cell">✓</div>
-                    <div class="calendar-cell">Q4 2026</div>
-
-                    <div class="calendar-cell calendar-label">Speaking</div>
-                    <div class="calendar-cell">Q2 2026</div>
-                    <div class="calendar-cell">Q1 2027</div>
-
-                    <div class="calendar-cell calendar-label">Writing</div>
-                    <div class="calendar-cell">Q2 2026</div>
-                    <div class="calendar-cell">Q1 2027</div>
+                    <div
+                      class="calendar-cell calendar-label"
+                      data-de="Lesen"
+                      data-en="Reading"
+                    >
+                      Reading
+                    </div>
+                    <div class="calendar-cell" data-de="✓" data-en="✓">✓</div>
+                    <div
+                      class="calendar-cell"
+                      data-de="Q4 2026"
+                      data-en="Q4 2026"
+                    >
+                      Q4 2026
+                    </div>
+                    <div
+                      class="calendar-cell calendar-label"
+                      data-de="Hören"
+                      data-en="Listening"
+                    >
+                      Listening
+                    </div>
+                    <div class="calendar-cell" data-de="✓" data-en="✓">✓</div>
+                    <div
+                      class="calendar-cell"
+                      data-de="Q4 2026"
+                      data-en="Q4 2026"
+                    >
+                      Q4 2026
+                    </div>
+                    <div
+                      class="calendar-cell calendar-label"
+                      data-de="Sprechen"
+                      data-en="Speaking"
+                    >
+                      Speaking
+                    </div>
+                    <div
+                      class="calendar-cell"
+                      data-de="Q2 2026"
+                      data-en="Q2 2026"
+                    >
+                      Q2 2026
+                    </div>
+                    <div
+                      class="calendar-cell"
+                      data-de="Q1 2027"
+                      data-en="Q1 2027"
+                    >
+                      Q1 2027
+                    </div>
+                    <div
+                      class="calendar-cell calendar-label"
+                      data-de="Schreiben"
+                      data-en="Writing"
+                    >
+                      Writing
+                    </div>
+                    <div
+                      class="calendar-cell"
+                      data-de="Q2 2026"
+                      data-en="Q2 2026"
+                    >
+                      Q2 2026
+                    </div>
+                    <div
+                      class="calendar-cell"
+                      data-de="Q1 2027"
+                      data-en="Q1 2027"
+                    >
+                      Q1 2027
+                    </div>
                   </div>
                 </div>
               </div>
-
               <div class="education-section">
                 <div class="exp-item edu-item">
                   <div class="exp-role">
-                    <h2>Master of Business Administration, MBA</h2>
+                    <h2
+                      data-de="Master of Business Administration, MBA"
+                      data-en="Master of Business Administration, MBA"
+                    >
+                      Master of Business Administration, MBA
+                    </h2>
                   </div>
-                  <div class="exp-date">2010-2013</div>
+                  <div class="exp-date" data-de="2010-2013" data-en="2010-2013">
+                    2010-2013
+                  </div>
                   <div class="exp-company">
-                    Perdue School of Business, Salisbury University
+                    <span
+                      class="company-name"
+                      data-de="Perdue School of Business, Salisbury University"
+                      data-en="Perdue School of Business, Salisbury University"
+                      >Perdue School of Business, Salisbury University</span
+                    >
                     <a
-                      href="https://www.salisbury.edu/"
-                      target="_blank"
                       class="website-icon"
+                      href="https://www.salisbury.edu/"
                       onclick="event.stopPropagation()"
+                      target="_blank"
                       ><svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
                         fill="none"
+                        height="14"
                         stroke="currentColor"
-                        stroke-width="2"
                         stroke-linecap="round"
                         stroke-linejoin="round"
+                        stroke-width="2"
+                        viewbox="0 0 24 24"
+                        width="14"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
                         <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <line x1="2" x2="22" y1="12" y2="12"></line>
                         <path
                           d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
                         ></path></svg
                     ></a>
                     <a
-                      href="https://www.linkedin.com/school/salisbury-university/"
-                      target="_blank"
                       class="linkedin-icon"
+                      href="https://www.linkedin.com/school/salisbury-university/"
                       onclick="event.stopPropagation()"
+                      target="_blank"
                       ><svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
                         fill="currentColor"
+                        height="14"
+                        viewbox="0 0 24 24"
+                        width="14"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
                           d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                        /></svg
+                        ></path></svg
                     ></a>
                   </div>
-                  <div class="exp-location">Salisbury, MD, USA</div>
+                  <div
+                    class="exp-location"
+                    data-de="Salisbury, MD, USA"
+                    data-en="Salisbury, MD, USA"
+                  >
+                    Salisbury, MD, USA
+                  </div>
                 </div>
                 <div class="exp-item edu-item">
                   <div class="exp-role">
-                    <h2>Bachelor of Science / Finance</h2>
+                    <h2
+                      data-de="Bachelor of Science / Finance"
+                      data-en="Bachelor of Science / Finance"
+                    >
+                      Bachelor of Science / Finance
+                    </h2>
                   </div>
-                  <div class="exp-date">2004-2008</div>
+                  <div class="exp-date" data-de="2004-2008" data-en="2004-2008">
+                    2004-2008
+                  </div>
                   <div class="exp-company">
-                    Wilmington University
+                    <span
+                      class="company-name"
+                      data-de="Wilmington University"
+                      data-en="Wilmington University"
+                      >Wilmington University</span
+                    >
                     <a
-                      href="https://www.wilmu.edu/"
-                      target="_blank"
                       class="website-icon"
+                      href="https://www.wilmu.edu/"
                       onclick="event.stopPropagation()"
+                      target="_blank"
                       ><svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
                         fill="none"
+                        height="14"
                         stroke="currentColor"
-                        stroke-width="2"
                         stroke-linecap="round"
                         stroke-linejoin="round"
+                        stroke-width="2"
+                        viewbox="0 0 24 24"
+                        width="14"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
                         <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <line x1="2" x2="22" y1="12" y2="12"></line>
                         <path
                           d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
                         ></path></svg
                     ></a>
                     <a
-                      href="https://www.linkedin.com/school/wilmington-university/"
-                      target="_blank"
                       class="linkedin-icon"
+                      href="https://www.linkedin.com/school/wilmington-university/"
                       onclick="event.stopPropagation()"
+                      target="_blank"
                       ><svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
                         fill="currentColor"
+                        height="14"
+                        viewbox="0 0 24 24"
+                        width="14"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
                           d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                        /></svg
+                        ></path></svg
                     ></a>
                   </div>
-                  <div class="exp-location">New Castle, DE, USA</div>
+                  <div
+                    class="exp-location"
+                    data-de="New Castle, DE, USA"
+                    data-en="New Castle, DE, USA"
+                  >
+                    New Castle, DE, USA
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
         <!-- Personal Section (Off Hours / UAT) -->
         <div id="personal-section">
           <!-- Right Pane: Content Display -->
@@ -1767,40 +2184,60 @@
               <div class="bento-grid weekend-grid">
                 <div class="bento-card simple-card span-2x2">
                   <div class="card-img-container">
-                    <img src="images/strava.jpg" alt="Mountain Biking" />
+                    <img alt="Mountain Biking" src="images/strava.jpg" />
                   </div>
                   <div class="card-caption">
                     <h3>
-                      <span class="subtitle-label">Mountain Biking</span>: The
-                      best way to explore Switzerland
+                      <span
+                        class="subtitle-label"
+                        data-de="Mountainbiken"
+                        data-en="Mountain Biking"
+                        >Mountain Biking</span
+                      ><span
+                        data-de=": Die beste Art, die Schweiz zu entdecken."
+                        data-en=": The best way to explore Switzerland."
+                        >: The best way to explore Switzerland</span
+                      >
                     </h3>
                   </div>
                 </div>
                 <div class="bento-card simple-card span-2x2">
                   <div class="card-img-container">
-                    <img src="images/table%20tennis.jpg" alt="Table Tennis" />
+                    <img alt="Table Tennis" src="images/table%20tennis.jpg" />
                   </div>
                   <div class="card-caption">
                     <h3>
-                      <span class="subtitle-label">Table Tennis</span>: Playing
-                      since I was 5 years old.
+                      <span
+                        class="subtitle-label"
+                        data-de="Tischtennis"
+                        data-en="Table Tennis"
+                        >Table Tennis</span
+                      ><span
+                        data-de=": Spiele ich, seit ich 5 Jahre alt bin."
+                        data-en=": Playing since I was 5 years old."
+                        >: Playing since I was 5 years old.</span
+                      >
                     </h3>
                   </div>
                 </div>
                 <div class="bento-card simple-card centered-card">
                   <div class="card-img-container">
-                    <img src="images/golfing.jpg" alt="Angling" />
+                    <img alt="Angling" src="images/golfing.jpg" />
                   </div>
                   <div class="card-caption">
                     <h3>
-                      <span class="subtitle-label">Golf</span>: You don’t need
-                      to be a pro to enjoy it!
+                      <span class="subtitle-label" data-de="Golf" data-en="Golf"
+                        >Golf</span
+                      ><span
+                        data-de=": Es macht auch Spass, ohne Profi zu sein."
+                        data-en=": You don’t need to be a pro to enjoy it!"
+                        >: You don’t need to be a pro to enjoy it!</span
+                      >
                     </h3>
                   </div>
                 </div>
               </div>
             </div>
-
             <!-- 2. Latest Books (Swiss Big) -->
             <div class="uat-section-content swiss-big" id="section-hobbies">
               <div class="bento-grid">
@@ -1808,70 +2245,97 @@
                   <div class="card-content">
                     <h3>
                       <a
+                        data-de="Homo Deus – Eine Geschichte von Morgen"
+                        data-en="Homo Deus: A Brief History of Tomorrow"
+                        data-de-href="https://de.wikipedia.org/wiki/Homo_Deus_%E2%80%93_Eine_Geschichte_von_Morgen"
+                        data-en-href="https://en.wikipedia.org/wiki/Homo_Deus:_A_Brief_History_of_Tomorrow"
                         href="https://en.wikipedia.org/wiki/Homo_Deus:_A_Brief_History_of_Tomorrow"
-                        target="_blank"
                         rel="noopener"
+                        target="_blank"
                         >Homo Deus: A Brief History of Tomorrow</a
                       >
                     </h3>
-                    <p>Yuval Noah Harari</p>
+                    <p data-de="Yuval Noah Harari" data-en="Yuval Noah Harari">
+                      Yuval Noah Harari
+                    </p>
                   </div>
                 </div>
                 <div class="bento-card span-2x1 bg-tech">
                   <div class="card-content">
                     <h3>
                       <a
+                        data-de="Eine kurze Geschichte der Menschheit"
+                        data-en="Sapiens: A Brief History of Humankind"
+                        data-de-href="https://de.wikipedia.org/wiki/Eine_kurze_Geschichte_der_Menschheit"
+                        data-en-href="https://en.wikipedia.org/wiki/Sapiens:_A_Brief_History_of_Humankind"
                         href="https://en.wikipedia.org/wiki/Sapiens:_A_Brief_History_of_Humankind"
-                        target="_blank"
                         rel="noopener"
+                        target="_blank"
                         >Sapiens: A Brief History of Humankind</a
                       >
                     </h3>
-                    <p>Yuval Noah Harari</p>
+                    <p data-de="Yuval Noah Harari" data-en="Yuval Noah Harari">
+                      Yuval Noah Harari
+                    </p>
                   </div>
                 </div>
                 <div class="bento-card span-1x1">
                   <div class="card-content">
                     <h3>
                       <a
+                        data-de="Steve Jobs"
+                        data-en="Steve Jobs"
+                        data-de-href="https://de.wikipedia.org/wiki/Steve_Jobs_(Buch)"
+                        data-en-href="https://en.wikipedia.org/wiki/Steve_Jobs_(book)"
                         href="https://en.wikipedia.org/wiki/Steve_Jobs_(book)"
-                        target="_blank"
                         rel="noopener"
+                        target="_blank"
                         >Steve Jobs</a
                       >
                     </h3>
-                    <p>Walter Isaacson</p>
+                    <p data-de="Walter Isaacson" data-en="Walter Isaacson">
+                      Walter Isaacson
+                    </p>
                   </div>
                 </div>
                 <div class="bento-card span-2x1 bg-cooking">
                   <div class="card-content">
                     <h3>
                       <a
+                        data-de="Walkaway"
+                        data-en="Walkaway"
                         href="https://en.wikipedia.org/wiki/Walkaway_(Doctorow_novel)"
-                        target="_blank"
                         rel="noopener"
+                        target="_blank"
                         >Walkaway</a
                       >
                     </h3>
-                    <p>Cory Doctorow</p>
+                    <p data-de="Cory Doctorow" data-en="Cory Doctorow">
+                      Cory Doctorow
+                    </p>
                   </div>
                 </div>
                 <div class="bento-card span-1x1">
                   <div class="card-content">
                     <h3>
                       <a
+                        data-de="Jahrhundert-Trilogie"
+                        data-en="Century Trilogy"
+                        data-de-href="https://de.wikipedia.org/wiki/Sturz_der_Titanen"
+                        data-en-href="https://en.wikipedia.org/wiki/Fall_of_Giants"
                         href="https://en.wikipedia.org/wiki/Fall_of_Giants"
-                        target="_blank"
                         rel="noopener"
+                        target="_blank"
                         >Century Trilogy</a
                       >
                     </h3>
-                    <p>Ken Follett</p>
+                    <p data-de="Ken Follett" data-en="Ken Follett">
+                      Ken Follett
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
-
             <!-- 3. Culture (Swiss Big) -->
             <div class="uat-section-content swiss-big" id="section-culture">
               <div class="split-grid">
@@ -1881,146 +2345,218 @@
                     <div class="list-item">
                       <span class="list-text"
                         ><a
+                          data-de="There Will Be Blood"
+                          data-en="There Will Be Blood"
                           href="https://www.imdb.com/title/tt0469494/"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >There Will Be Blood</a
                         ></span
                       >
-                      <span class="list-date">2007</span>
+                      <span class="list-date" data-de="2007" data-en="2007"
+                        >2007</span
+                      >
                     </div>
                     <div class="list-item">
                       <span class="list-text"
                         ><a
+                          data-de="Gangs of New York"
+                          data-en="Gangs of New York"
                           href="https://www.imdb.com/title/tt0217505/"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Gangs of New York</a
                         ></span
                       >
-                      <span class="list-date">2002</span>
+                      <span class="list-date" data-de="2002" data-en="2002"
+                        >2002</span
+                      >
                     </div>
                     <div class="list-item">
                       <span class="list-text"
                         ><a
+                          data-de="Back to the Future Trilogy"
+                          data-en="Back to the Future Trilogy"
                           href="https://www.imdb.com/title/tt0088763/"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Back to the Future Trilogy</a
                         ></span
                       >
-                      <span class="list-date">1985</span>
+                      <span class="list-date" data-de="1985" data-en="1985"
+                        >1985</span
+                      >
                     </div>
                     <div class="list-item">
                       <span class="list-text"
                         ><a
+                          data-de="I Am Legend"
+                          data-en="I Am Legend"
                           href="https://www.imdb.com/title/tt0480249/"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >I Am Legend</a
                         ></span
                       >
-                      <span class="list-date">2007</span>
+                      <span class="list-date" data-de="2007" data-en="2007"
+                        >2007</span
+                      >
                     </div>
                     <div class="list-item">
                       <span class="list-text"
                         ><a
+                          data-de="Léon: The Professional"
+                          data-en="Léon: The Professional"
                           href="https://www.imdb.com/title/tt0110413/"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Léon: The Professional</a
                         ></span
                       >
-                      <span class="list-date">1994</span>
+                      <span class="list-date" data-de="1994" data-en="1994"
+                        >1994</span
+                      >
                     </div>
                   </div>
                 </div>
-
                 <!-- TV Shows Column -->
                 <div class="culture-col">
                   <div class="list-group">
                     <div class="list-item">
                       <span class="list-text"
                         ><a
+                          data-de="Breaking Bad"
+                          data-en="Breaking Bad"
                           href="https://www.imdb.com/title/tt0903747/?ref_=ls_t_1"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Breaking Bad</a
                         ></span
                       >
-                      <span class="list-date">2008 - 2013</span>
+                      <span
+                        class="list-date"
+                        data-de="2008 - 2013"
+                        data-en="2008 - 2013"
+                        >2008 - 2013</span
+                      >
                     </div>
                     <div class="list-item">
                       <span class="list-text"
                         ><a
+                          data-de="True Detective (S1)"
+                          data-en="True Detective (S1)"
                           href="https://www.imdb.com/title/tt2356777/?ref_=ls_t_93"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >True Detective (S1)</a
                         ></span
                       >
-                      <span class="list-date">2014</span>
+                      <span class="list-date" data-de="2014" data-en="2014"
+                        >2014</span
+                      >
                     </div>
                     <div class="list-item">
                       <span class="list-text"
                         ><a
+                          data-de="House of Cards"
+                          data-en="House of Cards"
                           href="https://www.imdb.com/title/tt1856010/?ref_=ls_t_39"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >House of Cards</a
                         ></span
                       >
-                      <span class="list-date">2013 - 2018</span>
+                      <span
+                        class="list-date"
+                        data-de="2013 - 2018"
+                        data-en="2013 - 2018"
+                        >2013 - 2018</span
+                      >
                     </div>
                     <div class="list-item">
                       <span class="list-text"
                         ><a
+                          data-de="Mad Men"
+                          data-en="Mad Men"
                           href="https://www.imdb.com/title/tt0804503/?ref_=ls_t_9"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Mad Men</a
                         ></span
                       >
-                      <span class="list-date">2007 - 2015</span>
+                      <span
+                        class="list-date"
+                        data-de="2007 - 2015"
+                        data-en="2007 - 2015"
+                        >2007 - 2015</span
+                      >
                     </div>
                     <div class="list-item">
                       <span class="list-text"
                         ><a
+                          data-de="Friends"
+                          data-en="Friends"
                           href="https://www.imdb.com/title/tt0108778/"
-                          target="_blank"
                           rel="noopener"
+                          target="_blank"
                           >Friends</a
                         ></span
                       >
-                      <span class="list-date">1994 - 2004</span>
+                      <span
+                        class="list-date"
+                        data-de="1994 - 2004"
+                        data-en="1994 - 2004"
+                        >1994 - 2004</span
+                      >
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
             <!-- 4. TO DO (GO) List (Swiss Big) -->
             <div class="uat-section-content swiss-big" id="section-bucket">
               <div class="bucket-row">
                 <div class="bento-card bucket-card">
                   <span class="square-check"></span>
-                  <div class="bucket-text">Australia</div>
+                  <div
+                    class="bucket-text"
+                    data-de="Australia"
+                    data-en="Australia"
+                  >
+                    Australia
+                  </div>
                 </div>
                 <div class="bento-card bucket-card">
                   <span class="square-check"></span>
-                  <div class="bucket-text">Japan</div>
+                  <div class="bucket-text" data-de="Japan" data-en="Japan">
+                    Japan
+                  </div>
                 </div>
                 <div class="bento-card bucket-card">
                   <span class="square-check"></span>
-                  <div class="bucket-text">China</div>
+                  <div class="bucket-text" data-de="China" data-en="China">
+                    China
+                  </div>
                 </div>
                 <div class="bento-card bucket-card">
                   <span class="square-check"></span>
-                  <div class="bucket-text">New Zealand</div>
+                  <div
+                    class="bucket-text"
+                    data-de="New Zealand"
+                    data-en="New Zealand"
+                  >
+                    New Zealand
+                  </div>
                 </div>
                 <div class="bento-card bucket-card">
                   <span class="square-check"></span>
-                  <div class="bucket-text">Learn to snowboard</div>
+                  <div
+                    class="bucket-text"
+                    data-de="Learn to snowboard"
+                    data-en="Learn to snowboard"
+                  >
+                    Learn to snowboard
+                  </div>
                 </div>
               </div>
             </div>
@@ -2028,41 +2564,54 @@
         </div>
       </div>
     </section>
-
     <!-- Matrix Export Modal -->
-    <div id="matrixExportModal" class="matrix-export-modal">
+    <div class="matrix-export-modal" id="matrixExportModal">
       <div class="matrix-export-modal-content">
         <div class="matrix-export-modal-header">
-          <h2>TASKS and TOOLS Progression 2014-2025</h2>
-          <div class="matrix-export-controls" data-1p-ignore>
-            <div class="matrix-download-warning">
+          <h2
+            data-de="TASKS und TOOLS Entwicklung 2014-2025"
+            data-en="TASKS and TOOLS Progression 2014-2025"
+          >
+            TASKS and TOOLS Progression 2014-2025
+          </h2>
+          <div class="matrix-export-controls" data-1p-ignore="">
+            <div
+              class="matrix-download-warning"
+              data-de="Falls der Download fehlschlägt, könnte er durch die Sicherheitseinstellungen Ihrer Organisation blockiert sein. Bitte wenden Sie sich an Ihren Netzwerkadministrator oder versuchen Sie es mit einem anderen Netzwerk"
+              data-en="If file download fails, it may be blocked by your organization’s security settings. Check with your network admin, or try another network."
+            >
               If file download fails, it may be blocked by your organization’s
               security settings. Check with your network admin, or try another
               network.
             </div>
-            <label class="matrix-checkbox-container" data-1p-ignore>
+            <label class="matrix-checkbox-container" data-1p-ignore="">
               <input
-                type="checkbox"
-                id="includeCV"
-                class="cv-checkbox-input"
-                data-1p-ignore
                 autocomplete="off"
+                class="cv-checkbox-input"
+                data-1p-ignore=""
+                id="includeCV"
+                type="checkbox"
               />
               <span class="cv-checkbox-custom"></span>
-              <span class="matrix-checkbox-label">Include CV</span>
+              <span
+                class="matrix-checkbox-label"
+                data-de="Lebenslauf einschließen"
+                data-en="Include CV"
+                >Include CV</span
+              >
             </label>
             <button class="matrix-export-btn" onclick="downloadMatrixAsPDF()">
               <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
                 fill="none"
+                height="16"
                 stroke="currentColor"
                 stroke-width="2"
+                viewbox="0 0 24 24"
+                width="16"
               >
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1="12" y1="15" x2="12" y2="3" />
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" x2="12" y1="15" y2="3"></line>
               </svg>
             </button>
             <button
@@ -2070,93 +2619,104 @@
               onclick="closeMatrixExportModal()"
             >
               <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
                 fill="none"
+                height="20"
                 stroke="currentColor"
                 stroke-width="2"
+                viewbox="0 0 24 24"
+                width="20"
               >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
+                <line x1="18" x2="6" y1="6" y2="18"></line>
+                <line x1="6" x2="18" y1="6" y2="18"></line>
               </svg>
             </button>
           </div>
         </div>
         <div class="matrix-export-modal-body">
-          <div id="matrixExportPreview" class="matrix-export-preview">
+          <div class="matrix-export-preview" id="matrixExportPreview">
             <!-- Export-ready matrix rendered here -->
           </div>
         </div>
       </div>
     </div>
-
     <!-- CV Export Modal -->
-    <div id="cvExportModal" class="contact-modal-overlay">
+    <div class="contact-modal-overlay" id="cvExportModal">
       <div class="contact-modal-surface cv-export-modal-surface">
         <button class="contact-modal-close" onclick="closeCVExportModal()">
           <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
             fill="none"
+            height="20"
             stroke="currentColor"
             stroke-width="2"
+            viewbox="0 0 24 24"
+            width="20"
           >
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
+            <line x1="18" x2="6" y1="6" y2="18"></line>
+            <line x1="6" x2="18" y1="6" y2="18"></line>
           </svg>
         </button>
-
-        <div class="cv-export-form" data-1p-ignore>
-          <label class="cv-checkbox-container" data-1p-ignore>
+        <div class="cv-export-form" data-1p-ignore="">
+          <label class="cv-checkbox-container" data-1p-ignore="">
             <input
-              type="checkbox"
-              id="includeSkillsMatrix"
-              class="cv-checkbox-input"
-              data-1p-ignore
               autocomplete="off"
+              class="cv-checkbox-input"
+              data-1p-ignore=""
+              id="includeSkillsMatrix"
+              type="checkbox"
             />
             <span class="cv-checkbox-custom"></span>
-            <span class="cv-checkbox-label">
-              Include <span style="font-weight: 700">TASKS</span> &
-              <span class="font-monospace" style="font-weight: 700">TOOLS</span>
-              progression
-            </span>
+            <span class="cv-checkbox-label"
+              ><span data-de="" data-en="Include">Include</span>
+              <span data-de="TASKS" data-en="TASKS" style="font-weight: 700"
+                >TASKS</span
+              >
+              <span data-de="und" data-en="&amp;">&amp;</span>
+              <span
+                class="font-monospace"
+                data-de="TOOLS"
+                data-en="TOOLS"
+                style="font-weight: 700"
+                >TOOLS</span
+              >
+              <span data-de="einschließen" data-en="progression"
+                >progression</span
+              ></span
+            >
           </label>
-
-          <div class="cv-download-warning">
+          <div
+            class="cv-download-warning"
+            data-de="Falls der Download fehlschlägt, könnte er durch die Sicherheitseinstellungen Ihrer Organisation blockiert sein. Bitte wenden Sie sich an Ihren Netzwerkadministrator oder versuchen Sie es mit einem anderen Netzwerk"
+            data-en="If file download fails, it may be blocked by your organization’s security settings. Check with your network admin, or try another network."
+          >
             If file download fails, it may be blocked by your organization’s
             security settings. Check with your network admin, or try another
             network.
           </div>
-
           <button
             class="contact-submit cv-download-submit"
             onclick="downloadCV()"
           >
             <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
               fill="none"
+              height="18"
               stroke="currentColor"
               stroke-width="2"
+              viewbox="0 0 24 24"
+              width="18"
             >
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
+              <line x1="12" x2="12" y1="15" y2="3"></line>
             </svg>
-            Download CV
+            <span data-de="LEBENSLAUF HERUNTERLADEN" data-en="DOWNLOAD CV">DOWNLOAD CV</span>
           </button>
         </div>
       </div>
     </div>
-
     <!-- Add Skill Modal -->
     <div
-      id="addSkillModal"
       class="matrix-export-modal"
+      id="addSkillModal"
       style="
         display: none;
         z-index: 10001;
@@ -2179,22 +2739,22 @@
         "
       >
         <div class="matrix-export-modal-header">
-          <h2>Add New Skill</h2>
+          <h2 data-de="Add New Skill" data-en="Add New Skill">Add New Skill</h2>
           <button
-            type="button"
             class="matrix-export-close"
             onclick="closeAddSkillModal()"
+            type="button"
           >
             <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
               fill="none"
+              height="20"
               stroke="currentColor"
               stroke-width="2"
+              viewbox="0 0 24 24"
+              width="20"
             >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
+              <line x1="18" x2="6" y1="6" y2="18"></line>
+              <line x1="6" x2="18" y1="6" y2="18"></line>
             </svg>
           </button>
         </div>
@@ -2202,11 +2762,13 @@
           class="matrix-export-modal-body add-skill-modal-body"
           style="padding: 20px; width: 100%; box-sizing: border-box"
         >
-          <label style="display: block; margin-bottom: 8px; font-weight: 600"
+          <label
+            data-de="Skill Name:"
+            data-en="Skill Name:"
+            style="display: block; margin-bottom: 8px; font-weight: 600"
             >Skill Name:</label
           >
           <input
-            type="text"
             id="newSkillInput"
             style="
               width: 100%;
@@ -2216,9 +2778,12 @@
               margin-bottom: 16px;
               box-sizing: border-box;
             "
+            type="text"
           />
-
-          <label style="display: block; margin-bottom: 8px; font-weight: 600"
+          <label
+            data-de="Skill Type:"
+            data-en="Skill Type:"
+            style="display: block; margin-bottom: 8px; font-weight: 600"
             >Skill Type:</label
           >
           <div
@@ -2227,31 +2792,35 @@
           >
             <label style="display: flex; align-items: center; cursor: pointer">
               <input
-                type="radio"
+                checked=""
                 name="skillType"
-                value="task"
-                checked
                 style="margin-right: 6px"
+                type="radio"
+                value="task"
               />
-              Task (Regular)
+              <span data-de="Task (Regular)" data-en="Task (Regular)"
+                >Task (Regular)</span
+              >
             </label>
             <label style="display: flex; align-items: center; cursor: pointer">
               <input
-                type="radio"
                 name="skillType"
-                value="tool"
                 style="margin-right: 6px"
+                type="radio"
+                value="tool"
               />
-              Tool (Monospace)
+              <span data-de="Tool (Monospace)" data-en="Tool (Monospace)"
+                >Tool (Monospace)</span
+              >
             </label>
           </div>
-
           <div
             class="add-skill-actions"
             style="display: flex; justify-content: flex-end; gap: 8px"
           >
             <button
-              type="button"
+              data-de="Cancel"
+              data-en="Cancel"
               onclick="closeAddSkillModal()"
               style="
                 padding: 8px 16px;
@@ -2260,11 +2829,13 @@
                 border-radius: 4px;
                 cursor: pointer;
               "
+              type="button"
             >
               Cancel
             </button>
             <button
-              type="button"
+              data-de="Add Skill"
+              data-en="Add Skill"
               onclick="confirmAddSkill()"
               style="
                 padding: 8px 16px;
@@ -2275,6 +2846,7 @@
                 cursor: pointer;
                 font-weight: 600;
               "
+              type="button"
             >
               Add Skill
             </button>
@@ -2283,145 +2855,141 @@
       </div>
     </div>
     <!-- Contact Modal -->
-    <div id="contactModal" class="contact-modal-overlay">
+    <div class="contact-modal-overlay" id="contactModal">
       <div class="contact-modal-surface">
         <button class="contact-modal-close" onclick="closeContactModal()">
           <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
             fill="none"
+            height="24"
             stroke="currentColor"
-            stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
+            stroke-width="2"
+            viewbox="0 0 24 24"
+            width="24"
           >
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="18" x2="6" y1="6" y2="18"></line>
+            <line x1="6" x2="18" y1="6" y2="18"></line>
           </svg>
         </button>
-
         <div id="contactFormContainer">
-          <h2 class="contact-title" data-en="Contact Me" data-de="Kontakt">
+          <h2 class="contact-title" data-de="Kontakt" data-en="Contact Me">
             Contact Me
           </h2>
           <p
             class="contact-subtitle"
-            data-en="Send me a message and I'll get back to you as soon as possible."
             data-de="Senden Sie mir eine Nachricht und ich melde mich so schnell wie möglich bei Ihnen."
+            data-en="Send me a message and I'll get back to you as soon as possible."
           >
             Send me a message and I'll get back to you as soon as possible.
           </p>
-
-          <form id="contactForm" class="contact-form">
+          <form class="contact-form" id="contactForm">
             <!-- Hidden Google Form Fields (Entry IDs will be mapped here) -->
             <div class="contact-group">
               <input
-                type="text"
-                name="name"
-                class="contact-input"
-                placeholder="Your Name"
                 aria-label="Your Name"
-                required
-              />
-            </div>
-
-            <div class="contact-group">
-              <input
-                type="email"
-                name="email"
                 class="contact-input"
-                placeholder="Email"
-                aria-label="Email"
-                required
-              />
-            </div>
-
-            <div class="contact-group">
-              <input
+                name="name"
+                placeholder="Your Name"
+                data-en-placeholder="Your Name"
+                data-de-placeholder="Name"
+                required=""
                 type="text"
-                name="subject"
-                class="contact-input"
-                placeholder="Subject (optional)"
-                aria-label="Subject"
               />
             </div>
-
+            <div class="contact-group">
+              <input
+                aria-label="Email"
+                class="contact-input"
+                name="email"
+                placeholder="Email"
+                data-en-placeholder="Email"
+                data-de-placeholder="Email"
+                required=""
+                type="email"
+              />
+            </div>
+            <div class="contact-group">
+              <input
+                aria-label="Subject"
+                class="contact-input"
+                name="subject"
+                placeholder="Subject (optional)"
+                data-en-placeholder="Subject (optional)"
+                data-de-placeholder="Betreff (optional)"
+                type="text"
+              />
+            </div>
             <div class="contact-group">
               <textarea
-                name="message"
-                class="contact-textarea"
-                placeholder="Message"
                 aria-label="Message"
-                required
+                class="contact-textarea"
+                name="message"
+                placeholder="Message"
+                data-en-placeholder="Message"
+                data-de-placeholder="Nachricht"
+                required=""
               ></textarea>
             </div>
-
-            <button
-              type="submit"
-              class="contact-submit"
-              data-en="Send Message"
-              data-de="Nachricht senden"
-            >
-              <span>Send Message</span>
+            <button class="contact-submit" type="submit">
+              <span data-de="Nachricht senden" data-en="Send Message"
+                >Send Message</span
+              >
               <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
                 fill="none"
+                height="18"
                 stroke="currentColor"
-                stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                stroke-width="2"
+                viewbox="0 0 24 24"
+                width="18"
               >
-                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <line x1="22" x2="11" y1="2" y2="13"></line>
                 <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
               </svg>
             </button>
           </form>
         </div>
-
-        <div id="contactSuccess" class="contact-success-overlay">
+        <div class="contact-success-overlay" id="contactSuccess">
           <div class="success-icon">
             <svg
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
               fill="none"
+              height="32"
               stroke="currentColor"
-              stroke-width="3"
               stroke-linecap="round"
               stroke-linejoin="round"
+              stroke-width="3"
+              viewbox="0 0 24 24"
+              width="32"
             >
               <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
           </div>
-          <h2 class="contact-title" data-en="Sent!" data-de="Gesendet!">
+          <h2 class="contact-title" data-de="Gesendet!" data-en="Sent!">
             Sent!
           </h2>
           <p
             class="contact-subtitle"
-            data-en="Thank you for your message. I'll be in touch soon."
             data-de="Vielen Dank für Ihre Nachricht. Ich melde mich bald bei Ihnen."
+            data-en="Thank you for your message. I'll be in touch soon."
           >
             Thank you for your message. I'll be in touch soon.
           </p>
           <button
-            onclick="closeContactModal()"
             class="contact-submit"
-            style="width: 100%"
-            data-en="Close"
             data-de="Schließen"
+            data-en="Close"
+            onclick="closeContactModal()"
+            style="width: 100%"
           >
             Close
           </button>
         </div>
       </div>
     </div>
-
     <!-- JavaScript -->
     <script src="js/main.js"></script>
-
     <script src="js/skill-matrix.js"></script>
   </body>
 </html>

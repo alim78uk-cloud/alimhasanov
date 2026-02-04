@@ -662,9 +662,9 @@
   color: #8a5a00;
   font-size: 11px;
   line-height: 1.2;
-  max-height: 2.4em;
-  overflow: hidden;
   min-height: 40px;
+  display: flex;
+  align-items: center;
 }
 
 .matrix-checkbox-container {

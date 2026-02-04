@@ -53,6 +53,15 @@
   padding-bottom: 2rem;
 }
 
+@media (min-width: 1025px) {
+  .header:not(.collapsed) .name-area {
+    transform: translateY(0.75rem);
+  }
+  .header:not(.collapsed) .journey-trace {
+    transform: translateY(0.75rem);
+  }
+}
+
 .header.collapsed .header-content {
   flex-direction: row;
   justify-content: flex-start;
@@ -120,6 +129,37 @@
   color: var(--accent-color);
   margin-bottom: 1rem;
   text-align: center;
+  white-space: nowrap;
+}
+
+.hero-tagline .tagline-line {
+  display: inline;
+}
+
+.hero-tagline .tagline-line + .tagline-line {
+  margin-left: 0.35rem;
+}
+
+.hero-tagline .tagline-uat,
+.header-subtitle .subtitle-uat,
+.hero-description-uat {
+  display: none;
+}
+
+body.off-hours .hero-tagline .tagline-prod,
+body.off-hours .header-subtitle .subtitle-prod,
+body.off-hours .hero-description-prod {
+  display: none;
+}
+
+body.off-hours .hero-tagline .tagline-uat,
+body.off-hours .header-subtitle .subtitle-uat,
+body.off-hours .hero-description-uat {
+  display: block;
+}
+
+body.off-hours .header-subtitle .subtitle-uat {
+  display: inline;
 }
 
 .hero-description {
@@ -136,6 +176,14 @@
 }
 
 .hero-description p:last-child {
+  margin-bottom: 0;
+}
+
+.hero-description-uat p {
+  margin-bottom: 0.5rem;
+}
+
+.hero-description-uat p:last-child {
   margin-bottom: 0;
 }
 
@@ -190,7 +238,7 @@ body.off-hours .hero-tagline {
 .header-controls {
   position: fixed;
   top: calc(30px + var(--sticky-height) / 2);
-  left: calc(50% + 0.3 * var(--details-max-width));
+  left: calc(50% + 0.3 * var(--details-width));
   transform: translateY(-50%);
   display: flex;
   align-items: center;
@@ -198,6 +246,10 @@ body.off-hours .hero-tagline {
   z-index: 200;
   padding-left: 0;
   margin-left: 0;
+}
+
+body:not(.dev-mode) .dev-only {
+  display: none;
 }
 
 
@@ -354,6 +406,15 @@ body.off-hours .hero-tagline {
   mix-blend-mode: multiply;
   cursor: pointer;
   background: none !important;
+}
+
+/* Narrow desktop: keep sticky profile visible next to language toggle */
+@media (max-width: 1440px) and (min-width: 1251px) {
+  .sticky-profile {
+    width: 64px;
+    height: 64px;
+    right: -70px;
+  }
 }
 
 /* Journey Trace - Only in Hero */
@@ -522,21 +583,22 @@ body.off-hours .hero-tagline {
 }
 
 /* ========================================
-   Fixed Mode Toggle - Desktop: Flag hanging from right edge
+   Fixed Mode Toggle - Desktop: Flag hanging from left edge
    Aligned so tabs underline passes through middle of flag
    ======================================== */
 .fixed-mode-toggle {
   position: fixed;
-  top: calc(var(--sticky-height) + 85px); /* Aligns middle with tabs underline */
-  transform: translateY(-50%);
-  right: 0;
+  top: calc(var(--sticky-height) + 40px); /* Sit just below header row */
+  transform: none;
+  left: 0;
+  right: auto;
   z-index: 201;
   background: var(--bg-color);
   padding: 0.5rem 0.75rem;
-  border-radius: 4px 0 0 4px;
+  border-radius: 0 4px 4px 0;
   box-shadow:
-    -2px 2px 6px rgba(0, 0, 0, 0.05),
-    -1px 1px 2px rgba(0, 0, 0, 0.04);
+    2px 2px 6px rgba(0, 0, 0, 0.05),
+    1px 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 /* ========================================
@@ -720,6 +782,15 @@ body.off-hours .hero-tagline {
     margin: 1rem auto; /* Adjusted margins */
     text-align: center;
     width: 100%;
+  }
+
+  .hero-tagline {
+    white-space: normal;
+  }
+
+  .hero-tagline .tagline-line {
+    display: block;
+    margin-left: 0;
   }
 
   /* 2. Photo Top */

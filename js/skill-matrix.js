@@ -899,6 +899,14 @@ function renderHeatmapView() {
 
   html += "</div>";
   container.innerHTML = html;
+  
+  // Re-apply current language
+  const currentLang = document.documentElement.lang || 'en';
+  if (currentLang !== 'en') {
+      container.querySelectorAll('[data-en][data-de]').forEach(el => {
+          el.textContent = el.dataset[currentLang];
+      });
+  }
 }
 
 /**
@@ -936,10 +944,10 @@ function renderMobileView(skillIds, levelMaps) {
     </div>
     <!-- Legend - single horizontal row below firm nav -->
     <div class="mobile-legend-row">
-      <span class="mobile-legend-title">Cadence:</span>
-      <div class="mobile-legend-item"><div class="hm-legend-box bg-level-3"></div> Core</div>
-      <div class="mobile-legend-item"><div class="hm-legend-box bg-level-2"></div> Regular</div>
-      <div class="mobile-legend-item"><div class="hm-legend-box bg-level-1"></div> On Demand</div>
+      <span class="mobile-legend-title" data-de="Häufigkeit je Rolle:" data-en="Cadence:">Cadence:</span>
+      <div class="mobile-legend-item"><div class="hm-legend-box bg-level-3"></div> <span data-de="Kern" data-en="Core">Core</span></div>
+      <div class="mobile-legend-item"><div class="hm-legend-box bg-level-2"></div> <span data-de="Regelmässig" data-en="Regular">Regular</span></div>
+      <div class="mobile-legend-item"><div class="hm-legend-box bg-level-1"></div> <span data-de="Nach Bedarf" data-en="On Demand">On Demand</span></div>
     </div>
   </div>`;
 
@@ -986,6 +994,14 @@ function renderMobileView(skillIds, levelMaps) {
   }
 
   container.innerHTML = html;
+  
+  // Re-apply current language
+  const currentLang = document.documentElement.lang || 'en';
+  if (currentLang !== 'en') {
+      container.querySelectorAll('[data-en][data-de]').forEach(el => {
+          el.textContent = el.dataset[currentLang];
+      });
+  }
 }
 
 function renderDiagonalHeader(isFooter, totalDur) {
@@ -993,11 +1009,11 @@ function renderDiagonalHeader(isFooter, totalDur) {
       ? `
           <div class="hm-legend hm-legend-style-stacked">
               <div class="hm-stacked-content-col">
-                  <span class="hm-stacked-title">Cadence across roles:</span>
+                  <span class="hm-stacked-title" data-de="Häufigkeit je Rolle:" data-en="Cadence across roles:">Cadence across roles:</span>
                   <div class="hm-stacked-row">
-                      <div class="hm-legend-item"><div class="hm-legend-box bg-level-3"></div> Core</div>
-                      <div class="hm-legend-item"><div class="hm-legend-box bg-level-2"></div> Regular</div>
-                      <div class="hm-legend-item"><div class="hm-legend-box bg-level-1"></div> On Demand</div>
+                      <div class="hm-legend-item"><div class="hm-legend-box bg-level-3"></div> <span data-de="Kern" data-en="Core">Core</span></div>
+                      <div class="hm-legend-item"><div class="hm-legend-box bg-level-2"></div> <span data-de="Regelmässig" data-en="Regular">Regular</span></div>
+                      <div class="hm-legend-item"><div class="hm-legend-box bg-level-1"></div> <span data-de="Nach Bedarf" data-en="On Demand">On Demand</span></div>
                   </div>
               </div>
           </div>
@@ -1345,6 +1361,9 @@ function renderExportMatrix(container) {
   const skillIds = careerData.skillIds;
   const levelMaps = careerData.employers.map(buildEmployerLevelMap);
 
+  const currentLang = document.documentElement.lang || 'en';
+  const isDe = currentLang === 'de';
+
   let html = '<div class="export-matrix">';
 
   // Header Container (Title + Legend)
@@ -1353,8 +1372,12 @@ function renderExportMatrix(container) {
   // Title + Subtitle/Source (Full Width)
   html += '<div class="export-header-full">';
   html += '<div class="export-title-name">Alim Hasanov</div>';
+  
+  const progressionText = isDe ? "Entwicklung" : "Progression";
+  const ampersand = isDe ? "UND" : "&";
+  
   html += `<div class="export-title-desc">
-    <span style="font-weight: 900">TASKS</span> & <span class="font-monospace" style="font-weight: 700">TOOLS</span> Progression | 2014-2025
+    <span style="font-weight: 900">TASKS</span> ${ampersand} <span class="font-monospace" style="font-weight: 700">TOOLS</span> ${progressionText} | 2014-2025
   </div>`;
   html += '<div class="export-subtitle">alimhasanov.com</div>';
   html += "</div>";
@@ -1362,13 +1385,18 @@ function renderExportMatrix(container) {
   html += "</div>"; // End header container
 
   // Legend HTML (to be placed in label placeholder)
+  const cadenceText = isDe ? "Häufigkeit je Rolle:" : "Cadence across roles:";
+  const coreText = isDe ? "Kern" : "Core";
+  const regularText = isDe ? "Regelmässig" : "Regular";
+  const onDemandText = isDe ? "Nach Bedarf" : "On Demand";
+
   const legendHtml = `<div class="export-legend stacked">
-    <div class="export-legend-note">Cadence across roles:</div>
+    <div class="export-legend-note">${cadenceText}</div>
     <div class="export-legend-separator"></div>
     <div class="export-legend-row">
-      <div class="export-legend-item"><div class="export-legend-box level-3"></div> Core</div>
-      <div class="export-legend-item"><div class="export-legend-box level-2"></div> Regular</div>
-      <div class="export-legend-item"><div class="export-legend-box level-1"></div> On Demand</div>
+      <div class="export-legend-item"><div class="export-legend-box level-3"></div> ${coreText}</div>
+      <div class="export-legend-item"><div class="export-legend-box level-2"></div> ${regularText}</div>
+      <div class="export-legend-item"><div class="export-legend-box level-1"></div> ${onDemandText}</div>
     </div>
   </div>`;
 
