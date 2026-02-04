@@ -586,7 +586,7 @@ body.off-hours .hero-tagline {
   /* Tab underline is at: sticky-height + 50px (tabs padding-top) + ~28px (tab button height)
      Toggle height is ~28px (with padding 0.5rem top/bottom = 8px each + content ~12px)
      So: 40px + 50px + 28px - 28px = 90px */
-  top: calc(var(--sticky-height) + 50px);
+  top: calc(var(--sticky-height) + 55px);
   transform: none;
   left: 0;
   right: auto;
