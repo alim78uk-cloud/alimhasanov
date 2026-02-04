@@ -594,6 +594,32 @@ body.off-hours .hero-tagline {
   box-shadow:
     2px 2px 6px rgba(0, 0, 0, 0.05),
     1px 1px 2px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Hide mobile language switcher on desktop */
+.language-switcher-mobile {
+  display: none;
+}
+
+/* Mobile/Tablet: Show mobile language switcher, hide desktop version */
+@media (max-width: 1250px) {
+  .fixed-mode-toggle {
+    gap: 0.75rem;
+  }
+  
+  .language-switcher-mobile {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  
+  /* Hide the desktop language switcher in header-controls */
+  .header-controls .language-switcher:not(.language-switcher-mobile) {
+    display: none;
+  }
 }
 
 /* ========================================
