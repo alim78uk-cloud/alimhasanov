@@ -579,11 +579,11 @@ body.off-hours .hero-tagline {
 
 /* ========================================
    Fixed Mode Toggle - Desktop: Flag hanging from left edge
-   Aligned so tabs underline passes through middle of flag
+   Aligned so bottom of toggle aligns with bottom of tab underline
    ======================================== */
 .fixed-mode-toggle {
   position: fixed;
-  top: calc(var(--sticky-height) + 40px); /* Sit just below header row */
+  top: calc(var(--sticky-height) + 67px); /* Aligned with tab underline bottom */
   transform: none;
   left: 0;
   right: auto;
