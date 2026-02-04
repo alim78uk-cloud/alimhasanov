@@ -1790,6 +1790,7 @@
   .matrix-export-modal-header h2 {
     width: 100%;
     text-align: center;
+    font-size: 14px; /* Reduced from 18px for mobile */
   }
 
   .matrix-export-controls {
