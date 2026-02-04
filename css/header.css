@@ -583,10 +583,10 @@ body.off-hours .hero-tagline {
    ======================================== */
 .fixed-mode-toggle {
   position: fixed;
-  /* Tab underline is at: sticky-height + 50px (tabs padding-top) + ~28px (tab button height)
-     Toggle height is ~28px (with padding 0.5rem top/bottom = 8px each + content ~12px)
-     So: 40px + 50px + 28px - 28px = 90px */
-  top: calc(var(--sticky-height) + 55px);
+  /* Tab underline bottom is at: sticky-height (40px) + tabs padding-top (50px) + tab height (~17px) = ~107px
+     Toggle height is ~28px (padding 0.5rem * 2 + content)
+     So toggle top should be: 107px - 28px = 79px = sticky-height + 39px */
+  top: calc(var(--sticky-height) + 39px);
   transform: none;
   left: 0;
   right: auto;
