@@ -863,27 +863,42 @@ function switchLanguage(lang, animate = true) {
   }
 }
 
-langBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const lang = btn.dataset.lang;
+// Hide desktop language switcher in header-controls (we now use unified toggle)
+const desktopLangSwitcher = document.querySelector('.header-controls .language-switcher');
+if (desktopLangSwitcher) {
+  desktopLangSwitcher.style.display = 'none';
+}
 
-    langBtns.forEach((b) => {
-      b.classList.toggle("active", b.dataset.lang === lang);
-    });
+// Unified language toggle button (shows inactive language)
+const langToggleBtn = document.getElementById('langToggleBtn');
 
-    localStorage.setItem("language", lang);
-    switchLanguage(lang, true);
+function updateLangToggleButton(currentLang) {
+  if (!langToggleBtn) return;
+  
+  // Show the opposite language (if EN is active, show DE button)
+  const inactiveLang = currentLang === 'en' ? 'de' : 'en';
+  const buttonText = inactiveLang.toUpperCase();
+  
+  langToggleBtn.textContent = buttonText;
+  langToggleBtn.dataset.lang = inactiveLang;
+}
+
+if (langToggleBtn) {
+  langToggleBtn.addEventListener("click", () => {
+    const targetLang = langToggleBtn.dataset.lang;
+    
+    localStorage.setItem("language", targetLang);
+    switchLanguage(targetLang, true);
+    updateLangToggleButton(targetLang);
     // Update mobile tab label to reflect language change (e.g., AND vs UND)
     updateTabsToggleLabel();
   });
-});
+}
 
 // Load saved language on page load (default to English)
 const savedLang = localStorage.getItem("language") || "en";
-langBtns.forEach((btn) => {
-  btn.classList.toggle("active", btn.dataset.lang === savedLang);
-});
 switchLanguage(savedLang, false);
+updateLangToggleButton(savedLang);
 
 // Sync UAT state on load if the page is pre-set to off-hours (e.g., UAT environment).
 if (document.body.classList.contains("off-hours")) {
