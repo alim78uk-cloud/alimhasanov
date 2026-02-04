@@ -895,15 +895,71 @@ const contactEmailBtns = document.querySelectorAll(".contact-email-btn");
 const contactSuccess = document.getElementById("contactSuccess");
 const contactFormContainer = document.getElementById("contactFormContainer");
 
+const MODAL_ANIM_MS = 400;
+
+function updateBodyScrollLock() {
+  const hasActiveModal = document.querySelector(
+    ".contact-modal-overlay.is-open, .matrix-export-modal.active",
+  );
+  document.body.style.overflow = hasActiveModal ? "hidden" : "";
+}
+
+window.updateBodyScrollLock = updateBodyScrollLock;
+
+function forceHideOverlay(overlay) {
+  if (!overlay) return;
+  const t = Number(overlay.dataset.hideTimer || "0");
+  if (t) clearTimeout(t);
+  delete overlay.dataset.hideTimer;
+  overlay.classList.remove("active", "is-open");
+}
+
+function showOverlay(overlay) {
+  if (!overlay) return;
+  const t = Number(overlay.dataset.hideTimer || "0");
+  if (t) clearTimeout(t);
+  delete overlay.dataset.hideTimer;
+
+  overlay.classList.add("is-open");
+  // Force a layout so opacity transition reliably triggers.
+  // eslint-disable-next-line no-unused-expressions
+  overlay.offsetHeight;
+  overlay.classList.add("active");
+  updateBodyScrollLock();
+}
+
+function hideOverlay(overlay) {
+  if (!overlay) return;
+
+  overlay.classList.remove("active");
+  updateBodyScrollLock();
+
+  // Ensure the overlay cannot block clicks on any browser once closed.
+  overlay.dataset.hideTimer = String(
+    window.setTimeout(() => {
+      overlay.classList.remove("is-open");
+      delete overlay.dataset.hideTimer;
+      updateBodyScrollLock();
+    }, MODAL_ANIM_MS),
+  );
+}
+
+function closeOtherContactOverlays(exceptEl) {
+  document.querySelectorAll(".contact-modal-overlay.is-open").forEach((o) => {
+    if (o !== exceptEl) forceHideOverlay(o);
+  });
+}
+
 // Modal State Management
 function openContactModal() {
-  if (contactModal) contactModal.classList.add("active");
-  document.body.style.overflow = "hidden"; // Prevent scrolling
+  if (contactModal) {
+    closeOtherContactOverlays(contactModal);
+    showOverlay(contactModal);
+  }
 }
 
 function closeContactModal() {
-  if (contactModal) contactModal.classList.remove("active");
-  document.body.style.overflow = ""; // Restore scrolling
+  hideOverlay(contactModal);
 
   // Reset form after a delay (animation time)
   setTimeout(() => {
@@ -911,7 +967,7 @@ function closeContactModal() {
     if (contactSuccess) contactSuccess.classList.remove("active");
     if (contactFormContainer) contactFormContainer.style.opacity = "1";
     if (contactFormContainer) contactFormContainer.style.pointerEvents = "auto";
-  }, 400);
+  }, MODAL_ANIM_MS);
 }
 
 // Intercept Email Icon Click
@@ -921,6 +977,12 @@ if (contactEmailBtns.length) {
       e.preventDefault(); // Stop default mailto: behavior
       openContactModal();
     });
+  });
+}
+
+if (contactModal) {
+  contactModal.addEventListener("click", (e) => {
+    if (e.target === contactModal) closeContactModal();
   });
 }
 
@@ -994,17 +1056,21 @@ window.openCVExportModal = function () {
   const modal = document.getElementById("cvExportModal");
   if (!modal) return;
 
-  modal.classList.add("active");
-  document.body.style.overflow = "hidden";
+  closeOtherContactOverlays(modal);
+  showOverlay(modal);
 };
 
 window.closeCVExportModal = function () {
   const modal = document.getElementById("cvExportModal");
-  if (modal) {
-    modal.classList.remove("active");
-    document.body.style.overflow = "";
-  }
+  hideOverlay(modal);
 };
+
+const cvExportModal = document.getElementById("cvExportModal");
+if (cvExportModal) {
+  cvExportModal.addEventListener("click", (e) => {
+    if (e.target === cvExportModal) closeCVExportModal();
+  });
+}
 
 function triggerDownload(url, filename) {
   const link = document.createElement("a");

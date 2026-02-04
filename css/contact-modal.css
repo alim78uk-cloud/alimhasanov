@@ -9,12 +9,16 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 11000;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-modal-overlay.is-open {
+  display: flex;
 }
 
 .contact-modal-overlay.active {

@@ -1332,12 +1332,21 @@ window.openMatrixExportModal = function () {
 
   if (!modal || !preview) return;
 
+  // Avoid stacked overlays (and potential click-blockers) across different modal systems.
+  document.querySelectorAll(".contact-modal-overlay.is-open").forEach((o) => {
+    o.classList.remove("active", "is-open");
+  });
+
   // Render export-ready matrix
   renderExportMatrix(preview);
 
   // Show modal
   modal.classList.add("active");
-  document.body.style.overflow = "hidden";
+  if (window.updateBodyScrollLock) {
+    window.updateBodyScrollLock();
+  } else {
+    document.body.style.overflow = "hidden";
+  }
 };
 
 // Close export modal
@@ -1345,7 +1354,11 @@ window.closeMatrixExportModal = function () {
   const modal = document.getElementById("matrixExportModal");
   if (modal) {
     modal.classList.remove("active");
-    document.body.style.overflow = "";
+    if (window.updateBodyScrollLock) {
+      window.updateBodyScrollLock();
+    } else {
+      document.body.style.overflow = "";
+    }
   }
 };
 
