@@ -678,6 +678,8 @@
   border: 1px solid var(--border-color);
   transition: all 0.2s ease;
   min-height: 40px;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .matrix-checkbox-container:hover {
@@ -754,6 +756,8 @@
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s ease;
+  min-height: 40px;
+  box-sizing: border-box;
 }
 
 .matrix-export-btn:hover {
@@ -771,14 +775,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   background: transparent;
   border: 1px solid var(--border-color);
   border-radius: 6px;
   color: var(--secondary-text);
   cursor: pointer;
   transition: all 0.2s ease;
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .matrix-export-close:hover {
