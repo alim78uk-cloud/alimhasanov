@@ -796,7 +796,7 @@ function switchLanguage(lang, animate = true) {
         }
 
         el.style.transition = "opacity 0.2s ease-in";
-        el.style.opacity = "1";
+        el.style.opacity = ""; // Remove inline opacity to respect CSS (e.g. for .j-code 0.7 opacity)
       });
     }, 150);
   } else {
