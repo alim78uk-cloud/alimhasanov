@@ -26,15 +26,7 @@ let currentPanel = "hero"; // 'hero' or 'details'
 let isOffHours = false;
 let isAnimating = false;
 
-// Mark local/dev environments for dev-only UI.
-const isDevHost =
-  window.location.protocol === "file:" ||
-  ["localhost", "127.0.0.1", "0.0.0.0", "::1"].includes(
-    window.location.hostname,
-  );
-if (isDevHost) {
-  document.body.classList.add("dev-mode");
-}
+
 
 function applyMode(nextIsOffHours, { animate = true } = {}) {
   isOffHours = nextIsOffHours;
