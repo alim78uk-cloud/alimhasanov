@@ -401,17 +401,41 @@ function getActiveTabLabel() {
 
   if (!activeBtn) return "Menu";
 
-  // Using innerText is more reliable for gathering formatted text from elements
-  // We'll clone to avoid any side effects from cleaning nodes
+  // Get current language
+  const currentLang = document.documentElement.lang || 'en';
+  
+  // Clone the button to work with it safely
   const clone = activeBtn.cloneNode(true);
 
-  // Remove download bits if any exist (safety)
+  // Remove download bits if any exist
   const downloads = clone.querySelectorAll(
     ".tab-download-btn, .mobile-tab-download-icon",
   );
   downloads.forEach((d) => d.remove());
 
-  return clone.innerText.trim().replace(/\s+/g, " ") || "Menu";
+  // Build the label from data attributes for language-aware translation
+  let labelParts = [];
+  
+  // Iterate through all child nodes and text nodes to build the label
+  const processNode = (node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const text = node.textContent.trim();
+      if (text) labelParts.push(text);
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      // Check if this element has translation data
+      const translation = node.dataset[currentLang];
+      if (translation) {
+        labelParts.push(translation);
+      } else {
+        // Recursively process children
+        node.childNodes.forEach(processNode);
+      }
+    }
+  };
+
+  clone.childNodes.forEach(processNode);
+  
+  return labelParts.join(" ").replace(/\s+/g, " ").trim() || "Menu";
 }
 
 function closeTabsMenu() {
