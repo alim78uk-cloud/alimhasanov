@@ -884,7 +884,8 @@ function updateLangToggleButton(currentLang) {
 }
 
 if (langToggleBtn) {
-  langToggleBtn.addEventListener("click", () => {
+  langToggleBtn.addEventListener("click", (event) => {
+    event.stopPropagation(); // Prevent triggering parent mode-toggle
     const targetLang = langToggleBtn.dataset.lang;
     
     localStorage.setItem("language", targetLang);
