@@ -1380,7 +1380,7 @@ window.downloadCV = async function () {
     const combinedPdfBytes = await cvPdf.save();
 
     // Download
-    downloadPdfBytes(combinedPdfBytes, "AlimHasanov_CV_public.pdf");
+    downloadPdfBytes(combinedPdfBytes, getCVFilename());
 
     // Restore button
     if (btn) {
