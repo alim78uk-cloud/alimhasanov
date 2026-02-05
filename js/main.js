@@ -26,8 +26,6 @@ let currentPanel = "hero"; // 'hero' or 'details'
 let isOffHours = false;
 let isAnimating = false;
 
-
-
 function applyMode(nextIsOffHours, { animate = true } = {}) {
   isOffHours = nextIsOffHours;
 
@@ -402,8 +400,8 @@ function getActiveTabLabel() {
   if (!activeBtn) return "Menu";
 
   // Get current language
-  const currentLang = document.documentElement.lang || 'en';
-  
+  const currentLang = document.documentElement.lang || "en";
+
   // Clone the button to work with it safely
   const clone = activeBtn.cloneNode(true);
 
@@ -415,7 +413,7 @@ function getActiveTabLabel() {
 
   // Build the label from data attributes for language-aware translation
   let labelParts = [];
-  
+
   // Iterate through all child nodes and text nodes to build the label
   const processNode = (node) => {
     if (node.nodeType === Node.TEXT_NODE) {
@@ -434,7 +432,7 @@ function getActiveTabLabel() {
   };
 
   clone.childNodes.forEach(processNode);
-  
+
   return labelParts.join(" ").replace(/\s+/g, " ").trim() || "Menu";
 }
 
@@ -523,10 +521,9 @@ function updateTabsToggleLabel() {
 
       if (isTechTab) {
         // Get current language to use correct translation
-        const currentLang = document.documentElement.lang || 'en';
-        const andText = currentLang === 'de' ? 'UND' : 'AND';
-        finalHtml =
-          `<span style="font-weight: 700;">TASKS</span>&nbsp;${andText}&nbsp;<span class="font-monospace">TOOLS</span>`;
+        const currentLang = document.documentElement.lang || "en";
+        const andText = currentLang === "de" ? "UND" : "AND";
+        finalHtml = `<span style="font-weight: 700;">TASKS</span>&nbsp;${andText}&nbsp;<span class="font-monospace">TOOLS</span>`;
       } else {
         // General replacements for other cases if they happen to contain these words
         if (finalHtml.includes("TASKS")) {
@@ -864,21 +861,23 @@ function switchLanguage(lang, animate = true) {
 }
 
 // Hide desktop language switcher in header-controls (we now use unified toggle)
-const desktopLangSwitcher = document.querySelector('.header-controls .language-switcher');
+const desktopLangSwitcher = document.querySelector(
+  ".header-controls .language-switcher",
+);
 if (desktopLangSwitcher) {
-  desktopLangSwitcher.style.display = 'none';
+  desktopLangSwitcher.style.display = "none";
 }
 
 // Unified language toggle button (shows inactive language)
-const langToggleBtn = document.getElementById('langToggleBtn');
+const langToggleBtn = document.getElementById("langToggleBtn");
 
 function updateLangToggleButton(currentLang) {
   if (!langToggleBtn) return;
-  
+
   // Show the opposite language (if EN is active, show DE button)
-  const inactiveLang = currentLang === 'en' ? 'de' : 'en';
+  const inactiveLang = currentLang === "en" ? "de" : "en";
   const buttonText = inactiveLang.toUpperCase();
-  
+
   langToggleBtn.textContent = buttonText;
   langToggleBtn.dataset.lang = inactiveLang;
 }
@@ -887,7 +886,7 @@ if (langToggleBtn) {
   langToggleBtn.addEventListener("click", (event) => {
     event.stopPropagation(); // Prevent triggering parent mode-toggle
     const targetLang = langToggleBtn.dataset.lang;
-    
+
     localStorage.setItem("language", targetLang);
     switchLanguage(targetLang, true);
     updateLangToggleButton(targetLang);
@@ -1109,6 +1108,17 @@ if (cvExportModal) {
   });
 }
 
+// Helper function to get the correct CV filename based on language
+function getCVFilename() {
+  const currentLang = document.documentElement.lang || "en";
+  return currentLang === "de"
+    ? "AlimHasasov_Labenslauf_öffentlich.pdf"
+    : "AlimHasanov_CV_public.pdf";
+}
+
+// Make it globally accessible for skill-matrix.js
+window.getCVFilename = getCVFilename;
+
 function triggerDownload(url, filename) {
   const link = document.createElement("a");
   link.href = url;
@@ -1174,7 +1184,7 @@ async function downloadCvWithPageNumbers(filename) {
     throw new Error("pdf-lib not loaded");
   }
   const { PDFDocument } = PDFLib;
-  const cvResponse = await fetch("AlimHasasov_CV_public.pdf");
+  const cvResponse = await fetch(getCVFilename());
   const cvBytes = await cvResponse.arrayBuffer();
   const cvPdf = await PDFDocument.load(cvBytes);
   await addPageNumbers(cvPdf, PDFLib);
@@ -1209,12 +1219,12 @@ function createOffscreenMatrixPreview() {
 // Download CV only
 window.downloadCVOnly = async function () {
   try {
-    await downloadCvWithPageNumbers("AlimHasanov_CV_public.pdf");
+    await downloadCvWithPageNumbers(getCVFilename());
   } catch (error) {
     console.error("Error downloading CV:", error);
     await downloadPdfFile(
-      "AlimHasanov_CV_public.pdf",
-      "AlimHasanov_CV_public.pdf",
+      getCVFilename(),
+      getCVFilename(),
     );
   }
   closeCVExportModal();
@@ -1228,12 +1238,12 @@ window.downloadCV = async function () {
   if (!includeMatrix) {
     // Simple download using blob to force download
     try {
-      await downloadCvWithPageNumbers("AlimHasanov_CV_public.pdf");
+      await downloadCvWithPageNumbers(getCVFilename());
     } catch (error) {
       console.error("Error adding page numbers to CV:", error);
       await downloadPdfFile(
-        "AlimHasanov_CV_public.pdf",
-        "AlimHasanov_CV_public.pdf",
+        getCVFilename(),
+        getCVFilename(),
       );
     }
     closeCVExportModal();
@@ -1268,7 +1278,7 @@ window.downloadCV = async function () {
     }
 
     // Fetch the existing CV PDF
-    const cvResponse = await fetch("AlimHasanov_CV_public.pdf");
+    const cvResponse = await fetch(getCVFilename());
     const cvBytes = await cvResponse.arrayBuffer();
 
     // Load the CV PDF
@@ -1390,8 +1400,8 @@ window.downloadCV = async function () {
 
     // Fallback to simple download
     await downloadPdfFile(
-      "AlimHasasov_CV_public.pdf",
-      "AlimHasanov_CV_public.pdf",
+      getCVFilename(),
+      getCVFilename(),
     );
     closeCVExportModal();
 

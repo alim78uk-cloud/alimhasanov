@@ -1547,7 +1547,8 @@ window.downloadMatrixAsPDF = async function () {
         const matrixPdfDoc = await PDFDocument.load(matrixPdfBytes);
         
         // Fetch the CV PDF
-        const cvResponse = await fetch("AlimHasasov_CV_public.pdf");
+        const cvFilename = window.getCVFilename ? window.getCVFilename() : "AlimHasanov_CV_public.pdf";
+        const cvResponse = await fetch(cvFilename);
         const cvBytes = await cvResponse.arrayBuffer();
         const cvPdfDoc = await PDFDocument.load(cvBytes);
         
